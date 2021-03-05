@@ -1,0 +1,85 @@
+.auth-container {
+    padding: 3px 20px;
+    position: relative;
+    top: 3px;
+}
+
+.auth-container .auth-button {
+    background-color: rgb(196, 137, 90);
+    position: relative;
+    bottom: 4px;
+    left: 2px;
+    padding: 0;
+    border: none;
+    width: 126px;
+    height: 45px;
+    font-size: 1rem;
+    font-weight: 550;
+    color: #faf6f6;
+    border-radius: 400px;
+    transition: all .3s;
+}
+
+.auth-container .auth-button:hover {
+    background-color: rgb(224, 176, 18);
+    color: rgb(255, 255, 255);
+    border: white solid 1px;
+}
+
+.auth-container .auth-button:active {
+    box-shadow: 0 3px 2px rgba(0, 0, 0, .26);
+    transform: scale(1.05);
+}
+
+.auth-container span {
+    position: relative;
+    bottom: 8px;
+}
+
+.user-icon__svg {
+    width: 32px;
+    position: relative;
+    top: 3px;
+    right: 3px;
+}
+
+@media (max-width: 700px) {
+    .auth-button_desktop, .admin-auth__button {
+        display: none;
+    }
+    .auth-container {
+        position: absolute;
+        right: 3%;
+        top: 22%;
+    }
+}
+
+@media (min-width: 700px) {
+    .auth-button_mobile, .admin-auth__mobile {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .auth-container .auth-button {
+        border-radius: 500px;
+        left: 3vw;
+    }
+}
+
+@media (max-width: 340px) {
+    .auth-container span {
+        display: none;
+    }
+    .auth-container .auth-button {
+        height: 47px;
+        width: 47px;
+        border-radius: 50%;
+    }
+    .user-icon__svg {
+        width: 39px;
+        position: relative;
+        top: 4.5px;
+        right: -1.8px;
+    }
+}

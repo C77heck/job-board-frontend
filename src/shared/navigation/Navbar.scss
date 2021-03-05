@@ -1,0 +1,32 @@
+.navbar {
+    position: fixed;
+    z-index: 800;
+    width: 100vw;
+    &__inner {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__left {
+        flex-basis: 50%;
+        background-color: rgba(51, 68, 80, 0.438);
+        height: 6rem;
+        border-radius: 500rem;
+        display: flex;
+        justify-content: space-around;
+    }
+    &__right {
+        width: 26rem;
+        background-color: #ffffff70;
+        height: 6rem;
+        border-radius: 500rem;
+
+        // right hand side is set to absolute to prevent overstretching the viewport.
+        position: absolute;
+        right: 4rem;
+        top: 0;
+
+        // position svg icons
+        display: flex;
+        justify-content: space-around;
+    }
+}

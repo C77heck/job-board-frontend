@@ -1,0 +1,44 @@
+.header {
+    background-image: radial-gradient(#00000031, #30669d2e), url("/images/search.jpg");
+    background-size: cover;
+    height: 80vh;
+    border-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: var(--color-grey-light-2);
+    &__title {
+        background-color: rgba(113, 120, 136, 0.712);
+        text-align: center;
+        padding: 2rem 2rem 5rem;
+        color: #ffd333;
+        border-radius: 5px;
+
+        &--left {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 95% 99%, 50% 75%, 0% 75%);
+            position: absolute;
+            left: 7.5vw;
+            top: 18rem;
+        }
+        &--right {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 66% 77%, 4% 100%, 36% 75%, 0% 75%);
+            position: absolute;
+            right: 9.5vw;
+            top: 12rem;
+        }
+    }
+    & h1 {
+        font-size: 3.2rem;
+        margin-bottom: 2rem;
+    }
+    & h2 {
+        font-size: 2.5rem;
+        margin-bottom: 2.9rem;
+    }
+    & form {
+        width: 82%;
+    }
+}

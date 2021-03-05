@@ -1,0 +1,31 @@
+.svg-icons {
+    height: 4rem;
+    width: 3.5rem;
+    color: #e0bf8e;
+    margin: 0 1.2rem;
+    transition: color 200ms ease-in-out;
+    cursor: pointer;
+    &:hover {
+        color: #f07808;
+    }
+}
+
+.notification {
+}
+
+.arrow-down {
+    width: 5rem;
+    height: 6rem;
+    color: white;
+}
+.tripadvisor {
+    width: 5rem;
+}
+
+.footer-icons {
+    width: 3rem;
+    color: #202020;
+    &:hover {
+        color: #202020;
+    }
+}
