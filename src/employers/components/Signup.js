@@ -72,7 +72,7 @@ const FirstPage = props => {
                     />
                     <Input
                         id='username'
-                        label='Phone number'
+                        label='Username'
                         onInput={props.onInput}
                         value={props.value.username.value}
                         validators={[VALIDATOR_REQUIRE()]}
@@ -151,17 +151,19 @@ const Signup = props => {
                 </Button>
                     :
                     <React.Fragment>
-                        <Button
-                            className='back-btn'
-                            onClick={onClickHandler}
-                        ><BackIcon /></Button>
-                        <Button
-                            disabled={props.disabled}
-                            className='register-button'
-                            onSubmit={props.onSubmit}
-                        >
-                            SIGN UP
+                        <div className='signup__double--btn'>
+                            <Button
+                                className='back-btn'
+                                onClick={onClickHandler}
+                            ><BackIcon /></Button>
+                            <Button
+                                disabled={props.disabled}
+                                className='register-button'
+                                onSubmit={props.onSubmit}
+                            >
+                                SIGN UP
                 </Button>
+                        </div>
                     </React.Fragment>
                 }
                 <p>Already have an account? <span className='signin-here' onClick={props.cancelSignup}>sign in here</span></p>

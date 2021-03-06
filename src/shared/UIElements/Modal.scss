@@ -1,6 +1,6 @@
 @import "../../sass/variables";
 
-.modals {
+.modal {
   z-index: 1000;
   position: fixed;
   top: 22vh;
@@ -11,13 +11,17 @@
   text-align: center;
   border-radius: 3rem;
   overflow: hidden;
+  font-size: 1.6rem;
   @media screen and (max-width: $mobile) {
     top: 4vh;
   }
   &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 2rem;
     width: 100%;
-    padding: 1rem 0.5rem;
+    padding: 2rem 0.5rem;
     color: white;
     & h2 {
       margin: 0.5rem;

@@ -11,6 +11,8 @@ import ErrorModal from '../../shared/UIElements/ErrorModal';
 import PasswordResetter from './PasswordResetter';
 
 import './Auth.scss'
+import { ErrorHandler } from '../../shared/utility/ErrorHandler';
+import MessageModal from '../../shared/UIElements/MessageModal';
 
 
 
@@ -23,10 +25,6 @@ const Auth = props => {
     const [clickedSignIn, setClickedSignIn] = useState(false);
     const [forgottenPass, setForgottenPass] = useState(false)
     const [message, setMessage] = useState('')
-    const [signedup, setSignedup] = useState(false);
-    const [coordinates, setCoordinates] = useState();
-
-
 
     const [inputState, inputHandler, isFormValid] = useForm({
         fName: {
@@ -106,9 +104,6 @@ const Auth = props => {
         setForgottenPass(false)
     }
 
-    const signedupSuccessToClose = () => {
-        setSignedup(false)
-    }
     const signinHandler = async e => {
         e.preventDefault();
 
@@ -122,11 +117,14 @@ const Auth = props => {
                     password: inputState.inputs.password.value
                 })
             )
+            if (responseData.statusCode > 201) {
+                throw new ErrorHandler(responseData.message, responseData.statusCode)
+            }
             signInClose()
             setMessage(responseData.message);
 
         } catch (err) {
-            console.log(err)
+            applicationError(err.message)
         }
 
 
@@ -153,23 +151,15 @@ const Auth = props => {
                     answer: inputState.inputs.answer.value
                 })
             )
-            console.log(responseData)
-
+            if (responseData.statusCode > 201) {
+                throw new ErrorHandler(responseData.message, responseData.statusCode)
+            }
+            setMessage(responseData.message);
             // signin(responseData.userData);
             signInClose();
-            //setSignedup(true)
         } catch (err) {
-            // applicationError(err.message)
-            console.log(err, {
-                first_name: inputState.inputs.fName.value,
-                last_name: inputState.inputs.surname.value,
-                email: inputState.inputs.email.value,
-                password: inputState.inputs.password.value,
-                username: inputState.inputs.username.value,
-                city: inputState.inputs.city.value,
-                hint: question.value,
-                answer: inputState.inputs.answer.value
-            })
+            applicationError(err.message)
+
 
         }
     }
@@ -191,10 +181,12 @@ const Auth = props => {
         }
 
     }
-
+    const messageClear = () => {
+        setMessage('');
+    }
     return (
         <React.Fragment>
-
+            <MessageModal message={message} onClear={messageClear} />
             <ErrorModal error={error} onClear={clearError} />
 
             <Signin
@@ -238,11 +230,6 @@ const Auth = props => {
                 isLoading={isLoading}
             />
 
-            <SuccesfulSignup
-                show={signedup}
-                onClear={signedupSuccessToClose}
-                marker={coordinates}
-            />
             {props.register ? <div
                 className={props.className}
                 onClick={!isLoggedIn ? register : undefined}

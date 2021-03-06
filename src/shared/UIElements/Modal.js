@@ -16,7 +16,7 @@ const ModalOverlay = props => {
             classNames='modal'
         >
 
-            <div className={`modals ${props.className}`} >
+            <div className={`modal ${props.className}`} >
 
                 <header
                     className={`modal__header ${props.headerClass}`}
