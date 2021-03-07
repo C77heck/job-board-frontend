@@ -32,6 +32,7 @@ function App() {
           <LandingPage />
         </Route>
         <Route path='/jobs' exact>
+          <NavBar />
           <Ads />
         </Route>
         <Redirect to='/' />

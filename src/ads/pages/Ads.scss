@@ -1,0 +1,29 @@
+.job-amount {
+    margin: 20vh auto 2vh;
+    font-size: 3rem;
+    color: var(--color-text-darkest);
+
+    text-align: center;
+}
+.ads {
+    margin: 0 auto 20vh;
+    display: flex;
+    flex-direction: row;
+    max-width: 100rem;
+    background: rgb(204, 215, 241);
+    &__list {
+        flex-basis: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    &__category {
+        flex-basis: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        background: rgb(185, 192, 212);
+    }
+}

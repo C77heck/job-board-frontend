@@ -15,7 +15,7 @@ const Header = props => {
                     <h1>Upload your CV</h1>
                     <h2>It only takes a few seconds</h2>
                 </div>
-                <SearchBar />
+                <SearchBar className='search--main' />
             </div>
         </header>
     )

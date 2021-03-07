@@ -50,7 +50,7 @@ const SearchBar = props => {
     }
     return (
         <form onSubmit={onSubmitHandler}>
-            <div className='search'>
+            <div className={props.className}>
                 <Input
                     id='title'
                     label='Job title'
