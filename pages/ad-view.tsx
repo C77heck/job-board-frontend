@@ -1,10 +1,10 @@
-import type { NextPage } from 'next';
+import { NextPage } from 'next';
 import { BaseLayout } from '../shared/layouts/base.layout';
 
-const Home: NextPage = () => {
+const AdView: NextPage = (props: any) => {
     return <BaseLayout auth={false} meta={{ title: 'home page', keywords: 'whatever', description: 'some description' }}>
-        <h1 className={'fs-55'}> its my home page</h1>
+        <h1 className={'fs-55'}>AdView</h1>
     </BaseLayout>;
 };
 
-export default Home;
+export default AdView;
