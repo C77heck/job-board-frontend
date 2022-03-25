@@ -1,23 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap');
+@mixin Fonts() {
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap');
 
-.fw {
-    &--400 {
-        font-weight: 400;
+
+    p, small, a, div, label, h1, h2, h3, h4, h5 {
+        font-family: 'Oswald', sans-serif;
+
+        color: var(--color-dark-2);
     }
 
-    &--600 {
-        font-weight: 600;
-    }
 
-    &--700 {
-        font-weight: 700;
-    }
+    .fw {
+        &--400 {
+            font-weight: 400;
+        }
 
-    &--800 {
-        font-weight: 800;
-    }
+        &--600 {
+            font-weight: 600;
+        }
 
-    &--900 {
-        font-weight: 900;
+        &--700 {
+            font-weight: 700;
+        }
+
+        &--800 {
+            font-weight: 800;
+        }
+
+        &--900 {
+            font-weight: 900;
+        }
     }
 }
