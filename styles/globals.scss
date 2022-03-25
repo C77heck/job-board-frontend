@@ -47,5 +47,11 @@ html {
     }
 }
 
+p, small, a, div, label, h1, h2, h3, h4, h5 {
+    font-family: 'Oswald', sans-serif;
+
+    color: var(--color-dark-2);
+}
+
 
 @include Helpers($lg, $xl, $md, $sm, $mlg);
