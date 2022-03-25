@@ -1,9 +1,19 @@
 import { FieldProps } from './input';
 
-export class FormStructure {
-    public fields: FieldProps[];
+export interface FormOptions {
+    [key: string]: FieldProps;
+}
 
-    public constructor(fields: FieldProps[]) {
+interface FormStructureProps {
+    id: string;
+}
+
+export class FormStructure implements FormStructureProps {
+    public fields: FormOptions;
+    public id: string;
+
+    public constructor(fields: FormOptions, id?: string | undefined) {
         this.fields = fields;
+        this.id = id || '';
     }
 }

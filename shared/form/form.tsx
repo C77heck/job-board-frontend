@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Button, ButtonProps } from '../components/buttons/button';
+import { FormStructure } from './form.structure';
 import { SuccessModal } from './success.modal';
 import { ClientProps } from '../hooks/client';
 import { ErrorModal } from './error-modal';
@@ -12,6 +13,7 @@ interface FormProps extends ClientProps {
     onSuccess?: () => void;
     onError?: () => void;
     children: any;
+    form?: FormStructure;
 }
 
 export const Form = (props: FormProps) => {
@@ -50,6 +52,7 @@ export const Form = (props: FormProps) => {
                 {props.submitButton && <Button
                     isLoading={isLoading}
                     disabled={!isFormValid}
+                    type={'submit'}
                     {...props.submitButton}
                 />}
             </div>
@@ -66,3 +69,29 @@ export const Form = (props: FormProps) => {
         />
     </Fragment>;
 };
+
+// public validate(): boolean {
+//     const fields = this.fields;
+//     let validatorResults: boolean[] = [];
+//     for (const prop in fields) {
+//         if (fields.hasOwnProperty(prop) && !!(fields[prop]?.validators || []).length) {
+//             const results = (fields[prop]?.validators || []).map(validator => validator());
+//             validatorResults = [...validatorResults, ...results];
+//         }
+//     }
+//
+//     return !validatorResults.filter(result => !result).length;
+// }
+//
+// public json() {
+//     const fields = this.fields;
+//     let payload: any = {};
+//     for (const prop in fields) {
+//         if (fields.hasOwnProperty(prop)) {
+//             console.log(fields[prop]);
+//             payload[prop] = fields[prop]?.value || '';
+//         }
+//     }
+//
+//     return JSON.stringify(payload);
+// }
