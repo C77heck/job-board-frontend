@@ -132,6 +132,6 @@ export const Input = (props: FieldProps) => {
         >
             {manageInputType(props.element || 'text')}
         </div>
-        {!!hasError && <small className={'error-show'}>{props.errorMessage}</small>}
+        {!!hasError && <small className={'error-show'}>{errorMessage || props.errorMessage}</small>}
     </div>;
 };
