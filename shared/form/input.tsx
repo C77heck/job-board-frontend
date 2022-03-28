@@ -41,6 +41,8 @@ export const Input = (props: FieldProps) => {
         if (!!props.value) {
             setValue(props.value);
         }
+        getData(props.name, { value: props?.value || '', isValid: !hasError }, props.namespace);
+
     }, [props.value]);
 
     const validate = (value: string): ValidatorInterface => {

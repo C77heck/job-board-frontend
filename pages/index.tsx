@@ -3,6 +3,7 @@ import { Field } from '../shared/form/field';
 import { Form } from '../shared/form/form';
 import { FormStructure } from '../shared/form/form.structure';
 import { Input } from '../shared/form/input';
+import { requiredValidator } from '../shared/form/validators/required-validator';
 import { useClient } from '../shared/hooks/client';
 import { BaseLayout } from '../shared/layouts/base.layout';
 
@@ -20,7 +21,7 @@ const Home: NextPage = () => {
             name: 'second',
             label: 'Second',
             value: null,
-            validators: [],
+            validators: [requiredValidator],
             className: 'col-100',
         }),
         third: new Field({
