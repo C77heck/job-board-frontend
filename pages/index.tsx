@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import { Field } from '../shared/form/field';
 import { Form } from '../shared/form/form';
 import { FormStructure } from '../shared/form/form.structure';
-import Input from '../shared/form/__input';
+import { Input } from '../shared/form/input';
 import { useClient } from '../shared/hooks/client';
 import { BaseLayout } from '../shared/layouts/base.layout';
 
@@ -10,6 +10,7 @@ const Home: NextPage = () => {
     const client = useClient();
     const form = new FormStructure({
         first: new Field({
+            id: 'first',
             name: 'first',
             label: 'First',
             value: null,
@@ -18,6 +19,7 @@ const Home: NextPage = () => {
             namespace: 'basic-one',
         }),
         second: new Field({
+            id: 'second',
             name: 'second',
             label: 'Second',
             value: null,
@@ -26,6 +28,7 @@ const Home: NextPage = () => {
             namespace: 'basic-one',
         }),
         third: new Field({
+            id: 'third',
             name: 'third',
             label: 'Third',
             value: null,

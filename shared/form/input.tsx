@@ -1,25 +1,47 @@
 import React, { RefObject, useCallback, useContext, useEffect, useState } from 'react';
 import { CONSTANTS } from '../constants';
 import { FormContext } from '../contexts/form.context';
-import { FieldProps } from './__input';
 import { RangeInput } from './range-input';
 import { SearchableDropdown } from './searchable-dropdown';
 import { TextInput } from './text-input';
 import { ValidatorInterface } from './validators/validator-interface';
+
+export interface FieldProps {
+    type?: string;
+    name: string;
+    id?: string | undefined;
+    readOnly?: boolean;
+    required?: boolean;
+    placeholder?: string;
+    autoComplete?: string | undefined;
+    disabled?: boolean | undefined;
+    className?: string | undefined;
+    validators?: any[]; // TODO -> we will need a validator interface here.
+    getData: (value: any, hasError: boolean) => void;
+    errorMessage?: string;
+    label?: string;
+    options?: string[];
+    element?: 'text' | 'dropdown' | 'searchable' | 'searchable_dropdown' | 'textarea';
+    isNumberOnly?: boolean;
+    value: string | null;
+    onChange?: (value: string) => void;
+    inputClasses?: string;
+    namespace: string;
+}
 
 export const Input = (props: FieldProps) => {
     const [hasError, setHasError] = useState(false);
     const [value, setValue] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const prodRef: RefObject<HTMLDivElement> = React.createRef();
-    const { getData, getForm, isFormValid, namespaces, formData } = useContext(FormContext);
+    const { getData, getForm, isFormValid, formData } = useContext(FormContext);
 
     useEffect(() => {
         if (!!props.value) {
             setValue(props.value);
         }
-        console.log(namespaces, formData);
-    }, [props.value]);
+        console.log(formData);
+    }, [props.value, formData]);
 
     const validate = (value: string): ValidatorInterface => {
         const hasErrors = !!props.validators && !!props.validators.length
@@ -44,7 +66,7 @@ export const Input = (props: FieldProps) => {
         setValue(val);
         setHasError(hasError);
         setErrorMessage(errorMessage);
-        getData({ value, isValid: !hasError }, props.namespace);
+        getData(props.name, { value, isValid: !hasError }, props.namespace);
     };
 
     const onClickHandler = (isChosen: boolean, option: string) => {

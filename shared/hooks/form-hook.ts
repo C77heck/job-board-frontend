@@ -6,14 +6,12 @@ export interface ValueProp {
 }
 
 export const useForm = () => {
-    const [namespaces, setNamespaces] = useState<any[]>([]);
     const [formData, setFormData] = useState<any>({});
 
-    const getData = (data: ValueProp, namespace: string) => {
-        setNamespaces([...namespaces, namespace]);
+    const getData = (propName: string, data: ValueProp, namespace: string) => {
         setFormData({
             ...formData,
-            [namespace]: data,
+            [namespace]: { ...formData[namespace], [propName]: data },
         });
     };
 
@@ -29,5 +27,5 @@ export const useForm = () => {
         return true;
     };
 
-    return { getData, getForm, validate, isFormValid, namespaces, formData };
+    return { getData, getForm, validate, isFormValid, formData };
 };

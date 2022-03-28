@@ -1,5 +1,5 @@
 import { getUniqueId } from '../libs/helpers';
-import { FieldProps } from "./__input";
+import { FieldProps } from "./input";
 
 export class Field implements FieldProps {
     public type;
