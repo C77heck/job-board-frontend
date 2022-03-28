@@ -17,17 +17,26 @@ interface FormProps extends ClientProps {
 }
 
 export const Form = (props: FormProps) => {
-    const { getIsFormValid, formData, getPayload } = useContext(FormContext);
+    const { getIsFormValid, formData, getPayload, setForm } = useContext(FormContext);
     const [isFormValid, setIsFormValid] = useState(false);
     const namespace = props.form?.namespace;
+    const fields = props.form?.fields;
+
+    useEffect(() => {
+        setForm(fields, namespace);
+    }, []);
+
     useEffect(() => {
         setIsFormValid(getIsFormValid(namespace) as any);
+        console.log(formData, getIsFormValid(namespace));
     }, [formData]);
 
     const { isLoading, error, clearError, successMessage, clearMessage } = props;
 
     const submit = async (e: any) => {
         e.preventDefault();
+        console.log(getIsFormValid(namespace));
+
         props.onSubmit(getPayload(namespace));
     };
     // review this logic

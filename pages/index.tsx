@@ -14,7 +14,7 @@ const Home: NextPage = () => {
             name: 'first',
             label: 'First',
             value: null,
-            validators: [],
+            validators: [requiredValidator],
             className: 'col-100',
         }),
         second: new Field({
@@ -28,7 +28,7 @@ const Home: NextPage = () => {
             name: 'third',
             label: 'Third',
             value: null,
-            validators: [],
+            validators: [requiredValidator],
             className: 'col-100',
         }),
     }, 'basic-one');

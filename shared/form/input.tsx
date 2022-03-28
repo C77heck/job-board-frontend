@@ -38,11 +38,13 @@ export const Input = (props: FieldProps) => {
     const { getData } = useContext(FormContext);
 
     useEffect(() => {
+        getData(props.name, { value: props?.value || '', isValid: false }, props.namespace);
+    }, []);
+
+    useEffect(() => {
         if (!!props.value) {
             setValue(props.value);
         }
-        getData(props.name, { value: props?.value || '', isValid: !hasError }, props.namespace);
-
     }, [props.value]);
 
     const validate = (value: string): ValidatorInterface => {

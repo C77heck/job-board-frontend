@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { FormOptions, FormStructure } from '../form/form.structure';
 
 export interface ValueProp {
     value: string;
@@ -11,6 +12,24 @@ export const useForm = () => {
         setFormData({
             ...formData,
             [namespace]: { ...formData[namespace], [propName]: data },
+        });
+    };
+
+    const setForm = (form: FormOptions, namespace: string) => {
+        const baseForm: any = {};
+
+        for (const prop in form) {
+            if (form.hasOwnProperty(prop)) {
+                baseForm[namespace] = {
+                    ...baseForm[namespace],
+                    [prop]: { value: form?.[prop]?.value || '', isValid: false }
+                };
+            }
+        }
+
+        setFormData({
+            ...formData,
+            ...baseForm
         });
     };
 
@@ -44,5 +63,5 @@ export const useForm = () => {
         return payload;
     };
 
-    return { getData, getForm, getIsFormValid, formData, getPayload };
+    return { getData, getForm, getIsFormValid, formData, getPayload, setForm };
 };
