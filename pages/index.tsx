@@ -10,33 +10,27 @@ const Home: NextPage = () => {
     const client = useClient();
     const form = new FormStructure({
         first: new Field({
-            id: 'first',
             name: 'first',
             label: 'First',
             value: null,
             validators: [],
             className: 'col-100',
-            namespace: 'basic-one',
         }),
         second: new Field({
-            id: 'second',
             name: 'second',
             label: 'Second',
             value: null,
             validators: [],
             className: 'col-100',
-            namespace: 'basic-one',
         }),
         third: new Field({
-            id: 'third',
             name: 'third',
             label: 'Third',
             value: null,
             validators: [],
             className: 'col-100',
-            namespace: 'basic-one',
         }),
-    });
+    }, 'basic-one');
 
     return <BaseLayout auth={false} meta={{ title: 'home page', keywords: 'whatever', description: 'some description' }}>
         <h1 className={'fs-55'}> its my home page</h1>
@@ -44,13 +38,13 @@ const Home: NextPage = () => {
             <Form
                 form={form}
                 className={'w-30'}
-                onSubmit={() => console.log(form)}
+                onSubmit={(payload: any) => console.log(payload)}
                 submitButton={{ title: 'submit', buttonStyle: 'submit' }}
                 {...client}
             >
-                <Input {...form?.fields?.first} />
-                <Input {...form?.fields?.second} />
-                <Input {...form?.fields?.third} />
+                <Input {...form?.fields?.first} namespace={form.namespace}/>
+                <Input {...form?.fields?.second} namespace={form.namespace}/>
+                <Input {...form?.fields?.third} namespace={form.namespace}/>
             </Form>
         </div>
 

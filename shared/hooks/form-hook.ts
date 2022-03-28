@@ -7,7 +7,6 @@ export interface ValueProp {
 
 export const useForm = () => {
     const [formData, setFormData] = useState<any>({});
-
     const getData = (propName: string, data: ValueProp, namespace: string) => {
         setFormData({
             ...formData,
@@ -19,13 +18,31 @@ export const useForm = () => {
         return formData?.[namespace] || {};
     };
 
-    const validate = (namespace: string) => {
-        console.log(formData?.[namespace] || {});
-    };
+    const getIsFormValid = (namespace: string) => {
+        const form = formData?.[namespace] || {};
 
-    const isFormValid = (namespace: string) => {
+        for (const prop in form) {
+            if (form.hasOwnProperty(prop)) {
+                if (!form[prop]?.isValid) {
+                    return false;
+                }
+            }
+        }
+
         return true;
     };
 
-    return { getData, getForm, validate, isFormValid, formData };
+    const getPayload = (namespace: string) => {
+        const form = formData?.[namespace] || {};
+        const payload: any = {};
+        for (const prop in form) {
+            if (form.hasOwnProperty(prop)) {
+                payload[prop] = form[prop]?.value;
+            }
+        }
+
+        return payload;
+    };
+
+    return { getData, getForm, getIsFormValid, formData, getPayload };
 };

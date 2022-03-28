@@ -1,29 +1,34 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import { Button, ButtonProps } from '../components/buttons/button';
+import { FormContext } from '../contexts/form.context';
 import { FormStructure } from './form.structure';
 import { SuccessModal } from './success.modal';
 import { ClientProps } from '../hooks/client';
 import { ErrorModal } from './error-modal';
-import Input from './__input';
 
 interface FormProps extends ClientProps {
-    onSubmit: () => void;
+    onSubmit: (payload: any) => void;
     submitButton?: ButtonProps;
     className?: string;
     onSuccess?: () => void;
     onError?: () => void;
     children: any;
-    form?: FormStructure;
+    form: FormStructure;
 }
 
 export const Form = (props: FormProps) => {
+    const { getIsFormValid, formData, getPayload } = useContext(FormContext);
+    const [isFormValid, setIsFormValid] = useState(false);
+    const namespace = props.form?.namespace;
+    useEffect(() => {
+        setIsFormValid(getIsFormValid(namespace) as any);
+    }, [formData]);
+
     const { isLoading, error, clearError, successMessage, clearMessage } = props;
-    // TODO -> we will need the context data to come here with form validity and such
-    const isFormValid = true;
-    // perhaps get the form data here and submit it too. see how it goes
+
     const submit = async (e: any) => {
         e.preventDefault();
-        props.onSubmit();
+        props.onSubmit(getPayload(namespace));
     };
     // review this logic
     const manageSuccessClose = () => {

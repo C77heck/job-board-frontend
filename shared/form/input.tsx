@@ -32,16 +32,16 @@ export interface FieldProps {
 export const Input = (props: FieldProps) => {
     const [hasError, setHasError] = useState(false);
     const [value, setValue] = useState('');
+    // TODO -> probably will need to move over the error from props to state...
     const [errorMessage, setErrorMessage] = useState('');
     const prodRef: RefObject<HTMLDivElement> = React.createRef();
-    const { getData, getForm, isFormValid, formData } = useContext(FormContext);
+    const { getData } = useContext(FormContext);
 
     useEffect(() => {
         if (!!props.value) {
             setValue(props.value);
         }
-        console.log(formData);
-    }, [props.value, formData]);
+    }, [props.value]);
 
     const validate = (value: string): ValidatorInterface => {
         const hasErrors = !!props.validators && !!props.validators.length

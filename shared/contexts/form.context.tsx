@@ -6,9 +6,9 @@ export const FormContext = createContext({
     },
     getForm: (namespace: string) => {
     },
-    validate: (namespace: string) => {
+    getIsFormValid: (namespace: string) => {
     },
-    isFormValid: (namespace: string) => {
+    getPayload: (namespace: string) => {
     },
     formData: (namespace: string) => {
     }
