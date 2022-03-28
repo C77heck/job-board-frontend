@@ -2,15 +2,12 @@ import type { NextPage } from 'next';
 import { Field } from '../shared/form/field';
 import { Form } from '../shared/form/form';
 import { FormStructure } from '../shared/form/form.structure';
-import Input from '../shared/form/input';
+import Input from '../shared/form/__input';
 import { useClient } from '../shared/hooks/client';
 import { BaseLayout } from '../shared/layouts/base.layout';
 
 const Home: NextPage = () => {
     const client = useClient();
-    const getData = (value: string) => {
-        console.log(value);
-    };
     const form = new FormStructure({
         first: new Field({
             name: 'first',
@@ -18,7 +15,7 @@ const Home: NextPage = () => {
             value: null,
             validators: [],
             className: 'col-100',
-            onChange: (value: string) => getData(value)
+            namespace: 'basic-one',
         }),
         second: new Field({
             name: 'second',
@@ -26,7 +23,7 @@ const Home: NextPage = () => {
             value: null,
             validators: [],
             className: 'col-100',
-            onChange: (value: string) => getData(value)
+            namespace: 'basic-one',
         }),
         third: new Field({
             name: 'third',
@@ -34,7 +31,7 @@ const Home: NextPage = () => {
             value: null,
             validators: [],
             className: 'col-100',
-            onChange: (value: string) => getData(value)
+            namespace: 'basic-one',
         }),
     });
 

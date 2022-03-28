@@ -4,7 +4,7 @@ import { FormStructure } from './form.structure';
 import { SuccessModal } from './success.modal';
 import { ClientProps } from '../hooks/client';
 import { ErrorModal } from './error-modal';
-import Input from './input';
+import Input from './__input';
 
 interface FormProps extends ClientProps {
     onSubmit: () => void;

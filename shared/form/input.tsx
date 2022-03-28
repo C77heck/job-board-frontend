@@ -1,57 +1,29 @@
-import React, { Component } from "react";
+import React, { RefObject, useCallback, useContext, useEffect, useState } from 'react';
 import { CONSTANTS } from '../constants';
+import { FormContext } from '../contexts/form.context';
+import { FieldProps } from './__input';
 import { RangeInput } from './range-input';
 import { SearchableDropdown } from './searchable-dropdown';
 import { TextInput } from './text-input';
 import { ValidatorInterface } from './validators/validator-interface';
 
-export interface FieldProps {
-    type?: string;
-    name: string;
-    id?: string | undefined;
-    readOnly?: boolean;
-    required?: boolean;
-    placeholder?: string;
-    autoComplete?: string | undefined;
-    disabled?: boolean | undefined;
-    className?: string | undefined;
-    validators?: any[]; // TODO -> we will need a validator interface here.
-    getData: (value: any, hasError: boolean) => void;
-    errorMessage?: string;
-    label?: string;
-    options?: string[];
-    element?: 'text' | 'dropdown' | 'searchable' | 'searchable_dropdown' | 'textarea';
-    isNumberOnly?: boolean;
-    value: string | null;
-    onChange?: (value: string) => void;
-    inputClasses?: string;
-    namespace?: string;
-}
+export const Input = (props: FieldProps) => {
+    const [hasError, setHasError] = useState(false);
+    const [value, setValue] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const prodRef: RefObject<HTMLDivElement> = React.createRef();
+    const { getData, getForm, isFormValid, namespaces, formData } = useContext(FormContext);
 
-class Input extends Component<FieldProps, any> {
-    public state = { value: '', hasError: false, errorMessage: '' };
-    public prodRef: any;
-
-    constructor(props: any) {
-        super(props);
-        this.prodRef = React.createRef();
-    }
-
-    public componentDidMount() {
-        if (!!this.props.value) {
-            this.setState({ value: this.props.value });
+    useEffect(() => {
+        if (!!props.value) {
+            setValue(props.value);
         }
-    }
+        console.log(namespaces, formData);
+    }, [props.value]);
 
-    public componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
-        if (prevProps.value !== this.props.value) {
-            this.setState({ value: this.props.value });
-        }
-    }
-
-    public validate(value: string): ValidatorInterface {
-        const hasErrors = !!this.props.validators && !!this.props.validators.length
-            ? this.props.validators.map((validator: any) => validator(value))
+    const validate = (value: string): ValidatorInterface => {
+        const hasErrors = !!props.validators && !!props.validators.length
+            ? props.validators.map((validator: any) => validator(value))
             : [];
 
         if (!hasErrors.length) {
@@ -59,89 +31,85 @@ class Input extends Component<FieldProps, any> {
         }
 
         return hasErrors[0];
-    }
+    };
 
-    public handleChange({ target: { value } }: React.ChangeEvent<HTMLInputElement>) {
-        const { hasError, errorMessage } = this.validate(value);
-        if (this.props.isNumberOnly) {
-            this.setState({ value: this.removeNonNumericValues(value), hasError, errorMessage });
-        } else {
-            this.setState({ value, hasError, errorMessage });
-        }
-
-
-    }
-
-    public removeNonNumericValues(value: string) {
+    const removeNonNumericValues = useCallback((value: string) => {
         const isNumeric = /^-?\d*\.?\d*$/;
         return value.split('').filter(v => isNumeric.test(v)).join('');
-    }
+    }, []);
 
-    public onClickHandler(isChosen: boolean, option: string) {
-        this.setState({ value: isChosen ? '' : option });
-    }
+    const handleChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
+        const { hasError, errorMessage } = validate(value);
+        const val = props.isNumberOnly ? removeNonNumericValues(value) : value;
+        setValue(val);
+        setHasError(hasError);
+        setErrorMessage(errorMessage);
+        getData({ value, isValid: !hasError }, props.namespace);
+    };
 
-    public manageInputType(element: string) {
+    const onClickHandler = (isChosen: boolean, option: string) => {
+        setValue(isChosen ? '' : option);
+    };
+
+    const manageInputType = (element: string) => {
         const { INPUTS: { TEXTAREA, SEARCHABLE, SEARCHABLE_DROPDOWN, DROPDOWN, RANGE } } = CONSTANTS;
         switch (element) {
             case DROPDOWN:
                 return <TextInput
-                    {...this.props}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e)}
-                    value={this.state.value}
+                    {...props}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
+                    value={value}
                 />; // will need the dropdown
             case SEARCHABLE:
                 return <TextInput
-                    {...this.props}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e)}
-                    value={this.state.value}
+                    {...props}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
+                    value={value}
                 />; // will need the dropdown
             case SEARCHABLE_DROPDOWN:
                 return <SearchableDropdown
-                    {...this.props}
-                    divRef={this.prodRef}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e)}
-                    value={this.state.value}
-                    onClickHandler={(isChosen: boolean, value: string) => this.onClickHandler(isChosen, value)}
+                    {...props}
+                    divRef={prodRef}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
+                    value={value}
+                    onClickHandler={(isChosen: boolean, value: string) => onClickHandler(isChosen, value)}
                 />;
             case TEXTAREA:
                 return <TextInput
-                    {...this.props}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e)}
-                    value={this.state.value}
+                    {...props}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
+                    value={value}
                 />;  // will need the textarea
             case RANGE:
                 return <RangeInput
-                    {...this.props}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e)}
-                    value={this.state.value}
+                    {...props}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
+                    value={value}
                 />;
             default:
                 return <TextInput
-                    {...this.props}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e)}
-                    value={this.state.value}
+                    {...props}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
+                    value={value}
                 />;
         }
-    }
+    };
 
-    public render() {
-        const hasError = this.state.hasError;
-
-        return <div
-            className={`display-flex flex-column ${this.props.className}`}
-            ref={this.prodRef}
+    return <div
+        className={`display-flex flex-column ${props.className}`}
+        ref={prodRef}
+    >
+        {props.label && <label
+            className={`input-label error-${hasError ? 'show' : 'hide'}--label`}
+            htmlFor={props.name}
         >
-            {this.props.label && <label className={`input-label error-${hasError ? 'show' : 'hide'}--label`}
-                                        htmlFor={this.props.name}>{this.props.label}</label>}
-            <div
-                className={`input-wrapper ${this.props.inputClasses} error-${hasError ? 'show' : 'hide'}--div`}
-            >
-                {this.manageInputType(this.props.element || 'text')}
-            </div>
-            {!!hasError && <small className={'error-show'}>{this.props.errorMessage}</small>}
-        </div>;
-    }
-}
-
-export default React.memo(Input);
+            {props.label}
+        </label>}
+        <div
+            className={`input-wrapper ${props.inputClasses} error-${hasError ? 'show' : 'hide'}--div`}
+        >
+            {manageInputType(props.element || 'text')}
+        </div>
+        {!!hasError && <small className={'error-show'}>{props.errorMessage}</small>}
+    </div>;
+};
