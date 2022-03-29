@@ -62,14 +62,12 @@ export const Form = (props: FormProps) => {
             className={props.className}
         >
             {props.children}
-            <div className={'row'}>
-                {props.submitButton && <Button
-                    isLoading={isLoading}
-                    disabled={!isFormValid}
-                    type={'submit'}
-                    {...props.submitButton}
-                />}
-            </div>
+            {props.submitButton && <Button
+                isLoading={isLoading}
+                disabled={!isFormValid}
+                type={'submit'}
+                {...props.submitButton}
+            />}
         </form>
         <ErrorModal
             show={!!error}

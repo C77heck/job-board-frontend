@@ -13,14 +13,14 @@ const Search = (props: any) => {
             label: 'What',
             value: null,
             validators: [requiredValidator],
-            className: 'col-100',
+            className: 'col-40',
         }),
         where: new Field({
             name: 'where',
             label: 'Where',
             value: null,
             validators: [requiredValidator],
-            className: 'col-100',
+            className: 'col-40',
         }),
     }, 'search-role-by-geolocation');
 
@@ -31,9 +31,9 @@ const Search = (props: any) => {
     return <div className={'w-100 position-center'}>
         <Form
             form={form}
-            className={'w-30'}
+            className={'w-40 row'}
             onSubmit={(payload: any) => search(payload)}
-            submitButton={{ title: 'Find', buttonStyle: 'submit' }}
+            submitButton={{ title: 'Find', buttonStyle: 'submit', className: 'col-20' }}
             {...client}
         >
             <Input {...form?.fields?.what} namespace={form.namespace}/>
