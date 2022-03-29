@@ -1,27 +1,20 @@
 @mixin Colors() {
     :root {
-        --color-primary-1: #d7be60;
-        --color-primary-2: #e9cf71;
-        --color-primary-3: #C4B88D;
+        --color-primary-1: #2ad8e8;
+        --color-primary-2: #5ed5e0;
+        --color-primary-3: #98dee5;
 
-        --color-secondary-1: #e5bd22;
-        --color-secondary-2: #dbd5c0;
-        --color-secondary-3: #c5a11f;
+        --color-secondary-1: #2be06c;
+        --color-secondary-2: #5fda8b;
+        --color-secondary-3: #8fd7a9;
 
-        --text-color: rgb(60, 64, 70);
-        --text-color-light: rgb(140, 143, 150);
+        --text-color: rgb(50, 54, 61);
+        --text-color-light: rgb(141, 142, 143);
         --text-color-dark: rgb(32, 33, 36);
 
-        --color-primary-transparent: #d7be60c9;
-        --color-secondary-1: #70ac15;
-        --color-secondary-2: #354141;
-        --color-secondary-3: #5e7272;
+        --color-primary-transparent: rgba(42, 216, 232, 0.53);
         --color-secondary-4: #0c8b90;
         --color-secondary-5: #0cc4cb;
-        --color-dark-1: hsl(27, 41%, 17%);
-        --color-dark-2: #5e573b;
-        --color-dark-3: #7d736a;
-        --color-dark-4: hsla(0, 4%, 38%, 0.65);
         --color-error-1: hsl(0, 83%, 56%);
         --color-error-2: hsl(0, 63%, 46%);
         --color-error-3: #f97070;
