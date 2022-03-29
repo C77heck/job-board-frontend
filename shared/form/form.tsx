@@ -83,29 +83,3 @@ export const Form = (props: FormProps) => {
         />
     </Fragment>;
 };
-
-// public validate(): boolean {
-//     const fields = this.fields;
-//     let validatorResults: boolean[] = [];
-//     for (const prop in fields) {
-//         if (fields.hasOwnProperty(prop) && !!(fields[prop]?.validators || []).length) {
-//             const results = (fields[prop]?.validators || []).map(validator => validator());
-//             validatorResults = [...validatorResults, ...results];
-//         }
-//     }
-//
-//     return !validatorResults.filter(result => !result).length;
-// }
-//
-// public json() {
-//     const fields = this.fields;
-//     let payload: any = {};
-//     for (const prop in fields) {
-//         if (fields.hasOwnProperty(prop)) {
-//             console.log(fields[prop]);
-//             payload[prop] = fields[prop]?.value || '';
-//         }
-//     }
-//
-//     return JSON.stringify(payload);
-// }
