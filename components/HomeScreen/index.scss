@@ -1,0 +1,10 @@
+.search-box {
+    border-radius: 4px;
+    background-color: var(--color-primary-transparent);
+}
+
+.home-page{
+    &--header{
+        background-image: url("./public/");
+    }
+}

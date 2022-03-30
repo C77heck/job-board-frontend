@@ -16,6 +16,9 @@ export interface FieldProps {
     autoComplete?: string | undefined;
     disabled?: boolean | undefined;
     className?: string | undefined;
+    inputClasses?: string;
+    wrapperClasses?: string;
+    labelClass?: string;
     validators?: any[]; // TODO -> we will need a validator interface here.
     getData: (value: any, hasError: boolean) => void;
     errorMessage?: string;
@@ -25,7 +28,6 @@ export interface FieldProps {
     isNumberOnly?: boolean;
     value: string | null;
     onChange?: (value: string) => void;
-    inputClasses?: string;
     namespace: string;
 }
 
@@ -126,13 +128,13 @@ export const Input = (props: FieldProps) => {
         ref={prodRef}
     >
         {props.label && <label
-            className={`input-label error-${hasError ? 'show' : 'hide'}--label`}
+            className={`input-label error-${hasError ? 'show' : 'hide'}--label ${props.labelClass}`}
             htmlFor={props.name}
         >
             {props.label}
         </label>}
         <div
-            className={`input-wrapper ${props.inputClasses} error-${hasError ? 'show' : 'hide'}--div`}
+            className={`input-wrapper ${props.wrapperClasses} error-${hasError ? 'show' : 'hide'}--div`}
         >
             {manageInputType(props.element || 'text')}
         </div>

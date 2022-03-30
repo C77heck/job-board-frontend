@@ -24,6 +24,8 @@ export class Field implements FieldProps {
     public min;
     public max;
     public namespace;
+    public labelClass;
+    public wrapperClasses;
 
     public constructor(attributes: any) {
         this.type = attributes?.type || 'text';
@@ -35,6 +37,9 @@ export class Field implements FieldProps {
         this.autoComplete = attributes?.autoComplete || 'false';
         this.disabled = attributes?.disabled || false;
         this.className = attributes?.className || '';
+        this.inputClasses = attributes?.inputClasses || '';
+        this.labelClass = attributes?.labelClass || '';
+        this.wrapperClasses = attributes?.wrapperClasses || '';
         this.validators = attributes?.validators || [];
         this.getData = attributes?.getData;
         this.errorMessage = attributes?.errorMessage || '';
@@ -44,8 +49,8 @@ export class Field implements FieldProps {
         this.isNumberOnly = attributes?.isNumberOnly || false;
         this.value = attributes?.value || null;
         this.onChange = attributes?.onChange || null;
-        this.inputClasses = attributes?.inputClasses || '';
         this.namespace = attributes?.namespace || '';
+
         if (this.element === 'range') {
             this.min = attributes?.min || 0;
             this.max = attributes?.max || 100;

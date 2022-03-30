@@ -22,7 +22,7 @@
     }
 
     &:disabled {
-        background-color: var(--color-dark-3);
+        background-color: var(--color-disabled);
 
         &:hover {
             opacity: 1;
@@ -30,7 +30,9 @@
     }
 
     &--submit {
-        background-color: var(--color-primary-3);
+        width: 100%;
+        height: 3.5rem;
+        background-color: var(--color-secondary-1);
         font-size: 2rem;
     }
 
