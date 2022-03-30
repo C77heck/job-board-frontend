@@ -6,6 +6,11 @@
 .home-page {
     &--header {
         //background-image: url("./public/assets/header-1.jpg");
-        background-image: url("./public/assets/header-1.jpg");
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)), url("../../public/assets/header-1.jpg");
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        min-height: 500px;
     }
 }

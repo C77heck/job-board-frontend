@@ -4,7 +4,7 @@
         --color-primary-2: #5ed5e0;
         --color-primary-3: #98dee5;
 
-        --color-secondary-1: #2be06c;
+        --color-secondary-1: #15bd9e;
         --color-secondary-2: #5fda8b;
         --color-secondary-3: #8fd7a9;
 
@@ -77,11 +77,8 @@
             color: var(--color-light);
         }
 
-        &--light-2 {
-            color: var(--color-dark-3);
-        }
 
-        &--light-3 {
+        &--light-2 {
             color: var(--color-shadow);
         }
 

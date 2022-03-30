@@ -134,7 +134,7 @@ export const Input = (props: FieldProps) => {
             {props.label}
         </label>}
         <div
-            className={`input-wrapper ${props.wrapperClasses} error-${hasError ? 'show' : 'hide'}--div`}
+            className={`input-wrapper overflow-hidden ${props.wrapperClasses} error-${hasError ? 'show' : 'hide'}--div`}
         >
             {manageInputType(props.element || 'text')}
         </div>

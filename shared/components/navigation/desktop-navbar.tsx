@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import { useCallback } from 'react';
 import { staticData } from '../../config/static-data';
 import { LoginButton } from './login.button';
+import { NavLink } from './nav-link';
 
 export const DesktopNavbar = (props: any) => {
     // todo -> need to factor in if the visitor is a job seeker or an employer for links to show.
@@ -21,30 +21,30 @@ export const DesktopNavbar = (props: any) => {
             <div className={'col-80 col-lg-60'}>
                 <ul className="nav-bar--ul row">
                     <li className={'col-20'}>
-                        <Link href={home}>
+                        <NavLink href={home}>
                             Home
-                        </Link>
+                        </NavLink>
                     </li>
                     {isLoggedIn && <li className={'col-20'}>
-                        <Link href={adEdit}>
+                        <NavLink href={adEdit}>
                             watchlist
-                        </Link>
+                        </NavLink>
                     </li>}
                     {isLoggedIn && <li className={'col-20'}>
-                        <Link href={favourites}>
+                        <NavLink href={favourites}>
                             Favourites
-                        </Link>
+                        </NavLink>
                     </li>}
 
                     <li className={'col-20'}>
-                        <Link href={adsList}>
+                        <NavLink href={adsList}>
                             Fluctuation
-                        </Link>
+                        </NavLink>
                     </li>
                     {isLoggedIn && <li className={'col-20'}>
-                        <Link href={adView}>
+                        <NavLink href={adView}>
                             new purchase
-                        </Link>
+                        </NavLink>
                     </li>}
 
                 </ul>

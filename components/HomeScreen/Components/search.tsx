@@ -12,19 +12,23 @@ const Search = (props: any) => {
             name: 'what',
             label: 'What',
             value: null,
-            validators: [requiredValidator],
+            validators: [],
             className: 'col-30',
-            labelClass: 'fs-20',
+            labelClass: 'fs-21 letter-spacing-3 text-color--light-1 mb-3',
             inputClasses: 'h-px-35',
+            wrapperClasses: 'border-radius-6',
+            placeholder: 'Job title, skill or company...',
         }),
         where: new Field({
             name: 'where',
             label: 'Where',
             value: null,
-            validators: [requiredValidator],
+            validators: [],
             className: 'col-30',
-            labelClass: 'fs-20',
+            labelClass: 'fs-20 letter-spacing-3 text-color--light-1 mb-3',
             inputClasses: 'h-px-35',
+            wrapperClasses: 'border-radius-6',
+            placeholder: 'Town, city or postcode',
         }),
     }, 'search-role-by-geolocation');
 
@@ -32,7 +36,7 @@ const Search = (props: any) => {
         console.log('sending the request to where should go', payload);
     };
 
-    return <div className={'search-box position-center h-px-166 w-61'}>
+    return <div className={'search-box position-center h-px-166 w-61 mt-170'}>
         <Form
             form={form}
             className={'w-80 row justify-content-space-around align-items-end pb-22'}

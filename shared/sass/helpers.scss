@@ -56,6 +56,9 @@
             display: none !important;
         }
     }
+    .overflow-hidden {
+        overflow: hidden;
+    }
 
     .text-decoration-none {
         text-decoration: none;
@@ -489,7 +492,7 @@
         }
     }
 
-    @for $i from 0 through 100 {
+    @for $i from 0 through 200 {
         .#{w-vw- + $i} {
             width: $i + vw !important;
         }
@@ -583,6 +586,11 @@
                 flex: 0 0 $i * 1% !important;
                 max-width: $i * 1% !important;
             }
+        }
+    }
+    @for $i from 0 through 5 {
+        .#{letter-spacing- + $i} {
+            letter-spacing: $i + px;
         }
     }
 }
