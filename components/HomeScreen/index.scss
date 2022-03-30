@@ -3,8 +3,9 @@
     background-color: var(--color-primary-transparent);
 }
 
-.home-page{
-    &--header{
-        background-image: url("./public/");
+.home-page {
+    &--header {
+        //background-image: url("./public/assets/header-1.jpg");
+        background-image: url("./public/assets/header-1.jpg");
     }
 }
