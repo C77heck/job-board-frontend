@@ -16,6 +16,7 @@ export const BaseLayout = (props: { children: any; auth: boolean; meta: Meta }) 
             <main>
                 {props.auth ? <Auth>{props.children}</Auth> : props.children}
             </main>
+            <Footer/>
         </ContextWrapper>
         <Footer/>
     </>;

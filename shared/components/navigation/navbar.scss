@@ -112,3 +112,14 @@
     }
 }
 
+.footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-primary-1);
+
+    & h3, a {
+        color: var(--color-light);
+    }
+}
