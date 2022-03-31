@@ -9,7 +9,7 @@ export const objectToArray = (object: any) => {
     return arr;
 };
 
-export const priceFormat = (amount: number, decimal = 1, currency: string = 'hun') => {
+export const priceFormat = (amount: number, decimal = 1, currency: string = 'eur') => {
     const val = !!amount ? amount : 0;
     const price = round(val, decimal);
 

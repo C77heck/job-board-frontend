@@ -59,6 +59,8 @@ const getButtonType = (type: string) => {
             return 'button button--primary';
         case 'transparent':
             return 'button button--transparent';
+        case 'filter':
+            return 'button button--filter';
         default:
             return 'button';
     }
