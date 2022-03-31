@@ -21,8 +21,8 @@ export const RegisterForm = (props: any) => {
             label: 'Name',
             value: null,
             validators: [requiredValidator],
-            className: 'col-100 mt-17',
-            labelClass: 'fs-18 fw--700 mb-2',
+            className: 'col-100 mt-11',
+            labelClass: 'fs-15 fw--700 mb-2',
         }),
         email: new Field({
             name: 'email',
@@ -30,8 +30,8 @@ export const RegisterForm = (props: any) => {
             value: null,
             validators: [emailValidator],
             options: props.options || [],
-            className: 'col-100 mt-17',
-            labelClass: 'fs-18 fw--700 mb-2',
+            className: 'col-100 mt-11',
+            labelClass: 'fs-15 fw--700 mb-2',
             placeholder: 'example@example.com',
         }),
         password: new Field({
@@ -39,8 +39,8 @@ export const RegisterForm = (props: any) => {
             label: 'Password',
             value: null,
             validators: [requiredValidator],
-            className: 'col-100 mt-17',
-            labelClass: 'fs-18 fw--700 mb-2',
+            className: 'col-100 mt-11',
+            labelClass: 'fs-15 fw--700 mb-2',
             type: 'password',
         }),
         hint: new Field({
@@ -48,8 +48,8 @@ export const RegisterForm = (props: any) => {
             label: 'Security hint',
             value: null,
             validators: [requiredValidator],
-            className: 'col-100 mt-17',
-            labelClass: 'fs-18 fw--700 mb-2',
+            className: 'col-100 mt-11',
+            labelClass: 'fs-15 fw--700 mb-2',
             placeholder: 'First pet name, first love...',
         }),
         answer: new Field({
@@ -57,8 +57,8 @@ export const RegisterForm = (props: any) => {
             label: 'Answer',
             value: null,
             validators: [requiredValidator],
-            className: 'col-100 mt-17',
-            labelClass: 'fs-18 fw--700 mb-2',
+            className: 'col-100 mt-11',
+            labelClass: 'fs-15 fw--700 mb-2',
         }),
     }, 'user-register');
 
