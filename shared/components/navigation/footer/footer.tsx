@@ -8,21 +8,21 @@ export const Footer = (props: any) => {
 
     return <footer className={'display-flex flex-column'}>
         <div className={'footer display-flex justify-content-center p-40'}>
-            <div className={'col-20 position-center flex-column'}>
+            <div className={'col-20 display-flex flex-column'}>
                 <h3 className={'fs-17 fw--700 pb-10'}>Job board</h3>
                 <NavLink href={'/'}><span className={'fs-13 fw--400 pb-3 hover-primary'}>About us</span></NavLink>
                 <NavLink href={'/'}><span className={'fs-13 fw--400 pb-3 hover-primary'}>Privacy policy</span></NavLink>
                 <NavLink href={'/'}><span className={'fs-13 fw--400 pb-3 hover-primary'}>Terms and Conditions</span></NavLink>
                 <NavLink href={'/'}><span className={'fs-13 fw--400 pb-3 hover-primary'}>Cookies</span></NavLink>
             </div>
-            <div className={'col-20 position-center flex-column'}>
+            <div className={'col-20 display-flex flex-column'}>
                 <h3 className={'fs-17 fw--700 pb-10'}>Recruiter</h3>
                 <NavLink href={'/'}><span className={'fs-13 fw--400 pb-3 hover-primary'}>Advertise a job</span></NavLink>
                 <NavLink href={'/'}><span className={'fs-13 fw--400 pb-3 hover-primary'}>Contact us</span></NavLink>
                 <NavLink href={'/'}><span className={'fs-13 fw--400 pb-3 hover-primary'}></span></NavLink>
             </div>
 
-            <div className={'col-20 position-center flex-column'}>
+            <div className={'col-20 display-flex flex-column'}>
                 <h3 className={'fs-17 fw--700 pb-10'}>Job seeker</h3>
                 <NavLink href={'/'}><span className={'fs-13 fw--400 pb-3 hover-primary'}>Salary checker</span></NavLink>
                 <NavLink href={'/'}><span className={'fs-13 fw--400 pb-3 hover-primary'}>Salary planner</span></NavLink>
