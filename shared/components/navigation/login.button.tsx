@@ -13,9 +13,9 @@ export const LoginButton = ({ isMobile }: any) => {
 
     if (isLoggedIn) {
         return <Button
-            textColor={'text-color--light-1 fs-mlg-17 fs-16'}
-            buttonStyle={isMobile ? 'logout--mobile' : 'logout'}
-            title={isMobile ? <LogoutIcon width={30} className={'text-color--light-1 pt-9 pl-8'}/> : 'Logout'}
+            textColor={'text-color--light-1'}
+            buttonStyle={'transparent'}
+            title={<LogoutIcon width={20} className={'text-color--light-1 pt-3'}/>}
             onClick={() => signout()}
         />;
     }
@@ -27,12 +27,12 @@ export const LoginButton = ({ isMobile }: any) => {
             ? <RegisterForm onClick={() => setIsRegister(false)}/>
             : <LoginForm onClick={() => setIsRegister(true)}/>}
         size={{ sm: 90, md: 72, lg: 60, xl: 40 }}
-        header={<h2 className={'header--3 text-align-center'}>Sign in</h2>}
-        wrapperClass={isMobile ? 'align-self-center' : ''}
+        header={<h2 className={'header--3 text-align-center'}>{isRegister ? 'Sign up' : 'Sign in'}</h2>}
+        wrapperClass={'align-self-center'}
         trigger={<Button
-            textColor={'text-color--light-1 fs-mlg-17 fs-16'}
-            buttonStyle={isMobile ? 'login--mobile' : 'login'}
-            title={isMobile ? <LoginIcon width={27} className={'text-color--light-1 pt-3'}/> : 'Login'}
+            textColor={'text-color--light-1'}
+            buttonStyle={'transparent'}
+            title={<LoginIcon width={24} className={'text-color--light-1 pt-3'}/>}
         />}
     />;
 };

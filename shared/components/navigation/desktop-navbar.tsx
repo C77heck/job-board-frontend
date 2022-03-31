@@ -1,56 +1,77 @@
+import * as React from 'react';
 import { useCallback } from 'react';
 import { staticData } from '../../config/static-data';
+import { Button } from '../buttons/button';
+import { FavouriteIcon, LogoutIcon, NotificationIcon } from '../icons/icons';
 import { LoginButton } from './login.button';
 import { NavLink } from './nav-link';
+import { RegisterCv } from './register-cv';
 
 export const DesktopNavbar = (props: any) => {
     // todo -> need to factor in if the visitor is a job seeker or an employer for links to show.
     const { links: { adEdit, adsList, adView, jobSeekerProfile, employerProfile, favourites, home } } = staticData;
 
-    const getColor = useCallback((link: string) => {
-        const genericClasses = 'text-decoration-none uppercase fs-mlg-17 fs-14 white-space-nowrap py-20 fw--700';
-        return window.location.pathname === link
-            ? `${genericClasses} text-color--active`
-            : `${genericClasses}`;
+    const checkLocation = useCallback((link: string) => {
+        return !(window.location.pathname === link);
     }, []);
 
     const { isLoggedIn } = props;
 
-    return <nav className={`${props.className} nav-bar justify-content-center align-items-center`}>
-        <div className={'row max-width-vw-85'}>
-            <div className={'col-80 col-lg-60'}>
+    return <nav className={`${props.className} nav-bar flex-column`}>
+        <div className={'row fix-height-70 background-color--light-1 position-center'}>
+            <div className={'col-40'}>
+                <NavLink href={'/'}>
+                    <h2 className={'fs-40 fw--900 text-color--secondary-1 hover-opacity'}>Job board</h2>
+                </NavLink>
+            </div>
+            <div className={'col-40 display-flex justify-content-end'}>
+                <div className={'display-flex align-items-center'}>
+                    <h3 className={'fs-18 fw--700'}>Are you recruiting?</h3>
+                    <Button title={'Advertise now'} buttonStyle={'secondary'} className={'ml-20'}/>
+                </div>
+            </div>
+        </div>
+        <div className={'row fix-height-40 position-center'}>
+            <div className={'col-40'}>
                 <ul className="nav-bar--ul row">
-                    <li className={'col-20'}>
+                    {checkLocation(home) && <li className={'mr-28'}>
                         <NavLink href={home}>
                             Home
                         </NavLink>
-                    </li>
-                    {isLoggedIn && <li className={'col-20'}>
-                        <NavLink href={adEdit}>
-                            watchlist
-                        </NavLink>
                     </li>}
-                    {isLoggedIn && <li className={'col-20'}>
-                        <NavLink href={favourites}>
-                            Favourites
-                        </NavLink>
-                    </li>}
-
-                    <li className={'col-20'}>
+                    {checkLocation(adsList) && <li className={'mr-28'}>
                         <NavLink href={adsList}>
-                            Fluctuation
-                        </NavLink>
-                    </li>
-                    {isLoggedIn && <li className={'col-20'}>
-                        <NavLink href={adView}>
-                            new purchase
+                            Jobs
                         </NavLink>
                     </li>}
+                    <li className={'mr-28'}>
+                        <NavLink href={favourites}>
+                            Companies hiring
+                        </NavLink>
+                    </li>
+                    <li className={'mr-28'}>
+                        <NavLink href={adsList}>
+                            Career advice
+                        </NavLink>
+                    </li>
 
                 </ul>
             </div>
-            <div className={'col-20 col-lg-40 display-flex justify-content-end'}>
-                <LoginButton/>
+            <div className={'col-40 display-flex justify-content-end align-items-center'}>
+                <Button
+                    className={'ml-13'}
+                    textColor={'text-color--light-1'}
+                    buttonStyle={'transparent'}
+                    title={<NotificationIcon width={23} className={`hover-opacity text-color--light-1 pt-2`}/>}
+                    onClick={() => console.log('favourite')}
+                />
+                <div className={'ml-13'}>
+                    <NavLink href={favourites}>
+                        <FavouriteIcon width={23} className={`hover-opacity text-color--light-1`}/>
+                    </NavLink>
+                </div>
+                <div className={'ml-13'}><LoginButton/></div>
+                <div className={'ml-20'}><RegisterCv/></div>
             </div>
         </div>
     </nav>;

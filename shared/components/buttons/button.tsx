@@ -27,7 +27,7 @@ export const Button = (props: ButtonProps) => {
         {props.isLoading
             ? <span className={`${props.textColor} fs-13 display-flex`}><SpinnerIcon width={15}/><span
                 className={'pl-10 pt-1'}>Loading...</span></span>
-            : <span className={`${props.textColor}`}>{props.title}</span>}
+            : <span className={`${props.textColor} position-center`}>{props.title}</span>}
     </button>;
 };
 
@@ -53,6 +53,12 @@ const getButtonType = (type: string) => {
             return 'button button--delete';
         case 'link':
             return 'button button--link';
+        case 'secondary':
+            return 'button button--secondary';
+        case 'primary':
+            return 'button button--primary';
+        case 'transparent':
+            return 'button button--transparent';
         default:
             return 'button';
     }

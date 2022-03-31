@@ -1,6 +1,7 @@
 import moment from "moment";
 import * as React from "react";
 import { useContext } from "react";
+import { Input } from '../../form/input';
 import { Button } from "../buttons/button";
 import { AuthContext } from "../../contexts/auth.context";
 import { Field } from "../../form/field";
@@ -14,63 +15,71 @@ export const RegisterForm = (props: any) => {
     const client = useClient();
     const { signin } = useContext(AuthContext);
 
-    const formData = new FormStructure([
-        new Field({
+    const form = new FormStructure({
+        name: new Field({
             name: 'name',
             label: 'Name',
             value: null,
             validators: [requiredValidator],
-            className: 'col-100'
+            className: 'col-100 mt-17',
+            labelClass: 'fs-18 fw--700 mb-2',
         }),
-        new Field({
+        email: new Field({
             name: 'email',
             label: 'Email',
             value: null,
             validators: [emailValidator],
             options: props.options || [],
-            className: 'col-100'
+            className: 'col-100 mt-17',
+            labelClass: 'fs-18 fw--700 mb-2',
+            placeholder: 'example@example.com',
         }),
-        new Field({
+        password: new Field({
             name: 'password',
             label: 'Password',
             value: null,
             validators: [requiredValidator],
-            className: 'col-100',
+            className: 'col-100 mt-17',
+            labelClass: 'fs-18 fw--700 mb-2',
             type: 'password',
         }),
-        new Field({
+        hint: new Field({
             name: 'hint',
             label: 'Security hint',
             value: null,
             validators: [requiredValidator],
-            className: 'col-100',
+            className: 'col-100 mt-17',
+            labelClass: 'fs-18 fw--700 mb-2',
+            placeholder: 'First pet name, first love...',
         }),
-        new Field({
+        answer: new Field({
             name: 'answer',
             label: 'Answer',
             value: null,
             validators: [requiredValidator],
-            className: 'col-100',
+            className: 'col-100 mt-17',
+            labelClass: 'fs-18 fw--700 mb-2',
         }),
-    ]);
+    }, 'user-register');
 
     const submit = async (data: any) => {
-
-        const response: any = await client.client('/users/signup', 'post', { body: data });
-
-        if (!client.error && !!response) {
-            signin({ ...(response?.userData || {}), expiry: moment() });
-        }
+        console.log('registering', data);
     };
 
     return <div>
         <Form
-            {...client}
-            onSubmit={(data: any) => submit(data)}
-            form={formData}
-            submitButton={{ className: 'mt-20 col-100 col-md-40 col-lg-22 margin-auto', title: 'Register', type: 'submit' }}
+            form={form}
             className={'row margin-auto w-60'}
-        />
+            onSubmit={(payload: any) => submit(payload)}
+            submitButton={{ className: 'mt-20 col-100 col-md-40 col-lg-22 margin-auto', title: 'Register', type: 'submit' }}
+            {...client}
+        >
+            <Input {...form?.fields?.name} namespace={form.namespace}/>
+            <Input {...form?.fields?.email} namespace={form.namespace}/>
+            <Input {...form?.fields?.password} namespace={form.namespace}/>
+            <Input {...form?.fields?.hint} namespace={form.namespace}/>
+            <Input {...form?.fields?.answer} namespace={form.namespace}/>
+        </Form>
         <div className={'position-center py-15'}>
             <Button title={'login'} buttonStyle={'link'} onClick={props.onClick}/>
         </div>

@@ -1,8 +1,9 @@
 @mixin Colors() {
     :root {
-        --color-primary-1: #2ad8e8;
+        --color-primary-1: #2a89e8;
         --color-primary-2: #5ed5e0;
         --color-primary-3: #98dee5;
+        --color-primary-transparent: #2a89e887;
 
         --color-secondary-1: #15bd9e;
         --color-secondary-2: #5fda8b;
@@ -13,7 +14,6 @@
         --text-color-dark: rgb(32, 33, 36);
         --color-disabled: rgb(141, 142, 143);
         --color-dark-2: rgba(8, 61, 66, 0.53);
-        --color-primary-transparent: #2a89e887;
         --color-secondary-4: #0c8b90;
         --color-secondary-5: #0cc4cb;
         --color-error-1: hsl(0, 83%, 56%);
@@ -82,6 +82,29 @@
             color: var(--color-shadow);
         }
 
+        &--primary-1 {
+            color: var(--color-primary-1);
+        }
+
+        &--primary-2 {
+            color: var(--color-primary-2);
+        }
+
+        &--primary-3 {
+            color: var(--color-primary-3);
+        }
+
+        &--secondary-1 {
+            color: var(--color-secondary-1);
+        }
+
+        &--secondary-2 {
+            color: var(--color-secondary-2);
+        }
+
+        &--secondary-3 {
+            color: var(--color-secondary-3);
+        }
 
         &--active {
             color: white !important;

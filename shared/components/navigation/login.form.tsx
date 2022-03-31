@@ -1,6 +1,7 @@
 import moment from 'moment';
 import * as React from "react";
 import { useContext } from "react";
+import { Input } from '../../form/input';
 import { Button } from "../buttons/button";
 import { AuthContext } from "../../contexts/auth.context";
 import { Field } from "../../form/field";
@@ -14,24 +15,26 @@ export const LoginForm = (props: any) => {
     const client = useClient();
     const { signin } = useContext(AuthContext);
 
-    const formData = new FormStructure([
-        new Field({
+    const form = new FormStructure({
+        email: new Field({
             name: 'email',
             label: 'Email',
             value: null,
             validators: [emailValidator],
             options: props.options || [],
-            className: 'col-100'
+            className: 'col-100 mt-17',
+            labelClass: 'fs-18 fw--700 mb-2',
         }),
-        new Field({
+        password: new Field({
             name: 'password',
             label: 'Password',
             value: null,
             validators: [requiredValidator],
-            className: 'col-100',
+            className: 'col-100 mt-17',
+            labelClass: 'fs-18 fw--700 mb-2',
             type: 'password',
         }),
-    ]);
+    }, 'login-form');
 
     const submit = async (data: any) => {
         const body: any = {
@@ -49,10 +52,13 @@ export const LoginForm = (props: any) => {
         <Form
             {...client}
             onSubmit={(data: any) => submit(data)}
-            form={formData}
+            form={form}
             submitButton={{ className: 'mt-20 col-100 col-md-40 col-lg-22 margin-auto', title: 'Login', type: 'submit' }}
             className={'row margin-auto w-60'}
-        />
+        >
+            <Input {...form?.fields?.email} namespace={form.namespace}/>
+            <Input {...form?.fields?.password} namespace={form.namespace}/>
+        </Form>
         <div className={'position-center py-15'}>
             <Button title={'Register'} buttonStyle={'link'} onClick={props.onClick}/>
         </div>

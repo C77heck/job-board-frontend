@@ -3,21 +3,22 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: var(--color-primary-transparent);
+    background-color: var(--color-primary-1);
 
     &--ul {
         display: flex;
 
         & li {
             text-decoration: none;
-            font-size: 2rem;
+            font-size: 1.7rem;
             list-style: none;
-            padding: 2rem;
             cursor: pointer;
             transition: all 250ms;
 
             & a {
                 text-decoration: none;
+                color: var(--color-light);
+                letter-spacing: 2px;
             }
 
             &:hover {

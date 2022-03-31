@@ -48,13 +48,6 @@
         &:hover {
             background-color: var(--color-secondary-2) !important;
         }
-
-        &--mobile {
-            background-color: var(--color-secondary-3);
-            height: 43px !important;
-            width: 43px !important;
-            border-radius: 50%;
-        }
     }
 
     &--logout {
@@ -69,13 +62,11 @@
         &:hover {
             background-color: var(--color-secondary-3) !important;
         }
+    }
 
-        &--mobile {
-            background-color: var(--color-secondary-3);
-            height: 43px !important;
-            width: 43px !important;
-            border-radius: 50%;
-        }
+    &--transparent {
+        background-color: transparent;
+        width: fit-content;
     }
 
     &--delete {
@@ -112,6 +103,34 @@
         height: 4rem;
         min-width: 14rem;
         font-size: 2rem;
+
+        &:hover {
+            background-color: var(--color-success-1) !important;
+        }
+    }
+
+    &--secondary {
+        background-color: var(--color-secondary-2);
+        height: 100%;
+        font-weight: bold;
+        letter-spacing: 1.5px;
+        height: 3rem;
+        min-width: 14rem;
+        font-size: 1.3rem;
+
+        &:hover {
+            background-color: var(--color-success-1) !important;
+        }
+    }
+
+    &--primary {
+        background-color: var(--color-primary-2);
+        height: 100%;
+        font-weight: bold;
+        letter-spacing: 1.5px;
+        height: 2.6rem;
+        min-width: 14rem;
+        font-size: 1.3rem;
 
         &:hover {
             background-color: var(--color-success-1) !important;

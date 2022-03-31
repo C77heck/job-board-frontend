@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export class TextInput extends Component<any, any> {
     public render() {
         return <input
-            className={`input ${this.props.inputClasses} w-100 pl-8`}
+            className={`input ${this.props.inputClasses} h-px-35 w-100 pl-8`}
             onChange={(e) => this.props.handleChange(e)}
             value={this.props.value}
             type={this.props.type || 'text'}
