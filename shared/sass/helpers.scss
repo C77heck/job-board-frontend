@@ -314,17 +314,19 @@
         cursor: pointer !important;
 
         &:hover {
-            color: var(--color-secondary-4);
+            color: rgb(218, 175, 58);
+
+            color: var(--color-secondary-1);
         }
+    }
+    .hover-yellow {
+        color: rgb(82, 80, 80);
+        text-decoration: none;
+        transition: color 220ms ease-in-out;
+        cursor: pointer !important;
 
-        & span {
-            color: rgb(82, 80, 80);
-            text-decoration: none;
-            transition: color 220ms ease-in-out;
-
-            &:hover {
-                color: rgb(35, 148, 201);
-            }
+        &:hover {
+            color: var(--color-yellow);
         }
     }
 
@@ -335,7 +337,7 @@
         cursor: pointer !important;
 
         &:hover {
-            color: rgb(218, 175, 58);
+            color: var(--color-secondary-1);
         }
     }
 

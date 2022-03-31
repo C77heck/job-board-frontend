@@ -25,7 +25,7 @@ const Posting = ({ title, description, location, salary, className }: Post) => {
         <h3 className={'text-color--light-1 fs-18 letter-spacing-1'}>{title} <span className={'text-color--secondary-2 fs-14 fw--400'}>({priceFormat(+salary)})</span></h3>
         <p className={'text-color--light-1 fs-14 fw--400'}>{location}</p>
         <p className={'text-color--light-1 fs-12 fw--400 mb-5'}>{description}</p>
-        <NavLink href={'/'}><p className={'text-color--light-1 fs-12 fw--400 hover-secondary'}>See more...</p></NavLink>
+        <NavLink href={'/'}><p className={'fs-12 fw--400 text-color--secondary-2 hover-opacity'}>See more...</p></NavLink>
     </div>;
 };
 
