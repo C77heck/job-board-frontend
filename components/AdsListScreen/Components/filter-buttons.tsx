@@ -3,7 +3,7 @@ import { FilterItem } from '../../HomeScreen/Components/filter-strip';
 import { FilterProps } from './filters';
 
 const Filter = ({ title, items }: FilterItem) => {
-    return <Button title={title} buttonStyle={'filter-buttons'} onClick={() => console.log(items)}/>;
+    return <Button className={'m-4'} title={title} buttonStyle={'filter-buttons'} onClick={() => console.log(items)}/>;
 };
 
 export const FilterButtons = ({ title, filters }: FilterProps) => {
