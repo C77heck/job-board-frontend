@@ -13,8 +13,8 @@ export const BaseLayout = (props: { children: any; auth: boolean; meta: Meta }) 
         <Meta {...props.meta}/>
         <NavBar/>
         <ContextWrapper>
-            <main>
-                {props.auth ? <Auth>{props.children}</Auth> : props.children}
+            <main className={'position-center'}>
+                    {props.auth ? <Auth>{props.children}</Auth> : props.children}
             </main>
         </ContextWrapper>
         <Footer/>

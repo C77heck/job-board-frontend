@@ -57,11 +57,11 @@ const dummyJobs = [
 ];
 const AdsList: NextPage = (props: any) => {
     return <BaseLayout auth={false} meta={{ title: 'jobs', keywords: 'jobs', description: 'jobs' }}>
-        <div className={'row position-center mt-110'}>
+        <div className={'row position-center my-150'}>
             <div className={'col-20'}>
                 <FilterColumn/>
             </div>
-            <div className={'col-60 pl-40'}>
+            <div className={'col-80 pl-40'}>
                 <JobListings jobs={dummyJobs as any}/>
             </div>
         </div>

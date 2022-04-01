@@ -48,6 +48,9 @@ html {
     }
 }
 
+.base-layout-width {
+    max-width: 115rem;
+}
 
 @include Helpers($lg, $xl, $md, $sm, $mlg);
 @include Fonts();

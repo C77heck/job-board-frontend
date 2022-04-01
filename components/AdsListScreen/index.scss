@@ -1,3 +1,25 @@
 .job-board {
     border: 1.5px solid var(--text-color-light);
 }
+
+.company-logo {
+    width: 7rem;
+    height: 7rem;
+    border: 1px solid var(--text-color-light);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 211ms;
+    cursor: pointer;
+
+    & img {
+        transition: transform 211ms;
+        width: 100%;
+        transform: scale(0.9);
+    }
+
+    &:hover img {
+        transform: scale(1);
+    }
+}

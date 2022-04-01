@@ -34,7 +34,7 @@ const Search = (props: any) => {
         console.log('sending the request to where should go', payload);
     };
 
-    return <div className={'search-box position-center h-px-166 w-70 mt-170'}>
+    return <div className={'search-box position-center h-px-166 w-90 mt-170'}>
         <Form
             form={form}
             className={'w-90 row justify-content-space-around align-items-end pb-22'}

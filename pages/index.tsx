@@ -16,8 +16,10 @@ const dummyPostings = [
 const Home: NextPage = () => {
     return <BaseLayout auth={false} meta={{ title: 'home page', keywords: 'whatever', description: 'some description' }}>
         <Header>
-            <Search/>
-            <FreshPostings data={dummyPostings}/>
+            <div className={'base-layout-width position-center flex-column'}>
+                <Search/>
+                <FreshPostings data={dummyPostings}/>
+            </div>
         </Header>
     </BaseLayout>;
 };
