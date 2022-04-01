@@ -2,6 +2,7 @@ import moment from 'moment';
 import { NextPage } from 'next';
 import { FilterColumn } from '../components/AdsListScreen/Components/filter-column';
 import { JobListings } from '../components/AdsListScreen/Components/job-listings';
+import { BaseLayoutWidth } from '../shared/layouts/base-layout-width';
 import { BaseLayout } from '../shared/layouts/base.layout';
 import { priceFormat } from '../shared/libs/helpers';
 
@@ -57,15 +58,16 @@ const dummyJobs = [
 ];
 const AdsList: NextPage = (props: any) => {
     return <BaseLayout auth={false} meta={{ title: 'jobs', keywords: 'jobs', description: 'jobs' }}>
-        <div className={'row position-center my-150'}>
-            <div className={'col-20'}>
-                <FilterColumn/>
+        <BaseLayoutWidth>
+            <div className={'row position-center my-150'}>
+                <div className={'col-20'}>
+                    <FilterColumn/>
+                </div>
+                <div className={'col-80 pl-40'}>
+                    <JobListings jobs={dummyJobs as any}/>
+                </div>
             </div>
-            <div className={'col-80 pl-40'}>
-                <JobListings jobs={dummyJobs as any}/>
-            </div>
-        </div>
-
+        </BaseLayoutWidth>
     </BaseLayout>;
 };
 export default AdsList;
