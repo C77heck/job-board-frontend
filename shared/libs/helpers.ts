@@ -74,3 +74,18 @@ export const sort = (collection: any[], direction: 'asc' | 'desc' = 'asc', by = 
     }
     return collection.sort((a, b) => a[by].localeCompare(b[by]));
 };
+
+/**
+ * make the datepicker value compatible with safari and firefox
+ * @param dateString
+ */
+export const formatLongText = (text: string, maxLength: number) => {
+    if (!text) {
+        return '';
+    }
+    if (text.length <= maxLength) {
+        return text;
+    }
+
+    return `${text.slice(0, maxLength)}...`;
+};

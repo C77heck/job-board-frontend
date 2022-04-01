@@ -14,7 +14,6 @@ const dummyPostings = [
     { id: '7', title: 'Social Worker', description: 'description', location: 'London', salary: '3000' },
 ];
 const Home: NextPage = () => {
-
     return <BaseLayout auth={false} meta={{ title: 'home page', keywords: 'whatever', description: 'some description' }}>
         <Header>
             <Search/>

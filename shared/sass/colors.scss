@@ -2,15 +2,15 @@
     :root {
         --color-primary-1: #2a89e8;
         --color-primary-2: #5ed5e0;
-        --color-primary-3: #98dee5;
+        --color-primary-3: #2a89e8eb;
         --color-primary-transparent: #2a89e887;
 
         --color-secondary-1: #15bd9e;
         --color-secondary-2: #5fda8b;
         --color-secondary-3: #8fd7a9;
-        --color-yellow:  rgb(218, 175, 58);
+        --color-yellow: rgb(218, 175, 58);
         --text-color: rgb(50, 54, 61);
-        --text-color-light: rgb(141, 142, 143);
+        --text-color-light: #8d8e8f63;
         --text-color-dark: rgb(32, 33, 36);
         --color-disabled: rgb(141, 142, 143);
         --color-dark-2: rgba(8, 61, 66, 0.53);
@@ -80,6 +80,10 @@
 
         &--light-2 {
             color: var(--color-shadow);
+        }
+
+        &--dark {
+            color: var(--color-dark-2);
         }
 
         &--primary-1 {
