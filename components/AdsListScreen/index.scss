@@ -23,3 +23,13 @@
         transform: scale(1);
     }
 }
+
+.filter-block {
+    padding: 5px 0;
+    border: 1px solid var(--text-color-light);
+
+    &--item {
+        border-top: 1px solid var(--text-color-light);
+
+    }
+}

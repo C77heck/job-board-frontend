@@ -333,13 +333,30 @@
     }
 
     .hover-secondary {
-        color: white;
         text-decoration: none;
         transition: color 220ms ease-in-out;
         cursor: pointer !important;
 
         &:hover {
             color: var(--color-secondary-1);
+        }
+
+        &--background {
+            transition: all 220ms ease-in-out;
+            cursor: pointer !important;
+
+            &:hover {
+                background-color: var(--color-secondary-1);
+                color: var(--color-light) !important;
+            }
+
+            &:hover span {
+                color: var(--color-light) !important;
+            }
+
+            &:active span {
+                transform: translateY(1px);
+            }
         }
     }
 

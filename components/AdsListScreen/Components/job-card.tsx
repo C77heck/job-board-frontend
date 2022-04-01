@@ -22,17 +22,17 @@ export const JobCard = ({ title, date, description, location, salary, className 
             <div className={'display-flex pb-8'}>
                 <div className={'display-flex'}>
                     <MoneyIcon className={'display-flex align-items-center'} width={20}/>
-                    <h2 className={'fs-17 fw--700 pl-8'}>{salary}</h2>
+                    <h2 className={'fs-17 fw--700 pl-8 text-color--yellow'}>{salary}</h2>
                 </div>
                 <div className={'display-flex pl-8'}>
                     <LocationIcon className={'display-flex align-items-center justify-content-start pt-1'} width={19}/>
-                    <p className={'fs-15 fw--500 pl-8'}>{location}</p>
+                    <p className={'fs-15 fw--500 pl-8 text-color--yellow'}>{location}</p>
                 </div>
 
             </div>
             <div className={'display-flex'}>
                 <CalendarIcon className={'display-flex align-items-center'} width={16}/>
-                <h2 className={'fs-15 fw--400 pl-8'}>{date}</h2>
+                <h2 className={'fs-15 fw--400 pl-8 text-color--yellow'}>{date}</h2>
             </div>
             <p className={'fs-13 fw--400 pt-16'}>{formatLongText(description, 420)}</p>
         </div>
