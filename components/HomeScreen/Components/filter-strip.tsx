@@ -1,17 +1,17 @@
 import { Button } from '../../../shared/components/buttons/button';
 
-interface Filter {
+export interface FilterItem {
     id: string;
     title: string;
-    property: string;
+    items: number | string | undefined;
 }
 
-const Filter = ({ title, property }: Filter) => {
-    return <Button title={title} buttonStyle={'filter'} onClick={() => console.log(property)}/>;
+const Filter = ({ title, items }: FilterItem) => {
+    return <Button title={title} buttonStyle={'filter'} onClick={() => console.log(items)}/>;
 };
 
-interface Filters {
-    filters: Filter[];
+export interface Filters {
+    filters: FilterItem[];
 }
 
 export const FilterStrip = ({ filters }: Filters) => {

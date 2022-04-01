@@ -1,4 +1,5 @@
-import { Filters } from './filter';
+import { FilterButtons } from './filter-buttons';
+import { Filters } from './filters';
 
 const dummyLocationFilters = [
     { id: '1', title: 'London', items: 3 },
@@ -14,5 +15,6 @@ export const FilterColumn = (props: any) => {
         <Filters title={'Location'} filters={dummyLocationFilters}/>
         <Filters title={'Type of Company'} filters={dummyLocationFilters}/>
         <Filters title={'Date posted'} filters={dummyLocationFilters}/>
+        <FilterButtons title={'Related roles'} filters={dummyLocationFilters}/>
     </div>;
 };

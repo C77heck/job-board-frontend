@@ -1,10 +1,6 @@
-interface FilterItem {
-    id: string;
-    title: string;
-    items: number;
-}
+import { FilterItem } from '../../HomeScreen/Components/filter-strip';
 
-interface FilterProps {
+export interface FilterProps {
     filters: FilterItem[];
     title?: string;
 }
@@ -18,7 +14,7 @@ const Filter = ({ id, title, items }: FilterItem) => {
 
 export const Filters = ({ filters, title }: FilterProps) => {
     return <div className={'filter-block row mt-15'}>
-        {title && <h3 className={'px-13 fs-16 fw--900'}>{title}</h3>}
+        {title && <h3 className={'px-13 pt-5 pb-12 fs-16 fw--900'}>{title}</h3>}
         {(filters || []).map(filter => <Filter key={filter.id} {...filter} />)}
     </div>;
 };

@@ -141,6 +141,24 @@
         }
     }
 
+    &--filter-buttons {
+        background-color: var(--color-light);
+        color: var(--color-dark-2);
+        height: 100%;
+        font-weight: bold;
+        letter-spacing: 1.2px;
+        height: 3rem;
+        font-size: 1.3rem;
+        border-radius: 0;
+        width: fit-content;
+        padding: 3px 21px;
+        border: 2px solid var(--text-color);
+
+        &:hover {
+            background-color: var(--color-success-1) !important;
+        }
+    }
+
     &--primary {
         background-color: var(--color-primary-2);
         height: 100%;

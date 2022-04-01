@@ -61,6 +61,8 @@ const getButtonType = (type: string) => {
             return 'button button--transparent';
         case 'filter':
             return 'button button--filter';
+        case 'filter-buttons':
+            return 'button button--filter-buttons';
         default:
             return 'button';
     }
