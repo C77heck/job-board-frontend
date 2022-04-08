@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { Paginator } from '../../../shared/components/paginator';
 import { JobCard } from "./job-card";
 
 export interface Job {
@@ -14,6 +16,7 @@ interface JobListingsProp {
 }
 
 export const JobListings = ({ jobs }: JobListingsProp) => {
+
     return <div className={''}>
         {(jobs || []).map((job, index) => <JobCard
             key={job.id}

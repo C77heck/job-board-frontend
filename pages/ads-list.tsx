@@ -1,7 +1,9 @@
 import moment from 'moment';
 import { NextPage } from 'next';
+import { useState } from 'react';
 import { FilterColumn } from '../components/AdsListScreen/Components/filter-column';
 import { JobListings } from '../components/AdsListScreen/Components/job-listings';
+import { Paginator } from '../shared/components/paginator';
 import { BaseLayoutWidth } from '../shared/layouts/base-layout-width';
 import { BaseLayout } from '../shared/layouts/base.layout';
 import { priceFormat } from '../shared/libs/helpers';
@@ -57,9 +59,14 @@ const dummyJobs = [
     },
 ];
 const AdsList: NextPage = (props: any) => {
+    const [page, setPage] = useState(1);
+    const paginate = (page: number) => {
+        setPage(page);
+    };
+
     return <BaseLayout auth={false} meta={{ title: 'jobs', keywords: 'jobs', description: 'jobs' }}>
         <BaseLayoutWidth>
-            <div className={'row position-center my-150'}>
+            <div className={'row position-center mt-150 mb-50'}>
                 <div className={'col-20'}>
                     <FilterColumn/>
                 </div>
@@ -67,6 +74,7 @@ const AdsList: NextPage = (props: any) => {
                     <JobListings jobs={dummyJobs as any}/>
                 </div>
             </div>
+            <Paginator total={2} currentPage={page} fetchPage={(data: number) => paginate(data)}/>
         </BaseLayoutWidth>
     </BaseLayout>;
 };
