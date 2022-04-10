@@ -24,18 +24,18 @@ export const Form = (props: FormProps) => {
 
     useEffect(() => {
         setForm(fields, namespace);
-    }, []);
+    }, [namespace, fields]);
 
     useEffect(() => {
         setIsFormValid(getIsFormValid(namespace) as any);
-        console.log(formData, getIsFormValid(namespace));
-    }, [formData]);
+        console.log(namespace, formData, getIsFormValid(namespace));
+    }, []);
 
     const { isLoading, error, clearError, successMessage, clearMessage } = props;
 
     const submit = async (e: any) => {
         e.preventDefault();
-        console.log(getIsFormValid(namespace));
+        console.log(namespace, getIsFormValid(namespace));
 
         props.onSubmit(getPayload(namespace));
     };

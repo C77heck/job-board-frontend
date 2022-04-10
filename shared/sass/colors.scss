@@ -31,6 +31,22 @@
     }
 
     .background-color {
+        &--primary-1 {
+            background-color: var(--color-primary-1);
+        }
+
+        &--primary-2 {
+            background-color: var(--color-primary-2);
+        }
+
+        &--secondary-1 {
+            background-color: var(--color-secondary-1);
+        }
+
+        &--secondary-2 {
+            background-color: var(--color-secondary-2);
+        }
+
         &--error-1 {
             background-color: var(--color-error-1);
         }

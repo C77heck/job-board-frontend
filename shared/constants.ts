@@ -5,6 +5,7 @@ export const CONSTANTS = {
         SEARCHABLE_DROPDOWN: 'searchable_dropdown',
         DROPDOWN: 'dropdown',
         TEXTAREA: 'textarea',
-        RANGE: 'range'
+        RANGE: 'range',
+        CHECKBOX: 'checkbox'
     }
 };

@@ -1,6 +1,7 @@
 import React, { RefObject, useCallback, useContext, useEffect, useState } from 'react';
 import { CONSTANTS } from '../constants';
 import { FormContext } from '../contexts/form.context';
+import { Checkbox } from './checkbox';
 import { RangeInput } from './range-input';
 import { SearchableDropdown } from './searchable-dropdown';
 import { TextInput } from './text-input';
@@ -24,12 +25,39 @@ export interface FieldProps {
     errorMessage?: string;
     label?: string;
     options?: string[];
-    element?: 'text' | 'dropdown' | 'searchable' | 'searchable_dropdown' | 'textarea';
+    element?: 'text' | 'dropdown' | 'searchable' | 'searchable_dropdown' | 'textarea' | 'checkbox' | string;
     isNumberOnly?: boolean;
     value: string | null;
     onChange?: (value: string) => void;
     namespace: string;
 }
+
+interface NormalWrapperProps extends FieldProps {
+    prodRef: RefObject<any>;
+    hasError: boolean;
+    errorMessage: string;
+    children: any;
+}
+
+const NormalWrapper = (props: NormalWrapperProps) => {
+    return <div
+        className={`display-flex flex-column ${props.className}`}
+        ref={props.prodRef}
+    >
+        {props.label && <label
+            className={`input-label error-${props.hasError ? 'show' : 'hide'}--label ${props.labelClass}`}
+            htmlFor={props.name}
+        >
+            {props.label}
+        </label>}
+        <div
+            className={`input-wrapper overflow-hidden ${props.wrapperClasses} error-${props.hasError ? 'show' : 'hide'}--div`}
+        >
+            {props.children}
+        </div>
+        {!!props.hasError && <small className={'error-show'}>{props.errorMessage || props.errorMessage}</small>}
+    </div>;
+};
 
 export const Input = (props: FieldProps) => {
     const [hasError, setHasError] = useState(false);
@@ -38,6 +66,7 @@ export const Input = (props: FieldProps) => {
     const [errorMessage, setErrorMessage] = useState('');
     const prodRef: RefObject<HTMLDivElement> = React.createRef();
     const { getData } = useContext(FormContext);
+    const { INPUTS: { TEXTAREA, SEARCHABLE, SEARCHABLE_DROPDOWN, DROPDOWN, RANGE, CHECKBOX } } = CONSTANTS;
 
     useEffect(() => {
         getData(props.name, { value: props?.value || '', isValid: false }, props.namespace);
@@ -80,7 +109,6 @@ export const Input = (props: FieldProps) => {
     };
 
     const manageInputType = (element: string) => {
-        const { INPUTS: { TEXTAREA, SEARCHABLE, SEARCHABLE_DROPDOWN, DROPDOWN, RANGE } } = CONSTANTS;
         switch (element) {
             case DROPDOWN:
                 return <TextInput
@@ -114,6 +142,12 @@ export const Input = (props: FieldProps) => {
                     handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                     value={value}
                 />;
+            case CHECKBOX:
+                return <Checkbox
+                    {...props}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
+                    value={value}
+                />;
             default:
                 return <TextInput
                     {...props}
@@ -123,21 +157,9 @@ export const Input = (props: FieldProps) => {
         }
     };
 
-    return <div
-        className={`display-flex flex-column ${props.className}`}
-        ref={prodRef}
-    >
-        {props.label && <label
-            className={`input-label error-${hasError ? 'show' : 'hide'}--label ${props.labelClass}`}
-            htmlFor={props.name}
-        >
-            {props.label}
-        </label>}
-        <div
-            className={`input-wrapper overflow-hidden ${props.wrapperClasses} error-${hasError ? 'show' : 'hide'}--div`}
-        >
-            {manageInputType(props.element || 'text')}
-        </div>
-        {!!hasError && <small className={'error-show'}>{errorMessage || props.errorMessage}</small>}
-    </div>;
+    const element = props?.element || '';
+
+    return element === CHECKBOX ? manageInputType(element) : <NormalWrapper {...props} {...{ prodRef, hasError, errorMessage }}>
+        {manageInputType(element)}
+    </NormalWrapper>;
 };

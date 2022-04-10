@@ -11,8 +11,7 @@ export const FormContext = createContext({
     },
     getPayload: (namespace: string) => {
     },
-    formData: (namespace: string) => {
-    },
+    formData: {},
     setForm: (form: FormOptions, namespace: string) => {
-    }
+    },
 });
