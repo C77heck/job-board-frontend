@@ -18,7 +18,6 @@ export class Checkbox extends Component<any, any> {
     }
 
     public handleOnClick() {
-        console.log(!this.state.active);
         this.setState({ active: !this.state.active });
     }
 
@@ -30,7 +29,7 @@ export class Checkbox extends Component<any, any> {
             type={'button'}
         >
             {this.renderCheckIcon(this.state.active)}
-            <span className={'typo-small-inter fw-700 pl-2'}>{this.props.label}</span>
+            <span className={'typo-small-inter fw-700 pl-5'}>{this.props.label}</span>
         </button>;
     }
 }

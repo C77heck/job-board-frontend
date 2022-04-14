@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormOptions, FormStructure } from '../form/form.structure';
 
 export interface ValueProp {
@@ -8,16 +8,26 @@ export interface ValueProp {
 
 export const useForm = () => {
     const [formData, setFormData] = useState<any>({});
-    const getData = (propName: string, data: ValueProp, namespace: string) => {
+    const setData = (propName: string, data: ValueProp, namespace: string) => {
+        console.log('triggered getData');
+
         setFormData({
             ...formData,
             [namespace]: { ...formData[namespace], [propName]: data },
         });
     };
 
-    const setForm = (form: FormOptions, namespace: string) => {
-        const baseForm: any = {};
+    useEffect(() => {
+        console.log('triggered useEffect', { formData });
+        for (const namespace in formData) {
+            console.log(getIsFormValid(namespace));
+        }
+    }, [formData]);
 
+    const setForm = (form: FormOptions, namespace: string) => {
+        console.log('setForm', namespace);
+        const baseForm: any = {};
+        console.log({ baseForm, form, namespace });
         for (const prop in form) {
             if (form.hasOwnProperty(prop)) {
                 baseForm[namespace] = {
@@ -63,5 +73,5 @@ export const useForm = () => {
         return payload;
     };
 
-    return { getData, getForm, getIsFormValid, formData, getPayload, setForm };
+    return { setData, getForm, getIsFormValid, formData, getPayload, setForm };
 };

@@ -3,7 +3,7 @@ import { FormOptions, FormStructure } from '../form/form.structure';
 import { ValueProp } from '../hooks/form-hook';
 
 export const FormContext = createContext({
-    getData: (propName: string, data: ValueProp, namespace: string) => {
+    setData: (propName: string, data: ValueProp, namespace: string) => {
     },
     getForm: (namespace: string) => {
     },

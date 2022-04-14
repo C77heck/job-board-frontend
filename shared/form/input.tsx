@@ -65,11 +65,11 @@ export const Input = (props: FieldProps) => {
     // TODO -> probably will need to move over the error from props to state...
     const [errorMessage, setErrorMessage] = useState('');
     const prodRef: RefObject<HTMLDivElement> = React.createRef();
-    const { getData } = useContext(FormContext);
+    const { setData } = useContext(FormContext);
     const { INPUTS: { TEXTAREA, SEARCHABLE, SEARCHABLE_DROPDOWN, DROPDOWN, RANGE, CHECKBOX } } = CONSTANTS;
 
     useEffect(() => {
-        getData(props.name, { value: props?.value || '', isValid: false }, props.namespace);
+        setData(props.name, { value: props?.value || '', isValid: false }, props.namespace);
     }, []);
 
     useEffect(() => {
@@ -101,7 +101,7 @@ export const Input = (props: FieldProps) => {
         setValue(val);
         setHasError(hasError);
         setErrorMessage(errorMessage);
-        getData(props.name, { value, isValid: !hasError }, props.namespace);
+        setData(props.name, { value, isValid: !hasError }, props.namespace);
     };
 
     const onClickHandler = (isChosen: boolean, option: string) => {

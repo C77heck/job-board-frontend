@@ -536,6 +536,12 @@
             margin-left: $i + px !important;
             margin-right: $i + px !important;
         }
+        @media (min-width: $md) {
+            .#{mx-md- + $i} {
+                padding-left: $i + px !important;
+                padding-right: $i + px !important;
+            }
+        }
         .#{my- + $i} {
             margin-top: $i + px !important;
             margin-bottom: $i + px !important;

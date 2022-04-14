@@ -50,11 +50,11 @@ export const LoginForm = (props: any) => {
 
     return <div>
         <Form
-            {...client}
-            onSubmit={(data: any) => submit(data)}
             form={form}
+            onSubmit={(payload: any) => submit(payload)}
             submitButton={{ className: 'mt-20 col-100 col-md-40 col-lg-22 margin-auto', title: 'Login', type: 'submit' }}
             className={'row margin-auto w-60'}
+            {...client}
         >
             <Input {...form?.fields?.email} namespace={form.namespace}/>
             <Input {...form?.fields?.password} namespace={form.namespace}/>

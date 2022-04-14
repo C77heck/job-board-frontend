@@ -36,7 +36,6 @@ export const RegisterForm = (props: any) => {
             label: 'Email',
             value: null,
             validators: [emailValidator],
-            options: props.options || [],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
             placeholder: 'example@example.com',
@@ -84,10 +83,12 @@ export const RegisterForm = (props: any) => {
             labelClass: 'fs-15 fw--700 mb-2',
         }),
     }, 'user-register');
+    // const apiURL = process.env?.NEXT_PUBLIC_API || '';
+    // PROCESS is not defines. check on next js.
 
     const submit = async (data: any) => {
         const apiURL = process.env?.NEXT_PUBLIC_API || '';
-
+        console.log(apiURL);
         client.client(`${apiURL}/users/signup`, 'post', { body: data });
         console.log('registering', data);
     };
@@ -95,18 +96,22 @@ export const RegisterForm = (props: any) => {
     return <div>
         <Form
             form={form}
-            className={'row margin-auto w-60'}
+            className={'row justify-content-space-between'}
             onSubmit={(payload: any) => submit(payload)}
             submitButton={{ className: 'mt-20 col-100 col-md-40 col-lg-22 margin-auto', title: 'Register', type: 'submit' }}
             {...client}
         >
-            <Input {...form?.fields?.name} namespace={form.namespace}/>
-            <Input {...form?.fields?.email} namespace={form.namespace}/>
-            <Input {...form?.fields?.password} namespace={form.namespace}/>
-            <Input {...form?.fields?.securityQuestion} namespace={form.namespace}/>
-            <Input {...form?.fields?.securityAnswer} namespace={form.namespace}/>
-            <Input {...form?.fields?.isRecruiter} element={CHECKBOX} namespace={form.namespace}/>
-            <Input {...form?.fields?.description} namespace={form.namespace}/>
+            <div className={'col-md-50 mx-md-20 col-100'}>
+                <Input {...form?.fields?.name} namespace={form.namespace}/>
+                <Input {...form?.fields?.email} namespace={form.namespace}/>
+                <Input {...form?.fields?.password} namespace={form.namespace}/>
+                <Input {...form?.fields?.isRecruiter} element={CHECKBOX} namespace={form.namespace}/>
+            </div>
+            <div className={'col-md-50 mx-md-20 col-100'}>
+                <Input {...form?.fields?.securityQuestion} namespace={form.namespace}/>
+                <Input {...form?.fields?.securityAnswer} namespace={form.namespace}/>
+                <Input {...form?.fields?.description} namespace={form.namespace}/>
+            </div>
         </Form>
         <div className={'position-center py-15'}>
             <Button title={'login'} buttonStyle={'link'} onClick={props.onClick}/>

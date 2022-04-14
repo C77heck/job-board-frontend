@@ -16,7 +16,7 @@ export const RegisterCv = ({ isMobile }: any) => {
         content={isRegister
             ? <RegisterForm onClick={() => setIsRegister(false)}/>
             : <LoginForm onClick={() => setIsRegister(true)}/>}
-        size={{ sm: 90, md: 72, lg: 60, xl: 40 }}
+        size={{ sm: 90, md: 67, lg: 50, xl: 40 }}
         header={<h2 className={'header--3 text-align-center'}>Sign in</h2>}
         wrapperClass={''}
         trigger={<Button
