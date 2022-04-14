@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ContextWrapper } from '../../layouts/context.wrapper';
 import { Close } from '../icons/icons';
 import { Portal } from '../portal';
 
@@ -128,12 +129,14 @@ export class Modal extends React.Component<ModalProps, any> {
             <div className={'h-100'} onClick={(e: any) => this.handleClick(e, true)}>
                 {!!this.props.trigger && this.props.trigger}
             </div>
-            <Portal elementId={this.props.portal || 'modals'}>
-                <div>
-                    {this.renderOverlay()}
-                    {this.renderModal()}
-                </div>
-            </Portal>
+            <ContextWrapper>
+                <Portal elementId={this.props.portal || 'modals'}>
+                    <div>
+                        {this.renderOverlay()}
+                        {this.renderModal()}
+                    </div>
+                </Portal>
+            </ContextWrapper>
         </div>;
     }
 }

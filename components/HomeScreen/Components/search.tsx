@@ -27,7 +27,7 @@ const Search = (props: any) => {
             wrapperClasses: 'border-radius-6',
             placeholder: 'Town, city or postcode',
         }),
-    }, 'search-role-by-geolocation');
+    },  'search-role-by-geolocation');
 
     const search = (payload: any) => {
         console.log('sending the request to where should go', payload);
