@@ -8,7 +8,6 @@ import { MobileNavbar } from './mobile-navbar';
 export const NavBar = (props: any) => {
     const { token, isLoggedIn } = useContext(AuthContext);
     const request = new Repository(token);
-    console.log(request, token, isLoggedIn);
 
     return <Portal elementId={'navbar'}>
         <DesktopNavbar className={"display-none display-md-flex"} isLoggedIn={isLoggedIn}/>

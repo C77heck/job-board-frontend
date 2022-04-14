@@ -1,3 +1,4 @@
+import * as Process from 'process';
 import * as React from "react";
 import { useContext } from "react";
 import { CONSTANTS } from '../../constants';
@@ -21,7 +22,6 @@ export const RegisterForm = (props: any) => {
     const { INPUTS: { CHECKBOX } } = CONSTANTS;
     const client = useClient();
     const { signin } = useContext(AuthContext);
-
     const form = new FormStructure({
         name: new Field({
             name: 'name',
@@ -87,10 +87,8 @@ export const RegisterForm = (props: any) => {
     // PROCESS is not defines. check on next js.
 
     const submit = async (data: any) => {
-        const apiURL = process.env?.NEXT_PUBLIC_API || '';
-        console.log(apiURL);
-        client.client(`${apiURL}/users/signup`, 'post', { body: data });
-        console.log('registering', data);
+        const response = await client.client(`${process?.env?.NEXT_PUBLIC_API || ''}/users/signup`, 'POST', { body: data });
+        console.log('registering', data, response);
     };
 
     return <div>

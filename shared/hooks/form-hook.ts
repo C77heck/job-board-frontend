@@ -9,25 +9,14 @@ export interface ValueProp {
 export const useForm = () => {
     const [formData, setFormData] = useState<any>({});
     const setData = (propName: string, data: ValueProp, namespace: string) => {
-        console.log('triggered getData');
-
         setFormData({
             ...formData,
             [namespace]: { ...formData[namespace], [propName]: data },
         });
     };
 
-    useEffect(() => {
-        console.log('triggered useEffect', { formData });
-        for (const namespace in formData) {
-            console.log(getIsFormValid(namespace));
-        }
-    }, [formData]);
-
     const setForm = (form: FormOptions, namespace: string) => {
-        console.log('setForm', namespace);
         const baseForm: any = {};
-        console.log({ baseForm, form, namespace });
         for (const prop in form) {
             if (form.hasOwnProperty(prop)) {
                 baseForm[namespace] = {
