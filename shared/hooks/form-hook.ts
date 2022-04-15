@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { CONSTANTS } from '../constants';
 import { FormOptions, FormStructure } from '../form/form.structure';
 
 export interface ValueProp {
@@ -7,6 +8,7 @@ export interface ValueProp {
 }
 
 export const useForm = () => {
+    const { INPUTS: { CHECKBOX } } = CONSTANTS;
     const [formData, setFormData] = useState<any>({});
     const setData = (propName: string, data: ValueProp, namespace: string) => {
         setFormData({
@@ -17,11 +19,13 @@ export const useForm = () => {
 
     const setForm = (form: FormOptions, namespace: string) => {
         const baseForm: any = {};
+        console.log('CHEKC THIS', { form });
         for (const prop in form) {
             if (form.hasOwnProperty(prop)) {
+                const isValid = form?.[prop]?.element === CHECKBOX;
                 baseForm[namespace] = {
                     ...baseForm[namespace],
-                    [prop]: { value: form?.[prop]?.value || '', isValid: false }
+                    [prop]: { value: form?.[prop]?.value || '', isValid }
                 };
             }
         }
@@ -38,7 +42,7 @@ export const useForm = () => {
 
     const getIsFormValid = (namespace: string) => {
         const form = formData?.[namespace] || {};
-
+        console.log({ namespace, form });
         for (const prop in form) {
             if (form.hasOwnProperty(prop)) {
                 if (!form[prop]?.isValid) {

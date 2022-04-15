@@ -73,14 +73,7 @@ export const RegisterForm = (props: any) => {
             validators: [],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
-        }),
-        description: new Field({
-            name: 'description',
-            label: 'Description',
-            value: null,
-            validators: [],
-            className: 'col-100 mt-11',
-            labelClass: 'fs-15 fw--700 mb-2',
+            element: CHECKBOX
         }),
     }, 'user-register');
     // const apiURL = process.env?.NEXT_PUBLIC_API || '';
@@ -103,12 +96,11 @@ export const RegisterForm = (props: any) => {
                 <Input {...form?.fields?.name} namespace={form.namespace}/>
                 <Input {...form?.fields?.email} namespace={form.namespace}/>
                 <Input {...form?.fields?.password} namespace={form.namespace}/>
-                <Input {...form?.fields?.isRecruiter} element={CHECKBOX} namespace={form.namespace}/>
             </div>
             <div className={'col-md-50 mx-md-20 col-100'}>
                 <Input {...form?.fields?.securityQuestion} namespace={form.namespace}/>
                 <Input {...form?.fields?.securityAnswer} namespace={form.namespace}/>
-                <Input {...form?.fields?.description} namespace={form.namespace}/>
+                <Input {...form?.fields?.isRecruiter} namespace={form.namespace}/>
             </div>
         </Form>
         <div className={'position-center py-15'}>

@@ -69,10 +69,6 @@ export const Input = (props: FieldProps) => {
     const { INPUTS: { TEXTAREA, SEARCHABLE, SEARCHABLE_DROPDOWN, DROPDOWN, RANGE, CHECKBOX } } = CONSTANTS;
 
     useEffect(() => {
-        setData(props.name, { value: props?.value || '', isValid: false }, props.namespace);
-    }, []);
-
-    useEffect(() => {
         if (!!props.value) {
             setValue(props.value);
         }
@@ -81,7 +77,7 @@ export const Input = (props: FieldProps) => {
     const validate = (value: string): ValidatorInterface => {
         // TODO -> something doesnt seem right here. i think we should filter the result of the validation
         const hasErrors = !!props.validators && !!props.validators.length
-            ? props.validators.map((validator: any) => validator(value))
+            ? props.validators.map((validator: any) => validator(value)).filter((res: ValidatorInterface) => res.hasError)
             : [];
 
         if (!hasErrors.length) {
@@ -103,6 +99,7 @@ export const Input = (props: FieldProps) => {
         setHasError(hasError);
         setErrorMessage(errorMessage);
         // TODO CHECKBOX SHOULD BE VALID BY DEFAULT
+        console.log('got triggerd , handleChange', hasError);
         setData(props.name, { value, isValid: !hasError }, props.namespace);
     };
 
