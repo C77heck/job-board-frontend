@@ -3,7 +3,7 @@ import { HttpError } from './http-error';
 import { QueryManager } from './query.manager';
 
 export class Repository {
-    public baseUrl = process.env.REACT_APP_BASE_URL;
+    public baseUrl = process?.env?.NEXT_PUBLIC_API || '';
     public headers: string[][] = [['Content-Type', 'application/json']];
 
     public constructor(token: string | null = null) {

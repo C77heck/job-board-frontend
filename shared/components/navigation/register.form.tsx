@@ -87,7 +87,7 @@ export const RegisterForm = (props: any) => {
     // PROCESS is not defines. check on next js.
 
     const submit = async (data: any) => {
-        const response = await client.client(`${process?.env?.NEXT_PUBLIC_API || ''}/users/signup`, 'POST', { body: data });
+        const response = await client.client(`/users/signup`, 'POST', { body: data });
         console.log('registering', data, response);
     };
 

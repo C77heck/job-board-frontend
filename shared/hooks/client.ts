@@ -26,7 +26,6 @@ export const useClient = (): ClientProps => {
     };
     const client = async (url: string, method: string, options?: RequestInit, query?: any) => {
         try {
-            console.log('GOT IN TO CLIENT');
             setIsLoading(true);
             const response: any = await request.fetch(url, method, options, query);
             setIsLoading(false);
