@@ -79,6 +79,7 @@ export const Input = (props: FieldProps) => {
     }, [props.value]);
 
     const validate = (value: string): ValidatorInterface => {
+        // TODO -> something doesnt seem right here. i think we should filter the result of the validation
         const hasErrors = !!props.validators && !!props.validators.length
             ? props.validators.map((validator: any) => validator(value))
             : [];
@@ -101,6 +102,7 @@ export const Input = (props: FieldProps) => {
         setValue(val);
         setHasError(hasError);
         setErrorMessage(errorMessage);
+        // TODO CHECKBOX SHOULD BE VALID BY DEFAULT
         setData(props.name, { value, isValid: !hasError }, props.namespace);
     };
 
