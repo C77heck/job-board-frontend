@@ -28,7 +28,7 @@ export const DesktopNavbar = (props: any) => {
                 <div className={'col-50 display-flex justify-content-end'}>
                     <div className={'display-flex align-items-center'}>
                         <h3 className={'fs-18 fw--700'}>Are you recruiting?</h3>
-                        <Button title={'Advertise now'} buttonStyle={'secondary'} className={'ml-20'}/>
+                        <Button title={'Advertise now'} buttonStyle={'secondary'} className={'ml-20 mt-3'}/>
                     </div>
                 </div>
             </div>

@@ -98,7 +98,6 @@ export const Input = (props: FieldProps) => {
         const { hasError, errorMessage } = validate(val);
         setHasError(hasError);
         setErrorMessage(errorMessage);
-        setData(props.name, { value, isValid: !hasError }, props.namespace);
     };
 
     useEffect(() => {

@@ -28,7 +28,7 @@ export class TextInput extends Component<any, any> {
             {this.props.type === 'password' && <Eyeicon
                 onClick={() => this.managePasswordType()}
                 width={25}
-                className={`hover-opacity pr-4 ${this.state.type === 'text' ? 'text-color--secondary-1' : ''}`}
+                className={`hover-opacity pt-3 pr-4 ${this.state.type === 'text' ? 'text-color--secondary-1' : ''}`}
             />}
         </div>;
     }

@@ -23,9 +23,17 @@ export const RegisterForm = (props: any) => {
     const client = useClient();
     const { signin } = useContext(AuthContext);
     const form = new FormStructure({
-        name: new Field({
-            name: 'name',
-            label: 'Name',
+        first_name: new Field({
+            name: 'first_name',
+            label: 'First name',
+            value: null,
+            validators: [requiredValidator],
+            className: 'col-100 mt-11',
+            labelClass: 'fs-15 fw--700 mb-2',
+        }),
+        last_name: new Field({
+            name: 'last_name',
+            label: 'Last name',
             value: null,
             validators: [requiredValidator],
             className: 'col-100 mt-11',
@@ -43,6 +51,15 @@ export const RegisterForm = (props: any) => {
         password: new Field({
             name: 'password',
             label: 'Password',
+            value: null,
+            validators: [requiredValidator],
+            className: 'col-100 mt-11',
+            labelClass: 'fs-15 fw--700 mb-2',
+            type: 'password',
+        }),
+        password_again: new Field({
+            name: 'password_again',
+            label: 'Password again',
             value: null,
             validators: [requiredValidator],
             className: 'col-100 mt-11',
@@ -93,14 +110,16 @@ export const RegisterForm = (props: any) => {
             {...client}
         >
             <div className={'col-md-50 mx-md-20 col-100'}>
-                <Input {...form?.fields?.name} namespace={form.namespace}/>
+                <Input {...form?.fields?.first_name} namespace={form.namespace}/>
+                <Input {...form?.fields?.last_name} namespace={form.namespace}/>
                 <Input {...form?.fields?.email} namespace={form.namespace}/>
-                <Input {...form?.fields?.password} namespace={form.namespace}/>
+                <Input {...form?.fields?.isRecruiter} namespace={form.namespace}/>
             </div>
             <div className={'col-md-50 mx-md-20 col-100'}>
+                <Input {...form?.fields?.password} namespace={form.namespace}/>
+                <Input {...form?.fields?.password_again} namespace={form.namespace}/>
                 <Input {...form?.fields?.securityQuestion} namespace={form.namespace}/>
                 <Input {...form?.fields?.securityAnswer} namespace={form.namespace}/>
-                <Input {...form?.fields?.isRecruiter} namespace={form.namespace}/>
             </div>
         </Form>
         <div className={'position-center py-15'}>
