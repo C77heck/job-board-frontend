@@ -1,5 +1,6 @@
 import React, { RefObject, useCallback, useContext, useEffect, useState } from 'react';
 import { debounceTime, distinctUntilChanged, Observable, Subject, tap } from 'rxjs';
+import { Eyeicon } from '../components/icons/icons';
 import { CONSTANTS } from '../constants';
 import { FormContext } from '../contexts/form.context';
 import { Checkbox } from './checkbox';
@@ -52,7 +53,7 @@ const NormalWrapper = (props: NormalWrapperProps) => {
             {props.label}
         </label>}
         <div
-            className={`input-wrapper overflow-hidden ${props.wrapperClasses} error-${props.hasError ? 'show' : 'hide'}--div`}
+            className={`position-center input-wrapper overflow-hidden ${props.wrapperClasses} error-${props.hasError ? 'show' : 'hide'}--div`}
         >
             {props.children}
         </div>
@@ -172,7 +173,7 @@ export const Input = (props: FieldProps) => {
 
     const element = props?.element || '';
 
-    return element === CHECKBOX ? manageInputType(element) : <NormalWrapper {...props} {...{ prodRef, hasError, errorMessage }}>
-        {manageInputType(element)}
-    </NormalWrapper>;
+    return element === CHECKBOX
+        ? manageInputType(element)
+        : <NormalWrapper {...props} {...{ prodRef, hasError, errorMessage }}>{manageInputType(element)}</NormalWrapper>;
 };
