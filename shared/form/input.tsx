@@ -63,7 +63,7 @@ const NormalWrapper = (props: NormalWrapperProps) => {
 
 export const Input = (props: FieldProps) => {
     const [hasError, setHasError] = useState(false);
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState(props.value);
     // TODO -> probably will need to move over the error from props to state...
     const [errorMessage, setErrorMessage] = useState('');
     const prodRef: RefObject<HTMLDivElement> = React.createRef();
@@ -72,9 +72,7 @@ export const Input = (props: FieldProps) => {
     const [onValueChange$] = useState(() => new Subject());
 
     useEffect(() => {
-        if (!!props.value) {
-            setValue(props.value);
-        }
+        setValue(props.value);
     }, [props.value]);
 
     const removeNonNumericValues = useCallback((value: string) => {

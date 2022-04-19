@@ -3,7 +3,7 @@ import { CONSTANTS } from '../constants';
 import { FormOptions, FormStructure } from '../form/form.structure';
 
 export interface ValueProp {
-    value: string;
+    value: string | number | boolean | undefined;
     isValid: boolean;
 }
 
@@ -22,9 +22,11 @@ export const useForm = () => {
         for (const prop in form) {
             if (form.hasOwnProperty(prop)) {
                 const isValid = form?.[prop]?.element === CHECKBOX;
+                console.log(form?.[prop]?.element, !!(form[prop].value));
+                const value = form?.[prop]?.element === CHECKBOX ? form?.[prop]?.value || '' : !!(form[prop].value);
                 baseForm[namespace] = {
                     ...baseForm[namespace],
-                    [prop]: { value: form?.[prop]?.value || '', isValid }
+                    [prop]: { value, isValid }
                 };
             }
         }
@@ -41,7 +43,7 @@ export const useForm = () => {
 
     const getIsFormValid = (namespace: string) => {
         const form = formData?.[namespace] || {};
-        console.log({ namespace, form });
+
         for (const prop in form) {
             if (form.hasOwnProperty(prop)) {
                 if (!form[prop]?.isValid) {
