@@ -26,7 +26,7 @@ export const RegisterForm = (props: any) => {
         first_name: new Field({
             name: 'first_name',
             label: 'First name',
-            value: null,
+            value: '',
             validators: [requiredValidator],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
@@ -34,7 +34,7 @@ export const RegisterForm = (props: any) => {
         last_name: new Field({
             name: 'last_name',
             label: 'Last name',
-            value: null,
+            value: '',
             validators: [requiredValidator],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
@@ -42,7 +42,7 @@ export const RegisterForm = (props: any) => {
         email: new Field({
             name: 'email',
             label: 'Email',
-            value: null,
+            value: '',
             validators: [emailValidator],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
@@ -51,7 +51,7 @@ export const RegisterForm = (props: any) => {
         password: new Field({
             name: 'password',
             label: 'Password',
-            value: null,
+            value: '',
             validators: [requiredValidator],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
@@ -60,7 +60,7 @@ export const RegisterForm = (props: any) => {
         password_again: new Field({
             name: 'password_again',
             label: 'Password again',
-            value: null,
+            value: '',
             validators: [requiredValidator],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
@@ -69,7 +69,7 @@ export const RegisterForm = (props: any) => {
         securityQuestion: new Field({
             name: 'securityQuestion',
             label: 'Security hint',
-            value: null,
+            value: '',
             validators: [requiredValidator],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
@@ -78,7 +78,7 @@ export const RegisterForm = (props: any) => {
         securityAnswer: new Field({
             name: 'securityAnswer',
             label: 'Answer',
-            value: null,
+            value: '',
             validators: [requiredValidator],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',

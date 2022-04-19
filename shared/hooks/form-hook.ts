@@ -22,7 +22,6 @@ export const useForm = () => {
         for (const prop in form) {
             if (form.hasOwnProperty(prop)) {
                 const isValid = form?.[prop]?.element === CHECKBOX;
-                console.log(form?.[prop]?.element, !!(form[prop].value));
                 const value = form?.[prop]?.element === CHECKBOX ? form?.[prop]?.value || '' : !!(form[prop].value);
                 baseForm[namespace] = {
                     ...baseForm[namespace],
