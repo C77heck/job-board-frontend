@@ -1,4 +1,5 @@
 import React, { RefObject, useCallback, useContext, useEffect, useState } from 'react';
+import { debounceTime, distinctUntilChanged, Observable, Subject, tap } from 'rxjs';
 import { CONSTANTS } from '../constants';
 import { FormContext } from '../contexts/form.context';
 import { Checkbox } from './checkbox';
@@ -67,6 +68,7 @@ export const Input = (props: FieldProps) => {
     const prodRef: RefObject<HTMLDivElement> = React.createRef();
     const { setData } = useContext(FormContext);
     const { INPUTS: { TEXTAREA, SEARCHABLE, SEARCHABLE_DROPDOWN, DROPDOWN, RANGE, CHECKBOX } } = CONSTANTS;
+    const [onValueChange$] = useState(() => new Subject());
 
     useEffect(() => {
         if (!!props.value) {
@@ -74,8 +76,12 @@ export const Input = (props: FieldProps) => {
         }
     }, [props.value]);
 
+    const removeNonNumericValues = useCallback((value: string) => {
+        const isNumeric = /^-?\d*\.?\d*$/;
+        return value.split('').filter(v => isNumeric.test(v)).join('');
+    }, []);
+
     const validate = (value: string): ValidatorInterface => {
-        // TODO -> something doesnt seem right here. i think we should filter the result of the validation
         const hasErrors = !!props.validators && !!props.validators.length
             ? props.validators.map((validator: any) => validator(value)).filter((res: ValidatorInterface) => res.hasError)
             : [];
@@ -87,20 +93,28 @@ export const Input = (props: FieldProps) => {
         return hasErrors[0];
     };
 
-    const removeNonNumericValues = useCallback((value: string) => {
-        const isNumeric = /^-?\d*\.?\d*$/;
-        return value.split('').filter(v => isNumeric.test(v)).join('');
+    const manageValidation = (val: any) => {
+        const { hasError, errorMessage } = validate(val);
+        setHasError(hasError);
+        setErrorMessage(errorMessage);
+        setData(props.name, { value, isValid: !hasError }, props.namespace);
+    };
+
+    useEffect(() => {
+        const subscription = onValueChange$.pipe(
+            debounceTime(1000),
+            distinctUntilChanged(),
+            tap(a => console.log(a))
+        ).subscribe((v) => manageValidation(v) as any);
+
+        return () => subscription.unsubscribe();
     }, []);
 
     const handleChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
-        const { hasError, errorMessage } = validate(value);
         const val = props.isNumberOnly ? removeNonNumericValues(value) : value;
         setValue(val);
-        setHasError(hasError);
-        setErrorMessage(errorMessage);
-        // TODO CHECKBOX SHOULD BE VALID BY DEFAULT
-        console.log('got triggerd , handleChange', hasError);
-        setData(props.name, { value, isValid: !hasError }, props.namespace);
+        onValueChange$.next(val);
+        setData(props.name, { value: val, isValid: !hasError }, props.namespace);
     };
 
     const onClickHandler = (isChosen: boolean, option: string) => {

@@ -19,7 +19,6 @@ export const useForm = () => {
 
     const setForm = (form: FormOptions, namespace: string) => {
         const baseForm: any = {};
-        console.log('CHEKC THIS', { form });
         for (const prop in form) {
             if (form.hasOwnProperty(prop)) {
                 const isValid = form?.[prop]?.element === CHECKBOX;
