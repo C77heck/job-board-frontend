@@ -24,6 +24,8 @@ export class TextInput extends Component<any, any> {
                 placeholder={this.props.placeholder}
                 autoComplete={this.props.autoComplete}
                 disabled={this.props.disabled}
+                onFocus={() => this.props.onFocus()}
+                onBlur={() => this.props.onBlur()}
             />
             {this.props.type === 'password' && <Eyeicon
                 onClick={() => this.managePasswordType()}

@@ -38,6 +38,7 @@ interface NormalWrapperProps extends FieldProps {
     hasError: boolean;
     errorMessage: string;
     children: any;
+    isInFocus: boolean;
 }
 
 const NormalWrapper = (props: NormalWrapperProps) => {
@@ -46,29 +47,29 @@ const NormalWrapper = (props: NormalWrapperProps) => {
         ref={props.prodRef}
     >
         {props.label && <label
-            className={`input-label error-${props.hasError ? 'show' : 'hide'}--label ${props.labelClass}`}
+            className={`input-label error-${props.hasError && !props.isInFocus ? 'show' : 'hide'}--label ${props.labelClass}`}
             htmlFor={props.name}
         >
             {props.label}
         </label>}
         <div
-            className={`position-center input-wrapper overflow-hidden ${props.wrapperClasses} error-${props.hasError ? 'show' : 'hide'}--div`}
+            className={`position-center input-wrapper overflow-hidden ${props.wrapperClasses} error-${props.hasError && !props.isInFocus ? 'show' : 'hide'}--div`}
         >
             {props.children}
         </div>
-        {!!props.hasError && <small className={'error-show'}>{props.errorMessage || props.errorMessage}</small>}
+        {!!props.hasError && !props.isInFocus && <small className={'error-show'}>{props.errorMessage || props.errorMessage}</small>}
     </div>;
 };
 
 export const Input = (props: FieldProps) => {
     const [hasError, setHasError] = useState(false);
     const [value, setValue] = useState(props.value);
+    const [isInFocus, setIsInFocus] = useState(true);
     // TODO -> probably will need to move over the error from props to state...
     const [errorMessage, setErrorMessage] = useState('');
     const prodRef: RefObject<HTMLDivElement> = React.createRef();
     const { setData } = useContext(FormContext);
     const { INPUTS: { TEXTAREA, SEARCHABLE, SEARCHABLE_DROPDOWN, DROPDOWN, RANGE, CHECKBOX } } = CONSTANTS;
-    const [onValueChange$] = useState(() => new Subject());
 
     useEffect(() => {
         setValue(props.value);
@@ -91,26 +92,12 @@ export const Input = (props: FieldProps) => {
         return hasErrors[0];
     };
 
-    const manageValidation = (val: any) => {
-        const { hasError, errorMessage } = validate(val);
-        setHasError(hasError);
-        setErrorMessage(errorMessage);
-    };
-
-    useEffect(() => {
-        const subscription = onValueChange$.pipe(
-            debounceTime(1000),
-            distinctUntilChanged(),
-            tap(a => console.log(a))
-        ).subscribe((v) => manageValidation(v) as any);
-
-        return () => subscription.unsubscribe();
-    }, []);
-
     const handleChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
         const val = props.isNumberOnly ? removeNonNumericValues(value) : value;
         setValue(val);
-        onValueChange$.next(val);
+        const { hasError, errorMessage } = validate(val);
+        setHasError(hasError);
+        setErrorMessage(errorMessage);
         setData(props.name, { value: val, isValid: !hasError }, props.namespace);
     };
 
@@ -122,18 +109,24 @@ export const Input = (props: FieldProps) => {
         switch (element) {
             case DROPDOWN:
                 return <TextInput
+                    onFocus={() => setIsInFocus(true)}
+                    onBlur={() => setIsInFocus(false)}
                     {...props}
                     handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                     value={value}
                 />; // will need the dropdown
             case SEARCHABLE:
                 return <TextInput
+                    onFocus={() => setIsInFocus(true)}
+                    onBlur={() => setIsInFocus(false)}
                     {...props}
                     handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                     value={value}
                 />; // will need the dropdown
             case SEARCHABLE_DROPDOWN:
                 return <SearchableDropdown
+                    onFocus={() => setIsInFocus(true)}
+                    onBlur={() => setIsInFocus(false)}
                     {...props}
                     divRef={prodRef}
                     handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
@@ -142,6 +135,8 @@ export const Input = (props: FieldProps) => {
                 />;
             case TEXTAREA:
                 return <TextInput
+                    onFocus={() => setIsInFocus(true)}
+                    onBlur={() => setIsInFocus(false)}
                     {...props}
                     handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                     value={value}
@@ -160,6 +155,8 @@ export const Input = (props: FieldProps) => {
                 />;
             default:
                 return <TextInput
+                    onFocus={() => setIsInFocus(true)}
+                    onBlur={() => setIsInFocus(false)}
                     {...props}
                     handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                     value={value}
@@ -171,5 +168,5 @@ export const Input = (props: FieldProps) => {
 
     return element === CHECKBOX
         ? manageInputType(element)
-        : <NormalWrapper {...props} {...{ prodRef, hasError, errorMessage }}>{manageInputType(element)}</NormalWrapper>;
+        : <NormalWrapper {...props} {...{ prodRef, hasError, errorMessage, isInFocus }}>{manageInputType(element)}</NormalWrapper>;
 };
