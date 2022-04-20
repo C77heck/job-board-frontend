@@ -16,6 +16,14 @@ export const useForm = () => {
             [namespace]: { ...formData[namespace], [propName]: data },
         });
     };
+    useEffect(() => {
+        for (const prop in formData) {
+            if (formData.hasOwnProperty(prop)) {
+                console.log({ formData, prop, isValid: getIsFormValid(prop) });
+                formData[prop].isFormValid = getIsFormValid(prop);
+            }
+        }
+    }, [formData]);
 
     const setForm = (form: FormOptions, namespace: string) => {
         const baseForm: any = {};
@@ -44,7 +52,7 @@ export const useForm = () => {
         const form = formData?.[namespace] || {};
 
         for (const prop in form) {
-            if (form.hasOwnProperty(prop)) {
+            if (form.hasOwnProperty(prop) && prop !== 'isFormValid') {
                 if (!form[prop]?.isValid) {
                     return false;
                 }

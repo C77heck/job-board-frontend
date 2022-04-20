@@ -98,7 +98,6 @@ export const RegisterForm = (props: any) => {
 
     const submit = async (data: any) => {
         const response = await client.client(`/users/signup`, 'POST', { body: data });
-        console.log('registering', data, response);
     };
 
     return <div>

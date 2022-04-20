@@ -17,25 +17,18 @@ interface FormProps extends ClientProps {
 }
 
 export const Form = (props: FormProps) => {
-    const { getIsFormValid, formData, getPayload, setForm } = useContext(FormContext);
-    const [isFormValid, setIsFormValid] = useState(false);
+    const { formData, getPayload, setForm } = useContext(FormContext);
     const namespace = props.form?.namespace;
     const fields = props.form?.fields;
 
     useEffect(() => {
-        console.log(fields);
         setForm(fields, namespace);
     }, [fields, namespace]);
-
-    useEffect(() => {
-        setIsFormValid(getIsFormValid(namespace) as any);
-    }, [formData]);
 
     const { isLoading, error, clearError, successMessage, clearMessage } = props;
 
     const submit = async (e: any) => {
         e.preventDefault();
-        console.log(namespace, getPayload(namespace));
         props.onSubmit(getPayload(namespace));
     };
     // review this logic
@@ -63,7 +56,7 @@ export const Form = (props: FormProps) => {
             {props.children}
             {props.submitButton && <Button
                 isLoading={isLoading}
-                disabled={!isFormValid}
+                disabled={!(formData as any)?.[namespace]?.isFormValid}
                 type={'submit'}
                 {...props.submitButton}
             />}
