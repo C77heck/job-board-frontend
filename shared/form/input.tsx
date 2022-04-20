@@ -1,6 +1,5 @@
 import React, { RefObject, useCallback, useContext, useEffect, useState } from 'react';
 import { debounceTime, distinctUntilChanged, Observable, Subject, tap } from 'rxjs';
-import { Eyeicon } from '../components/icons/icons';
 import { CONSTANTS } from '../constants';
 import { FormContext } from '../contexts/form.context';
 import { Checkbox } from './checkbox';

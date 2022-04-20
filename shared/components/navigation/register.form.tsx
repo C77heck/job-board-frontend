@@ -57,15 +57,6 @@ export const RegisterForm = (props: any) => {
             labelClass: 'fs-15 fw--700 mb-2',
             type: 'password',
         }),
-        password_again: new Field({
-            name: 'password_again',
-            label: 'Password again',
-            value: '',
-            validators: [requiredValidator],
-            className: 'col-100 mt-11',
-            labelClass: 'fs-15 fw--700 mb-2',
-            type: 'password',
-        }),
         securityQuestion: new Field({
             name: 'securityQuestion',
             label: 'Security hint',
@@ -116,7 +107,6 @@ export const RegisterForm = (props: any) => {
             </div>
             <div className={'col-md-50 mx-md-20 col-100'}>
                 <Input {...form?.fields?.password} namespace={form.namespace}/>
-                <Input {...form?.fields?.password_again} namespace={form.namespace}/>
                 <Input {...form?.fields?.securityQuestion} namespace={form.namespace}/>
                 <Input {...form?.fields?.securityAnswer} namespace={form.namespace}/>
             </div>
