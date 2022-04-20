@@ -23,10 +23,11 @@ export const LoginButton = ({ isMobile }: any) => {
         return <Button
             textColor={'text-color--light-1'}
             buttonStyle={'transparent'}
-            title={<ProfileDropdown trigger={<LoginIcon width={24} className={'text-color--light-1 pt-3'}/>} content={content}/>}
+            title={<ProfileDropdown trigger={<LoginIcon width={24} className={'text-color--light-1 pt-3 hover-opacity'}/>} content={content}/>}
             onClick={() => signout()}
         />;
     }
+
 
     return <Modal
         level={2}
