@@ -19,7 +19,6 @@ export const useForm = () => {
     useEffect(() => {
         for (const prop in formData) {
             if (formData.hasOwnProperty(prop)) {
-                console.log({ formData, prop, isValid: getIsFormValid(prop) });
                 formData[prop].isFormValid = getIsFormValid(prop);
             }
         }
