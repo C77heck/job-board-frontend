@@ -28,7 +28,6 @@ export const LoginButton = ({ isMobile }: any) => {
         />;
     }
 
-
     return <Modal
         level={2}
         className={'border-radius-px-5 p-15'}

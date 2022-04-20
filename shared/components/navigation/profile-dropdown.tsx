@@ -1,11 +1,11 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 
 export interface ProfileDropdown {
     trigger: JSX.Element;
     content: JSX.Element;
 }
 
-export class ProfileDropdown extends Component<ProfileDropdown, any> {
+export class ProfileDropdown extends Component<any, any> {
     public state = { show: false, isInFocus: false };
     public divRef: React.RefObject<any> = React.createRef();
 
@@ -31,7 +31,6 @@ export class ProfileDropdown extends Component<ProfileDropdown, any> {
     }
 
     public handleClickOutside(event: any) {
-        console.log('TRIGGERED', !this.divRef.current.contains(event.target), this.divRef.current);
         if (!this.divRef.current.contains(event.target)) {
             this.setState({ show: false });
         }
