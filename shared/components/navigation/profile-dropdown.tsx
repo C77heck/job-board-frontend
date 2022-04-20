@@ -12,7 +12,7 @@ export const ProfileDropdown = (props: ProfileDropdown) => {
         <div onClick={() => setShow(!show)}>
             {props.trigger && props.trigger}
         </div>
-        <div className={`position-absolute dropdown dropdown--${show ? 'show' : 'hide'}`}>
+        <div className={`dropdown-general dropdown dropdown--${show ? 'show' : 'hide'}`}>
             {props.content && props.content}
         </div>
     </div>;

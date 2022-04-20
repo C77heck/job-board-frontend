@@ -74,6 +74,7 @@
 
     &--show {
         transform: translateY(0);
+        z-index: 4;
     }
 
     &--hide {
@@ -81,6 +82,15 @@
         opacity: 0;
         z-index: -4;
     }
+}
+
+.dropdown-general {
+    border: 1px solid var(--color-dark-2);
+    padding: 0.5rem;
+    position: absolute;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 1px 11px 8px 3px var(--color-shadow);
 }
 
 .question-button {

@@ -15,9 +15,9 @@ export const LoginButton = ({ isMobile }: any) => {
 
     if (true) {
         const content = <div className={'position-center row'}>
-            <NavLink className={'col-100'} href={'/job-seeker-profile'}>Profile</NavLink>
-            <NavLink className={'col-100'} href={'/my-jobs'}>Jobs</NavLink>
-            <div className={'col-100'}><LogoutIcon width={20} className={'text-color--light-1 pt-3'}/></div>
+            <NavLink href={'/job-seeker-profile'}><span className={'col-100 fs-16 pt-5'}>Profile</span></NavLink>
+            <NavLink href={'/my-jobs'}><span className={'col-100 fs-16 pt-5'}>Jobs</span></NavLink>
+            <div className={'col-100 pt-5'}><LogoutIcon width={20} className={'text-color--light-1 pt-3'}/></div>
         </div>;
 
         return <Button
