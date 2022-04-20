@@ -5,17 +5,25 @@ import { LoginIcon, LogoutIcon } from '../icons/icons';
 import { Modal } from '../modal/modal';
 import { AuthContext } from '../../contexts/auth.context';
 import { LoginForm } from "./login.form";
+import { NavLink } from './nav-link';
+import { ProfileDropdown } from './profile-dropdown';
 import { RegisterForm } from "./register.form";
 
 export const LoginButton = ({ isMobile }: any) => {
     const { signout, isLoggedIn } = useContext(AuthContext);
     const [isRegister, setIsRegister] = useState(false);
 
-    if (isLoggedIn) {
+    if (true) {
+        const content = <div className={'position-center row'}>
+            <NavLink className={'col-100'} href={'/job-seeker-profile'}>Profile</NavLink>
+            <NavLink className={'col-100'} href={'/my-jobs'}>Jobs</NavLink>
+            <div className={'col-100'}><LogoutIcon width={20} className={'text-color--light-1 pt-3'}/></div>
+        </div>;
+
         return <Button
             textColor={'text-color--light-1'}
             buttonStyle={'transparent'}
-            title={<LogoutIcon width={20} className={'text-color--light-1 pt-3'}/>}
+            title={<ProfileDropdown trigger={<LoginIcon width={24} className={'text-color--light-1 pt-3'}/>} content={content}/>}
             onClick={() => signout()}
         />;
     }
