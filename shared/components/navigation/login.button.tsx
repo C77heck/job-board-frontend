@@ -14,10 +14,10 @@ export const LoginButton = ({ isMobile }: any) => {
     const [isRegister, setIsRegister] = useState(false);
 
     if (true) {
-        const content = <div className={'position-center row'}>
-            <NavLink href={'/job-seeker-profile'}><span className={'col-100 fs-16 pt-5'}>Profile</span></NavLink>
-            <NavLink href={'/my-jobs'}><span className={'col-100 fs-16 pt-5'}>Jobs</span></NavLink>
-            <div className={'col-100 pt-5'}><LogoutIcon width={20} className={'text-color--light-1 pt-3'}/></div>
+        const content = <div className={'row'}>
+            <NavLink href={'/job-seeker-profile'}><span className={'col-100 fs-16 pt-5 text-align-left'}>Profile</span></NavLink>
+            <NavLink href={'/my-jobs'}><span className={'col-100 fs-16 pt-5 text-align-left'}>Jobs</span></NavLink>
+            <div className={'col-100 pt-5'}><LogoutIcon width={20} className={'pt-3 text-align-left'}/></div>
         </div>;
 
         return <Button
