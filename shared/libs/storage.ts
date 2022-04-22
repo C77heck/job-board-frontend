@@ -5,7 +5,7 @@
 
 export class Storage {
     public name: string;
-    public storage = window.localStorage;
+    public storage = window?.localStorage;
 
     public constructor(name: string, type: string = 'local') {
         this.name = name;

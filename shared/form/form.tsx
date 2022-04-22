@@ -1,4 +1,5 @@
 import { Fragment, useContext, useEffect, useState } from 'react';
+import { debounceTime, distinctUntilChanged, Subject, tap } from 'rxjs';
 import { Button, ButtonProps } from '../components/buttons/button';
 import { FormContext } from '../contexts/form.context';
 import { FormStructure } from './form.structure';
@@ -22,9 +23,28 @@ export const Form = (props: FormProps) => {
     const namespace = props.form?.namespace;
     const fields = props.form?.fields;
 
+    const checkValidity = (form: any) => {
+        console.log('CHECKING THE VALIDITY', { form: form.isFormValid });
+        setIsFormValid(form.isFormValid);
+    };
+    const [$onFormValidity] = useState(() => new Subject());
     useEffect(() => {
-        setIsFormValid(!(formData as any)?.[namespace]?.isFormValid);
+        const subscription = $onFormValidity.pipe(
+            debounceTime(500),
+            distinctUntilChanged(),
+            tap(a => console.log(a))
+        ).subscribe(checkValidity as any);
+
+        return () => subscription.unsubscribe();
+    }, []);
+
+    useEffect(() => {
+        $onFormValidity.next(formData);
     }, [formData]);
+
+    // useEffect(() => {
+    //     setIsFormValid(!(formData as any)?.[namespace]?.isFormValid);
+    // }, [formData]);
 
     useEffect(() => {
         setForm(fields, namespace);
