@@ -52,7 +52,7 @@ export const LoginForm = (props: any) => {
         <Form
             form={form}
             onSubmit={(payload: any) => submit(payload)}
-            submitButton={{ className: 'mt-20 col-100 col-md-40 col-lg-22 margin-auto', title: 'Login', type: 'submit' }}
+            submitButton={{ className: 'mt-20 col-100 col-md-40 col-lg-30 margin-auto', title: 'Login', type: 'submit' }}
             className={'row margin-auto w-60'}
             {...client}
         >
