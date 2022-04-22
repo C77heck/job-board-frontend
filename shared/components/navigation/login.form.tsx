@@ -36,11 +36,11 @@ export const LoginForm = (props: any) => {
         }),
     }, 'login-form');
 
-    const submit = async (data: any) => {
-        const body: any = {
-            email: "something@gmail.com" || data?.email || '',
-            password: "something@gmail.com" || data?.password || '',
-        };
+    const submit = async (body: any) => {
+        // const body: any = {
+        //     email: "something@gmail.com" || data?.email || '',
+        //     password: "something@gmail.com" || data?.password || '',
+        // };
         const response: any = await client.client('/users/login', 'post', { body });
 
         if (!client.error && !!response) {

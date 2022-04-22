@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { ContextWrapper } from '../../layouts/context.wrapper';
+import { AuthContextWrapper } from '../../contexts/wrappers/auth-context.wrapper';
+import { FormContextWrapper } from '../../contexts/wrappers/form-context.wrapper';
 import { Close } from '../icons/icons';
 import { Portal } from '../portal';
 
@@ -129,14 +130,16 @@ export class Modal extends React.Component<ModalProps, any> {
             <div className={'h-100'} onClick={(e: any) => this.handleClick(e, true)}>
                 {!!this.props.trigger && this.props.trigger}
             </div>
-            <ContextWrapper>
-                <Portal elementId={this.props.portal || 'modals'}>
-                    <div>
-                        {this.renderOverlay()}
-                        {this.renderModal()}
-                    </div>
-                </Portal>
-            </ContextWrapper>
+            <AuthContextWrapper>
+                <FormContextWrapper>
+                    <Portal elementId={this.props.portal || 'modals'}>
+                        <div>
+                            {this.renderOverlay()}
+                            {this.renderModal()}
+                        </div>
+                    </Portal>
+                </FormContextWrapper>
+            </AuthContextWrapper>
         </div>;
     }
 }

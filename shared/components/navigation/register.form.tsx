@@ -1,3 +1,4 @@
+import moment from 'moment';
 import * as Process from 'process';
 import * as React from "react";
 import { useContext } from "react";
@@ -88,7 +89,11 @@ export const RegisterForm = (props: any) => {
     // PROCESS is not defines. check on next js.
 
     const submit = async (data: any) => {
-        const response = await client.client(`/users/signup`, 'POST', { body: data });
+        const response: any = await client.client(`/users/signup`, 'POST', { body: data });
+
+        if (!client.error && !!response) {
+            signin({ ...(response?.userData || {}), expiry: moment() });
+        }
     };
 
     return <div>
