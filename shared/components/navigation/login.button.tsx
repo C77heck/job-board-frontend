@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useContext, useState } from 'react';
+import { AuthContext } from '../../contexts/auth.context';
 import { Button } from '../buttons/button';
 import { LoginIcon, LogoutIcon } from '../icons/icons';
 import { Modal } from '../modal/modal';
-import { AuthContext } from '../../contexts/auth.context';
 import { LoginForm } from "./login.form";
 import { NavLink } from './nav-link';
 import { ProfileDropdown } from './profile-dropdown';
@@ -12,7 +12,7 @@ import { RegisterForm } from "./register.form";
 export const LoginButton = ({ isMobile }: any) => {
     const { signout, isLoggedIn } = useContext(AuthContext);
     const [isRegister, setIsRegister] = useState(false);
-
+    console.log(isLoggedIn);
     if (isLoggedIn) {
         const content = <div className={'row'}>
             <NavLink href={'/job-seeker-profile'}><span className={'col-100 fs-16 pt-5 text-align-left hover-secondary'}>Profile</span></NavLink>

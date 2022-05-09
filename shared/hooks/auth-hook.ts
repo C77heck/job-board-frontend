@@ -25,7 +25,10 @@ export const useAuth = () => {
 
     useEffect(() => {
         const data = storage.get();
-        if (data && hasNotExpired(data)) {
+        if (isLoggedIn && data && !hasNotExpired(data)) {
+            signout();
+        }
+        if (data && hasNotExpired(data) && !isLoggedIn) {
             signin(data);
         }
     });
@@ -40,10 +43,11 @@ export const useAuth = () => {
 
     // TODO -> Will need an expiry ddate. make sure to use my own date manager.
     const signin = (userData: UserProps) => {
-        setIsLoggedIn(true);
         setToken(userData?.token);
         setUserId(userData?.userId);
+        setIsLoggedIn(true);
         storage.set({ ...userData });
+        console.log('got in');
     };
 
     return { isLoggedIn, token, userId, signout, signin };

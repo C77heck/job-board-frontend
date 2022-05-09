@@ -5,11 +5,13 @@
 
 export class Storage {
     public name: string;
-    public storage = window?.localStorage;
+    public storage: any;
 
     public constructor(name: string, type: string = 'local') {
         this.name = name;
-        this.storage = type === 'local' ? window.localStorage : window.sessionStorage;
+        if (typeof window !== "undefined") {
+            this.storage = type === 'local' ? window.localStorage : window.sessionStorage;
+        }
     }
 
     public has() {

@@ -102,6 +102,7 @@ export const RegisterForm = (props: any) => {
             className={'row justify-content-space-between'}
             onSubmit={(payload: any) => submit(payload)}
             submitButton={{ className: 'mt-20 col-100 col-md-40 col-lg-22 margin-auto', title: 'Register', type: 'submit' }}
+            onSuccess={() => window.location.reload()}
             {...client}
         >
             <div className={'col-md-50 mx-md-20 col-100'}>

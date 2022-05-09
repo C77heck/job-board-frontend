@@ -22,17 +22,19 @@ export const Form = (props: FormProps) => {
     const { formData, getPayload, setForm } = useContext(FormContext);
     const namespace = props.form?.namespace;
     const fields = props.form?.fields;
+    const { isLoading, error, clearError, successMessage, clearMessage } = props;
 
-    const checkValidity = (form: any) => {
-        console.log('CHECKING THE VALIDITY', { form: form.isFormValid });
-        setIsFormValid(form.isFormValid);
-    };
+    // this bit of code is to bring the context api state data up to speed with the  component.
     const [$onFormValidity] = useState(() => new Subject());
+    const checkValidity = (form: any) => {
+        setIsFormValid(!form?.[namespace].isFormValid);
+    };
+
     useEffect(() => {
         const subscription = $onFormValidity.pipe(
             debounceTime(500),
             distinctUntilChanged(),
-            tap(a => console.log(a))
+            tap(a => console.log('DONT MIND'))
         ).subscribe(checkValidity as any);
 
         return () => subscription.unsubscribe();
@@ -42,15 +44,10 @@ export const Form = (props: FormProps) => {
         $onFormValidity.next(formData);
     }, [formData]);
 
-    // useEffect(() => {
-    //     setIsFormValid(!(formData as any)?.[namespace]?.isFormValid);
-    // }, [formData]);
-
     useEffect(() => {
         setForm(fields, namespace);
     }, [fields, namespace]);
 
-    const { isLoading, error, clearError, successMessage, clearMessage } = props;
 
     const submit = async (e: any) => {
         e.preventDefault();

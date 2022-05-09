@@ -37,10 +37,6 @@ export const LoginForm = (props: any) => {
     }, 'login-form');
 
     const submit = async (body: any) => {
-        // const body: any = {
-        //     email: "something@gmail.com" || data?.email || '',
-        //     password: "something@gmail.com" || data?.password || '',
-        // };
         const response: any = await client.client('/users/login', 'post', { body });
 
         if (!client.error && !!response) {
@@ -54,6 +50,7 @@ export const LoginForm = (props: any) => {
             onSubmit={(payload: any) => submit(payload)}
             submitButton={{ className: 'mt-20 col-100 col-md-40 col-lg-30 margin-auto', title: 'Login', type: 'submit' }}
             className={'row margin-auto w-60'}
+            onSuccess={() => window.location.reload()}
             {...client}
         >
             <Input {...form?.fields?.email} namespace={form.namespace}/>

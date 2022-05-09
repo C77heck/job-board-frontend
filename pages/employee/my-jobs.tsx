@@ -1,9 +1,9 @@
 import type { NextPage } from 'next';
-import { FreshPostings } from '../components/HomeScreen/Components/fresh-postings';
-import { Header } from '../components/HomeScreen/Components/header';
-import Search from '../components/HomeScreen/Components/search';
-import { BaseLayoutWidth } from '../shared/layouts/base-layout-width';
-import { BaseLayout } from '../shared/layouts/base.layout';
+import { FreshPostings } from '../../components/HomeScreen/Components/fresh-postings';
+import { Header } from '../../components/HomeScreen/Components/header';
+import Search from '../../components/HomeScreen/Components/search';
+import { BaseLayoutWidth } from '../../shared/layouts/base-layout-width';
+import { BaseLayout } from '../../shared/layouts/base.layout';
 
 const dummyPostings = [
     { id: '1', title: 'Chef de partie', description: 'description', location: 'London, Sussex', salary: '3000' },

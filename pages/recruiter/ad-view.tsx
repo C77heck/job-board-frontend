@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { BaseLayout } from '../shared/layouts/base.layout';
+import { BaseLayout } from '../../shared/layouts/base.layout';
 
 const AdView: NextPage = (props: any) => {
     return <BaseLayout auth={false} meta={{ title: 'home page', keywords: 'whatever', description: 'some description' }}>
