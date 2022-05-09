@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { useCallback } from 'react';
-import { staticData } from '../../config/static-data';
+import { getLinks } from '../../config/static-data';
 import { Button } from '../buttons/button';
-import { FavouriteIcon, LogoutIcon, NotificationIcon } from '../icons/icons';
+import { FavouriteIcon, NotificationIcon } from '../icons/icons';
 import { LoginButton } from './login.button';
 import { NavLink } from './nav-link';
 import { RegisterCv } from './register-cv';
 
 export const DesktopNavbar = (props: any) => {
     // todo -> need to factor in if the visitor is a job seeker or an employer for links to show.
-    const { links: { adEdit, adsList, adView, jobSeekerProfile, employerProfile, favourites, home } } = staticData;
+    const { adEdit, adsList, adView, jobSeekerProfile, employerProfile, favourites, home } = getLinks();
 
     const checkLocation = useCallback((link: string) => {
         return !(window.location.pathname === link);

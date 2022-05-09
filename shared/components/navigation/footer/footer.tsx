@@ -1,10 +1,10 @@
-import { staticData } from '../../../config/static-data';
+import { getLinks } from '../../../config/static-data';
 import { Button } from '../../buttons/button';
 import { FacebookIcon, InstagramIcon, LinkedInIcon, TwitterIcon } from '../../icons/icons';
 import { NavLink } from '../nav-link';
 
 export const Footer = (props: any) => {
-    const { links: { adEdit, adsList, adView, jobSeekerProfile, employerProfile, favourites, home } } = staticData;
+    const { adEdit, adsList, adView, jobSeekerProfile, employerProfile, favourites, home } = getLinks();
 
     return <footer className={'display-flex flex-column'}>
         <div className={'footer display-flex justify-content-center p-40'}>

@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { useCallback } from 'react';
-import { staticData } from '../../config/static-data';
+import { getLinks } from '../../config/static-data';
 
 export const MobileLinks = (props: any) => {
-    const { links: { adEdit, adsList, adView, jobSeekerProfile, employerProfile, favourites, home } } = staticData;
+    const { adEdit, adsList, adView, jobSeekerProfile, employerProfile, favourites, home } = getLinks();
 
     const getColor = useCallback((link: string) => {
         const genericClasses = 'text-decoration-none uppercase fs-21 white-space-nowrap py-20 fw--700';

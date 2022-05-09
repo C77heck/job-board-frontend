@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/auth.context';
 import { Button } from '../buttons/button';
 import { LoginIcon, LogoutIcon } from '../icons/icons';
@@ -12,11 +12,11 @@ import { RegisterForm } from "./register.form";
 export const LoginButton = ({ isMobile }: any) => {
     const { signout, isLoggedIn } = useContext(AuthContext);
     const [isRegister, setIsRegister] = useState(false);
-    useEffect(() => console.log('loginbutton', isLoggedIn), [isLoggedIn]);
+
     if (isLoggedIn) {
         const content = <div className={'row'}>
-            <NavLink href={'/job-seeker-profile'}><span className={'col-100 fs-16 pt-5 text-align-left hover-secondary'}>Profile</span></NavLink>
-            <NavLink href={'/my-jobs'}><span className={'col-100 fs-16 pt-5 text-align-left hover-secondary'}>Jobs</span></NavLink>
+            <NavLink href={'/employee/job-seeker-profile'}><span className={'col-100 fs-16 pt-5 text-align-left hover-secondary'}>Profile</span></NavLink>
+            <NavLink href={'/employee/my-jobs'}><span className={'col-100 fs-16 pt-5 text-align-left hover-secondary'}>Jobs</span></NavLink>
             <div className={'col-100 pt-5'}><LogoutIcon width={20} className={'pt-3 text-align-left hover-secondary'}/></div>
         </div>;
 
@@ -24,7 +24,7 @@ export const LoginButton = ({ isMobile }: any) => {
             textColor={'text-color--light-1'}
             buttonStyle={'transparent'}
             title={<ProfileDropdown trigger={<LoginIcon width={24} className={'text-color--light-1 pt-3 hover-opacity'}/>} content={content}/>}
-            onClick={() => signout()}
+            onClick={() => console.log('signout pressed')}
         />;
     }
 

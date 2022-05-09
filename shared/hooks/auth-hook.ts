@@ -32,9 +32,7 @@ export const useAuth = () => {
             signin(data);
         }
     });
-
-    useEffect(() => console.log('HOOK', isLoggedIn), [isLoggedIn]);
-
+    
     const signout = () => {
         storage.remove();
         setIsLoggedIn(false);
