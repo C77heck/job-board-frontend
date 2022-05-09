@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/auth.context';
 import { Button } from '../buttons/button';
 import { LoginIcon, LogoutIcon } from '../icons/icons';
@@ -12,7 +12,7 @@ import { RegisterForm } from "./register.form";
 export const LoginButton = ({ isMobile }: any) => {
     const { signout, isLoggedIn } = useContext(AuthContext);
     const [isRegister, setIsRegister] = useState(false);
-    console.log(isLoggedIn);
+    useEffect(() => console.log('loginbutton', isLoggedIn), [isLoggedIn]);
     if (isLoggedIn) {
         const content = <div className={'row'}>
             <NavLink href={'/job-seeker-profile'}><span className={'col-100 fs-16 pt-5 text-align-left hover-secondary'}>Profile</span></NavLink>
