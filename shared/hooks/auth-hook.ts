@@ -11,6 +11,8 @@ export interface UserMeta {
     description: string;
     images: string;
     meta: string;
+    isRecruiter: boolean;
+    logo: string;
 }
 
 export interface UserProps {
@@ -63,7 +65,6 @@ export const useAuth = () => {
     const signin = (userData: UserProps) => {
         setToken(userData?.token);
         setUserId(userData?.userId);
-        setUserData(userData.meta);
         setIsLoggedIn(true);
         storage.set({ token: userData.token, userId: userData.userId, expiry: userData.expiry });
     };
@@ -75,7 +76,6 @@ export const useAuth = () => {
 
             setUserData(userData.meta);
         } catch (e) {
-            console.log(e);
             setUserData(null);
         }
     };

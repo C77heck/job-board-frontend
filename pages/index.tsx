@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { FreshPostings } from '../components/HomeScreen/Components/fresh-postings';
-import { Header } from '../components/HomeScreen/Components/header';
+import { HomeScreenHeader } from '../components/HomeScreen/Components/home.screen.header';
 import Search from '../components/HomeScreen/Components/search';
 import { BaseLayoutWidth } from '../shared/layouts/base-layout-width';
 import { BaseLayout } from '../shared/layouts/base.layout';
@@ -16,12 +16,12 @@ const dummyPostings = [
 ];
 const Home: NextPage = () => {
     return <BaseLayout auth={false} meta={{ title: 'home page', keywords: 'whatever', description: 'some description' }}>
-        <Header>
+        <HomeScreenHeader>
             <BaseLayoutWidth>
                 <Search/>
                 <FreshPostings data={dummyPostings}/>
             </BaseLayoutWidth>
-        </Header>
+        </HomeScreenHeader>
     </BaseLayout>;
 };
 

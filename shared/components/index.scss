@@ -4,3 +4,21 @@
 @import './buttons/button.scss';
 @import './icons/icons.scss';
 @import './navigation/navbar';
+
+
+.hr {
+    &--normal {
+        border-bottom: 1.5px solid #C3C9D5;
+        width: 100%;
+    }
+
+    &--light {
+        border-bottom: 1.5px solid #E1E4EA;
+        width: 100%;
+    }
+
+    &--vertical {
+        border-right: 1.5px solid #E1E4EA;
+    }
+
+}

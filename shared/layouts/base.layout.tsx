@@ -5,14 +5,14 @@ import { AuthContextWrapper } from '../contexts/wrappers/auth-context.wrapper';
 import { FormContextWrapper } from '../contexts/wrappers/form-context.wrapper';
 import { Meta } from './meta';
 
-export const BaseLayout = (props: { children: any; auth: boolean; meta: Meta }) => {
+export const BaseLayout = (props: { children: any; auth: boolean; meta: Meta; className?: string; }) => {
 
     return <>
         <Meta {...props.meta}/>
         <AuthContextWrapper>
             <FormContextWrapper>
                 <NavBar/>
-                <main className={'position-center'}>
+                <main className={`position-center ${props.className}`}>
                     {props.auth ? <Auth>{props.children}</Auth> : props.children}
                 </main>
             </FormContextWrapper>
