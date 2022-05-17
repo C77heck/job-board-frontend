@@ -3,15 +3,23 @@ import { useEffect, useState } from 'react';
 import { redirect } from '../libs/helpers';
 import { Storage } from '../libs/storage';
 
+export interface UserMeta {
+    firstName: string;
+    lastName: string;
+    email: string;
+}
+
 export interface UserProps {
     userId: string;
     token: string;
     expiry: Date;
+    meta: UserMeta;
 }
 
 export const useAuth = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [token, setToken] = useState('');
+    const [userData, setUserData] = useState<UserMeta | null>(null);
     const [userId, setUserId] = useState('');
     const storage = new Storage('auth');
 
@@ -32,7 +40,7 @@ export const useAuth = () => {
             signin(data);
         }
     });
-    
+
     const signout = () => {
         storage.remove();
         setIsLoggedIn(false);
@@ -45,10 +53,10 @@ export const useAuth = () => {
     const signin = (userData: UserProps) => {
         setToken(userData?.token);
         setUserId(userData?.userId);
+        setUserData(userData.meta);
         setIsLoggedIn(true);
-        storage.set({ ...userData });
-        console.log('got in');
+        storage.set({ token: userData.token, userId: userData.userId, expiry: userData.expiry });
     };
 
-    return { isLoggedIn, token, userId, signout, signin };
+    return { isLoggedIn, token, userId, userData, signout, signin };
 };
