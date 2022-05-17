@@ -1,12 +1,16 @@
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { redirect } from '../libs/helpers';
+import { Repository } from '../libs/repository';
 import { Storage } from '../libs/storage';
 
 export interface UserMeta {
-    firstName: string;
-    lastName: string;
+    first_name: string;
+    last_name: string;
     email: string;
+    description: string;
+    images: string;
+    meta: string;
 }
 
 export interface UserProps {
@@ -19,7 +23,7 @@ export interface UserProps {
 export const useAuth = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [token, setToken] = useState('');
-    const [userData, setUserData] = useState<UserMeta | null>(null);
+    const [userData, setUserData] = useState<any>(null);
     const [userId, setUserId] = useState('');
     const storage = new Storage('auth');
 
@@ -41,6 +45,12 @@ export const useAuth = () => {
         }
     });
 
+    useEffect(() => {
+        if (isLoggedIn && userId && !userData) {
+            (async () => await whoami(userId))();
+        }
+    }, [userId]);
+
     const signout = () => {
         storage.remove();
         setIsLoggedIn(false);
@@ -58,5 +68,17 @@ export const useAuth = () => {
         storage.set({ token: userData.token, userId: userData.userId, expiry: userData.expiry });
     };
 
-    return { isLoggedIn, token, userId, userData, signout, signin };
+    const whoami = async (userId: string) => {
+        try {
+            const request = new Repository(token);
+            const userData = await request.fetch(`/users/whoami/${userId}`, 'get', {}, {});
+
+            setUserData(userData.meta);
+        } catch (e) {
+            console.log(e);
+            setUserData(null);
+        }
+    };
+
+    return { isLoggedIn, token, userId, userData, whoami, signout, signin };
 };
