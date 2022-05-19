@@ -1,17 +1,16 @@
 import moment from 'moment';
-import * as Process from 'process';
 import * as React from "react";
 import { useContext } from "react";
 import { CONSTANTS } from '../../constants';
-import { Input } from '../../form/input';
-import { Button } from "../buttons/button";
 import { AuthContext } from "../../contexts/auth.context";
 import { Field } from "../../form/field";
 import { Form } from "../../form/form";
 import { FormStructure } from "../../form/form.structure";
+import { Input } from '../../form/input';
 import { emailValidator } from "../../form/validators/email-validator";
 import { requiredValidator } from "../../form/validators/required-validator";
 import { useClient } from "../../hooks/client";
+import { Button } from "../buttons/button";
 
 // TODO -> these will have to be dealt with. probably with an attachment service.
 // we could build a local service that serves staff from the local machine.
@@ -85,8 +84,6 @@ export const RegisterForm = (props: any) => {
             element: CHECKBOX
         }),
     }, 'user-register');
-    // const apiURL = process.env?.NEXT_PUBLIC_API || '';
-    // PROCESS is not defines. check on next js.
 
     const submit = async (data: any) => {
         const response: any = await client.client(`/users/signup`, 'POST', { body: data });

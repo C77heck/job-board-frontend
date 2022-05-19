@@ -2,10 +2,10 @@ import { Fragment, useContext, useEffect, useState } from 'react';
 import { debounceTime, distinctUntilChanged, Subject, tap } from 'rxjs';
 import { Button, ButtonProps } from '../components/buttons/button';
 import { FormContext } from '../contexts/form.context';
-import { FormStructure } from './form.structure';
-import { SuccessModal } from './success.modal';
 import { ClientProps } from '../hooks/client';
 import { ErrorModal } from './error-modal';
+import { FormStructure } from './form.structure';
+import { SuccessModal } from './success.modal';
 
 interface FormProps extends ClientProps {
     onSubmit: (payload: any) => void;
@@ -46,8 +46,7 @@ export const Form = (props: FormProps) => {
 
     useEffect(() => {
         setForm(fields, namespace);
-    }, [fields, namespace]);
-
+    }, []);
 
     const submit = async (e: any) => {
         e.preventDefault();

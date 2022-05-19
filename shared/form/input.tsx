@@ -1,5 +1,4 @@
 import React, { RefObject, useCallback, useContext, useEffect, useState } from 'react';
-import { debounceTime, distinctUntilChanged, Observable, Subject, tap } from 'rxjs';
 import { CONSTANTS } from '../constants';
 import { FormContext } from '../contexts/form.context';
 import { Checkbox } from './checkbox';
@@ -98,6 +97,7 @@ export const Input = (props: FieldProps) => {
         const { hasError, errorMessage } = validate(val);
         setHasError(hasError);
         setErrorMessage(errorMessage);
+        console.log('handleChange', { value, props, hasError, val });
         setData(props.name, { value: val, isValid: !hasError }, props.namespace);
     };
 
