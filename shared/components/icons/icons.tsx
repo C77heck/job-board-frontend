@@ -1,10 +1,16 @@
-export const Close = (props: any) => {
+export interface IconProps {
+    className?: string;
+    onClick?: () => void;
+    width: number;
+}
+
+export const Close = (props: IconProps) => {
     return <div
         className={props.className}
         onClick={props.onClick}
     >
         <svg
-            className={props.width}
+            className={`w-px-${props.width}`}
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg">
             <g data-name="Layer 2">
@@ -17,7 +23,7 @@ export const Close = (props: any) => {
     </div>;
 };
 
-export const SpinnerIcon = (props: any) => {
+export const SpinnerIcon = (props: IconProps) => {
     return <div
         className={`${props.className}`}
     >
@@ -28,7 +34,7 @@ export const SpinnerIcon = (props: any) => {
     </div>;
 };
 
-export const ArrowLeft = (props: any) => {
+export const ArrowLeft = (props: IconProps) => {
     return <div
         className={`${props.className}`}
         onClick={props.onClick}
@@ -42,7 +48,7 @@ export const ArrowLeft = (props: any) => {
     </div>;
 };
 
-export const ArrowRight = (props: any) => {
+export const ArrowRight = (props: IconProps) => {
     return <div
         className={`${props.className}`}
         onClick={props.onClick}
@@ -53,7 +59,7 @@ export const ArrowRight = (props: any) => {
     </div>;
 };
 
-export const FavouriteIcon = (props: any) => {
+export const FavouriteIcon = (props: IconProps) => {
     return <div
         className={`${props.className}`}
         onClick={props.onClick}
@@ -77,7 +83,7 @@ export const FavouriteIcon = (props: any) => {
     </div>;
 };
 
-export const BarsIcon = (props: any) => {
+export const BarsIcon = (props: IconProps) => {
     return <div
         className={`${props.className}`}
         onClick={props.onClick}
@@ -90,7 +96,7 @@ export const BarsIcon = (props: any) => {
     </div>;
 };
 
-export const LoginIcon = (props: any) => {
+export const LoginIcon = (props: IconProps) => {
     return <div
         className={`${props.className}`}
         onClick={props.onClick}
@@ -123,7 +129,7 @@ export const LoginIcon = (props: any) => {
     </div>;
 };
 
-export const NotificationIcon = (props: any) => {
+export const NotificationIcon = (props: IconProps) => {
     return <div
         className={`${props.className}`}
         onClick={props.onClick}
@@ -138,7 +144,7 @@ export const NotificationIcon = (props: any) => {
     </div>;
 };
 
-export const FacebookIcon = (props: any) => {
+export const FacebookIcon = (props: IconProps) => {
     return <div
         className={`${props.className}`}
         onClick={props.onClick}
@@ -150,7 +156,7 @@ export const FacebookIcon = (props: any) => {
     </div>;
 };
 
-export const InstagramIcon = (props: any) => {
+export const InstagramIcon = (props: IconProps) => {
     return <div
         className={`${props.className}`}
         onClick={props.onClick}
@@ -162,7 +168,7 @@ export const InstagramIcon = (props: any) => {
     </div>;
 };
 
-export const LinkedInIcon = (props: any) => {
+export const LinkedInIcon = (props: IconProps) => {
     return <div
         className={`${props.className}`}
         onClick={props.onClick}
@@ -174,7 +180,7 @@ export const LinkedInIcon = (props: any) => {
     </div>;
 };
 
-export const TwitterIcon = (props: any) => {
+export const TwitterIcon = (props: IconProps) => {
     return <div
         className={`${props.className}`}
         onClick={props.onClick}
@@ -186,7 +192,7 @@ export const TwitterIcon = (props: any) => {
     </div>;
 };
 
-export const LogoutIcon = (props: any) => {
+export const LogoutIcon = (props: IconProps) => {
     return <div
         className={`${props.className}`}
         onClick={props.onClick}
@@ -202,7 +208,7 @@ export const LogoutIcon = (props: any) => {
     </div>;
 };
 
-export const MoneyIcon = (props: any) => {
+export const MoneyIcon = (props: IconProps) => {
     return <div
         className={`${props.className}`}
         onClick={props.onClick}
@@ -216,7 +222,7 @@ export const MoneyIcon = (props: any) => {
     </div>;
 };
 
-export const Eyeicon = (props: any) => {
+export const Eyeicon = (props: IconProps) => {
     return <div
         className={`${props.className}`}
         onClick={props.onClick}
@@ -229,7 +235,7 @@ export const Eyeicon = (props: any) => {
     </div>;
 };
 
-export const CalendarIcon = (props: any) => {
+export const CalendarIcon = (props: IconProps) => {
         return <div
             className={`${props.className}`}
             onClick={props.onClick}
@@ -243,17 +249,32 @@ export const CalendarIcon = (props: any) => {
         </div>;
     }
 ;
-export const LocationIcon = (props: any) => {
-        return <div
-            className={`${props.className}`}
-            onClick={props.onClick}
-        >
-            <svg fill="currentColor" className={`w-px-${props.width}`} viewBox="0 0 16 16">
-                <path
-                    d="M8.482 0a5.482 5.482 0 015.481 5.482c0 1.058-.608 2.692-1.68 4.792l-.336.644a68.928 68.928 0 01-2.766 4.7.83.83 0 01-1.399 0 68.829 68.829 0 01-2.765-4.7C3.737 8.508 3 6.646 3 5.482A5.482 5.482 0 018.482 0zm0 .997a4.485 4.485 0 00-4.485 4.485c0 1.608 1.843 5.171 4.192 8.915l.292.462.294-.462c2.28-3.637 4.08-7.091 4.187-8.764l.005-.151A4.485 4.485 0 008.482.997zm0 1.993a2.492 2.492 0 110 4.983 2.492 2.492 0 010-4.983zm0 .997a1.495 1.495 0 100 2.99 1.495 1.495 0 000-2.99z"
-                    fillRule="evenodd"
-                />
-            </svg>
-        </div>;
-    }
-;
+export const LocationIcon = (props: IconProps) => {
+    return <div
+        className={`${props.className}`}
+        onClick={props.onClick}
+    >
+        <svg fill="currentColor" className={`w-px-${props.width}`} viewBox="0 0 16 16">
+            <path
+                d="M8.482 0a5.482 5.482 0 015.481 5.482c0 1.058-.608 2.692-1.68 4.792l-.336.644a68.928 68.928 0 01-2.766 4.7.83.83 0 01-1.399 0 68.829 68.829 0 01-2.765-4.7C3.737 8.508 3 6.646 3 5.482A5.482 5.482 0 018.482 0zm0 .997a4.485 4.485 0 00-4.485 4.485c0 1.608 1.843 5.171 4.192 8.915l.292.462.294-.462c2.28-3.637 4.08-7.091 4.187-8.764l.005-.151A4.485 4.485 0 008.482.997zm0 1.993a2.492 2.492 0 110 4.983 2.492 2.492 0 010-4.983zm0 .997a1.495 1.495 0 100 2.99 1.495 1.495 0 000-2.99z"
+                fillRule="evenodd"
+            />
+        </svg>
+    </div>;
+};
+
+export const EditIcon = (props: IconProps) => {
+    return <div
+        className={`${props.className}`}
+        onClick={props.onClick}
+    >
+        <svg fill="currentColor" className={`w-px-${props.width}`} x="0px" y="0px" viewBox="0 0 512.035 512.035">
+            <polygon points="308.296,76.933 435.229,203.866 470.856,168.282 343.922,41.349"/>
+            <path d="M485.945,26.272c-29.76-29.76-75.307-33.984-109.845-13.077l122.923,122.923     C519.907,101.6,515.726,56.054,485.945,26.272z"/>
+            <path
+                d="M36.511,348.442c-2.795,2.795-4.757,6.293-5.675,10.133L0.586,485.594c-1.728,7.189,0.427,14.784,5.675,20.011     c4.032,4.032,9.493,6.251,15.083,6.251c1.643,0,3.307-0.192,4.928-0.576l127.019-30.251c3.819-0.917,7.339-2.88,10.133-5.675     L405.044,234.01L278.111,107.077L36.511,348.442z M313.759,198.106c8.341,8.341,8.341,21.824,0,30.165l-85.333,85.333     c-4.16,4.16-9.621,6.251-15.083,6.251c-5.461,0-10.923-2.091-15.083-6.251c-8.341-8.341-8.341-21.824,0-30.165l85.333-85.333     C291.935,189.765,305.418,189.765,313.759,198.106z"/>
+        </svg>
+    </div>;
+};
+
+

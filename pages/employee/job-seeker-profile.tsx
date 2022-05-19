@@ -9,7 +9,7 @@ const JobSeekerProfile: NextPage = (props: any) => {
     return <BaseLayout
         auth={false}
         meta={{ title: 'home page', keywords: 'whatever', description: 'some description' }}
-        className={'flex-column'}
+        className={'flex-column job-seeker-profile'}
     >
         <JobSeekerHeader>
             <h2>My profile</h2>

@@ -115,7 +115,7 @@ export class Modal extends React.Component<ModalProps, any> {
                 {header && header}
                 <Close
                     className={'float-right hover-opacity'}
-                    width={'w-px-21'}
+                    width={21}
                     onClick={() => this.handleClick(null, false)}
                 />
             </div>

@@ -35,12 +35,12 @@ export class ProfileBox extends React.Component<ProfileBoxProps, any> {
             className={'h-100'}
             enableEdit={this.props.enableEdit}
         >
-            <h6 className={'fw-bold text--small'}>{this.props.header}</h6>
+            <h6 className={'fw-700 text--small'}>{this.props.header}</h6>
             <div className={'row'}>
-                <div className={'col-12'}>
+                <div className={'col-50'}>
                     {this.renderFirstColumn(firstColumns)}
                 </div>
-                <div className={'col-12'}>
+                <div className={'col-50'}>
                     {this.renderSecondColumn(secondColumns)}
                 </div>
             </div>
@@ -53,7 +53,7 @@ interface ProfileDataProps extends ProfileItem {
 }
 
 const ProfileDataItem = (props: ProfileDataProps) => {
-    return <div className={'display-flex flex-column mb-4'}>
+    return <div className={'display-flex flex-column mb-4 my-15'}>
         <span className={'text--small-grey'}>{props.label}:</span>
         <span className={'text--small'}>{props.data}</span>
     </div>;
