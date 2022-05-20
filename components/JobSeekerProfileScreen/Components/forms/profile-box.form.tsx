@@ -25,7 +25,7 @@ export const ProfileBoxForm = (props: any) => {
         first_name: new Field({
             name: 'first_name',
             label: 'First name',
-            value: '',
+            value: props?.data?.['first_name']?.data || '',
             validators: [requiredValidator],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
@@ -33,7 +33,7 @@ export const ProfileBoxForm = (props: any) => {
         last_name: new Field({
             name: 'last_name',
             label: 'Last name',
-            value: '',
+            value: props?.data?.['last_name']?.data || '',
             validators: [requiredValidator],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
@@ -43,7 +43,7 @@ export const ProfileBoxForm = (props: any) => {
             type: TEXTAREA,
             name: 'description',
             label: 'Description',
-            value: '',
+            value: props?.data?.['description']?.data || '',
             validators: [],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',

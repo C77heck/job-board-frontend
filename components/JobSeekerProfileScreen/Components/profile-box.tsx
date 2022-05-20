@@ -1,11 +1,12 @@
 import React from 'react';
-import { ProfileItem } from '../libs/user.data.document';
+import { ProfileItem, SafeUserData } from '../libs/user.data.document';
 import { BoxWrapper } from './box-wrapper';
 
 interface ProfileBoxProps {
     profileItems: any[];
     enableEdit: boolean;
     header: string;
+    form: SafeUserData;
 }
 
 export class ProfileBox extends React.Component<ProfileBoxProps, any> {
@@ -22,9 +23,12 @@ export class ProfileBox extends React.Component<ProfileBoxProps, any> {
     }
 
     public getCollumns() {
+        const profileItems = (this.props.profileItems || []);
+        const mid = Math.ceil(profileItems.length / 2);
+
         return {
-            firstColumns: (this.props.profileItems || []).slice(0, 5),
-            secondColumns: (this.props.profileItems || []).slice(0, 5)
+            firstColumns: profileItems.slice(0, mid),
+            secondColumns: profileItems.slice(mid)
         };
     }
 
@@ -34,6 +38,7 @@ export class ProfileBox extends React.Component<ProfileBoxProps, any> {
         return <BoxWrapper
             className={'h-100'}
             enableEdit={this.props.enableEdit}
+            form={this.props.form}
         >
             <h6 className={'fw-700 text--small'}>{this.props.header}</h6>
             <div className={'row'}>

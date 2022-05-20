@@ -1,12 +1,14 @@
 import React from 'react';
 import { EditIcon } from '../../../shared/components/icons/icons';
 import { Modal } from '../../../shared/components/modal/modal';
+import { SafeUserData } from '../libs/user.data.document';
 import { ProfileBoxForm } from './forms/profile-box.form';
 
 interface BoxWrapperProps {
     children: any;
     className?: string;
     enableEdit?: boolean;
+    form?: SafeUserData;
 }
 
 export class BoxWrapper extends React.Component<BoxWrapperProps, any> {
@@ -15,7 +17,7 @@ export class BoxWrapper extends React.Component<BoxWrapperProps, any> {
     }
 
     public renderModalContent() {
-        return <ProfileBoxForm/>;
+        return <ProfileBoxForm data={this.props.form}/>;
     }
 
     public renderEdit() {
@@ -36,7 +38,6 @@ export class BoxWrapper extends React.Component<BoxWrapperProps, any> {
         return <div className={`border-radius-px-8 p-25 background-color--light-1 ${this.props.className} position-relative`}>
             {this.renderEdit()}
             {this.props.children}
-
         </div>;
     }
 }

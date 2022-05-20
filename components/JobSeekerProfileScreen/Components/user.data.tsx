@@ -5,11 +5,13 @@ import { ProfileBox } from './profile-box';
 
 export const UserData = ({ filters }: any) => {
     const { userData } = useContext(AuthContext);
-    const { description, email, first_name, last_name, images, isRecruiter, logo, meta } = new UserDataDocument(userData);
+    const userDocument = new UserDataDocument(userData);
+    const { description, email, first_name, last_name, images, isRecruiter, logo, meta } = userDocument;
 
     return <div className={'row justify-content-space-between'}>
         <div className={'col-30 mt-20 mb-50'}>
             <ProfileBox
+                form={userDocument}
                 profileItems={[first_name, last_name, email, description]}
                 enableEdit={true}
                 header={'Profile data'}
@@ -17,6 +19,7 @@ export const UserData = ({ filters }: any) => {
         </div>
         <div className={'col-30 mt-20 mb-50'}>
             <ProfileBox
+                form={userDocument}
                 profileItems={[first_name, last_name, email, description]}
                 enableEdit={true}
                 header={'Profile data'}
@@ -24,6 +27,7 @@ export const UserData = ({ filters }: any) => {
         </div>
         <div className={'col-30 mt-20 mb-50'}>
             <ProfileBox
+                form={userDocument}
                 profileItems={[first_name, last_name, email, description]}
                 enableEdit={true}
                 header={'Profile data'}
