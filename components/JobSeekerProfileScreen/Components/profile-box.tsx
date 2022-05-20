@@ -1,6 +1,7 @@
 import React from 'react';
 import { ProfileItem, SafeUserData } from '../libs/user.data.document';
 import { BoxWrapper } from './box-wrapper';
+import { ProfileBoxForm } from './forms/profile-box.form';
 
 interface ProfileBoxProps {
     profileItems: any[];
@@ -32,10 +33,15 @@ export class ProfileBox extends React.Component<ProfileBoxProps, any> {
         };
     }
 
+    public renderModalContent() {
+        return <ProfileBoxForm data={this.props.form}/>;
+    }
+
     public render() {
         const { firstColumns, secondColumns } = this.getCollumns();
 
         return <BoxWrapper
+            content={this.renderModalContent()}
             className={'h-100'}
             enableEdit={this.props.enableEdit}
             form={this.props.form}

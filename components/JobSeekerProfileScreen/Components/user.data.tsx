@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../../shared/contexts/auth.context';
 import { UserDataDocument } from '../libs/user.data.document';
+import { PhotoBox } from './photo.box';
 import { ProfileBox } from './profile-box';
 
 export const UserData = ({ filters }: any) => {
@@ -18,7 +19,7 @@ export const UserData = ({ filters }: any) => {
             />
         </div>
         <div className={'col-30 mt-20 mb-50'}>
-            <ProfileBox
+            <PhotoBox
                 form={userDocument}
                 profileItems={[first_name, last_name, email, description]}
                 enableEdit={true}

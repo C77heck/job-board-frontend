@@ -9,6 +9,7 @@ interface BoxWrapperProps {
     className?: string;
     enableEdit?: boolean;
     form?: SafeUserData;
+    content: JSX.Element;
 }
 
 export class BoxWrapper extends React.Component<BoxWrapperProps, any> {
@@ -16,16 +17,12 @@ export class BoxWrapper extends React.Component<BoxWrapperProps, any> {
         console.log('onClickHandler');
     }
 
-    public renderModalContent() {
-        return <ProfileBoxForm data={this.props.form}/>;
-    }
-
     public renderEdit() {
         return <div onClick={() => this.onClickHandler()} className={'display-flex justify-content-end'}>
             <Modal
                 level={2}
                 className={'border-radius-px-5 p-15'}
-                content={this.renderModalContent()}
+                content={this.props.content}
                 size={{ sm: 90, md: 67, lg: 50, xl: 40 }}
                 header={<h2 className={'header--3 text-align-center'}>Update profile data</h2>}
                 wrapperClass={''}
