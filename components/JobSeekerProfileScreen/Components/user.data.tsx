@@ -10,21 +10,21 @@ export const UserData = ({ filters }: any) => {
     return <div className={'row justify-content-space-between'}>
         <div className={'col-30 mt-20 mb-50'}>
             <ProfileBox
-                profileItems={[description, email, first_name, last_name]}
+                profileItems={[first_name, last_name, email, description]}
                 enableEdit={true}
                 header={'Profile data'}
             />
         </div>
         <div className={'col-30 mt-20 mb-50'}>
             <ProfileBox
-                profileItems={[description, email, first_name, last_name]}
+                profileItems={[first_name, last_name, email, description]}
                 enableEdit={true}
                 header={'Profile data'}
             />
         </div>
         <div className={'col-30 mt-20 mb-50'}>
             <ProfileBox
-                profileItems={[description, email, first_name, last_name]}
+                profileItems={[first_name, last_name, email, description]}
                 enableEdit={true}
                 header={'Profile data'}
             />

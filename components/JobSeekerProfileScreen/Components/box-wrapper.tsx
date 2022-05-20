@@ -1,7 +1,7 @@
 import React from 'react';
 import { EditIcon } from '../../../shared/components/icons/icons';
 import { Modal } from '../../../shared/components/modal/modal';
-import { RegisterForm } from '../../../shared/components/navigation/register.form';
+import { ProfileBoxForm } from './forms/profile-box.form';
 
 interface BoxWrapperProps {
     children: any;
@@ -15,7 +15,7 @@ export class BoxWrapper extends React.Component<BoxWrapperProps, any> {
     }
 
     public renderModalContent() {
-        return <RegisterForm/>;
+        return <ProfileBoxForm/>;
     }
 
     public renderEdit() {

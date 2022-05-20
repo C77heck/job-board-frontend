@@ -18,7 +18,7 @@ import { useClient } from '../../../../shared/hooks/client';
 //     images?: string[];
 
 export const ProfileBoxForm = (props: any) => {
-    const { INPUTS: { CHECKBOX } } = CONSTANTS;
+    const { INPUTS: { TEXTAREA } } = CONSTANTS;
     const client = useClient();
     const { signin, userId } = useContext(AuthContext);
     const form = new FormStructure({
@@ -38,10 +38,20 @@ export const ProfileBoxForm = (props: any) => {
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
         }),
+        description: new Field({
+            element: TEXTAREA,
+            type: TEXTAREA,
+            name: 'description',
+            label: 'Description',
+            value: '',
+            validators: [],
+            className: 'col-100 mt-11',
+            labelClass: 'fs-15 fw--700 mb-2',
+        }),
     }, 'profile-box');
 
     const submit = async (data: any) => {
-        const response: any = await client.client(`/users/update/${userId}`, 'POST', { body: data });
+        const response: any = await client.client(`/users/update/${userId}`, 'PUT', { body: data });
 
         if (!client.error && !!response) {
             signin({ ...(response?.userData || {}), expiry: moment() });
@@ -57,13 +67,11 @@ export const ProfileBoxForm = (props: any) => {
             onSuccess={() => window.location.reload()}
             {...client}
         >
-            <div className={'col-md-50 mx-md-20 col-100'}>
+            <div className={'mx-md-20 col-100'}>
                 <Input {...form?.fields?.first_name} namespace={form.namespace}/>
                 <Input {...form?.fields?.last_name} namespace={form.namespace}/>
-            </div>
-            <div className={'col-md-50 mx-md-20 col-100'}>
-                <Input {...form?.fields?.first_name} namespace={form.namespace}/>
-                <Input {...form?.fields?.last_name} namespace={form.namespace}/>
+                <Input {...form?.fields?.description} namespace={form.namespace}/>
+
             </div>
         </Form>
         <div className={'position-center py-15'}>

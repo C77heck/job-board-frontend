@@ -48,7 +48,7 @@ export const useAuth = () => {
     });
 
     useEffect(() => {
-        if (isLoggedIn && userId && !userData) {
+        if (isLoggedIn && userId && !userData?.first_name) {
             (async () => await whoami(userId))();
         }
     }, [userId]);

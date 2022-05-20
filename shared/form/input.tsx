@@ -5,6 +5,7 @@ import { Checkbox } from './checkbox';
 import { RangeInput } from './range-input';
 import { SearchableDropdown } from './searchable-dropdown';
 import { TextInput } from './text-input';
+import { Textarea } from './textarea';
 import { ValidatorInterface } from './validators/validator-interface';
 
 export interface FieldProps {
@@ -134,7 +135,7 @@ export const Input = (props: FieldProps) => {
                     onClickHandler={(isChosen: boolean, value: string) => onClickHandler(isChosen, value)}
                 />;
             case TEXTAREA:
-                return <TextInput
+                return <Textarea
                     onFocus={() => setIsInFocus(true)}
                     onBlur={() => setIsInFocus(false)}
                     {...props}
@@ -166,7 +167,7 @@ export const Input = (props: FieldProps) => {
 
     const element = props?.element || '';
 
-    return element === CHECKBOX
+    return element === CHECKBOX || element === TEXTAREA
         ? manageInputType(element)
         : <NormalWrapper {...props} {...{ prodRef, hasError, errorMessage, isInFocus }}>{manageInputType(element)}</NormalWrapper>;
 };

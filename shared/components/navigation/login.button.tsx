@@ -12,7 +12,14 @@ import { RegisterForm } from "./register.form";
 export const LoginButton = ({ isMobile }: any) => {
     const { signout, isLoggedIn } = useContext(AuthContext);
     const [isRegister, setIsRegister] = useState(false);
-
+    const signoutHandler = () => {
+        try {
+            signout();
+            window.location.reload();
+        } catch (e) {
+            console.log(e);
+        }
+    };
     if (isLoggedIn) {
         const content = <div className={'row'}>
             <NavLink href={'/employee/job-seeker-profile'}>
@@ -22,7 +29,7 @@ export const LoginButton = ({ isMobile }: any) => {
                 <span className={'col-100 display-block fs-16 pt-5 text-align-left hover-secondary'}>Jobs</span>
             </NavLink>
             <div className={'col-100 pt-5'}>
-                <LogoutIcon width={20} className={'pt-3 text-align-left hover-secondary'}/>
+                <LogoutIcon onClick={() => signoutHandler()} width={20} className={'pt-3 text-align-left hover-secondary'}/>
             </div>
         </div>;
 
