@@ -63,7 +63,7 @@ const NormalWrapper = (props: NormalWrapperProps) => {
 
 export const Input = (props: FieldProps) => {
     const [hasError, setHasError] = useState(false);
-    const [value, setValue] = useState(props.value);
+    const [value, setValue] = useState('');
     const [isInFocus, setIsInFocus] = useState(true);
     // TODO -> probably will need to move over the error from props to state...
     const [errorMessage, setErrorMessage] = useState('');
@@ -72,8 +72,15 @@ export const Input = (props: FieldProps) => {
     const { INPUTS: { TEXTAREA, SEARCHABLE, SEARCHABLE_DROPDOWN, DROPDOWN, RANGE, CHECKBOX } } = CONSTANTS;
 
     useEffect(() => {
-        setValue(props.value);
-    }, [props.value]);
+        setValue(props.value as string);
+    }, []);
+
+    useEffect(() => {
+        const { hasError, errorMessage } = validate(value);
+        setHasError(hasError);
+        setErrorMessage(errorMessage);
+        setData(props.name, { value, isValid: !hasError }, props.namespace);
+    }, [value]);
 
     const removeNonNumericValues = useCallback((value: string) => {
         const isNumeric = /^-?\d*\.?\d*$/;
@@ -95,11 +102,6 @@ export const Input = (props: FieldProps) => {
     const handleChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
         const val = props.isNumberOnly ? removeNonNumericValues(value) : value;
         setValue(val);
-        const { hasError, errorMessage } = validate(val);
-        setHasError(hasError);
-        setErrorMessage(errorMessage);
-        console.log('handleChange', { value, props, hasError, val });
-        setData(props.name, { value: val, isValid: !hasError }, props.namespace);
     };
 
     const onClickHandler = (isChosen: boolean, option: string) => {

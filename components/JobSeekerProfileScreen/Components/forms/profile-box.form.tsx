@@ -71,7 +71,6 @@ export const ProfileBoxForm = (props: any) => {
                 <Input {...form?.fields?.first_name} namespace={form.namespace}/>
                 <Input {...form?.fields?.last_name} namespace={form.namespace}/>
                 <Input {...form?.fields?.description} namespace={form.namespace}/>
-
             </div>
         </Form>
         <div className={'position-center py-15'}>
