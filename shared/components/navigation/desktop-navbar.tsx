@@ -75,8 +75,8 @@ export const DesktopNavbar = (props: any) => {
                             <FavouriteIcon width={23} className={`hover-opacity text-color--light-1`}/>
                         </NavLink>
                     </div>
-                    <div className={'ml-13'}><LoginButton/></div>
-                    <div className={'ml-20'}><RegisterCv/></div>
+                    <div className={'ml-13 position-relative'}><LoginButton/></div>
+                    <div className={'ml-20'}>{!isLoggedIn && <RegisterCv/>}</div>
                 </div>
             </div>
 

@@ -41,7 +41,7 @@ export class ProfileDropdown extends Component<any, any> {
             <div onClick={() => this.setState({ show: !this.state.show })}>
                 {this.props.trigger && this.props.trigger}
             </div>
-            <div className={`dropdown-general dropdown dropdown--${this.state.show ? 'show' : 'hide'}`}>
+            <div className={`${this.props.className} dropdown-general dropdown dropdown--${this.state.show ? 'show' : 'hide'}`}>
                 {this.props.content && this.props.content}
             </div>
         </div>;
