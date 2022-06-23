@@ -72,9 +72,11 @@ const AdsList: NextPage = (props: any) => {
                 </div>
                 <div className={'col-80 pl-40'}>
                     <JobListings jobs={dummyJobs as any}/>
+                    <div className={'pt-80'}>
+                        <Paginator total={2} currentPage={page} fetchPage={(data: number) => paginate(data)}/>
+                    </div>
                 </div>
             </div>
-            <Paginator total={2} currentPage={page} fetchPage={(data: number) => paginate(data)}/>
         </BaseLayoutWidth>
     </BaseLayout>;
 };
