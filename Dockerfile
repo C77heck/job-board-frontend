@@ -10,7 +10,7 @@ RUN apk add --no-cache make
 RUN apk add --no-cache g++
 RUN apk add --no-cache nginx
 RUN npm install
-RUN npm build
+RUN npm run build
 
 RUN rm -rf node_modules src
 

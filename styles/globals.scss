@@ -50,6 +50,7 @@ html {
 
 .base-layout-width {
     max-width: 115rem;
+    min-height: 80vh;
 }
 
 @include Helpers($lg, $xl, $md, $sm, $mlg);
