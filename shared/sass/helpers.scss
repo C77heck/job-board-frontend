@@ -401,6 +401,10 @@
         flex-wrap: wrap;
     }
 
+    .min-screen-height{
+        min-height: 100vh;
+    }
+
     @for $i from 1 through 1000 {
         .#{btn-w- + $i} {
             width: $i + px !important;

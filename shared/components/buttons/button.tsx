@@ -33,8 +33,6 @@ export const Button = (props: ButtonProps) => {
 
 const getButtonType = (type: string) => {
     switch (type) {
-        case 'base':
-            return 'button button--base';
         case 'submit':
             return 'button button--submit';
         case 'login':
