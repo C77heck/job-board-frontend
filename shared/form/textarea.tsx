@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export class Textarea extends Component<any, any> {
     public render() {
-        return <div className={'display-flex justify-content-center w-100 mt-30 flex-column'}>
+        return <div className={`${this.props.className} display-flex justify-content-center w-100 flex-column`}>
             {this.props.label && <label
                 className={`input-label error-${this.props.hasError && !this.props.isInFocus ? 'show' : 'hide'}--label ${this.props.labelClass}`}
                 htmlFor={this.props.name}
