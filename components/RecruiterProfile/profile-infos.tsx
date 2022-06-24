@@ -2,6 +2,7 @@ import React from 'react';
 import { BoxWrapper } from '../../shared/components/ui-misc/box-wrapper';
 import { DataPresenter } from '../../shared/components/ui-misc/data-presenter';
 import { ProfileItem } from '../JobSeekerProfileScreen/libs/user.data.document';
+import { RecruiterInfoForm } from './forms/recruiter-info.form';
 
 const dummyUserData = [
     { data: 'something1', label: 'something1' },
@@ -15,7 +16,7 @@ const dummyUserData = [
 export class ProfileInfos extends React.Component<any, any> {
     public render() {
         return <BoxWrapper
-            content={<div>Some content</div>}
+            content={<RecruiterInfoForm/>}
             className={'h-100'}
             enableEdit={this.props.enableEdit}
             form={this.props.form}

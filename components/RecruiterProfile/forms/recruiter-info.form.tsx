@@ -1,3 +1,4 @@
+import moment from 'moment';
 import * as React from "react";
 import { useContext } from "react";
 import { Button } from '../../../shared/components/buttons/button';
@@ -10,53 +11,71 @@ import { Input } from '../../../shared/form/input';
 import { requiredValidator } from '../../../shared/form/validators/required-validator';
 import { useClient } from '../../../shared/hooks/client';
 
-// datas we need
-// title, money, location, description
-export const NewJobForm = (props: any) => {
+export const RecruiterInfoForm = (props: any) => {
     const { INPUTS: { CHECKBOX } } = CONSTANTS;
     const client = useClient();
-    const { isLoggedIn } = useContext(AuthContext);
+    const { signin } = useContext(AuthContext);
     const form = new FormStructure({
-        job_title: new Field({
-            name: 'job_title',
-            label: 'Job title',
+        first_name: new Field({
+            name: 'first_name',
+            label: 'First name',
             value: '',
             validators: [requiredValidator],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
         }),
-        salary: new Field({
-            name: 'salary',
-            label: 'Salary',
+        last_name: new Field({
+            name: 'last_name',
+            label: 'Last name',
             value: '',
             validators: [requiredValidator],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
         }),
 
-        location: new Field({
-            name: 'location',
-            label: 'Location',
+        password: new Field({
+            name: 'password',
+            label: 'Password',
+            value: '',
+            validators: [requiredValidator],
+            className: 'col-100 mt-11',
+            labelClass: 'fs-15 fw--700 mb-2',
+            type: 'password',
+        }),
+        securityQuestion: new Field({
+            name: 'securityQuestion',
+            label: 'Security hint',
+            value: '',
+            validators: [requiredValidator],
+            className: 'col-100 mt-11',
+            labelClass: 'fs-15 fw--700 mb-2',
+            placeholder: 'First pet name, first love...',
+        }),
+        securityAnswer: new Field({
+            name: 'securityAnswer',
+            label: 'Answer',
             value: '',
             validators: [requiredValidator],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
         }),
-        description: new Field({
-            name: 'description',
-            label: 'Job description',
-            value: '',
+        isRecruiter: new Field({
+            name: 'isRecruiter',
+            label: 'Are you a recruiter?',
+            value: false,
             validators: [],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
-            element: 'textarea',
+            element: CHECKBOX
         }),
-
     }, 'user-register');
 
     const submit = async (data: any) => {
         const response: any = await client.client(`/users/signup`, 'POST', { body: data });
-        console.log(response);
+
+        if (!client.error && !!response) {
+            signin({ ...(response?.userData || {}), expiry: moment() });
+        }
     };
 
     return <div>
@@ -69,12 +88,14 @@ export const NewJobForm = (props: any) => {
             {...client}
         >
             <div className={'col-md-50 mx-md-20 col-100'}>
-                <Input {...form?.fields?.job_title} namespace={form.namespace}/>
-                <Input {...form?.fields?.salary} namespace={form.namespace}/>
-                <Input {...form?.fields?.location} namespace={form.namespace}/>
+                <Input {...form?.fields?.first_name} namespace={form.namespace}/>
+                <Input {...form?.fields?.last_name} namespace={form.namespace}/>
+                <Input {...form?.fields?.isRecruiter} namespace={form.namespace}/>
             </div>
             <div className={'col-md-50 mx-md-20 col-100'}>
-                <Input {...form?.fields?.description} namespace={form.namespace}/>
+                <Input {...form?.fields?.password} namespace={form.namespace}/>
+                <Input {...form?.fields?.securityQuestion} namespace={form.namespace}/>
+                <Input {...form?.fields?.securityAnswer} namespace={form.namespace}/>
             </div>
         </Form>
         <div className={'position-center py-15'}>

@@ -30,7 +30,7 @@ export const TabViewer = (props: TabViewerProps) => {
 
     const tabButton = ({ display, value }: TabNames) => {
         const isActive = value === activeTab ? 'filter-buttons-active' : '';
-        console.log({ value, activeTab });
+
         return <Button
             onClick={() => setActiveTab(value)}
             buttonStyle={'filter-buttons'}
