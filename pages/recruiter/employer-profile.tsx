@@ -1,5 +1,7 @@
 import { NextPage } from 'next';
 import { NewJobPosting } from '../../components/RecruiterProfile/new-job-posting';
+import { PostingsHistory } from '../../components/RecruiterProfile/postings-history';
+import { ProfileInfos } from '../../components/RecruiterProfile/profile-infos';
 import { Tab, TabViewer } from '../../components/RecruiterProfile/tab-viewer';
 import { BaseLayoutWidth } from '../../shared/layouts/base-layout-width';
 import { BaseLayout } from '../../shared/layouts/base.layout';
@@ -12,12 +14,17 @@ const EmployerProfile: NextPage = (props: any) => {
             { display: 'Profile infos', value: 'profile-infos' },
             { display: 'Job postings history', value: 'my-job-postings' }
         ],
-        elements: { 'new-postings': <NewJobPosting/>, 'profile-infos': <h2>profile-infos</h2>, 'my-job-postings': <h2>my-job-postings</h2> }
+        elements: {
+            'new-postings': <NewJobPosting/>,
+            'profile-infos': <ProfileInfos/>,
+            'my-job-postings': <PostingsHistory/>
+        }
     };
+
     return <BaseLayout auth={false} meta={{ title: 'home page', keywords: 'whatever', description: 'some description' }}>
         <BaseLayoutWidth className={'min-screen-height justify-content-start pt-150'}>
             <h1 className={'pb-40'}>My profile</h1>
-            <TabViewer tabs={tabs}/>
+            <TabViewer default={'profile-infos'} tabs={tabs}/>
         </BaseLayoutWidth>
     </BaseLayout>;
 };

@@ -176,6 +176,9 @@
     .scale-1 {
         transform: scale(1);
     }
+    .scale-up {
+        transform: scale(1.2);
+    }
 
     .animate--flickering-btn {
         animation: flicker 60ms 3;

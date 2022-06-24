@@ -1,8 +1,8 @@
 import React from 'react';
-import { EditIcon } from '../../../shared/components/icons/icons';
-import { Modal } from '../../../shared/components/modal/modal';
-import { SafeUserData } from '../libs/user.data.document';
-import { ProfileBoxForm } from './forms/profile-box.form';
+import { EditIcon } from '../icons/icons';
+import { Modal } from '../modal/modal';
+import { SafeUserData } from '../../../components/JobSeekerProfileScreen/libs/user.data.document';
+import { ProfileBoxForm } from '../../../components/JobSeekerProfileScreen/Components/forms/profile-box.form';
 
 interface BoxWrapperProps {
     children: any;

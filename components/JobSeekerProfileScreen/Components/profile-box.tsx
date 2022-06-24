@@ -1,6 +1,7 @@
 import React from 'react';
+import { BoxWrapper } from '../../../shared/components/ui-misc/box-wrapper';
+import { DataPresenter } from '../../../shared/components/ui-misc/data-presenter';
 import { ProfileItem, SafeUserData } from '../libs/user.data.document';
-import { BoxWrapper } from './box-wrapper';
 import { ProfileBoxForm } from './forms/profile-box.form';
 
 interface ProfileBoxProps {
@@ -13,13 +14,13 @@ interface ProfileBoxProps {
 export class ProfileBox extends React.Component<ProfileBoxProps, any> {
     public renderFirstColumn(items: ProfileItem[]) {
         return <div className={'w-100'}>
-            {items.length && items.map(({ label, data }: ProfileItem) => <ProfileDataItem key={`${data}`} data={data} label={label}/>)}
+            {items.length && items.map(({ label, data }: ProfileItem) => <DataPresenter key={`${data}`} data={data} label={label}/>)}
         </div>;
     }
 
     public renderSecondColumn(items: ProfileItem[]) {
         return <div className={'w-100'}>
-            {items.length && items.map(({ label, data }: ProfileItem) => <ProfileDataItem key={`${data}`} data={data} label={label}/>)}
+            {items.length && items.map(({ label, data }: ProfileItem) => <DataPresenter key={`${data}`} data={data} label={label}/>)}
         </div>;
     }
 
@@ -58,14 +59,3 @@ export class ProfileBox extends React.Component<ProfileBoxProps, any> {
         </BoxWrapper>;
     }
 }
-
-interface ProfileDataProps extends ProfileItem {
-    key: any;
-}
-
-const ProfileDataItem = (props: ProfileDataProps) => {
-    return <div className={'display-flex flex-column mb-4 my-15'}>
-        <span className={'text--small-grey'}>{props.label}:</span>
-        <span className={'text--small'}>{props.data}</span>
-    </div>;
-};

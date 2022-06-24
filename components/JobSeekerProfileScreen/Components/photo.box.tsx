@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import { UploaderMulti } from '../../../shared/components/file-upload/file-uploader';
 import { Lightbox } from '../../../shared/components/lightbox/light-box';
-import { BoxWrapper } from './box-wrapper';
+import { BoxWrapper } from '../../../shared/components/ui-misc/box-wrapper';
 import { EditPhotos } from './forms/edit.photos';
 
 export class PhotoBox extends Component<any, any> {

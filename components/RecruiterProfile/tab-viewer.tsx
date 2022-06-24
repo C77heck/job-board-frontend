@@ -13,6 +13,7 @@ export interface Tab {
 
 export interface TabViewerProps {
     tabs: Tab;
+    default: string;
 }
 
 export const TabViewer = (props: TabViewerProps) => {
@@ -23,11 +24,17 @@ export const TabViewer = (props: TabViewerProps) => {
         setActiveElement(props.tabs.elements[activeTab]);
     }, [activeTab]);
 
+    useEffect(() => {
+        setActiveTab(props.default);
+    }, []);
+
     const tabButton = ({ display, value }: TabNames) => {
+        const isActive = value === activeTab ? 'filter-buttons-active' : '';
+        console.log({ value, activeTab });
         return <Button
             onClick={() => setActiveTab(value)}
             buttonStyle={'filter-buttons'}
-            className={'mx-10'}
+            className={`${isActive} mx-10`}
             key={value}
             title={display}
         />;

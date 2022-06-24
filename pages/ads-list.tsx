@@ -8,7 +8,7 @@ import { BaseLayoutWidth } from '../shared/layouts/base-layout-width';
 import { BaseLayout } from '../shared/layouts/base.layout';
 import { priceFormat } from '../shared/libs/helpers';
 
-const dummyJobs = [
+export const dummyJobs = [
     {
         id: '6',
         title: 'Chef de partie',

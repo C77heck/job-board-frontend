@@ -152,9 +152,10 @@
         border-radius: 4px;
 
         &:hover {
-            background-color: var(--color-success-1) !important;
+            background-color: var(--color-primary-4);
         }
     }
+
 
     &--primary {
         background-color: var(--color-primary-2);
@@ -181,5 +182,13 @@
         &:hover {
             color: var(--color-secondary-5) !important;
         }
+    }
+}
+
+.filter-buttons-active {
+    background-color: var(--color-primary-4);
+
+    &:hover {
+        opacity: 0.8;
     }
 }
