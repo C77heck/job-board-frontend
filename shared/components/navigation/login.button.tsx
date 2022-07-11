@@ -22,7 +22,6 @@ export const LoginButton = ({ isMobile }: any) => {
         }
     };
     if (isLoggedIn) {
-        console.log({ userData });
         return <Button
             textColor={'text-color--light-1'}
             buttonStyle={'transparent'}

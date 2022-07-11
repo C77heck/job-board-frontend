@@ -16,7 +16,7 @@ export const NewJobForm = (props: any) => {
     const client = useClient();
     const { isLoggedIn } = useContext(AuthContext);
     const form = new FormStructure({
-        job_title: new Field({
+        title: new Field({
             name: 'job_title',
             label: 'Job title',
             value: '',
@@ -55,7 +55,7 @@ export const NewJobForm = (props: any) => {
     }, 'user-register');
 
     const submit = async (data: any) => {
-        const response: any = await client.client(`/users/signup`, 'POST', { body: data });
+        const response: any = await client.client(`/ads/create-new-ad`, 'POST', { body: data });
         console.log(response);
     };
 
@@ -69,11 +69,13 @@ export const NewJobForm = (props: any) => {
             {...client}
         >
             <div className={'col-md-50 mx-md-20 col-100'}>
-                <Input {...form?.fields?.job_title} namespace={form.namespace}/>
+                <Input {...form?.fields?.title} namespace={form.namespace}/>
                 <Input {...form?.fields?.salary} namespace={form.namespace}/>
                 <Input {...form?.fields?.location} namespace={form.namespace}/>
             </div>
             <div className={'col-md-50 mx-md-20 col-100'}>
+                <Input {...form?.fields?.expiresOn} namespace={form.namespace}/>
+                <Input {...form?.fields?.isPremium} namespace={form.namespace}/>
                 <Input {...form?.fields?.description} namespace={form.namespace}/>
             </div>
         </Form>
