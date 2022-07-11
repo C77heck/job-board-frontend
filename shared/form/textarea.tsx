@@ -11,8 +11,8 @@ export class Textarea extends Component<any, any> {
             </label>}
             <textarea
                 className={`input ${this.props.inputClasses} w-100 pl-8`}
-                rows={this.props.rows || 4}
-                cols={this.props.cols || 50}
+                rows={this.props.rows}
+                cols={this.props.cols}
                 onChange={(e) => this.props.handleChange(e)}
                 value={this.props.value}
                 name={this.props.name}

@@ -24,8 +24,9 @@ export interface UserProps {
 
 export const useAuth = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isRecruiter, setIsRecruiter] = useState(false);
     const [token, setToken] = useState('');
-    const [userData, setUserData] = useState<any>(null);
+    const [userData, setUserData] = useState<UserMeta | null>(null);
     const [userId, setUserId] = useState('');
     const storage = new Storage('auth');
 
@@ -80,5 +81,5 @@ export const useAuth = () => {
         }
     };
 
-    return { isLoggedIn, token, userId, userData, whoami, signout, signin };
+    return { isLoggedIn, token, userId, userData, isRecruiter, whoami, signout, signin };
 };

@@ -1,4 +1,4 @@
-import { BarsIcon } from '../icons/icons';
+import { BarsIcon } from '../../icons/icons';
 
 export const MobileMenuButton = (props: any) => {
     const isActive = props.isActive ? 'color-custom--secondary-3' : 'color-custom--grey';

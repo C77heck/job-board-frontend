@@ -404,7 +404,7 @@
         flex-wrap: wrap;
     }
 
-    .min-screen-height{
+    .min-screen-height {
         min-height: 100vh;
     }
 
@@ -629,5 +629,9 @@
         .#{letter-spacing- + $i} {
             letter-spacing: $i + px;
         }
+    }
+
+    .appear-smoothly {
+        animation: grow 1000ms 1;
     }
 }

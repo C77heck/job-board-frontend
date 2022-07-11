@@ -26,6 +26,8 @@ export class Field implements FieldProps {
     public namespace;
     public labelClass;
     public wrapperClasses;
+    public rows;
+    public cols;
 
     public constructor(attributes: any) {
         this.type = attributes?.type || 'text';
@@ -50,7 +52,8 @@ export class Field implements FieldProps {
         this.value = attributes?.value || null;
         this.onChange = attributes?.onChange || null;
         this.namespace = attributes?.namespace || '';
-
+        this.rows = attributes?.rows || 4;
+        this.cols = attributes?.cols || 50;
         if (this.element === 'range') {
             this.min = attributes?.min || 0;
             this.max = attributes?.max || 100;

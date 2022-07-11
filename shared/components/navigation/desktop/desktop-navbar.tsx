@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { useCallback } from 'react';
-import { getLinks } from '../../config/static-data';
-import { Button } from '../buttons/button';
-import { FavouriteIcon, NotificationIcon } from '../icons/icons';
-import { LoginButton } from './login.button';
-import { NavLink } from './nav-link';
-import { RegisterCv } from './register-cv';
+import { getLinks } from '../../../config/static-data';
+import { Button } from '../../buttons/button';
+import { FavouriteIcon, NotificationIcon } from '../../icons/icons';
+import { LoginButton } from '../login.button';
+import { NavLink } from '../extras/nav-link';
+import { RegisterCv } from '../register-cv';
 
 export const DesktopNavbar = (props: any) => {
     // todo -> need to factor in if the visitor is a job seeker or an employer for links to show.

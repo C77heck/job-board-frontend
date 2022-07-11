@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useCallback } from 'react';
-import { getLinks } from '../../config/static-data';
+import { getLinks } from '../../../config/static-data';
 
 export const MobileLinks = (props: any) => {
     const { adEdit, adsList, adView, jobSeekerProfile, employerProfile, favourites, home } = getLinks();
@@ -44,4 +44,3 @@ export const MobileLinks = (props: any) => {
         />
     </div>;
 };
-

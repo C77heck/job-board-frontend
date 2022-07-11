@@ -1,15 +1,15 @@
 import moment from 'moment';
 import * as React from "react";
 import { useContext } from "react";
-import { Input } from '../../form/input';
-import { Button } from "../buttons/button";
-import { AuthContext } from "../../contexts/auth.context";
-import { Field } from "../../form/field";
-import { Form } from "../../form/form";
-import { FormStructure } from "../../form/form.structure";
-import { emailValidator } from "../../form/validators/email-validator";
-import { requiredValidator } from "../../form/validators/required-validator";
-import { useClient } from "../../hooks/client";
+import { Input } from '../../../form/input';
+import { Button } from "../../buttons/button";
+import { AuthContext } from "../../../contexts/auth.context";
+import { Field } from "../../../form/field";
+import { Form } from "../../../form/form";
+import { FormStructure } from "../../../form/form.structure";
+import { emailValidator } from "../../../form/validators/email-validator";
+import { requiredValidator } from "../../../form/validators/required-validator";
+import { useClient } from "../../../hooks/client";
 
 export const LoginForm = (props: any) => {
     const client = useClient();

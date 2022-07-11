@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { useContext, useState } from 'react';
-import { AuthContext } from '../../contexts/auth.context';
+import { useState } from 'react';
 import { Button } from '../buttons/button';
 import { Modal } from '../modal/modal';
-import { LoginForm } from './login.form';
-import { RegisterForm } from './register.form';
+import { LoginForm } from './forms/login.form';
+import { RegisterForm } from './forms/register.form';
 
 export const RegisterCv = ({ isMobile }: any) => {
-    const { signout, isLoggedIn } = useContext(AuthContext);
     const [isRegister, setIsRegister] = useState(false);
 
     return <Modal

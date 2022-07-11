@@ -7,7 +7,7 @@ import { BaseLayoutWidth } from '../../shared/layouts/base-layout-width';
 import { BaseLayout } from '../../shared/layouts/base.layout';
 
 // http://localhost:3000/recruiter/employer-profile
-const EmployerProfile: NextPage = (props: any) => {
+const RecruiterProfile: NextPage = (props: any) => {
     const tabs: Tab = {
         tabNames: [
             { display: 'New posting', value: 'new-postings' },
@@ -28,4 +28,4 @@ const EmployerProfile: NextPage = (props: any) => {
         </BaseLayoutWidth>
     </BaseLayout>;
 };
-export default EmployerProfile;
+export default RecruiterProfile;

@@ -1,13 +1,11 @@
-import { useContext, useEffect, useState } from 'react';
-import { Portal } from '../portal';
+import { useContext } from 'react';
 import { AuthContext } from '../../contexts/auth.context';
-import { Repository } from '../../libs/repository';
-import { DesktopNavbar } from './desktop-navbar';
-import { MobileNavbar } from './mobile-navbar';
+import { Portal } from '../portal';
+import { DesktopNavbar } from './desktop/desktop-navbar';
+import { MobileNavbar } from './mobile/mobile-navbar';
 
 export const NavBar = (props: any) => {
-    const { token, isLoggedIn } = useContext(AuthContext);
-    const request = new Repository(token);
+    const { isLoggedIn } = useContext(AuthContext);
 
     return <Portal elementId={'navbar'}>
         <DesktopNavbar className={"display-none display-md-flex"} isLoggedIn={isLoggedIn}/>

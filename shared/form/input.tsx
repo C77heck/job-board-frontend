@@ -9,28 +9,30 @@ import { Textarea } from './textarea';
 import { ValidatorInterface } from './validators/validator-interface';
 
 export interface FieldProps {
-    type?: string;
+    type: string;
     name: string;
-    id?: string | undefined;
-    readOnly?: boolean;
-    required?: boolean;
-    placeholder?: string;
-    autoComplete?: string | undefined;
-    disabled?: boolean | undefined;
-    className?: string | undefined;
-    inputClasses?: string;
-    wrapperClasses?: string;
-    labelClass?: string;
-    validators?: any[]; // TODO -> we will need a validator interface here.
+    id: string | undefined;
+    readOnly: boolean;
+    required: boolean;
+    placeholder: string;
+    autoComplete: string | undefined;
+    disabled: boolean | undefined;
+    className: string | undefined;
+    inputClasses: string;
+    validators: any[]; // TODO -> we will need a validator interface here.
     getData: (value: any, hasError: boolean) => void;
-    errorMessage?: string;
-    label?: string;
-    options?: string[];
-    element?: 'text' | 'dropdown' | 'searchable' | 'searchable_dropdown' | 'textarea' | 'checkbox' | string;
-    isNumberOnly?: boolean;
+    errorMessage: string;
+    label: string;
+    options: string[];
+    element: 'text' | 'dropdown' | 'searchable' | 'searchable_dropdown' | 'textarea' | 'checkbox' | string;
+    isNumberOnly: boolean;
     value: string | null;
-    onChange?: (value: string) => void;
+    onChange: (value: string) => void;
     namespace: string;
+    labelClass: string;
+    wrapperClasses: string;
+    rows: number;
+    cols: number;
 }
 
 interface NormalWrapperProps extends FieldProps {

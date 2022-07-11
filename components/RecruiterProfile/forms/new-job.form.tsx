@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useContext } from "react";
-import { Button } from '../../../shared/components/buttons/button';
 import { CONSTANTS } from '../../../shared/constants';
 import { AuthContext } from '../../../shared/contexts/auth.context';
 import { Field } from '../../../shared/form/field';
@@ -50,6 +49,7 @@ export const NewJobForm = (props: any) => {
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
             element: 'textarea',
+            rows: 10
         }),
 
     }, 'user-register');
@@ -64,7 +64,7 @@ export const NewJobForm = (props: any) => {
             form={form}
             className={'row justify-content-space-between'}
             onSubmit={(payload: any) => submit(payload)}
-            submitButton={{ className: 'mt-20 col-100 col-md-40 col-lg-22 margin-auto', title: 'Register', type: 'submit' }}
+            submitButton={{ className: 'mt-60 col-100 col-md-40 col-lg-22 margin-auto', title: 'Post', type: 'submit' }}
             onSuccess={() => window.location.reload()}
             {...client}
         >
@@ -77,8 +77,5 @@ export const NewJobForm = (props: any) => {
                 <Input {...form?.fields?.description} namespace={form.namespace}/>
             </div>
         </Form>
-        <div className={'position-center py-15'}>
-            <Button title={'login'} buttonStyle={'link'} onClick={props.onClick}/>
-        </div>
     </div>;
 };

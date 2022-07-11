@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '../../../shared/components/buttons/button';
 import { CalendarIcon, EditIcon, FavouriteIcon, LocationIcon, MoneyIcon } from '../../../shared/components/icons/icons';
-import { NavLink } from '../../../shared/components/navigation/nav-link';
+import { NavLink } from '../../../shared/components/navigation/extras/nav-link';
 import { formatLongText } from '../../../shared/libs/helpers';
 import { CompanyLogo } from './company-logo';
 import { Job } from './job-listings';
