@@ -29,7 +29,7 @@ export class Checkbox extends Component<any, any> {
             type={'button'}
         >
             {this.renderCheckIcon(this.state.active)}
-            <span className={'typo-small-inter fw-700 pl-5'}>{this.props.label}</span>
+            <span className={'typo-small-inter fw-700 pl-5 pt-1'}>{this.props.label}</span>
         </button>;
     }
 }

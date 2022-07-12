@@ -2,6 +2,7 @@ import React, { RefObject, useCallback, useContext, useEffect, useState } from '
 import { CONSTANTS } from '../constants';
 import { FormContext } from '../contexts/form.context';
 import { Checkbox } from './checkbox';
+import { Datepicker } from './datepicker';
 import { RangeInput } from './range-input';
 import { SearchableDropdown } from './searchable-dropdown';
 import { TextInput } from './text-input';
@@ -24,7 +25,7 @@ export interface FieldProps {
     errorMessage: string;
     label: string;
     options: string[];
-    element: 'text' | 'dropdown' | 'searchable' | 'searchable_dropdown' | 'textarea' | 'checkbox' | string;
+    element: 'text' | 'dropdown' | 'searchable' | 'searchable_dropdown' | 'textarea' | 'checkbox' | 'datepicker' | string;
     isNumberOnly: boolean;
     value: string | null;
     onChange: (value: string) => void;
@@ -71,7 +72,7 @@ export const Input = (props: FieldProps) => {
     const [errorMessage, setErrorMessage] = useState('');
     const prodRef: RefObject<HTMLDivElement> = React.createRef();
     const { setData } = useContext(FormContext);
-    const { INPUTS: { TEXTAREA, SEARCHABLE, SEARCHABLE_DROPDOWN, DROPDOWN, RANGE, CHECKBOX } } = CONSTANTS;
+    const { INPUTS: { TEXTAREA, SEARCHABLE, SEARCHABLE_DROPDOWN, DROPDOWN, RANGE, CHECKBOX, DATEPICKER } } = CONSTANTS;
 
     useEffect(() => {
         setValue(props.value as string);
@@ -154,6 +155,14 @@ export const Input = (props: FieldProps) => {
                 />;
             case CHECKBOX:
                 return <Checkbox
+                    {...props}
+                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
+                    value={value}
+                />;
+            case DATEPICKER:
+                return <Datepicker
+                    onFocus={() => setIsInFocus(true)}
+                    onBlur={() => setIsInFocus(false)}
                     {...props}
                     handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                     value={value}

@@ -24,7 +24,7 @@ const RecruiterProfile: NextPage = (props: any) => {
     return <BaseLayout auth={false} meta={{ title: 'home page', keywords: 'whatever', description: 'some description' }}>
         <BaseLayoutWidth className={'min-screen-height justify-content-start pt-150'}>
             <h1 className={'pb-40 fs-40'}>My profile</h1>
-            <TabViewer default={'profile-infos'} tabs={tabs}/>
+            <TabViewer default={'new-postings'} tabs={tabs}/>
         </BaseLayoutWidth>
     </BaseLayout>;
 };

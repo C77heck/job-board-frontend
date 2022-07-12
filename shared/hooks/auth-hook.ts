@@ -48,11 +48,12 @@ export const useAuth = () => {
         }
     });
 
-    useEffect(() => {
-        if (isLoggedIn && userId && !userData?.first_name) {
-            (async () => await whoami(userId))();
-        }
-    }, [userId]);
+    // useEffect(() => {
+    //     if (isLoggedIn && userId && !userData?.first_name) {
+    //         console.log('WE ARE HITTING THE USEEFFECT', { userData, userId });
+    //         (async () => await whoami(userId))();
+    //     }
+    // }, [userId]);
 
     const signout = () => {
         storage.remove();

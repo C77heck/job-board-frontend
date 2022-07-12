@@ -6,6 +6,7 @@ export const CONSTANTS = {
         DROPDOWN: 'dropdown',
         TEXTAREA: 'textarea',
         RANGE: 'range',
+        DATEPICKER: 'datepicker',
         CHECKBOX: 'checkbox'
     }
 };

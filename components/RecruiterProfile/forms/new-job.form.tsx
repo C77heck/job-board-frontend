@@ -1,3 +1,4 @@
+import moment from 'moment';
 import * as React from "react";
 import { useContext } from "react";
 import { CONSTANTS } from '../../../shared/constants';
@@ -9,15 +10,13 @@ import { Input } from '../../../shared/form/input';
 import { requiredValidator } from '../../../shared/form/validators/required-validator';
 import { useClient } from '../../../shared/hooks/client';
 
-// datas we need
-// title, money, location, description
 export const NewJobForm = (props: any) => {
-    const { INPUTS: { CHECKBOX } } = CONSTANTS;
+    const { INPUTS: { CHECKBOX, TEXTAREA, DATEPICKER } } = CONSTANTS;
     const client = useClient();
     const { isLoggedIn } = useContext(AuthContext);
     const form = new FormStructure({
         title: new Field({
-            name: 'job_title',
+            name: 'title',
             label: 'Job title',
             value: '',
             validators: [requiredValidator],
@@ -41,6 +40,24 @@ export const NewJobForm = (props: any) => {
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
         }),
+        expiresOn: new Field({
+            name: 'expiresOn',
+            label: 'Expiry date',
+            value: moment().add(1, 'month').format('YYYY-MM-DD').toString(),
+            validators: [requiredValidator],
+            className: 'col-100 mt-11',
+            labelClass: 'fs-15 fw--700 mb-2',
+            element: DATEPICKER,
+        }),
+        isPremium: new Field({
+            name: 'isPremium',
+            label: 'Premium listing',
+            value: '',
+            validators: [requiredValidator],
+            className: 'col-100 mt-11',
+            labelClass: 'fs-15 fw--700 mb-2',
+            element: CHECKBOX,
+        }),
         description: new Field({
             name: 'description',
             label: 'Job description',
@@ -48,7 +65,7 @@ export const NewJobForm = (props: any) => {
             validators: [],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
-            element: 'textarea',
+            element: TEXTAREA,
             rows: 10
         }),
 

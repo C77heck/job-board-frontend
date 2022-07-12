@@ -10,7 +10,7 @@ export class Textarea extends Component<any, any> {
                 {this.props.label}
             </label>}
             <textarea
-                className={`input ${this.props.inputClasses} w-100 pl-8`}
+                className={`${this.props.inputClasses}input w-100 pl-8 py-5`}
                 rows={this.props.rows}
                 cols={this.props.cols}
                 onChange={(e) => this.props.handleChange(e)}

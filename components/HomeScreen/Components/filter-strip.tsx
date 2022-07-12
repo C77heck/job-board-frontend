@@ -3,11 +3,11 @@ import { Button } from '../../../shared/components/buttons/button';
 export interface FilterItem {
     id: string;
     title: string;
-    items: number | string | undefined;
+    property: number | string | undefined;
 }
 
-const Filter = ({ title, items }: FilterItem) => {
-    return <Button title={title} buttonStyle={'filter'} onClick={() => console.log(items)}/>;
+const Filter = ({ title, property }: FilterItem) => {
+    return <Button title={title} buttonStyle={'filter'} onClick={() => console.log(property)}/>;
 };
 
 export interface Filters {
