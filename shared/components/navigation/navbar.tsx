@@ -9,7 +9,7 @@ export const NavBar = (props: any) => {
 
     useEffect(() => {
         if (isLoggedIn && userId && !userData?.first_name) {
-            (async () => await whoami(userId))();
+            (async () => await whoami())();
         }
     }, [userId]);
 

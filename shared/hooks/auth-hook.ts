@@ -71,10 +71,10 @@ export const useAuth = () => {
         storage.set({ token: userData.token, userId: userData.userId, expiry: userData.expiry });
     };
 
-    const whoami = async (userId: string) => {
+    const whoami = async () => {
         try {
             const request = new Repository(token);
-            const userData = await request.fetch(`/users/whoami/${userId}`, 'get', {}, {});
+            const userData = await request.fetch('/users/whoami', 'get', {}, {});
 
             setUserData(userData.meta);
         } catch (e) {

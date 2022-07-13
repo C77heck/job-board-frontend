@@ -51,7 +51,7 @@ export const ProfileBoxForm = (props: any) => {
     }, 'profile-box');
 
     const submit = async (data: any) => {
-        const response: any = await client.client(`/users/update/${userId}`, 'PUT', { body: data });
+        const response: any = await client.client(`/users/update`, 'PUT', { body: data });
 
         if (!client.error && !!response) {
             signin({ ...(response?.userData || {}), expiry: moment() });

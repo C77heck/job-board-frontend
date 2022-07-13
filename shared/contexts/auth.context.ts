@@ -7,7 +7,7 @@ export const AuthContext = createContext({
     isLoggedIn: false,
     isRecruiter: false,
     userData: {} as UserMeta,
-    whoami: (userId: string) => {
+    whoami: () => {
     },
     signin: (data: UserProps) => {
     },
