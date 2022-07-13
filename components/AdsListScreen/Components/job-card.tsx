@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import { Button } from '../../../shared/components/buttons/button';
 import { CalendarIcon, EditIcon, FavouriteIcon, LocationIcon, MoneyIcon } from '../../../shared/components/icons/icons';
@@ -11,7 +12,7 @@ export interface JobCardProps extends Job {
     editable?: boolean;
 }
 
-export const JobCard = ({ title, date, description, location, salary, className, editable }: JobCardProps) => {
+export const JobCard = ({ title, expiresOn, description, location, salary, className, editable }: JobCardProps) => {
     // TODO -> THE EDITABLE TO HAVE A MODAL OPENING UP. MAKE SURE THAT THE FORM WILL FIT THE DESING IN BOTH PLACES
     const actionButton = editable
         ? <Button title={<EditIcon className={'hover-opacity'} width={20}/>} buttonStyle={'transparent'}/>
@@ -39,7 +40,7 @@ export const JobCard = ({ title, date, description, location, salary, className,
             </div>
             <div className={'display-flex'}>
                 <CalendarIcon className={'display-flex align-items-center'} width={16}/>
-                <h2 className={'fs-15 fw--400 pl-8 text-color--yellow'}>{date}</h2>
+                <h2 className={'fs-15 fw--400 pl-8 text-color--yellow'}>{moment(expiresOn).format('YYYY.MM.DD.')}</h2>
             </div>
             <div className={'display-flex'}>
                 <p className={'fs-13 fw--400 pt-16'}>

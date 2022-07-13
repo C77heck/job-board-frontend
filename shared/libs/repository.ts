@@ -20,7 +20,7 @@ export class Repository {
         this.headers.push(['Authorization', `Bearer ${token}`]);
     }
 
-    public async fetch(path: string, method: string, options: RequestInit, query: any) {
+    public async fetch(path: string, method = 'get', options: RequestInit, query: any) {
         const abortController = new AbortController();
         try {
             const request = new Request(this.formatUrl(path, query), this.formatOptions(options, abortController, method));

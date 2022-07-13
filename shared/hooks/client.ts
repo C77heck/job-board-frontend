@@ -9,7 +9,7 @@ export interface ClientProps {
     clearError: () => void;
     successMessage: string;
     clearMessage: () => void;
-    client: (url: string, method: string, options?: RequestInit, query?: any) => void;
+    client: (url: string, method?: string, options?: RequestInit, query?: any) => Promise<any>;
 }
 
 export const useClient = (): ClientProps => {
@@ -24,7 +24,7 @@ export const useClient = (): ClientProps => {
     const clearMessage = () => {
         setSuccessMessage('');
     };
-    const client = async (url: string, method: string, options?: RequestInit, query?: any) => {
+    const client = async (url: string, method?: string, options?: RequestInit, query?: any) => {
         try {
             setIsLoading(true);
             const response: any = await request.fetch(url, method, options, query);

@@ -4,7 +4,7 @@ export interface Job {
     id: string;
     title: string;
     description: string;
-    date: string;
+    expiresOn: string;
     location: string;
     salary: string;
 }
