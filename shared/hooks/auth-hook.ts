@@ -73,7 +73,7 @@ export const useAuth = () => {
 
     const whoami = async () => {
         try {
-            const request = new Repository(token);
+            const request = new Repository(token, 'api');
             const userData = await request.fetch('/users/whoami', 'get', {}, {});
 
             setUserData(userData.meta);

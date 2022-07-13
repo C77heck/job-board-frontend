@@ -13,7 +13,7 @@ export interface JobCardProps extends Job {
 }
 
 export const JobCard = ({ title, expiresOn, description, location, salary, className, editable }: JobCardProps) => {
-    // TODO -> THE EDITABLE TO HAVE A MODAL OPENING UP. MAKE SURE THAT THE FORM WILL FIT THE DESING IN BOTH PLACES
+    // TODO -> THE EDITABLE TO HAVE A MODAL OPENING UP. MAKE SURE THAT THE FORM WILL FIT THE DESIGN IN BOTH PLACES
     const actionButton = editable
         ? <Button title={<EditIcon className={'hover-opacity'} width={20}/>} buttonStyle={'transparent'}/>
         : <Button title={<FavouriteIcon width={25} className={'text-color--dark hover-secondary'}/>} buttonStyle={'transparent'}/>;

@@ -6,10 +6,11 @@ export class Repository {
     public baseUrl = process?.env?.NEXT_PUBLIC_API || '';
     public headers: string[][] = [['Content-Type', 'application/json']];
 
-    public constructor(token: string | null = null) {
+    public constructor(token: string | null = null, env: 'api' | 'attachment') {
         if (token) {
             this.setAuth(token);
         }
+        this.baseUrl = env === 'api' ? process?.env?.NEXT_PUBLIC_API || '' : process?.env?.NEXT_PUBLIC_ATTACHMENT || '';
     }
 
     public setHeader(header: string, value: string) {

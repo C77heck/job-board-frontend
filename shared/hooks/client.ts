@@ -12,9 +12,9 @@ export interface ClientProps {
     client: (url: string, method?: string, options?: RequestInit, query?: any) => Promise<any>;
 }
 
-export const useClient = (): ClientProps => {
+export const useClient = (env: 'api' | 'attachment' = 'api'): ClientProps => {
     const { token, signout, isLoggedIn } = useContext(AuthContext);
-    const request: any = new Repository(token);
+    const request: any = new Repository(token, env);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
