@@ -2,6 +2,15 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useClient } from '../../hooks/client';
 
+export interface FileData {
+    lastModified: number;
+    lastModifiedDate: Date;
+    name: string;
+    size: number;
+    type: string | "image/png";
+    webkitRelativePath: string;
+}
+
 export const Uploader = (props: any) => {
     const [attachments, setAttachments] = useState<any[]>([]);
     const [uploadQuantity, setUploadsQuantity] = useState<number>(0);
@@ -15,6 +24,7 @@ export const Uploader = (props: any) => {
             setUploadsQuantity(files.length);
 
             for (const file of files) {
+                console.log(file);
                 await addFile(file);
             }
 
@@ -27,13 +37,23 @@ export const Uploader = (props: any) => {
     };
 
     const addFile = async (file: any) => {
+        const fileData = {
+            lastModified: file.lastModified,
+            lastModifiedDate: file.lastModifiedDate,
+            name: file.name,
+            size: file.size,
+            type: file.type,
+            webkitRelativePath: file.webkitRelativePath,
+        };
+
         const reader = new FileReader();
 
         reader.readAsArrayBuffer(file);
 
         reader.onload = async () => {
             try {
-                const upload = await createAttachment(Buffer.from((reader.result as Buffer)).toString('base64'));
+                const fileAsBuffer = Buffer.from((reader.result as Buffer)).toString('base64');
+                const upload = await createAttachment(fileAsBuffer, fileData);
                 setAttachments([...attachments, upload.default.payload || '']);
             } catch (err) {
                 console.log(err);
@@ -41,12 +61,12 @@ export const Uploader = (props: any) => {
         };
     };
 
-    const createAttachment = async (data: string) => {
+    const createAttachment = async (file: string, fileData: FileData) => {
         try {
             setIsLoading(true);
-            return await client('/create', 'post', { body: data, headers: {'Content-Type': 'multipart/form-data'} }, {},);
+            const body = { ...fileData, file, compressionQuality: 'high' };
+            return await client('/create', 'post', { body: body as any, headers: { 'Content-Type': 'multipart/form-data' } });
         } catch (e) {
-            console.log(e);
             setIsLoading(false);
         }
     };

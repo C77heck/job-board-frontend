@@ -18,12 +18,15 @@ export const useClient = (env: 'api' | 'attachment' = 'api'): ClientProps => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+
     const clearError = () => {
         setError('');
     };
+
     const clearMessage = () => {
         setSuccessMessage('');
     };
+
     const client = async (url: string, method?: string, options?: RequestInit, query?: any) => {
         try {
             setIsLoading(true);
