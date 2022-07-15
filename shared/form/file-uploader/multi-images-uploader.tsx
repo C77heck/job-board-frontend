@@ -20,17 +20,21 @@ export const MultiImagesUploader = (props: IconUploderProps) => {
     }, [uploadedAttachments]);
 
     // fix the spinner and make uploaded images viewable with lightbox
-    const trigger = <div
+    const trigger = <FileDisplay
         onClick={() => setIsLoading(true)}
-        className={'logo-uploader background-color--light-2 position-center my-10'}
-    >
-        <FileDisplay alt={'uploader-icon'} src={''} uploadText={'Upload your images'} isLoading={isLoading}/>
-    </div>;
-
-    return <MultiUploader
-        getAttachments={(attachments: Attachment[]) => setUploadedAttachments(attachments)}
-        getIsLoading={(isLoading: boolean) => setIsLoading(isLoading)}
-        trigger={trigger}
-        alt={props.alt}
+        alt={'uploader-icon'}
+        src={''}
+        uploadText={'Upload your images'}
+        isLoading={isLoading}
     />;
+
+    return <div className={'display-flex'}>
+        <MultiUploader
+            getAttachments={(attachments: Attachment[]) => setUploadedAttachments(attachments)}
+            getIsLoading={(isLoading: boolean) => setIsLoading(isLoading)}
+            trigger={trigger}
+            alt={props.alt}
+        />
+        {uploadedAttachments.map(({ url, name }: Attachment) => <FileDisplay key={name} src={url}/>)}
+    </div>;
 };

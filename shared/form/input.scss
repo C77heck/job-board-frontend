@@ -124,4 +124,10 @@ textarea {
     width: 104px;
     height: 104px;
     cursor: pointer !important;
+    overflow: hidden;
+
+    & img {
+        max-width: 100%;
+        object-fit: contain;
+    }
 }
