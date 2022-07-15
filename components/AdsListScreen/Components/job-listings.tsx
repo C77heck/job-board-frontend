@@ -7,6 +7,7 @@ export interface Job {
     expiresOn: string;
     location: string;
     salary: string;
+    logo: string;
 }
 
 interface JobListingsProp {

@@ -13,6 +13,14 @@ export interface UserMeta {
     meta: string;
     isRecruiter: boolean;
     logo: string;
+    company?: CompanyData;
+}
+
+export interface CompanyData {
+    name: string;
+    address: string;
+    email: string;
+    description: string;
 }
 
 export interface UserProps {
@@ -67,6 +75,7 @@ export const useAuth = () => {
     const signin = (userData: UserProps) => {
         setToken(userData?.token);
         setUserId(userData?.userId);
+        setIsRecruiter(userData?.meta?.isRecruiter);
         setIsLoggedIn(true);
         storage.set({ token: userData.token, userId: userData.userId, expiry: userData.expiry });
     };
@@ -77,8 +86,8 @@ export const useAuth = () => {
             const userData = await request.fetch('/users/whoami', 'get', {}, {});
 
             setUserData(userData.meta);
-        } catch (e) {
-            setUserData(null);
+        } catch (e: any) {
+            signout();
         }
     };
 

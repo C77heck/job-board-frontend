@@ -12,7 +12,7 @@ export interface JobCardProps extends Job {
     editable?: boolean;
 }
 
-export const JobCard = ({ title, expiresOn, description, location, salary, className, editable }: JobCardProps) => {
+export const JobCard = ({ title, expiresOn, description, location, salary, className, editable, logo }: JobCardProps) => {
     // TODO -> THE EDITABLE TO HAVE A MODAL OPENING UP. MAKE SURE THAT THE FORM WILL FIT THE DESIGN IN BOTH PLACES
     const actionButton = editable
         ? <Button title={<EditIcon className={'hover-opacity'} width={20}/>} buttonStyle={'transparent'}/>
@@ -20,7 +20,7 @@ export const JobCard = ({ title, expiresOn, description, location, salary, class
 
     return <div className={`${className} row pb-8 job-board py-10 px-20`}>
         <div className={'col-11'}>
-            <CompanyLogo src={process.env.NEXT_PUBLIC_DUMMY_ICON}/>
+            <CompanyLogo src={logo}/>
         </div>
         <div className={'col-89 display-flex flex-column'}>
             <div className={'display-flex justify-content-space-between'}>

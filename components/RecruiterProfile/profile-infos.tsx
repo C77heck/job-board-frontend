@@ -14,6 +14,7 @@ const dummyUserData = [
 ];
 
 export class ProfileInfos extends React.Component<any, any> {
+    // <IconUploder {...form?.fields?.logo} namespace={form.namespace} alt={userData?.company?.name}/>
     public render() {
         return <BoxWrapper
             content={<RecruiterInfoForm/>}

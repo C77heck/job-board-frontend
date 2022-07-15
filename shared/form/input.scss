@@ -118,3 +118,10 @@
 textarea {
     font-family: 'Oswald', sans-serif;
 }
+
+.logo-uploader {
+    border: solid 1px var(--text-color-light);
+    width: 104px;
+    height: 104px;
+    cursor: pointer !important;
+}

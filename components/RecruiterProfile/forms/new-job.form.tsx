@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { CONSTANTS } from '../../../shared/constants';
 import { AuthContext } from '../../../shared/contexts/auth.context';
 import { Field } from '../../../shared/form/field';
-import { Uploader } from '../../../shared/form/file-uploader/uploader';
+import { MultiImagesUploader } from '../../../shared/form/file-uploader/multi-images-uploader';
 import { Form } from '../../../shared/form/form';
 import { FormStructure } from '../../../shared/form/form.structure';
 import { Input } from '../../../shared/form/input';
@@ -14,7 +14,7 @@ import { useClient } from '../../../shared/hooks/client';
 export const NewJobForm = (props: any) => {
     const { INPUTS: { CHECKBOX, TEXTAREA, DATEPICKER } } = CONSTANTS;
     const client = useClient();
-    const { isLoggedIn } = useContext(AuthContext);
+    const { isLoggedIn, userData } = useContext(AuthContext);
     const form = new FormStructure({
         title: new Field({
             name: 'title',
@@ -70,6 +70,16 @@ export const NewJobForm = (props: any) => {
             rows: 10
         }),
 
+        images: new Field({
+            name: 'images',
+            label: 'Images',
+            value: [],
+            validators: [],
+            className: 'col-100 mt-11',
+            labelClass: 'fs-15 fw--700 mb-2',
+            rows: 10
+        }),
+
     }, 'user-register');
 
     const submit = async (data: any) => {
@@ -90,7 +100,7 @@ export const NewJobForm = (props: any) => {
                 <Input {...form?.fields?.title} namespace={form.namespace}/>
                 <Input {...form?.fields?.salary} namespace={form.namespace}/>
                 <Input {...form?.fields?.location} namespace={form.namespace}/>
-                <Uploader trigger={<span className={'fs20'}>Uploader</span>}/>
+                <MultiImagesUploader {...form?.fields?.images} namespace={form.namespace}/>
             </div>
             <div className={'col-md-50 mx-md-20 col-100'}>
                 <Input {...form?.fields?.expiresOn} namespace={form.namespace}/>

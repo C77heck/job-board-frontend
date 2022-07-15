@@ -3,7 +3,7 @@ import { CONSTANTS } from '../constants';
 import { FormOptions } from '../form/form.structure';
 
 export interface ValueProp {
-    value: string | number | boolean | undefined;
+    value: any;
     isValid: boolean;
 }
 

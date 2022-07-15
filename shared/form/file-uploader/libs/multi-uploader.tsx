@@ -1,21 +1,19 @@
 import * as React from 'react';
-import { useState } from 'react';
-import { useClient } from '../../hooks/client';
+import { useEffect, useState } from 'react';
+import { useClient } from '../../../hooks/client';
+import { Attachment, FileData, MultiUploaderProps } from './uploader.interfaces';
 
-export interface FileData {
-    lastModified: number;
-    lastModifiedDate: Date;
-    name: string;
-    size: number;
-    type: string | "image/png";
-    webkitRelativePath: string;
-}
-
-export const Uploader = (props: any) => {
-    const [attachments, setAttachments] = useState<any[]>([]);
+export const MultiUploader = (props: MultiUploaderProps) => {
+    const [attachments, setAttachments] = useState<Attachment[]>([]);
     const [uploadQuantity, setUploadsQuantity] = useState<number>(0);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const { client } = useClient('attachment');
+
+    useEffect(() => {
+        props.getAttachments(attachments);
+        props.getIsLoading(isLoading);
+
+    }, [attachments, uploadQuantity, isLoading]);
 
     const addFiles = async (e: any) => {
         try {
@@ -24,13 +22,11 @@ export const Uploader = (props: any) => {
             setUploadsQuantity(files.length);
 
             for (const file of files) {
-                console.log(file);
                 await addFile(file);
             }
 
             setIsLoading(false);
         } catch (e) {
-            console.log(e);
             setIsLoading(false);
         }
 
@@ -54,7 +50,7 @@ export const Uploader = (props: any) => {
             try {
                 const fileAsBuffer = Buffer.from((reader.result as Buffer)).toString('base64');
                 const upload = await createAttachment(fileAsBuffer, fileData);
-                setAttachments([...attachments, upload.default.payload || '']);
+                setAttachments([...attachments, upload.attachment || '']);
             } catch (err) {
                 console.log(err);
             }
@@ -64,7 +60,9 @@ export const Uploader = (props: any) => {
     const createAttachment = async (file: string, fileData: FileData) => {
         try {
             setIsLoading(true);
-            const body = { ...fileData, file, compressionQuality: 'high' };
+            const body = { ...fileData, file, compressionQuality: 'high', alt: props.alt };
+            setIsLoading(false);
+
             return await client('/create', 'post', { body: body as any, headers: { 'Content-Type': 'multipart/form-data' } });
         } catch (e) {
             setIsLoading(false);
