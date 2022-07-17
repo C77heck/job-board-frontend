@@ -13,7 +13,7 @@ export interface IconUploderProps {
 
 export const MultiImagesUploader = (props: IconUploderProps) => {
     const [isLoading, setIsLoading] = useState(false);
-    const [options, setOptions] = useState({ viewAll: false, numberOfImg: 0, });
+    const [options, setOptions] = useState({ viewAll: false, numberOfImg: 0, display: '' });
     const [uploadedAttachments, setUploadedAttachments] = useState<Attachment[]>([]);
     const { setData } = useContext(FormContext);
 
@@ -21,6 +21,7 @@ export const MultiImagesUploader = (props: IconUploderProps) => {
         setOptions({
             viewAll: uploadedAttachments.length > 3,
             numberOfImg: uploadedAttachments.length,
+            display: uploadedAttachments[0]?.url || '',
         });
         setData(props.name, { value: uploadedAttachments.map(a => a.url), isValid: true }, props.namespace);
     }, [uploadedAttachments]);
@@ -34,11 +35,6 @@ export const MultiImagesUploader = (props: IconUploderProps) => {
         isLoading={isLoading}
     />;
 
-    const lightbox = <Lightbox
-        trigger={<FileDisplay key={'lightbox'} uploadText={'View all'} src={''}/>}
-        photos={uploadedAttachments.map(att => att.url)}
-    />;
-
     return <div className={'display-flex'}>
         <MultiUploader
             getAttachments={(attachments: Attachment[]) => setUploadedAttachments(attachments)}
@@ -46,7 +42,14 @@ export const MultiImagesUploader = (props: IconUploderProps) => {
             trigger={trigger}
             alt={props.alt}
         />
-        {uploadedAttachments.slice(0.3).map(({ url, name }: Attachment) => <FileDisplay key={name} src={url}/>)}
-        {options.viewAll && lightbox}
+        {options.viewAll && <Lightbox
+            trigger={<FileDisplay
+                overlay={true}
+                key={'lightbox'}
+                uploadText={`View uploads(${options.numberOfImg})`}
+                src={options.display}
+            />}
+            photos={uploadedAttachments.map(att => att.url)}
+        />}
     </div>;
 };

@@ -6,6 +6,7 @@ export interface FileDisplayProps {
     uploadText?: string;
     onClick?: () => void;
     isLoading?: boolean;
+    overlay?: boolean;
 }
 
 export const FileDisplay = (props: FileDisplayProps) => {
@@ -19,6 +20,7 @@ export const FileDisplay = (props: FileDisplayProps) => {
         className={'logo-uploader background-color--light-2 position-center my-10 mr-10'}
         onClick={props.onClick}
     >
+        {props.overlay && <div className={'position-center position-absolute'}><span className={'fs-11'}>{props.uploadText}</span></div>}
         {content}
     </div>;
 };
