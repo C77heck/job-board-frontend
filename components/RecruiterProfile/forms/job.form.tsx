@@ -1,6 +1,6 @@
 import moment from 'moment';
 import * as React from "react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CONSTANTS } from '../../../shared/constants';
 import { AuthContext } from '../../../shared/contexts/auth.context';
 import { Field } from '../../../shared/form/field';
@@ -10,8 +10,9 @@ import { FormStructure } from '../../../shared/form/form.structure';
 import { Input } from '../../../shared/form/input';
 import { requiredValidator } from '../../../shared/form/validators/required-validator';
 import { useClient } from '../../../shared/hooks/client';
+import { JobCardProps } from '../../AdsListScreen/Components/job-card';
 
-export const JobForm = (props: any) => {
+export const JobForm = (props: JobCardProps) => {
     const { INPUTS: { CHECKBOX, TEXTAREA, DATEPICKER } } = CONSTANTS;
     const client = useClient();
     const { isLoggedIn, userData } = useContext(AuthContext);
@@ -81,6 +82,11 @@ export const JobForm = (props: any) => {
         }),
 
     }, 'user-register');
+
+    useEffect(() => {
+        // TODO LOAD UP ALL THE DATA.
+        console.log(props);
+    }, [props]);
 
     const submit = async (data: any) => {
         const response: any = await client.client(`/ads/create-new-ad`, 'POST', { body: data });

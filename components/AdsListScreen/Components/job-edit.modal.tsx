@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from '../../../shared/components/buttons/button';
 import { EditIcon } from '../../../shared/components/icons/icons';
 import { EditModal } from '../../../shared/form/edit-modal';
 import { JobForm } from '../../RecruiterProfile/forms/job.form';
+import { JobCardProps } from './job-card';
 
-export const JobEditModal = (props: any) => {
+export const JobEditModal = (props: JobCardProps) => {
     const [show, setShow] = useState(false);
-
-    useEffect(() => {
-        console.log(show);
-    }, [show]);
 
     return <div>
         <Button
@@ -19,7 +16,7 @@ export const JobEditModal = (props: any) => {
         />
         <EditModal
             show={show}
-            content={<JobForm/>}
+            content={<JobForm {...props}/>}
             title={'Edit post'}
             onClick={(show) => setShow(show)}
         />
