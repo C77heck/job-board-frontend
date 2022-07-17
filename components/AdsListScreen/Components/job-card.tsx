@@ -1,10 +1,11 @@
 import moment from 'moment';
 import React from 'react';
 import { Button } from '../../../shared/components/buttons/button';
-import { CalendarIcon, EditIcon, FavouriteIcon, LocationIcon, MoneyIcon } from '../../../shared/components/icons/icons';
+import { CalendarIcon, FavouriteIcon, LocationIcon, MoneyIcon } from '../../../shared/components/icons/icons';
 import { NavLink } from '../../../shared/components/navigation/extras/nav-link';
 import { formatLongText } from '../../../shared/libs/helpers';
 import { CompanyLogo } from './company-logo';
+import { JobEditModal } from './job-edit.modal';
 import { Job } from './job-listings';
 
 export interface JobCardProps extends Job {
@@ -15,7 +16,7 @@ export interface JobCardProps extends Job {
 export const JobCard = ({ title, expiresOn, description, location, salary, className, editable, logo }: JobCardProps) => {
     // TODO -> THE EDITABLE TO HAVE A MODAL OPENING UP. MAKE SURE THAT THE FORM WILL FIT THE DESIGN IN BOTH PLACES
     const actionButton = editable
-        ? <Button title={<EditIcon className={'hover-opacity'} width={20}/>} buttonStyle={'transparent'}/>
+        ? <JobEditModal/>
         : <Button title={<FavouriteIcon width={25} className={'text-color--dark hover-secondary'}/>} buttonStyle={'transparent'}/>;
 
     return <div className={`${className} row pb-8 job-board py-10 px-20`}>

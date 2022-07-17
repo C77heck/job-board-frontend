@@ -11,7 +11,7 @@ import { Input } from '../../../shared/form/input';
 import { requiredValidator } from '../../../shared/form/validators/required-validator';
 import { useClient } from '../../../shared/hooks/client';
 
-export const NewJobForm = (props: any) => {
+export const JobForm = (props: any) => {
     const { INPUTS: { CHECKBOX, TEXTAREA, DATEPICKER } } = CONSTANTS;
     const client = useClient();
     const { isLoggedIn, userData } = useContext(AuthContext);

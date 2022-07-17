@@ -18,7 +18,7 @@ interface ModalProps {
     contentClasses?: string;
     headerClasses?: string;
     size: SizeProps; // use grid and up to 100
-    header?: JSX.Element;
+    header?: JSX.Element | string;
     show?: boolean;
     overlayClick?: (show: boolean) => void;
     level?: number;
@@ -143,4 +143,3 @@ export class Modal extends React.Component<ModalProps, any> {
         </div>;
     }
 }
-
