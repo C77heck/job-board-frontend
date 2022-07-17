@@ -5,6 +5,7 @@ import { Attachment, FileData, MultiUploaderProps } from './uploader.interfaces'
 
 export const MultiUploader = (props: MultiUploaderProps) => {
     const [attachments, setAttachments] = useState<Attachment[]>([]);
+    const [attachment, setAttachment] = useState<Attachment | null>(null);
     const [uploadQuantity, setUploadsQuantity] = useState<number>(0);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const { client } = useClient('attachment');
@@ -12,8 +13,13 @@ export const MultiUploader = (props: MultiUploaderProps) => {
     useEffect(() => {
         props.getAttachments(attachments);
         props.getIsLoading(isLoading);
-
     }, [attachments, uploadQuantity, isLoading]);
+
+    useEffect(() => {
+        if (!!attachment) {
+            setAttachments([...attachments, attachment]);
+        }
+    }, [attachment]);
 
     const addFiles = async (e: any) => {
         try {
@@ -50,7 +56,8 @@ export const MultiUploader = (props: MultiUploaderProps) => {
             try {
                 const fileAsBuffer = Buffer.from((reader.result as Buffer)).toString('base64');
                 const upload = await createAttachment(fileAsBuffer, fileData);
-                setAttachments([...attachments, upload.attachment || '']);
+
+                setAttachment(upload.attachment || '');
             } catch (err) {
                 console.log(err);
             }
