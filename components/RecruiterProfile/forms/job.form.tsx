@@ -1,22 +1,19 @@
 import moment from 'moment';
 import * as React from "react";
-import { useContext, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { CONSTANTS } from '../../../shared/constants';
-import { AuthContext } from '../../../shared/contexts/auth.context';
 import { Field } from '../../../shared/form/field';
 import { MultiImagesUploader } from '../../../shared/form/file-uploader/multi-images-uploader';
 import { Form } from '../../../shared/form/form';
 import { FormStructure } from '../../../shared/form/form.structure';
 import { Input } from '../../../shared/form/input';
 import { requiredValidator } from '../../../shared/form/validators/required-validator';
-import { useClient } from '../../../shared/hooks/client';
 import { JobCardProps } from '../../AdsListScreen/Components/job-card';
 
 export const JobForm = (props: JobCardProps) => {
     const { INPUTS: { CHECKBOX, TEXTAREA, DATEPICKER } } = CONSTANTS;
-    const client = useClient();
-    const { isLoggedIn, userData } = useContext(AuthContext);
-    const form = new FormStructure({
+    const [showForm, setShowForm] = useState(false);
+    const [form, setForm] = useState(new FormStructure({
         title: new Field({
             name: 'title',
             label: 'Job title',
@@ -33,7 +30,6 @@ export const JobForm = (props: JobCardProps) => {
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
         }),
-
         location: new Field({
             name: 'location',
             label: 'Location',
@@ -70,7 +66,6 @@ export const JobForm = (props: JobCardProps) => {
             element: TEXTAREA,
             rows: 10
         }),
-
         images: new Field({
             name: 'images',
             label: 'Images',
@@ -80,27 +75,34 @@ export const JobForm = (props: JobCardProps) => {
             labelClass: 'fs-15 fw--700 mb-2',
             rows: 10
         }),
-
-    }, 'user-register');
+    }, 'user-register'));
 
     useEffect(() => {
-        // TODO LOAD UP ALL THE DATA.
-        console.log(props);
-    }, [props]);
+        if (props.editable) {
+            for (const prop in form.fields) {
+                // @ts-ignore
+                if (props?.[prop]) {
+                    // @ts-ignore
+                    form.fields?.[prop]?.value = props?.[prop];
+                    setForm(form);
+                    setShowForm(true);
+                }
+            }
+        }
+    }, [props.editable]);
 
-    const submit = async (data: any) => {
-        const response: any = await client.client(`/ads/create-new-ad`, 'POST', { body: data });
-        console.log(response);
-    };
+    if (props.editable && !showForm) {
+        return null;
+    }
 
     return <div>
         <Form
             form={form}
             className={'row justify-content-space-between'}
-            onSubmit={(payload: any) => submit(payload)}
+            onSubmit={(payload: any) => props.submit && props.submit(payload)}
             submitButton={{ className: 'mt-60 col-100 col-md-40 col-lg-22 margin-auto', title: 'Post', type: 'submit' }}
             onSuccess={() => window.location.reload()}
-            {...client}
+            {...(props.client || {})}
         >
             <div className={'col-md-50 mx-md-20 col-100'}>
                 <Input {...form?.fields?.title} namespace={form.namespace}/>

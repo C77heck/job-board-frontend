@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Field } from '../../../shared/form/field';
 import { Form } from '../../../shared/form/form';
 import { FormStructure } from '../../../shared/form/form.structure';
@@ -6,7 +7,7 @@ import { useClient } from '../../../shared/hooks/client';
 
 const Search = (props: any) => {
     const client = useClient();
-    const form = new FormStructure({
+    const [form, setForm] = useState(new FormStructure({
         what: new Field({
             name: 'what',
             label: 'What',
@@ -27,7 +28,7 @@ const Search = (props: any) => {
             wrapperClasses: 'border-radius-6',
             placeholder: 'Town, city or postcode',
         }),
-    },  'search-role-by-geolocation');
+    }, 'search-role-by-geolocation'));
 
     const search = (payload: any) => {
         console.log('sending the request to where should go', payload);

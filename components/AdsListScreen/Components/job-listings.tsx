@@ -1,13 +1,13 @@
 import { JobCard } from "./job-card";
 
 export interface Job {
-    id: string;
-    title: string;
-    description: string;
-    expiresOn: string;
-    location: string;
-    salary: string;
-    logo: string;
+    id?: string;
+    title?: string;
+    description?: string;
+    expiresOn?: string;
+    location?: string;
+    salary?: string;
+    logo?: string;
 }
 
 interface JobListingsProp {

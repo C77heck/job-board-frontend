@@ -11,6 +11,8 @@ import { Job } from './job-listings';
 export interface JobCardProps extends Job {
     className?: string;
     editable?: boolean;
+    submit?: (data: any) => Promise<void>;
+    client?: any;
 }
 
 export const JobCard = (props: JobCardProps) => {
@@ -18,6 +20,8 @@ export const JobCard = (props: JobCardProps) => {
     const actionButton = editable
         ? <JobEditModal {...props}/>
         : <Button title={<FavouriteIcon width={25} className={'text-color--dark hover-secondary'}/>} buttonStyle={'transparent'}/>;
+
+    const { formattedText, isFormatted } = formatLongText(description, 420);
 
     return <div className={`${className} row pb-8 job-board py-10 px-20`}>
         <div className={'col-11'}>
@@ -45,8 +49,8 @@ export const JobCard = (props: JobCardProps) => {
             </div>
             <div className={'display-flex'}>
                 <p className={'fs-13 fw--400 pt-16'}>
-                    {formatLongText(description, 420)}
-                    <NavLink href={'/'}><span className={'fs-13 fw--400 pt-16 hover-opacity text-color--secondary-1'}>See more</span></NavLink>
+                    {formattedText}
+                    {isFormatted && <NavLink href={'/'}><span className={'fs-13 fw--400 pt-16 hover-opacity text-color--secondary-1'}>See more</span></NavLink>}
                 </p>
             </div>
         </div>

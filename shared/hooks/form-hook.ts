@@ -51,8 +51,6 @@ export const useForm = () => {
 
     const getIsFormValid = (namespace: string) => {
         const form = formData?.[namespace] || {};
-        console.log(form);
-
         for (const prop in form) {
             if (form.hasOwnProperty(prop) && prop !== 'isFormValid') {
                 if (!form[prop]?.isValid) {

@@ -1,6 +1,6 @@
 import moment from 'moment';
 import * as React from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Button } from '../../../../shared/components/buttons/button';
 import { CONSTANTS } from '../../../../shared/constants';
 import { AuthContext } from '../../../../shared/contexts/auth.context';
@@ -21,7 +21,7 @@ export const ProfileBoxForm = (props: any) => {
     const { INPUTS: { TEXTAREA } } = CONSTANTS;
     const client = useClient();
     const { signin, userId } = useContext(AuthContext);
-    const form = new FormStructure({
+    const [form, setForm] = useState(new FormStructure({
         first_name: new Field({
             name: 'first_name',
             label: 'First name',
@@ -48,7 +48,7 @@ export const ProfileBoxForm = (props: any) => {
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
         }),
-    }, 'profile-box');
+    }, 'profile-box'));
 
     const submit = async (data: any) => {
         const response: any = await client.client(`/users/update`, 'PUT', { body: data });

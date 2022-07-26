@@ -79,13 +79,18 @@ export const sort = (collection: any[], direction: 'asc' | 'desc' = 'asc', by = 
  * make the datepicker value compatible with safari and firefox
  * @param dateString
  */
-export const formatLongText = (text: string, maxLength: number) => {
-    if (!text) {
-        return '';
-    }
-    if (text.length <= maxLength) {
-        return text;
+export const formatLongText = (text?: string, maxLength?: number) => {
+    if (!text || !maxLength) {
+        return {
+            formattedText: '',
+            isFormatted: false
+        };
     }
 
-    return `${text.slice(0, maxLength)}...`;
+    const isShortEnough = text.length <= maxLength;
+
+    return {
+        formattedText: isShortEnough ? text : `${text.slice(0, maxLength)}...`,
+        isFormatted: !isShortEnough
+    };
 };

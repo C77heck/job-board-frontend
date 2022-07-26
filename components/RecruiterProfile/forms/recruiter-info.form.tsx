@@ -1,6 +1,6 @@
 import moment from 'moment';
 import * as React from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Button } from '../../../shared/components/buttons/button';
 import { CONSTANTS } from '../../../shared/constants';
 import { AuthContext } from '../../../shared/contexts/auth.context';
@@ -15,7 +15,7 @@ export const RecruiterInfoForm = (props: any) => {
     const { INPUTS: { CHECKBOX } } = CONSTANTS;
     const client = useClient();
     const { signin } = useContext(AuthContext);
-    const form = new FormStructure({
+    const [form, setForm] = useState(new FormStructure({
         first_name: new Field({
             name: 'first_name',
             label: 'First name',
@@ -68,7 +68,7 @@ export const RecruiterInfoForm = (props: any) => {
             labelClass: 'fs-15 fw--700 mb-2',
             element: CHECKBOX
         }),
-    }, 'user-register');
+    }, 'user-register'));
 
     const submit = async (data: any) => {
         const response: any = await client.client(`/users/signup`, 'POST', { body: data });

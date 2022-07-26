@@ -1,21 +1,21 @@
 import moment from 'moment';
 import * as React from "react";
-import { useContext } from "react";
-import { Input } from '../../../form/input';
-import { Button } from "../../buttons/button";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/auth.context";
 import { Field } from "../../../form/field";
 import { Form } from "../../../form/form";
 import { FormStructure } from "../../../form/form.structure";
+import { Input } from '../../../form/input';
 import { emailValidator } from "../../../form/validators/email-validator";
 import { requiredValidator } from "../../../form/validators/required-validator";
 import { useClient } from "../../../hooks/client";
+import { Button } from "../../buttons/button";
 
 export const LoginForm = (props: any) => {
     const client = useClient();
     const { signin } = useContext(AuthContext);
 
-    const form = new FormStructure({
+    const [form, setForm] = useState(new FormStructure({
         email: new Field({
             name: 'email',
             label: 'Email',
@@ -34,7 +34,7 @@ export const LoginForm = (props: any) => {
             labelClass: 'fs-15 fw--700 mb-2',
             type: 'password',
         }),
-    }, 'login-form');
+    }, 'login-form'));
 
     const submit = async (body: any) => {
         const response: any = await client.client('/users/login', 'post', { body });

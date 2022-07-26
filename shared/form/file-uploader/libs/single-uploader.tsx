@@ -22,7 +22,6 @@ export const SingleUploader = (props: SingleUploaderProps) => {
             setUploadsQuantity(files.length);
 
             for (const file of files) {
-                console.log(file);
                 await addFile(file);
             }
 

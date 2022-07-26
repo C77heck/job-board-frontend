@@ -28,7 +28,7 @@ export interface FieldProps {
     element: 'text' | 'dropdown' | 'searchable' | 'searchable_dropdown' | 'textarea' | 'checkbox' | 'datepicker' | string;
     isNumberOnly: boolean;
     value: string | null;
-    onChange: (value: string) => void;
+    onChange: (prop: string, value: string) => void;
     namespace: string;
     labelClass: string;
     wrapperClasses: string;
@@ -75,8 +75,9 @@ export const Input = (props: FieldProps) => {
     const { INPUTS: { TEXTAREA, SEARCHABLE, SEARCHABLE_DROPDOWN, DROPDOWN, RANGE, CHECKBOX, DATEPICKER } } = CONSTANTS;
 
     useEffect(() => {
+        console.log(props.value);
         setValue(props.value as string);
-    }, []);
+    }, [props.value]);
 
     useEffect(() => {
         const { hasError, errorMessage } = validate(value);
