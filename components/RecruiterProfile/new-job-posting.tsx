@@ -6,6 +6,7 @@ export const NewJobPosting = () => {
 
     const submit = async (data: any) => {
         const response: any = await client.client(`/ads/create-new-ad`, 'POST', { body: data });
+
         console.log(response);
     };
 

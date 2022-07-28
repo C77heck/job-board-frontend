@@ -1,4 +1,17 @@
 @mixin Helpers($lg, $xl, $md, $sm, $mlg) {
+    .opacity {
+        &--low {
+            opacity: 0.4;
+        }
+
+        &--medium {
+            opacity: 0.6;
+        }
+
+        &--high {
+            opacity: 0.8;
+        }
+    }
     .display-inherit {
         display: inherit;
     }

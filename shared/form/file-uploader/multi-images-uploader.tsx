@@ -9,22 +9,34 @@ export interface IconUploderProps {
     name: string;
     namespace: string;
     alt?: string;
+    value?: any[];
 }
 
 export const MultiImagesUploader = (props: IconUploderProps) => {
     const [isLoading, setIsLoading] = useState(false);
-    const [options, setOptions] = useState({ viewAll: false, numberOfImg: 0, display: '' });
+    const [options, setOptions] = useState({ numberOfImg: 0, display: '', attachments: [''] });
     const [uploadedAttachments, setUploadedAttachments] = useState<Attachment[]>([]);
     const { setData } = useContext(FormContext);
 
     useEffect(() => {
         setOptions({
-            viewAll: uploadedAttachments.length > 3,
             numberOfImg: uploadedAttachments.length,
             display: uploadedAttachments[0]?.url || '',
+            attachments: uploadedAttachments.map(att => att.url),
         });
+
         setData(props.name, { value: uploadedAttachments.map(a => a.url), isValid: true }, props.namespace);
     }, [uploadedAttachments]);
+
+    useEffect(() => {
+        if (props.value && props.value.length) {
+            setOptions({
+                numberOfImg: props.value.length,
+                display: props.value[0] || '',
+                attachments: props.value,
+            });
+        }
+    }, [props.value]);
 
     // fix the spinner and make uploaded images viewable with lightbox
     const trigger = <FileDisplay
@@ -42,14 +54,22 @@ export const MultiImagesUploader = (props: IconUploderProps) => {
             trigger={trigger}
             alt={props.alt}
         />
-        {options.viewAll && <Lightbox
-            trigger={<FileDisplay
-                overlay={true}
-                key={'lightbox'}
-                uploadText={`View uploads(${options.numberOfImg})`}
-                src={options.display}
-            />}
-            photos={uploadedAttachments.map(att => att.url)}
-        />}
+        <ImageDisplay options={options}/>
     </div>;
+};
+
+export const ImageDisplay = ({ options }: any) => {
+    if (!options.attachments.length) {
+        return null;
+    }
+
+    return <Lightbox
+        trigger={<FileDisplay
+            overlay={true}
+            key={'lightbox'}
+            uploadText={`View uploads(${options.numberOfImg})`}
+            src={options.display}
+        />}
+        photos={options.attachments}
+    />;
 };

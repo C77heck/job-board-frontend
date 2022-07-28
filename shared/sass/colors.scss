@@ -24,6 +24,7 @@
         --color-light: rgb(252, 252, 252);
         --color-light-2: #e7e7e7;
         --color-shadow: rgb(118, 126, 144);
+        --color-shadow-see-through: rgb(118, 126, 144);
         --color-success-1: hsl(85, 69%, 54%);
         --color-success-2: hsl(114, 69%, 54%);
         --color-success-3: hsl(111, 81%, 45%);
@@ -71,6 +72,10 @@
 
         &--grey {
             background-color: var(--color-shadow);
+        }
+
+        &--grey-2 {
+            background-color: var(--text-color-dark);
         }
 
         &--dark-2 {
@@ -190,6 +195,12 @@
 
         &--grey {
             color: var(--color-shadow);
+        }
+    }
+
+    .color {
+        &--light {
+            color: var(--color-light);
         }
     }
 
