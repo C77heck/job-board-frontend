@@ -42,7 +42,7 @@ export const TabViewer = (props: TabViewerProps) => {
 
     return <div className={'w-100'}>
         <div className={'display-flex justify-content-center'}>{props.tabs.tabNames.map((tabName: TabNames) => tabButton(tabName))}</div>
-        <div className={'mt-30'}>
+        <div className={'mt-30 px-50'}>
             {activeElement}
         </div>
     </div>;

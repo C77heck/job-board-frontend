@@ -1,8 +1,7 @@
 import React from 'react';
+import { SafeUserData } from '../../../components/JobSeekerProfileScreen/libs/user.data.document';
 import { EditIcon } from '../icons/icons';
 import { Modal } from '../modal/modal';
-import { SafeUserData } from '../../../components/JobSeekerProfileScreen/libs/user.data.document';
-import { ProfileBoxForm } from '../../../components/JobSeekerProfileScreen/Components/forms/profile-box.form';
 
 interface BoxWrapperProps {
     children: any;
@@ -26,13 +25,13 @@ export class BoxWrapper extends React.Component<BoxWrapperProps, any> {
                 size={{ sm: 90, md: 67, lg: 50, xl: 40 }}
                 header={<h2 className={'header--3 text-align-center'}>Update profile data</h2>}
                 wrapperClass={''}
-                trigger={<EditIcon className={'hover-opacity'} width={20}/>}
+                trigger={<EditIcon className={'hover-opacity box-wrapper-edit-icon'} width={20}/>}
             />
         </div>;
     }
 
     public render() {
-        return <div className={`border-radius-px-8 p-25 background-color--light-1 ${this.props.className} position-relative`}>
+        return <div className={`border-radius-px-8 p-25 ${this.props.className} position-relative box-wrapper box-shadow`}>
             {this.renderEdit()}
             {this.props.children}
         </div>;
