@@ -8,10 +8,12 @@ import { Form } from '../../../shared/form/form';
 import { FormStructure } from '../../../shared/form/form.structure';
 import { Input } from '../../../shared/form/input';
 import { requiredValidator } from '../../../shared/form/validators/required-validator';
+import { useClient } from '../../../shared/hooks/client';
 import { JobCardProps } from '../../AdsListScreen/Components/job-card';
 
 export const JobForm = (props: JobCardProps) => {
     const { INPUTS: { CHECKBOX, TEXTAREA, DATEPICKER } } = CONSTANTS;
+    const client = useClient();
     const [showForm, setShowForm] = useState(false);
     const [form, setForm] = useState(new FormStructure({
         title: new Field({
@@ -95,14 +97,22 @@ export const JobForm = (props: JobCardProps) => {
         return null;
     }
 
+    const submit = async (data: any) => {
+        if (!props.endpoint) {
+            return;
+        }
+
+        await client.client(props.endpoint, props.method, { body: data });
+    };
+
     return <div>
         <Form
             form={form}
             className={'row justify-content-space-between'}
-            onSubmit={(payload: any) => props.submit && props.submit(payload)}
+            onSubmit={(payload: any) => submit(payload)}
             submitButton={{ className: 'mt-60 col-100 col-md-40 col-lg-22 margin-auto', title: 'Post', type: 'submit' }}
             onSuccess={() => window.location.reload()}
-            {...(props.client || {})}
+            {...client}
         >
             <div className={'col-md-50 mx-md-20 col-100'}>
                 <Input {...form?.fields?.title} namespace={form.namespace}/>

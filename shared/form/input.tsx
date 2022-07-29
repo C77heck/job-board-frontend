@@ -27,7 +27,7 @@ export interface FieldProps {
     options: string[];
     element: 'text' | 'dropdown' | 'searchable' | 'searchable_dropdown' | 'textarea' | 'checkbox' | 'datepicker' | string;
     isNumberOnly: boolean;
-    value: string | null;
+    value: string | string[] | null;
     onChange: (prop: string, value: string) => void;
     namespace: string;
     labelClass: string;

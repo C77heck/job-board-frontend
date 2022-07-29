@@ -24,7 +24,7 @@ export const PostingsHistory = () => {
         (async () => await fetchJobs())();
     }, []);
 
-    return <div className={'py-50 w-100 px-30'}>
+    return <div className={'py-50 w-100 px-30 position-center'}>
         <JobListings editable={true} jobs={jobs}/>
     </div>;
 };

@@ -13,6 +13,8 @@ export interface JobCardProps extends Job {
     editable?: boolean;
     submit?: (data: any) => Promise<void>;
     client?: any;
+    endpoint?: string;
+    method?: string;
 }
 
 export const JobCard = (props: JobCardProps) => {
@@ -23,7 +25,7 @@ export const JobCard = (props: JobCardProps) => {
 
     const { formattedText, isFormatted } = formatLongText(description, 420);
 
-    return <div className={`${className} row pb-8 job-board py-10 px-20`}>
+    return <div className={`${className} row pb-8 job-board pt-19 pb-28 px-20`}>
         <div className={'col-11'}>
             <CompanyLogo src={logo}/>
         </div>

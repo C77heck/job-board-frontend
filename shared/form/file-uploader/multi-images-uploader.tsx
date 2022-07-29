@@ -1,18 +1,18 @@
 import { useContext, useEffect, useState } from 'react';
 import { FormContext } from '../../contexts/form.context';
+import { FieldProps } from '../input';
 import { FileDisplay } from './libs/file-display';
 import { Lightbox } from './libs/lightbox';
 import { MultiUploader } from './libs/multi-uploader';
 import { Attachment } from './libs/uploader.interfaces';
 
-export interface IconUploderProps {
+export interface IconUploaderProps extends FieldProps {
     name: string;
     namespace: string;
     alt?: string;
-    value?: any[];
 }
 
-export const MultiImagesUploader = (props: IconUploderProps) => {
+export const MultiImagesUploader = (props: IconUploaderProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const [options, setOptions] = useState({ numberOfImg: 0, display: '', attachments: [''] });
     const [uploadedAttachments, setUploadedAttachments] = useState<Attachment[]>([]);
@@ -33,7 +33,7 @@ export const MultiImagesUploader = (props: IconUploderProps) => {
             setOptions({
                 numberOfImg: props.value.length,
                 display: props.value[0] || '',
-                attachments: props.value,
+                attachments: props.value as string[],
             });
         }
     }, [props.value]);

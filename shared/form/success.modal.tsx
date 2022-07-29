@@ -30,7 +30,7 @@ export const SuccessModal = (props: SuccessModalProps) => {
         portal={'status-modal'}
         level={1}
         overlayClick={(show) => props.onClick('')}
-        className={'border-radius-px-5 p-15 z-100'}
+        className={'border-radius-px-5 p-15 z-100 base-modal'}
         content={content}
         size={{ sm: 90, md: 72, lg: 60, xl: 40 }}
         header={<h2 className={'header--3 text-align-center'}>Success</h2>}
