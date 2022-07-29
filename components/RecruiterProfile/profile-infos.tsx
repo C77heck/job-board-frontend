@@ -11,7 +11,7 @@ export const ProfileInfos = (props: any) => {
     const [formattedUserData, setFormattedUserData] = useState<any[]>([]);
 
     useEffect(() => {
-        console.log({ userData }, Object.keys(userData), Object.keys(userData).map((prop: string) => ({ [prop]: userData[prop as keyof UserMeta] || '' })));
+        console.log(Object.keys(userData), Object.keys(userData).map((prop: string) => ({ label: prop, data: userData[prop as keyof UserMeta] || '' })));
         if (!!userData) {
             setFormattedUserData(Object.keys(userData).map((prop: string) => ({ label: prop, data: userData[prop as keyof UserMeta] || '' })));
         }
@@ -24,7 +24,7 @@ export const ProfileInfos = (props: any) => {
         form={props.form}
     >
         <div className={'row'}>
-            {formattedUserData.map((data: ProfileItem) => <DataPresenter key={data.label} label={data.label} data={data.data}/>)}
+            {formattedUserData.map((data: ProfileItem) => <DataPresenter className={'col-12'} key={data.label} label={data.label} data={data.data}/>)}
         </div>
     </BoxWrapper>;
 };
