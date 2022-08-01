@@ -38,7 +38,6 @@ export const MultiImagesUploader = (props: IconUploaderProps) => {
         }
     }, [props.value]);
 
-    // fix the spinner and make uploaded images viewable with lightbox
     const trigger = <FileDisplay
         onClick={() => setIsLoading(true)}
         alt={'uploader-icon'}

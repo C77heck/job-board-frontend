@@ -4,13 +4,13 @@ import { FileDisplay } from './libs/file-display';
 import { SingleUploader } from './libs/single-uploader';
 import { Attachment } from './libs/uploader.interfaces';
 
-export interface IconUploderProps {
+export interface IconUploaderProps {
     name: string;
     namespace: string;
     alt?: string;
 }
 
-export const IconUploder = (props: IconUploderProps) => {
+export const IconUploader = (props: IconUploaderProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const [uploadedAttachment, setUploadedAttachment] = useState<Attachment | null>(null);
     const { setData } = useContext(FormContext);

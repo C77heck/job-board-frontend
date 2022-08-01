@@ -16,7 +16,10 @@ export const SingleUploader = (props: SingleUploaderProps) => {
     }, [attachment, uploadQuantity, isLoading]);
 
     const addFiles = async (e: any) => {
+        console.log('{ files: e.target.files, file: e.target.file }');
+
         try {
+            console.log({ files: e.target.files, file: e.target.file });
             const files = e.target.files || [];
             setIsLoading(true);
             setUploadsQuantity(files.length);

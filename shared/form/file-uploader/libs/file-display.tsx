@@ -22,7 +22,7 @@ export const FileDisplay = (props: FileDisplayProps) => {
             : <span className={'fs-11'}>{props.uploadText}</span>;
 
     return <div
-        className={'logo-uploader background-color--light-2 position-center my-10 mr-10'}
+        className={'logo-uploader background-color--light-2 position-center my-10'}
         onClick={props.onClick}
     >
         {content}
