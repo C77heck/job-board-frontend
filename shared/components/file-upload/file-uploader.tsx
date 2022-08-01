@@ -65,7 +65,7 @@ export class UploaderMulti extends Component<any, {}> {
     }
 
     public async createAttachment(data: string) {
-        console.log('sending attachment');
+        console.log('sending attachment', data);
         return {};
     }
 }

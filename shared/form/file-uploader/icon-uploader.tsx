@@ -27,6 +27,7 @@ export const IconUploader = (props: IconUploaderProps) => {
     </div>;
 
     return <SingleUploader
+        id={'logo-image-uploader'}
         getAttachment={(attachment) => setUploadedAttachment(attachment)}
         getIsLoading={(isLoading: boolean) => setIsLoading(isLoading)}
         trigger={trigger}

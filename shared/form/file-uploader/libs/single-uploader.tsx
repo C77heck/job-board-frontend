@@ -16,7 +16,7 @@ export const SingleUploader = (props: SingleUploaderProps) => {
     }, [attachment, uploadQuantity, isLoading]);
 
     const addFiles = async (e: any) => {
-        console.log('{ files: e.target.files, file: e.target.file }');
+        console.log('hitting the right addFiles...');
 
         try {
             console.log({ files: e.target.files, file: e.target.file });
@@ -74,14 +74,14 @@ export const SingleUploader = (props: SingleUploaderProps) => {
     };
 
     return <div className={'hover-opacity'}>
-        <label htmlFor={'profileImageUpload'}>{props.trigger}</label>
+        <label htmlFor={props.id}>{props.trigger}</label>
         <input
             onChange={(e) => addFiles(e)}
             accept="image/*"
             className={'display-none'}
             type={'file'}
-            id={'profileImageUpload'}
-            multiple={true}
+            id={props.id}
+            multiple={false}
         />
     </div>;
 };

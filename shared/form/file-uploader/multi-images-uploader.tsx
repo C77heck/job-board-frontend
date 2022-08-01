@@ -10,6 +10,7 @@ export interface IconUploaderProps extends FieldProps {
     name: string;
     namespace: string;
     alt?: string;
+    id: string;
 }
 
 export const MultiImagesUploader = (props: IconUploaderProps) => {
@@ -48,6 +49,7 @@ export const MultiImagesUploader = (props: IconUploaderProps) => {
 
     return <div className={'display-flex'}>
         <MultiUploader
+            id={props.id}
             getAttachments={(attachments: Attachment[]) => setUploadedAttachments(attachments)}
             getIsLoading={(isLoading: boolean) => setIsLoading(isLoading)}
             trigger={trigger}

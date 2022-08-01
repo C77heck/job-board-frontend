@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProfileBoxForm } from '../../../components/JobSeekerProfileScreen/Components/forms/profile-box.form';
-import { ProfileItem } from '../../../components/JobSeekerProfileScreen/libs/user.data.document';
+import { ProfileItem, SafeUserData } from '../../../components/JobSeekerProfileScreen/libs/user.data.document';
 import { SafeRecruiterData } from '../../../components/RecruiterProfile/libs/recruiter.data.document';
 import { BoxWrapper } from './box-wrapper';
 import { DataPresenter } from './data-presenter';
@@ -9,7 +9,7 @@ interface ProfileBoxProps {
     profileItems: any[];
     enableEdit: boolean;
     header: string;
-    form: SafeRecruiterData;
+    form: SafeRecruiterData | SafeUserData;
 }
 
 export class ProfileBox extends React.Component<ProfileBoxProps, any> {

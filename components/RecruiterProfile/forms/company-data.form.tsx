@@ -45,9 +45,9 @@ export const CompanyDataForm = (props: any) => {
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
             element: TEXTAREA,
-            rows: 10
+            rows: 7
         }),
-    }, 'user-register'));
+    }, 'user-data-update'));
 
     useEffect(() => {
         if (props.editable) {
@@ -84,10 +84,14 @@ export const CompanyDataForm = (props: any) => {
             onSuccess={() => window.location.reload()}
             {...client}
         >
-            <div className={'col-100'}>
+            <div className={'col-30 display-flex justify-content-start align-items-center'}>
                 <IconUploader {...form?.fields?.logo} namespace={form.namespace}/>
+            </div>
+            <div className={'col-70'}>
                 <Input {...form?.fields?.company_name} namespace={form.namespace}/>
                 <Input {...form?.fields?.address} namespace={form.namespace}/>
+            </div>
+            <div className={'col-100'}>
                 <Input {...form?.fields?.description} namespace={form.namespace}/>
             </div>
 

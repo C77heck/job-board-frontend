@@ -1,8 +1,8 @@
 import { useContext } from 'react';
+import { ProfileBox } from '../../../shared/components/ui-misc/profile-box';
 import { AuthContext } from '../../../shared/contexts/auth.context';
 import { UserDataDocument } from '../libs/user.data.document';
 import { PhotoBox } from './photo.box';
-import { ProfileBox } from '../../../shared/components/ui-misc/profile-box';
 
 export const UserData = ({ filters }: any) => {
     const { userData } = useContext(AuthContext);

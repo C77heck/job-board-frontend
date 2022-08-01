@@ -6,7 +6,6 @@ import { UserData } from '../../components/RecruiterProfile/user-data';
 import { BaseLayoutWidth } from '../../shared/layouts/base-layout-width';
 import { BaseLayout } from '../../shared/layouts/base.layout';
 
-// http://localhost:3000/recruiter/employer-profile
 const RecruiterProfile: NextPage = (props: any) => {
     const tabs: Tab = {
         tabNames: [
@@ -24,7 +23,7 @@ const RecruiterProfile: NextPage = (props: any) => {
     return <BaseLayout auth={false} meta={{ title: 'home page', keywords: 'whatever', description: 'some description' }}>
         <BaseLayoutWidth className={'min-screen-height justify-content-start pt-150'}>
             <h1 className={'pb-40 fs-40'}>My profile</h1>
-            <TabViewer default={'new-postings'} tabs={tabs}/>
+            <TabViewer default={'profile-infos'} tabs={tabs}/>
         </BaseLayoutWidth>
     </BaseLayout>;
 };

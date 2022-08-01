@@ -3,7 +3,6 @@ import { ProfileBox } from '../../shared/components/ui-misc/profile-box';
 import { AuthContext } from '../../shared/contexts/auth.context';
 import { CompanyPresenter } from './company-presenter';
 import { RecruiterDataDocument } from './libs/recruiter.data.document';
-import { PhotoBox } from './photo-box';
 
 export const UserData = ({ filters }: any) => {
     const { userData } = useContext(AuthContext);
@@ -18,12 +17,12 @@ export const UserData = ({ filters }: any) => {
             />
         </div>
         <div className={'col-30 mt-20 mb-50'}>
-            <PhotoBox
-                form={userDocument}
-                images={userDocument.images}
-                enableEdit={true}
-                header={'Profile data'}
-            />
+            {/*<PhotoBox*/}
+            {/*    form={userDocument}*/}
+            {/*    images={userDocument.images}*/}
+            {/*    enableEdit={true}*/}
+            {/*    header={'Profile data'}*/}
+            {/*/>*/}
         </div>
         <div className={'col-30 mt-20 mb-50'}>
             <ProfileBox

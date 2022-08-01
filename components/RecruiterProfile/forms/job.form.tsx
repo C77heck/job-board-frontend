@@ -117,7 +117,7 @@ export const JobForm = (props: JobCardProps) => {
                 <Input {...form?.fields?.title} namespace={form.namespace}/>
                 <Input {...form?.fields?.salary} namespace={form.namespace}/>
                 <Input {...form?.fields?.location} namespace={form.namespace}/>
-                <MultiImagesUploader {...form?.fields?.images} namespace={form.namespace}/>
+                <MultiImagesUploader {...form?.fields?.images} namespace={form.namespace} id={'profileImageUpload'}/>
             </div>
             <div className={'col-md-50 mx-md-20 col-100'}>
                 <Input {...form?.fields?.expiresOn} namespace={form.namespace}/>

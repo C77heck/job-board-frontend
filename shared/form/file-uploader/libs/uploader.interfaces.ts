@@ -21,6 +21,7 @@ export interface Uploader {
     getIsLoading: (isLoading: boolean) => void;
     trigger: JSX.Element;
     alt?: string;
+    id: string;
 }
 
 export interface MultiUploaderProps extends Uploader {
@@ -29,5 +30,4 @@ export interface MultiUploaderProps extends Uploader {
 
 export interface SingleUploaderProps extends Uploader {
     getAttachment: (attachments: Attachment | null) => void;
-
 }

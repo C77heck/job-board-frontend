@@ -1,7 +1,6 @@
 import React from 'react';
 import { BoxWrapper } from '../../shared/components/ui-misc/box-wrapper';
 import { DataPresenter } from '../../shared/components/ui-misc/data-presenter';
-import { ProfileBoxForm } from '../JobSeekerProfileScreen/Components/forms/profile-box.form';
 import { CompanyDataForm } from './forms/company-data.form';
 import { SafeRecruiterData } from './libs/recruiter.data.document';
 
@@ -13,7 +12,7 @@ export interface CompanyPresenterProps {
 
 export class CompanyPresenter extends React.Component<CompanyPresenterProps, any> {
     public renderModalContent() {
-        return <CompanyDataForm data={this.props.form}/>;
+        return <CompanyDataForm endpoin={'/update'} method={'PUT'} data={this.props.form}/>;
     }
 
     public render() {

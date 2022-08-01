@@ -77,13 +77,13 @@ export const MultiUploader = (props: MultiUploaderProps) => {
     };
 
     return <div className={'hover-opacity'}>
-        <label htmlFor={'profileImageUpload'}>{props.trigger}</label>
+        <label htmlFor={props.id}>{props.trigger}</label>
         <input
             onChange={(e) => addFiles(e)}
             accept="image/*"
             className={'display-none'}
             type={'file'}
-            id={'profileImageUpload'}
+            id={props.id}
             multiple={true}
         />
     </div>;
