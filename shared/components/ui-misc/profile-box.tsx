@@ -1,14 +1,15 @@
 import React from 'react';
-import { BoxWrapper } from '../../../shared/components/ui-misc/box-wrapper';
-import { DataPresenter } from '../../../shared/components/ui-misc/data-presenter';
-import { ProfileItem, SafeUserData } from '../libs/user.data.document';
-import { ProfileBoxForm } from './forms/profile-box.form';
+import { ProfileBoxForm } from '../../../components/JobSeekerProfileScreen/Components/forms/profile-box.form';
+import { ProfileItem } from '../../../components/JobSeekerProfileScreen/libs/user.data.document';
+import { SafeRecruiterData } from '../../../components/RecruiterProfile/libs/recruiter.data.document';
+import { BoxWrapper } from './box-wrapper';
+import { DataPresenter } from './data-presenter';
 
 interface ProfileBoxProps {
     profileItems: any[];
     enableEdit: boolean;
     header: string;
-    form: SafeUserData;
+    form: SafeRecruiterData;
 }
 
 export class ProfileBox extends React.Component<ProfileBoxProps, any> {
@@ -30,7 +31,9 @@ export class ProfileBox extends React.Component<ProfileBoxProps, any> {
 
         return {
             firstColumns: profileItems.slice(0, mid),
-            secondColumns: profileItems.slice(mid)
+            secondColumns: profileItems.slice(mid),
+            description: profileItems.slice(mid),
+            logo: profileItems.slice(mid),
         };
     }
 
@@ -39,7 +42,7 @@ export class ProfileBox extends React.Component<ProfileBoxProps, any> {
     }
 
     public render() {
-        const { firstColumns, secondColumns } = this.getCollumns();
+        const { firstColumns, secondColumns, logo, description } = this.getCollumns();
 
         return <BoxWrapper
             content={this.renderModalContent()}

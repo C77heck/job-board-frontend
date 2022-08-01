@@ -1,27 +1,26 @@
 import { useContext } from 'react';
-import { AuthContext } from '../../../shared/contexts/auth.context';
-import { UserDataDocument } from '../libs/user.data.document';
-import { PhotoBox } from './photo.box';
-import { ProfileBox } from '../../../shared/components/ui-misc/profile-box';
+import { ProfileBox } from '../../shared/components/ui-misc/profile-box';
+import { AuthContext } from '../../shared/contexts/auth.context';
+import { CompanyPresenter } from './company-presenter';
+import { RecruiterDataDocument } from './libs/recruiter.data.document';
+import { PhotoBox } from './photo-box';
 
 export const UserData = ({ filters }: any) => {
     const { userData } = useContext(AuthContext);
-    const userDocument = new UserDataDocument(userData);
-    const { description, email, first_name, last_name, images, isRecruiter, logo, meta } = userDocument;
+    const userDocument = new RecruiterDataDocument(userData);
 
     return <div className={'row justify-content-space-between'}>
         <div className={'col-30 mt-20 mb-50'}>
-            <ProfileBox
+            <CompanyPresenter
                 form={userDocument}
-                profileItems={[first_name, last_name, email, description]}
+                data={userDocument}
                 enableEdit={true}
-                header={'Profile data'}
             />
         </div>
         <div className={'col-30 mt-20 mb-50'}>
             <PhotoBox
                 form={userDocument}
-                profileItems={[first_name, last_name, email, description]}
+                images={userDocument.images}
                 enableEdit={true}
                 header={'Profile data'}
             />
@@ -29,7 +28,7 @@ export const UserData = ({ filters }: any) => {
         <div className={'col-30 mt-20 mb-50'}>
             <ProfileBox
                 form={userDocument}
-                profileItems={[first_name, last_name, email, description]}
+                profileItems={[userDocument.meta]}
                 enableEdit={true}
                 header={'Profile data'}
             />

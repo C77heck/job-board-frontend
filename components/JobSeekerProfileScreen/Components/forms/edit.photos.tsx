@@ -8,7 +8,7 @@ export class EditPhotos extends Component<any, any> {
     public state = { photos: [] };
 
     public componentDidMount() {
-        this.setState({ photos: this.props.meta?.photos });
+        this.setState({ photos: this.props.photos });
     }
 
     public async deletePhoto(photoId: string) {

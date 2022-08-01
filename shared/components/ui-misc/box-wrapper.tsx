@@ -1,4 +1,5 @@
 import React from 'react';
+import { SafeRecruiterData } from '../../../components/RecruiterProfile/libs/recruiter.data.document';
 import { SafeUserData } from '../../../components/JobSeekerProfileScreen/libs/user.data.document';
 import { EditIcon } from '../icons/icons';
 import { Modal } from '../modal/modal';
@@ -7,7 +8,7 @@ interface BoxWrapperProps {
     children: any;
     className?: string;
     enableEdit?: boolean;
-    form?: SafeUserData;
+    form?: SafeUserData | SafeRecruiterData;
     content: JSX.Element;
 }
 
@@ -31,7 +32,7 @@ export class BoxWrapper extends React.Component<BoxWrapperProps, any> {
     }
 
     public render() {
-        return <div className={`border-radius-px-8 p-25 ${this.props.className} position-relative box-wrapper box-shadow`}>
+        return <div className={`border-radius-px-8 p-25 ${this.props.className} position-relative background-color--light-1 box-shadow`}>
             {this.renderEdit()}
             {this.props.children}
         </div>;

@@ -1,8 +1,8 @@
 import { NextPage } from 'next';
 import { NewJobPosting } from '../../components/RecruiterProfile/new-job-posting';
 import { PostingsHistory } from '../../components/RecruiterProfile/postings-history';
-import { ProfileInfos } from '../../components/RecruiterProfile/profile-infos';
 import { Tab, TabViewer } from '../../components/RecruiterProfile/tab-viewer';
+import { UserData } from '../../components/RecruiterProfile/user-data';
 import { BaseLayoutWidth } from '../../shared/layouts/base-layout-width';
 import { BaseLayout } from '../../shared/layouts/base.layout';
 
@@ -16,7 +16,7 @@ const RecruiterProfile: NextPage = (props: any) => {
         ],
         elements: {
             'new-postings': <NewJobPosting/>,
-            'profile-infos': <ProfileInfos/>,
+            'profile-infos': <UserData/>,
             'my-job-postings': <PostingsHistory/>
         }
     };

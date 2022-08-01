@@ -21,7 +21,7 @@ export const JobListings = (props: JobListingsProp) => {
     return <div className={'w-px-800 box-shadow'}>
         {(props.jobs || []).map((job, index) => <JobCard
             editable={props.editable}
-            key={job.id}
+            key={job._id}
             className={props.jobs.length - 1 > index ? 'border-bottom-none' : ''}
             {...job}
         />)}

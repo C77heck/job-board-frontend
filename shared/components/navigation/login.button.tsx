@@ -13,6 +13,7 @@ import { RecruiterDropdown } from './recruiter-dropdown';
 export const LoginButton = ({ isMobile }: any) => {
     const { signout, isLoggedIn, userData } = useContext(AuthContext);
     const [isRegister, setIsRegister] = useState(false);
+
     const signoutHandler = () => {
         try {
             signout();
@@ -21,6 +22,7 @@ export const LoginButton = ({ isMobile }: any) => {
             console.log(e);
         }
     };
+
     if (isLoggedIn) {
         return <Button
             textColor={'text-color--light-1'}
