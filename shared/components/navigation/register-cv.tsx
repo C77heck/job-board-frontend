@@ -4,7 +4,7 @@ import { LoginModal } from './libs/login.modal';
 
 export const RegisterCv = ({ isMobile }: any) => {
     return <LoginModal
-        endpoint={'/users/job-seeker'}
+        type={'job-seeker'}
         isMobile={isMobile}
         trigger={<Button
             textColor={'text-color--light-1 fs-mlg-17 fs-16'}

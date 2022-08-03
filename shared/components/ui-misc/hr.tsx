@@ -1,5 +1,4 @@
 import * as React from 'react';
-import './hr.scss';
 
 interface HrProps {
     type?: 'light' | 'dark' | 'normal' | 'vertical';

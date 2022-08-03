@@ -12,7 +12,7 @@ export interface CompanyPresenterProps {
 
 export class CompanyPresenter extends React.Component<CompanyPresenterProps, any> {
     public renderModalContent() {
-        return <CompanyDataForm endpoint={'/users/update'} method={'PUT'} data={this.props.form}/>;
+        return <CompanyDataForm endpoint={'/users/recruiter/update'} method={'PUT'} data={this.props.form}/>;
     }
 
     public render() {

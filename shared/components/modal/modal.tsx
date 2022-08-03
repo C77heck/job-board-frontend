@@ -12,7 +12,7 @@ interface SizeProps {
 }
 
 interface ModalProps {
-    content: JSX.Element;
+    content: JSX.Element | null;
     trigger?: JSX.Element;
     className?: string;
     contentClasses?: string;

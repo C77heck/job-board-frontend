@@ -1,7 +1,6 @@
 import moment from 'moment';
 import * as React from "react";
-import { useContext, useState } from "react";
-import { CONSTANTS } from '../../../constants';
+import { useContext } from "react";
 import { AuthContext } from "../../../contexts/auth.context";
 import { Field } from "../../../form/field";
 import { Form } from "../../../form/form";
@@ -12,17 +11,10 @@ import { requiredValidator } from "../../../form/validators/required-validator";
 import { useClient } from "../../../hooks/client";
 import { Button } from "../../buttons/button";
 
-// TODO -> these will have to be dealt with. probably with an attachment service.
-// we could build a local service that serves staff from the local machine.
-//     logo?: string,
-//     meta?: string[],
-//     images?: string[];
-
-export const RegisterForm = (props: any) => {
-    const { INPUTS: { CHECKBOX } } = CONSTANTS;
+export const JobSeekerRegisterForm = (props: any) => {
     const client = useClient();
     const { signin } = useContext(AuthContext);
-    const [form, setForm] = useState(new FormStructure({
+    const form = new FormStructure({
         first_name: new Field({
             name: 'first_name',
             label: 'First name',
@@ -74,10 +66,10 @@ export const RegisterForm = (props: any) => {
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
         }),
-    }, 'user-register'));
+    }, 'user-register');
 
     const submit = async (data: any) => {
-        const response: any = await client.client(`/users/signup`, 'POST', { body: data });
+        const response: any = await client.client(props.endpoint, 'POST', { body: data });
 
         if (!client.error && !!response) {
             signin({ ...(response?.userData || {}), expiry: moment() });
