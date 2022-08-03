@@ -1,16 +1,17 @@
 import moment from 'moment';
 import { useEffect, useState } from 'react';
+import { UserType } from '../contexts/auth.context';
 import { redirect } from '../libs/helpers';
 import { Repository } from '../libs/repository';
 import { Storage } from '../libs/storage';
 
-export interface UserMeta {
+export interface UserData {
     first_name: string;
     last_name: string;
     email: string;
     description: string;
     images: string;
-    meta: string;
+    meta: any;
     isRecruiter: boolean;
     logo: string;
     company?: CompanyData;
@@ -23,19 +24,19 @@ export interface CompanyData {
     description: string;
 }
 
-export interface UserProps {
+export interface UserProps extends UserData {
     userId: string;
     token: string;
     expiry: Date;
-    meta: UserMeta;
+    type: UserType;
 }
 
 export const useAuth = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isRecruiter, setIsRecruiter] = useState(false);
     const [token, setToken] = useState('');
-    const [userData, setUserData] = useState<UserMeta | null>(null);
+    const [userData, setUserData] = useState<UserData | null>(null);
     const [userId, setUserId] = useState('');
+    const [type, setType] = useState('');
     const storage = new Storage('auth');
 
     const hasNotExpired = (data: UserProps) => {
@@ -56,13 +57,6 @@ export const useAuth = () => {
         }
     });
 
-    // useEffect(() => {
-    //     if (isLoggedIn && userId && !userData?.first_name) {
-    //         console.log('WE ARE HITTING THE USEEFFECT', { userData, userId });
-    //         (async () => await whoami(userId))();
-    //     }
-    // }, [userId]);
-
     const signout = () => {
         storage.remove();
         setIsLoggedIn(false);
@@ -75,21 +69,33 @@ export const useAuth = () => {
     const signin = (userData: UserProps) => {
         setToken(userData?.token);
         setUserId(userData?.userId);
-        setIsRecruiter(userData?.meta?.isRecruiter);
         setIsLoggedIn(true);
-        storage.set({ token: userData.token, userId: userData.userId, expiry: userData.expiry });
+        setType(userData.type);
+        storage.set({ token: userData.token, userId: userData.userId, expiry: userData.expiry, type: userData.type });
     };
 
-    const whoami = async () => {
-        try {
-            const request = new Repository(token, 'api');
-            const userData = await request.fetch('/users/whoami', 'get', {}, {});
+    const getEndpoint = (type: UserType) => {
+        switch (type) {
+            case 'recruiter':
+                return '/users/recruiter/whoami';
+            case 'job-seeker':
+                return '/users/job-seeker/whoami';
+            default:
+                throw new Error('No user type provided');
+        }
+    };
 
-            setUserData(userData.meta);
+    const whoami = async (type: UserType) => {
+        try {
+            const endpoint = getEndpoint(type);
+            const request = new Repository(token, 'api');
+            const response = await request.fetch(endpoint, 'get', {}, {});
+
+            setUserData(response.userData);
         } catch (e: any) {
             signout();
         }
     };
 
-    return { isLoggedIn, token, userId, userData, isRecruiter, whoami, signout, signin };
+    return { isLoggedIn, token, userId, userData, type, whoami, signout, signin };
 };

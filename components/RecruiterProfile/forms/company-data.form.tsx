@@ -69,9 +69,10 @@ export const CompanyDataForm = (props: any) => {
 
     const submit = async (data: any) => {
         if (!props.endpoint) {
+            console.log('what the fuck?', props.endpoint, !props.endpoint);
             return;
         }
-
+        console.log({ ...props }, client);
         await client.client(props.endpoint, props.method, { body: data });
     };
 
@@ -94,7 +95,6 @@ export const CompanyDataForm = (props: any) => {
             <div className={'col-100'}>
                 <Input {...form?.fields?.description} namespace={form.namespace}/>
             </div>
-
         </Form>
     </div>;
 };

@@ -1,15 +1,15 @@
 import { useContext, useEffect } from 'react';
-import { AuthContext } from '../../contexts/auth.context';
+import { AuthContext, UserType } from '../../contexts/auth.context';
 import { Portal } from '../portal';
 import { DesktopNavbar } from './desktop/desktop-navbar';
 import { MobileNavbar } from './mobile/mobile-navbar';
 
 export const NavBar = (props: any) => {
-    const { isLoggedIn, userId, userData, whoami } = useContext(AuthContext);
+    const { isLoggedIn, userId, userData, token, type, whoami } = useContext(AuthContext);
 
     useEffect(() => {
-        if (isLoggedIn && userId && !userData?.first_name) {
-            (async () => await whoami())();
+        if (isLoggedIn && userId && !token) {
+            (async () => await whoami(type as UserType))();
         }
     }, [userId]);
 

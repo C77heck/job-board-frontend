@@ -1,13 +1,15 @@
 import { createContext } from 'react';
-import { UserMeta, UserProps } from '../hooks/auth-hook';
+import { UserData, UserProps } from '../hooks/auth-hook';
 
+export type UserType = 'recruiter' | 'job-seeker';
 export const AuthContext = createContext({
     userId: '',
     token: '',
     isLoggedIn: false,
     isRecruiter: false,
-    userData: {} as UserMeta,
-    whoami: () => {
+    type: '',
+    userData: {} as UserData,
+    whoami: (type: UserType) => {
     },
     signin: (data: UserProps) => {
     },

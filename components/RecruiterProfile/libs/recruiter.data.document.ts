@@ -10,7 +10,7 @@ export interface SafeRecruiterData {
     isRecruiter: boolean;
     description: ProfileItem;
     logo: ProfileItem;
-    meta: string;
+    meta: any;
     images: ProfileItem;
 }
 

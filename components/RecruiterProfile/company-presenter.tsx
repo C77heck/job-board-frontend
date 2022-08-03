@@ -12,11 +12,12 @@ export interface CompanyPresenterProps {
 
 export class CompanyPresenter extends React.Component<CompanyPresenterProps, any> {
     public renderModalContent() {
-        return <CompanyDataForm endpoin={'/update'} method={'PUT'} data={this.props.form}/>;
+        return <CompanyDataForm endpoint={'/users/update'} method={'PUT'} data={this.props.form}/>;
     }
 
     public render() {
         const { logo, description, company_name, address } = this.props.data;
+
         return <BoxWrapper
             content={this.renderModalContent()}
             className={'h-100'}
@@ -27,7 +28,7 @@ export class CompanyPresenter extends React.Component<CompanyPresenterProps, any
             <div className={'row'}>
                 <div className={'col-50'}>
                     <div className={'logo-presenter'}>
-                        <img src={"https://thumbs.dreamstime.com/z/logo-bird-company-icon-business-design-abstract-nature-vector-flying-background-symbol-illustration-template-sky-modern-white-148065023.jpg"}/>
+                        <img src={logo.data as string}/>
                     </div>
                 </div>
                 <div className={'col-50'}>

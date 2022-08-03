@@ -1,6 +1,6 @@
 import React from 'react';
-import { SafeRecruiterData } from '../../../components/RecruiterProfile/libs/recruiter.data.document';
 import { SafeUserData } from '../../../components/JobSeekerProfileScreen/libs/user.data.document';
+import { SafeRecruiterData } from '../../../components/RecruiterProfile/libs/recruiter.data.document';
 import { EditIcon } from '../icons/icons';
 import { Modal } from '../modal/modal';
 
@@ -13,12 +13,8 @@ interface BoxWrapperProps {
 }
 
 export class BoxWrapper extends React.Component<BoxWrapperProps, any> {
-    public onClickHandler() {
-        console.log('onClickHandler');
-    }
-
     public renderEdit() {
-        return <div onClick={() => this.onClickHandler()} className={'display-flex justify-content-end'}>
+        return <div className={'display-flex justify-content-end'}>
             <Modal
                 level={2}
                 className={'border-radius-px-5 p-15'}
