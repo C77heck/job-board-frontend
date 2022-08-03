@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 export interface ProfileDropdown {
     trigger: JSX.Element;
     content: JSX.Element;
+    className?: string;
 }
 
-export class ProfileDropdown extends Component<any, any> {
+export class ProfileDropdown extends React.Component<any, any> {
     public state = { show: false, isInFocus: false };
     public divRef: React.RefObject<any> = React.createRef();
 

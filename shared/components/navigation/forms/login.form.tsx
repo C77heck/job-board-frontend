@@ -1,6 +1,6 @@
 import moment from 'moment';
 import * as React from "react";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../../contexts/auth.context";
 import { Field } from "../../../form/field";
 import { Form } from "../../../form/form";
@@ -11,17 +11,22 @@ import { requiredValidator } from "../../../form/validators/required-validator";
 import { useClient } from "../../../hooks/client";
 import { Button } from "../../buttons/button";
 
-export const LoginForm = (props: any) => {
+export interface LoginFormProps {
+    endpoint: string;
+    onClick: () => void;
+}
+
+export const LoginForm = (props: LoginFormProps) => {
     const client = useClient();
     const { signin } = useContext(AuthContext);
 
-    const [form, setForm] = useState(new FormStructure({
+    const form = new FormStructure({
         email: new Field({
             name: 'email',
             label: 'Email',
             value: null,
             validators: [emailValidator],
-            options: props.options || [],
+            options: '',
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
         }),
@@ -34,10 +39,10 @@ export const LoginForm = (props: any) => {
             labelClass: 'fs-15 fw--700 mb-2',
             type: 'password',
         }),
-    }, 'login-form'));
+    }, 'login-form');
 
     const submit = async (body: any) => {
-        const response: any = await client.client('/users/login', 'post', { body });
+        const response: any = await client.client(props.endpoint, 'post', { body });
 
         if (!client.error && !!response) {
             signin({ ...(response?.userData || {}), expiry: moment() });

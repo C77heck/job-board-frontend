@@ -1,5 +1,5 @@
 import { LogoutIcon } from '../icons/icons';
-import { NavLink } from './extras/nav-link';
+import { NavLink } from './libs/nav-link';
 
 export const RecruiterDropdown = (props: any) => {
     return <div className={'row'}>

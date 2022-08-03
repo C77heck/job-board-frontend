@@ -12,7 +12,6 @@ export interface UserData {
     description: string;
     images: string;
     meta: any;
-    isRecruiter: boolean;
     logo: string;
     company?: CompanyData;
 }

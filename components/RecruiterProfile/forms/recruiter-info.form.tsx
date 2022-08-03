@@ -59,15 +59,7 @@ export const RecruiterInfoForm = (props: any) => {
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
         }),
-        isRecruiter: new Field({
-            name: 'isRecruiter',
-            label: 'Are you a recruiter?',
-            value: false,
-            validators: [],
-            className: 'col-100 mt-11',
-            labelClass: 'fs-15 fw--700 mb-2',
-            element: CHECKBOX
-        }),
+
     }, 'user-register'));
 
     const submit = async (data: any) => {
@@ -90,7 +82,6 @@ export const RecruiterInfoForm = (props: any) => {
             <div className={'col-md-50 mx-md-20 col-100'}>
                 <Input {...form?.fields?.first_name} namespace={form.namespace}/>
                 <Input {...form?.fields?.last_name} namespace={form.namespace}/>
-                <Input {...form?.fields?.isRecruiter} namespace={form.namespace}/>
             </div>
             <div className={'col-md-50 mx-md-20 col-100'}>
                 <Input {...form?.fields?.password} namespace={form.namespace}/>

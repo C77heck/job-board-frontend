@@ -1,4 +1,4 @@
-import { NavLink } from '../../../shared/components/navigation/extras/nav-link';
+import { NavLink } from '../../../shared/components/navigation/libs/nav-link';
 import { priceFormat } from '../../../shared/libs/helpers';
 import { FilterStrip } from './filter-strip';
 

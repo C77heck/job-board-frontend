@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { LogoutIcon } from '../icons/icons';
-import { NavLink } from './extras/nav-link';
+import { NavLink } from './libs/nav-link';
 
 export const EmployeeDropdown = (props: any) => {
     return <div className={'row'}>

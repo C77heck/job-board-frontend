@@ -7,7 +7,7 @@ import { PhotoBox } from './photo.box';
 export const UserData = ({ filters }: any) => {
     const { userData } = useContext(AuthContext);
     const userDocument = new UserDataDocument(userData);
-    const { description, email, first_name, last_name, images, isRecruiter, logo, meta } = userDocument;
+    const { description, email, first_name, last_name, images, logo, meta } = userDocument;
 
     return <div className={'row justify-content-space-between'}>
         <div className={'col-30 mt-20 mb-50'}>

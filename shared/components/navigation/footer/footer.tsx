@@ -1,7 +1,7 @@
 import { getLinks } from '../../../config/static-data';
 import { Button } from '../../buttons/button';
 import { FacebookIcon, InstagramIcon, LinkedInIcon, TwitterIcon } from '../../icons/icons';
-import { NavLink } from '../extras/nav-link';
+import { NavLink } from '../libs/nav-link';
 
 export const Footer = (props: any) => {
     const { adEdit, adsList, adView, jobSeekerProfile, employerProfile, favourites, home } = getLinks();

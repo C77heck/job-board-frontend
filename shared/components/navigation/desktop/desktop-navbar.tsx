@@ -3,9 +3,10 @@ import { useCallback } from 'react';
 import { getLinks } from '../../../config/static-data';
 import { Button } from '../../buttons/button';
 import { FavouriteIcon, NotificationIcon } from '../../icons/icons';
+import { NavLink } from '../libs/nav-link';
 import { LoginButton } from '../login.button';
-import { NavLink } from '../extras/nav-link';
 import { RegisterCv } from '../register-cv';
+import { RegisterRecruiter } from '../register-recruiter';
 
 export const DesktopNavbar = (props: any) => {
     // todo -> need to factor in if the visitor is a job seeker or an employer for links to show.
@@ -28,7 +29,8 @@ export const DesktopNavbar = (props: any) => {
                 <div className={'col-50 display-flex justify-content-end'}>
                     <div className={'display-flex align-items-center'}>
                         <h3 className={'fs-18 fw--700'}>Are you recruiting?</h3>
-                        <Button title={'Advertise now'} buttonStyle={'secondary'} className={'ml-20 mt-3'}/>
+                        <RegisterRecruiter/>
+
                     </div>
                 </div>
             </div>

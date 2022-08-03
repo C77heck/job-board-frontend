@@ -2,7 +2,7 @@ import moment from 'moment';
 import React from 'react';
 import { Button } from '../../../shared/components/buttons/button';
 import { CalendarIcon, FavouriteIcon, LocationIcon, MoneyIcon } from '../../../shared/components/icons/icons';
-import { NavLink } from '../../../shared/components/navigation/extras/nav-link';
+import { NavLink } from '../../../shared/components/navigation/libs/nav-link';
 import { formatLongText } from '../../../shared/libs/helpers';
 import { CompanyLogo } from './company-logo';
 import { JobEditModal } from './job-edit.modal';
