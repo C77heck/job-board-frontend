@@ -28,7 +28,7 @@ export class BoxWrapper extends React.Component<BoxWrapperProps, any> {
     }
 
     public render() {
-        return <div className={`border-radius-px-8 p-25 ${this.props.className} position-relative background-color--light-1 box-shadow`}>
+        return <div className={`border-radius-px-8 p-25 ${this.props.className} position-relative background-color--light-1 box-shadow w-100`}>
             {this.renderEdit()}
             {this.props.children}
         </div>;

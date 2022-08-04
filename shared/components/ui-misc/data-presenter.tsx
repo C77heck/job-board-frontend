@@ -7,7 +7,7 @@ export interface ProfileDataProps extends ProfileItem {
 }
 
 export const DataPresenter = (props: ProfileDataProps) => {
-    return <div className={`display-flex flex-column mb-4 my-15 ${props.className}`}>
+    return <div className={`display-flex flex-column mb-4 ${props.className}`}>
         <span className={'text--small-grey'}>{props.label}:</span>
         <span className={'text--small'}>{props.data}</span>
     </div>;

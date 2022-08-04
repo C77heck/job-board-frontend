@@ -15,13 +15,13 @@ interface ProfileBoxProps {
 export class ProfileBox extends React.Component<ProfileBoxProps, any> {
     public renderFirstColumn(items: ProfileItem[]) {
         return <div className={'w-100'}>
-            {items.length && items.map(({ label, data }: ProfileItem) => <DataPresenter key={`${data}`} data={data} label={label}/>)}
+            {items.length && items.map(({ label, data }: ProfileItem) => <DataPresenter className={'my-15'} key={`${data}`} data={data} label={label}/>)}
         </div>;
     }
 
     public renderSecondColumn(items: ProfileItem[]) {
         return <div className={'w-100'}>
-            {items.length && items.map(({ label, data }: ProfileItem) => <DataPresenter key={`${data}`} data={data} label={label}/>)}
+            {items.length && items.map(({ label, data }: ProfileItem) => <DataPresenter className={'my-15'} key={`${data}`} data={data} label={label}/>)}
         </div>;
     }
 

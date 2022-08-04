@@ -19,7 +19,7 @@ export class CompanyPresenter extends React.Component<CompanyPresenterProps, any
 
         return <BoxWrapper
             content={this.renderModalContent()}
-            className={'h-100'}
+            className={'h-100 max-width-800'}
             enableEdit={this.props.enableEdit}
             form={this.props.data}
         >
@@ -29,14 +29,11 @@ export class CompanyPresenter extends React.Component<CompanyPresenterProps, any
                     <div className={'logo-presenter'}>
                         <img src={logo.data as string}/>
                     </div>
+                    <DataPresenter className={'my-15'} key={`${company_name.data}`} data={company_name.data} label={company_name.label}/>
+                    <DataPresenter className={'my-15'} key={`${address.data}`} data={address.data} label={address.label}/>
                 </div>
+
                 <div className={'col-50'}>
-                    <DataPresenter key={`${company_name.data}`} data={company_name.data} label={company_name.label}/>
-                </div>
-                <div className={'col-100'}>
-                    <DataPresenter key={`${address.data}`} data={address.data} label={address.label}/>
-                </div>
-                <div className={'col-100'}>
                     <DataPresenter key={`${description.data}`} data={description.data} label={description.label}/>
                 </div>
             </div>
