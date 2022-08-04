@@ -8,7 +8,7 @@ export const PostingsHistory = () => {
 
     const fetchJobs = async () => {
         try {
-            const response = await client('/ads/get-ads-by-employer');
+            const response = await client('/users/recruiter/get-ads');
 
             if (!response || !response?.items) {
                 throw new Error('SomethingWentWrong');
