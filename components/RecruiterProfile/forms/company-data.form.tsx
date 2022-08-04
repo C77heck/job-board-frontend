@@ -16,7 +16,7 @@ export const CompanyDataForm = (props: any) => {
     const [form, setForm] = useState(new FormStructure({
         logo: new Field({
             name: 'logo',
-            value: '',
+            value: props.data?.logo?.data || '',
             validators: [requiredValidator],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
@@ -24,7 +24,7 @@ export const CompanyDataForm = (props: any) => {
         company_name: new Field({
             name: 'company_name',
             label: 'Company name',
-            value: '',
+            value: props.data?.company_name?.data || '',
             validators: [requiredValidator],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
@@ -32,7 +32,7 @@ export const CompanyDataForm = (props: any) => {
         address: new Field({
             name: 'address',
             label: 'Address',
-            value: '',
+            value: props.data?.address?.data || '',
             validators: [requiredValidator],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
@@ -40,7 +40,7 @@ export const CompanyDataForm = (props: any) => {
         description: new Field({
             name: 'description',
             label: 'Description',
-            value: '',
+            value: props.data?.description?.data || '',
             validators: [],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
@@ -50,26 +50,20 @@ export const CompanyDataForm = (props: any) => {
     }, 'user-data-update'));
 
     useEffect(() => {
-        if (props.editable) {
-            for (const prop in form.fields) {
+        console.log(props.data);
+        for (const prop in form.fields) {
+            // @ts-ignore
+            if (props?.[prop]) {
                 // @ts-ignore
-                if (props?.[prop]) {
-                    // @ts-ignore
-                    form.fields?.[prop]?.value = props?.[prop];
-                    setForm(form);
-                    setShowForm(true);
-                }
+                form.fields?.[prop]?.value = props?.[prop];
+                setForm(form);
+                setShowForm(true);
             }
         }
-    }, [props.editable]);
-
-    if (props.editable && !showForm) {
-        return null;
-    }
+    }, [props.data]);
 
     const submit = async (data: any) => {
         if (!props.endpoint) {
-            console.log('what the fuck?', props.endpoint, !props.endpoint);
             return;
         }
         console.log({ ...props }, client);

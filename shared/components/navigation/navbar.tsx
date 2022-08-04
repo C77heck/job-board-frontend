@@ -8,7 +8,7 @@ export const NavBar = (props: any) => {
     const { isLoggedIn, userId, userData, token, type, whoami } = useContext(AuthContext);
 
     useEffect(() => {
-        if (isLoggedIn && userId && !token) {
+        if (isLoggedIn && userId && !userData) {
             (async () => await whoami(type as UserType))();
         }
     }, [userId]);

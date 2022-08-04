@@ -7,12 +7,11 @@ import { SafeRecruiterData } from './libs/recruiter.data.document';
 export interface CompanyPresenterProps {
     data: SafeRecruiterData;
     enableEdit?: boolean;
-    form: any;
 }
 
 export class CompanyPresenter extends React.Component<CompanyPresenterProps, any> {
     public renderModalContent() {
-        return <CompanyDataForm endpoint={'/users/recruiter/update'} method={'PUT'} data={this.props.form}/>;
+        return <CompanyDataForm endpoint={'/users/recruiter/update'} method={'PUT'} data={this.props.data}/>;
     }
 
     public render() {
@@ -22,7 +21,7 @@ export class CompanyPresenter extends React.Component<CompanyPresenterProps, any
             content={this.renderModalContent()}
             className={'h-100'}
             enableEdit={this.props.enableEdit}
-            form={this.props.form}
+            form={this.props.data}
         >
             <h6 className={'fw-700 text--small mb-15'}>Company data</h6>
             <div className={'row'}>

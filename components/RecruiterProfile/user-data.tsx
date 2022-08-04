@@ -10,11 +10,7 @@ export const UserData = ({ filters }: any) => {
 
     return <div className={'row justify-content-space-between'}>
         <div className={'col-30 mt-20 mb-50'}>
-            <CompanyPresenter
-                form={userDocument}
-                data={userDocument}
-                enableEdit={true}
-            />
+            <CompanyPresenter data={userDocument} enableEdit={true}/>
         </div>
         <div className={'col-30 mt-20 mb-50'}>
             {/*<PhotoBox*/}

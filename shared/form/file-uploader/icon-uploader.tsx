@@ -8,16 +8,21 @@ export interface IconUploaderProps {
     name: string;
     namespace: string;
     alt?: string;
+    value?: string;
 }
 
 export const IconUploader = (props: IconUploaderProps) => {
     const [isLoading, setIsLoading] = useState(false);
-    const [uploadedAttachment, setUploadedAttachment] = useState<Attachment | null>(null);
+    const [uploadedAttachment, setUploadedAttachment] = useState<Attachment | null>({ url: props.value } as any);
     const { setData } = useContext(FormContext);
 
     useEffect(() => {
         setData(props.name, { value: uploadedAttachment?.url, isValid: true }, props.namespace);
     }, [uploadedAttachment]);
+
+    useEffect(() => {
+        setUploadedAttachment({ url: props.value } as any);
+    }, [props.value]);
 
     const trigger = <div
         onClick={() => setIsLoading(true)}
