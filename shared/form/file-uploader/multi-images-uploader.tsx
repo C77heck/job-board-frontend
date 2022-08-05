@@ -6,17 +6,18 @@ import { Lightbox } from './libs/lightbox';
 import { MultiUploader } from './libs/multi-uploader';
 import { Attachment } from './libs/uploader.interfaces';
 
-export interface IconUploaderProps extends FieldProps {
+export interface IconUploaderProps extends Omit<FieldProps, 'value'> {
     name: string;
     namespace: string;
     alt?: string;
     id: string;
+    value: string[];
 }
 
 export const MultiImagesUploader = (props: IconUploaderProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const [options, setOptions] = useState({ numberOfImg: 0, display: '', attachments: [''] });
-    const [uploadedAttachments, setUploadedAttachments] = useState<Attachment[]>([]);
+    const [uploadedAttachments, setUploadedAttachments] = useState<Attachment[] | { url: string }[]>([]);
     const { setData } = useContext(FormContext);
 
     useEffect(() => {
@@ -30,12 +31,8 @@ export const MultiImagesUploader = (props: IconUploaderProps) => {
     }, [uploadedAttachments]);
 
     useEffect(() => {
-        if (props.value && props.value.length) {
-            setOptions({
-                numberOfImg: props.value.length,
-                display: props.value[0] || '',
-                attachments: props.value as string[],
-            });
+        if (props.value) {
+            setUploadedAttachments((props.value || []).map(url => ({ url })));
         }
     }, [props.value]);
 

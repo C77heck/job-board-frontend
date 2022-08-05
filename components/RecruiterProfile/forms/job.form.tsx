@@ -11,7 +11,7 @@ import { requiredValidator } from '../../../shared/form/validators/required-vali
 import { useClient } from '../../../shared/hooks/client';
 import { JobCardProps } from '../../AdsListScreen/Components/job-card';
 
-export const JobForm = (props: JobCardProps) => {
+export const JobForm = (props: JobCardProps & any) => {
     const { INPUTS: { CHECKBOX, TEXTAREA, DATEPICKER } } = CONSTANTS;
     const client = useClient();
     const [showForm, setShowForm] = useState(false);
@@ -19,7 +19,7 @@ export const JobForm = (props: JobCardProps) => {
         title: new Field({
             name: 'title',
             label: 'Job title',
-            value: '',
+            value: props?.title,
             validators: [requiredValidator],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
@@ -27,7 +27,7 @@ export const JobForm = (props: JobCardProps) => {
         salary: new Field({
             name: 'salary',
             label: 'Salary',
-            value: '',
+            value: props?.salary,
             validators: [requiredValidator],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
@@ -35,7 +35,7 @@ export const JobForm = (props: JobCardProps) => {
         location: new Field({
             name: 'location',
             label: 'Location',
-            value: '',
+            value: props?.location,
             validators: [requiredValidator],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
@@ -52,7 +52,7 @@ export const JobForm = (props: JobCardProps) => {
         isPremium: new Field({
             name: 'isPremium',
             label: 'Premium listing',
-            value: '',
+            value: props?.isPremium,
             validators: [requiredValidator],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
@@ -61,7 +61,7 @@ export const JobForm = (props: JobCardProps) => {
         description: new Field({
             name: 'description',
             label: 'Job description',
-            value: '',
+            value: props?.description || '',
             validators: [],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
@@ -71,7 +71,7 @@ export const JobForm = (props: JobCardProps) => {
         images: new Field({
             name: 'images',
             label: 'Images',
-            value: [],
+            value: props?.images || [],
             validators: [],
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
@@ -79,22 +79,16 @@ export const JobForm = (props: JobCardProps) => {
     }, 'user-register'));
 
     useEffect(() => {
-        if (props.editable) {
-            for (const prop in form.fields) {
+        for (const prop in form.fields) {
+            // @ts-ignore
+            if (props?.[prop]) {
                 // @ts-ignore
-                if (props?.[prop]) {
-                    // @ts-ignore
-                    form.fields?.[prop]?.value = props?.[prop];
-                    setForm(form);
-                    setShowForm(true);
-                }
+                form.fields?.[prop]?.value = props?.[prop];
+                setForm(form);
+                setShowForm(true);
             }
         }
-    }, [props.editable]);
-
-    if (props.editable && !showForm) {
-        return null;
-    }
+    }, []);
 
     const submit = async (data: any) => {
         if (!props.endpoint) {
