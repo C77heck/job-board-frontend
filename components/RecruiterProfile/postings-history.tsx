@@ -8,7 +8,7 @@ import { JobFilters } from './job-filters';
 export const PostingsHistory = () => {
     const [jobs, setJobs] = useState([]);
     const { client } = useClient();
-    const [paginator, setPaginator] = useState({
+    const [pagination, setPagination] = useState({
         limit: 0,
         total: 0,
         page: 0
@@ -16,14 +16,18 @@ export const PostingsHistory = () => {
 
     const fetchJobs = async () => {
         try {
-            const response = await client('/users/recruiter/get-ads', 'GET', undefined, { paginator });
+            const response = await client('/users/recruiter/get-ads', 'GET', undefined, { pagination });
 
             if (!response || !response?.items) {
                 throw new Error('SomethingWentWrong');
             }
 
             setJobs(response.items);
-            setPaginator(response.paginator);
+            setPagination({
+                limit: response.limit,
+                total: response.total,
+                page: response.page
+            });
 
         } catch (e) {
             console.log(e);
@@ -41,9 +45,9 @@ export const PostingsHistory = () => {
         <JobAnalytics/>
         <JobListings editable={true} jobs={jobs}/>
         <Paginator
-            total={paginator.total}
-            currentPage={paginator.page}
-            fetchPage={(page: number) => setPaginator({ ...paginator, page })}
+            total={pagination.total}
+            currentPage={pagination.page}
+            fetchPage={(page: number) => setPagination({ ...pagination, page })}
         />
     </div>;
 };

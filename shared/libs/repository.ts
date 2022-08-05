@@ -26,7 +26,7 @@ export class Repository {
     public getRequest(path: string, method: Methods = 'GET', options: RequestInit, query: any, abortController: AbortController) {
         switch (method) {
             case 'GET':
-                return new Request(this.formatUrl(path, query));
+                return new Request(this.formatUrl(path, query), this.formatOptions(options, abortController, method));
             default:
                 return new Request(this.formatUrl(path, query), this.formatOptions(options, abortController, method));
         }
@@ -60,14 +60,21 @@ export class Repository {
 
         for (const prop in query) {
             if (query.hasOwnProperty(prop)) {
-                queryManager.add(prop, query[prop]);
+                switch (prop) {
+                    case 'pagination':
+                        queryManager.add(prop, query[prop].toString());
+                    case 'sort':
+                        queryManager.add(prop, query[prop].toString());
+                    default:
+                        queryManager.add(prop, query[prop]);
+                }
             }
         }
 
         return `${this.baseUrl}${url}?${queryManager.getQuery()}`;
     }
 
-    public formatOptions(options: any = {}, abortController: AbortController, method: string) {
+    public formatOptions(options: any = {}, abortController: AbortController, method: Methods) {
         options.signal = abortController.signal;
         options.method = method;
         options.headers = this.headers;
