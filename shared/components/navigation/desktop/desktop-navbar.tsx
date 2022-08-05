@@ -30,7 +30,6 @@ export const DesktopNavbar = (props: any) => {
                     <div className={'display-flex align-items-center'}>
                         <h3 className={'fs-18 fw--700'}>Are you recruiting?</h3>
                         <RegisterRecruiter/>
-
                     </div>
                 </div>
             </div>

@@ -6,12 +6,12 @@ import { UserData } from '../../components/RecruiterProfile/user-data';
 import { BaseLayoutWidth } from '../../shared/layouts/base-layout-width';
 import { BaseLayout } from '../../shared/layouts/base.layout';
 
-const RecruiterProfile: NextPage = (props: any) => {
+const RecruiterDashboard: NextPage = (props: any) => {
     const tabs: Tab = {
         tabNames: [
             { display: 'New posting', value: 'new-postings' },
             { display: 'Profile infos', value: 'profile-infos' },
-            { display: 'Job postings history', value: 'my-job-postings' }
+            { display: 'Job posting history', value: 'my-job-postings' }
         ],
         elements: {
             'new-postings': <NewJobPosting/>,
@@ -27,4 +27,4 @@ const RecruiterProfile: NextPage = (props: any) => {
         </BaseLayoutWidth>
     </BaseLayout>;
 };
-export default RecruiterProfile;
+export default RecruiterDashboard;

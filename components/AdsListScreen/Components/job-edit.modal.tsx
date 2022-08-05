@@ -16,7 +16,7 @@ export const JobEditModal = (props: JobCardProps) => {
         />
         <EditModal
             show={show}
-            content={<JobForm {...props} endpoint={`/ads/update-ad/${props._id}`} method={'PUT'}/>}
+            content={<JobForm {...props} endpoint={`/users/recruiter/update-ad/${props._id}`} method={'PUT'}/>}
             title={'Edit post'}
             onClick={(show) => setShow(show)}
         />

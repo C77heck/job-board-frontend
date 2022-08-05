@@ -88,7 +88,7 @@ export const useAuth = () => {
         try {
             const endpoint = getEndpoint(type);
             const request = new Repository(token, 'api');
-            const response = await request.fetch(endpoint, 'get', {}, {});
+            const response = await request.fetch(endpoint, 'GET');
 
             setUserData(response.userData);
         } catch (e: any) {

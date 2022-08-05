@@ -2,6 +2,8 @@
 import { HttpError } from './http-error';
 import { QueryManager } from './query.manager';
 
+export type Methods = 'GET' | 'POST' | 'PUT' | 'OPTIONS' | 'PATCH' | 'DELETE';
+
 export class Repository {
     public baseUrl = process?.env?.NEXT_PUBLIC_API || '';
     public headers: string[][] = [['Content-Type', 'application/json']];
@@ -21,10 +23,19 @@ export class Repository {
         this.headers.push(['Authorization', `Bearer ${token}`]);
     }
 
-    public async fetch(path: string, method = 'get', options: RequestInit, query: any) {
+    public getRequest(path: string, method: Methods = 'GET', options: RequestInit, query: any, abortController: AbortController) {
+        switch (method) {
+            case 'GET':
+                return new Request(this.formatUrl(path, query));
+            default:
+                return new Request(this.formatUrl(path, query), this.formatOptions(options, abortController, method));
+        }
+    }
+
+    public async fetch(path: string, method: Methods = 'GET', options: RequestInit = {}, query: any = {}) {
         const abortController = new AbortController();
         try {
-            const request = new Request(this.formatUrl(path, query), this.formatOptions(options, abortController, method));
+            const request = this.getRequest(path, method, options, query, abortController);
             const response: any = await fetch(request);
             const responseData = await response.json();
 
@@ -62,7 +73,7 @@ export class Repository {
         options.headers = this.headers;
 
         switch (method) {
-            case 'get':
+            case 'GET':
                 return options;
             default:
                 options.body = JSON.stringify(options.body || {}, null);
