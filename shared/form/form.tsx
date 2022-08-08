@@ -15,6 +15,7 @@ interface FormProps extends ClientProps {
     onError?: () => void;
     children: any;
     form: FormStructure;
+    noModals?: boolean;
 }
 
 export const Form = (props: FormProps) => {
@@ -83,12 +84,12 @@ export const Form = (props: FormProps) => {
             />}
         </form>
         <ErrorModal
-            show={!!error}
+            show={!!error && !props.noModals}
             errorMessage={error}
             onClick={manageErrorClose}
         />
         <SuccessModal
-            show={!!successMessage}
+            show={!!successMessage && !props.noModals}
             successMessage={successMessage}
             onClick={manageSuccessClose}
         />

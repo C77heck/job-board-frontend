@@ -14,6 +14,7 @@ export interface Tab {
 export interface TabViewerProps {
     tabs: Tab;
     default: string;
+    onChange: (tab: string) => void;
 }
 
 export const TabViewer = (props: TabViewerProps) => {
@@ -28,11 +29,16 @@ export const TabViewer = (props: TabViewerProps) => {
         setActiveTab(props.default);
     }, []);
 
+    const handleTabClick = (tab: string) => {
+        setActiveTab(tab);
+        props.onChange(tab);
+    };
+
     const tabButton = ({ display, value }: TabNames) => {
         const isActive = value === activeTab ? 'filter-buttons-active' : '';
 
         return <Button
-            onClick={() => setActiveTab(value)}
+            onClick={() => handleTabClick(value)}
             buttonStyle={'filter-buttons'}
             className={`${isActive} mx-10`}
             key={value}

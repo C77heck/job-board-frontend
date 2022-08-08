@@ -80,7 +80,7 @@ export const CompanyDataForm = (props: any) => {
             {...client}
         >
             <div className={'col-30 display-flex justify-content-start align-items-center'}>
-                <IconUploader {...form?.fields?.logo} namespace={form.namespace}/>
+                <IconUploader {...form?.fields?.logo} value={form?.fields?.logo?.value as string} namespace={form.namespace}/>
             </div>
             <div className={'col-70'}>
                 <Input {...form?.fields?.company_name} namespace={form.namespace}/>

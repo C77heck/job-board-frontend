@@ -26,7 +26,6 @@ export const LoginForm = (props: LoginFormProps) => {
             label: 'Email',
             value: null,
             validators: [emailValidator],
-            options: '',
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
         }),
@@ -42,7 +41,7 @@ export const LoginForm = (props: LoginFormProps) => {
     }, 'login-form');
 
     const submit = async (body: any) => {
-        const response: any = await client.client(props.endpoint, 'post', { body });
+        const response: any = await client.client(props.endpoint, 'POST', { body });
 
         if (!client.error && !!response) {
             signin({ ...(response?.userData || {}), expiry: moment() });
@@ -51,6 +50,7 @@ export const LoginForm = (props: LoginFormProps) => {
 
     return <div>
         <Form
+            noModals={true}
             form={form}
             onSubmit={(payload: any) => submit(payload)}
             submitButton={{ className: 'mt-20 col-100 col-md-40 col-lg-30 margin-auto', title: 'Login', type: 'submit' }}

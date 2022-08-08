@@ -1,4 +1,5 @@
 import React, { MouseEventHandler } from 'react';
+import { ArrowLeft, ArrowRight } from '../icons/icons';
 
 export interface PaginationProp {
     startDot: boolean;
@@ -91,7 +92,10 @@ export class Paginator extends React.Component<any, any> {
             className={`${className}`}
             onClick={onClick}
         >
-            <span className={'material-icons fs-30 color--dark'}>arrow_right</span>
+            <ArrowRight
+                className={'px-10 cursor-pointer hover-opacity'}
+                width={16}
+            />
         </div>;
     }
 
@@ -100,7 +104,10 @@ export class Paginator extends React.Component<any, any> {
             className={`${className}`}
             onClick={onClick}
         >
-            <span className={'material-icons fs-30 color--dark'}>arrow_left</span>
+            <ArrowLeft
+                className={'px-10 cursor-pointer hover-opacity'}
+                width={16}
+            />
         </div>;
     }
 

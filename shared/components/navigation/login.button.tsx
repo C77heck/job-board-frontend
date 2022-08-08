@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../../contexts/auth.context';
 import { Button } from '../buttons/button';
 import { LoginIcon } from '../icons/icons';
@@ -10,7 +10,6 @@ import { RecruiterDropdown } from './recruiter-dropdown';
 
 export const LoginButton = ({ isMobile }: any) => {
     const { signout, isLoggedIn, type } = useContext(AuthContext);
-    const [isRegister, setIsRegister] = useState(false);
 
     const signoutHandler = () => {
         try {
