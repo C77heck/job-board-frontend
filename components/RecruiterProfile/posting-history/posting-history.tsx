@@ -22,14 +22,16 @@ export const PostingHistory = () => {
     };
 
     return <div className={'py-50 w-100 px-30 position-center flex-column'}>
-        <FilterLane passData={(data: any) => getJobs(data)}/>
-        <JobAnalytics/>
-        <Listing posts={paginatedData?.items}/>
-        {/*<JobListings editable={true} jobs={jobs}/>*/}
-        <Paginator
-            total={paginatedData.total}
-            currentPage={paginatedData.page}
-            fetchPage={(page: number) => setPaginatedData({ ...paginatedData, page })}
-        />
+        <div className={'max-width-800'}>
+            <FilterLane passData={(data: any) => getJobs(data)}/>
+            <JobAnalytics items={paginatedData.items}/>
+            <Listing posts={paginatedData?.items}/>
+            {/*<JobListings editable={true} jobs={jobs}/>*/}
+            <Paginator
+                total={paginatedData.total}
+                currentPage={paginatedData.page}
+                fetchPage={(page: number) => setPaginatedData({ ...paginatedData, page })}
+            />
+        </div>
     </div>;
 };

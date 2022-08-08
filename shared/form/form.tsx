@@ -16,6 +16,7 @@ interface FormProps extends ClientProps {
     children: any;
     form: FormStructure;
     noModals?: boolean;
+    buttonWrapper?: string;
 }
 
 export const Form = (props: FormProps) => {
@@ -52,6 +53,10 @@ export const Form = (props: FormProps) => {
     const submit = async (e: any) => {
         e.preventDefault();
         props.onSubmit(getPayload(namespace));
+
+        if (props.noModals && props.onSuccess) {
+            props.onSuccess();
+        }
     };
     // review this logic
     const manageSuccessClose = () => {
@@ -76,12 +81,12 @@ export const Form = (props: FormProps) => {
             className={props.className}
         >
             {props.children}
-            {props.submitButton && <Button
+            {props.submitButton && <div className={props.buttonWrapper}><Button
                 isLoading={isLoading}
                 disabled={isFormValid}
                 type={'submit'}
                 {...props.submitButton}
-            />}
+            /></div>}
         </form>
         <ErrorModal
             show={!!error && !props.noModals}

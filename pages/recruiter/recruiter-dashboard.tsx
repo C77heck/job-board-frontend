@@ -26,7 +26,7 @@ const RecruiterDashboard: NextPage = (props: any) => {
     };
 
     useEffect(() => {
-        setDefaultTab(storage.get() ?? 'profile-infos');
+        setDefaultTab(storage.get() || 'profile-infos');
     }, []);
 
     return <BaseLayout auth={false} meta={{ title: 'home page', keywords: 'whatever', description: 'some description' }}>

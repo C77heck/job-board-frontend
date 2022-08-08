@@ -203,6 +203,18 @@
         &--light {
             color: var(--color-light);
         }
+
+        &--dark-1 {
+            color: var(--text-color-dark);
+        }
+
+        &--dark-2 {
+            color: var(--color-dark-2);
+        }
+
+        &--dark-3 {
+            color: var(--color-shadow);
+        }
     }
 
     .color-inherit {

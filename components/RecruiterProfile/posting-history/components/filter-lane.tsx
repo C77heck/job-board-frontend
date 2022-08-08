@@ -73,8 +73,9 @@ export const FilterLane = (props: FilterLaneProps) => {
         noModals={true}
         onSubmit={(payload: any) => fetchJobs(payload)}
         form={form}
-        submitButton={{ className: 'mt-20 col-100 col-md-40 col-lg-17 margin-auto', title: 'Filter', type: 'submit' }}
-        className={'row max-width-800 justify-content-space-between'}
+        submitButton={{ className: 'w-100 h-px-34 letter-spacing-3 fs-14', title: 'Filter', type: 'submit' }}
+        buttonWrapper={'mt-20 col-100 col-md-40 col-lg-17 display-flex align-items-end'}
+        className={'row justify-content-space-between'}
         {...client}
     >
         <div className={'col-17 mx-3'}>
