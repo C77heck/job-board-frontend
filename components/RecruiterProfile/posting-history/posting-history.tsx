@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { Paginator } from '../../../shared/components/paginator/paginator';
 import { JobAnalytics } from '../job-analytics';
 import { FilterLane } from './components/filter-lane';
+import { Sort } from './components/sort-header';
 import { Listing } from './listing';
 
 export const PostingHistory = () => {
+    const [sort, setSort] = useState<Sort | null>(null);
     const [paginatedData, setPaginatedData] = useState({
         items: [],
         limit: 0,
@@ -23,10 +25,9 @@ export const PostingHistory = () => {
 
     return <div className={'py-50 w-100 px-30 position-center flex-column'}>
         <div className={'max-width-800'}>
-            <FilterLane passData={(data: any) => getJobs(data)}/>
+            <FilterLane sort={sort} passData={(data: any) => getJobs(data)}/>
             <JobAnalytics items={paginatedData.items}/>
-            <Listing posts={paginatedData?.items}/>
-            {/*<JobListings editable={true} jobs={jobs}/>*/}
+            <Listing onChange={(sort) => setSort(sort)} posts={paginatedData?.items}/>
             <Paginator
                 total={paginatedData.total}
                 currentPage={paginatedData.page}

@@ -1,8 +1,9 @@
 import React from 'react';
 import { JobCardProps } from '../../AdsListScreen/Components/job-card';
 import { Post } from './components/post';
+import { Sort, SortHeader } from './components/sort-header';
 
-export const Listing = (props: { posts: JobCardProps[] }): JSX.Element => {
+export const Listing = (props: { posts: JobCardProps[], onChange: (sort: Sort) => void; }): JSX.Element => {
     if (!props?.posts || !props?.posts.length) {
         return <div className={'w-100 pb-30'}>
             <h6 className={'fw-700 text--small'}>Empty list</h6>
@@ -11,22 +12,22 @@ export const Listing = (props: { posts: JobCardProps[] }): JSX.Element => {
 
     const header = <div className={'row w-100 py-15'}>
         <div className={'col-18 position-center'}>
-            <span className={'uppercase fs-16 fw--700'}>Title</span>
+            <SortHeader onChange={props.onChange} title={'Title'} property={'title'}/>
         </div>
         <div className={'col-17 position-center'}>
-            <span className={'uppercase fs-16 fw--700'}>Salary</span>
+            <SortHeader onChange={props.onChange} title={'Salary'} property={'salary'}/>
         </div>
         <div className={'col-16 position-center'}>
-            <span className={'uppercase fs-16 fw--700'}>Location</span>
+            <SortHeader onChange={props.onChange} title={'Location'} property={'location'}/>
         </div>
         <div className={'col-17 position-center'}>
-            <span className={'uppercase fs-16 fw--700'}>Posted at</span>
+            <SortHeader onChange={props.onChange} title={'Posted at'} property={'created_at'}/>
         </div>
         <div className={'col-16 position-center'}>
-            <span className={'uppercase fs-16 fw--700'}>Description</span>
+            <SortHeader disabled={true} title={'Description'}/>
         </div>
         <div className={'col-16 position-center'}>
-            <span className={'uppercase fs-16 fw--700'}>Edit</span>
+            <SortHeader disabled={true} title={'Edit'}/>
         </div>
     </div>;
 

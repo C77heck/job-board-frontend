@@ -5,9 +5,11 @@ import { Form } from '../../../../shared/form/form';
 import { FormStructure } from '../../../../shared/form/form.structure';
 import { Input } from '../../../../shared/form/input';
 import { useClient } from '../../../../shared/hooks/client';
+import { Sort } from './sort-header';
 
 export interface FilterLaneProps {
     passData: (data: any) => void;
+    sort: Sort | null;
 }
 
 export const FilterLane = (props: FilterLaneProps) => {
@@ -53,7 +55,7 @@ export const FilterLane = (props: FilterLaneProps) => {
     const fetchJobs = async (query?: any) => {
         try {
             const pagination = query?.pagination ? query?.pagination : {};
-            const response = await client.client('/users/recruiter/get-ads', 'GET', undefined, { pagination });
+            const response = await client.client('/users/recruiter/get-ads', 'GET', undefined, { pagination, sort: props.sort });
 
             if (!response || !response?.items) {
                 throw new Error('SomethingWentWrong');
@@ -69,11 +71,15 @@ export const FilterLane = (props: FilterLaneProps) => {
         (async () => await fetchJobs())();
     }, []);
 
+    useEffect(() => {
+        (async () => await fetchJobs())();
+    }, [props.sort]);
+
     return <Form
         noModals={true}
         onSubmit={(payload: any) => fetchJobs(payload)}
         form={form}
-        submitButton={{ className: 'w-100 h-px-34 letter-spacing-3 fs-14', title: 'Filter', type: 'submit' }}
+        submitButton={{ className: 'w-100 h-px-34 letter-spacing-3 fs-14 hover-opacity', title: 'Filter', type: 'submit' }}
         buttonWrapper={'mt-20 col-100 col-md-40 col-lg-17 display-flex align-items-end'}
         className={'row justify-content-space-between'}
         {...client}

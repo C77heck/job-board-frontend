@@ -10,6 +10,7 @@
         --color-secondary-2: #5fda8b;
         --color-secondary-3: #8fd7a9;
         --color-yellow: #d4b664;
+        --color-yellow-light: #eee370;
         --text-color: rgb(50, 54, 61);
         --text-color-light: #8d8e8f63;
         --text-color-dark: rgb(32, 33, 36);
@@ -85,6 +86,10 @@
 
         &--active {
             background-color: var(--color-primary-2);
+        }
+
+        &--yellow-light {
+            background-color: var(--color-yellow-light);
         }
     }
 

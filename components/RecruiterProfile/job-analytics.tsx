@@ -6,7 +6,7 @@ export interface JobAnalyticsProps {
 }
 
 export const JobAnalytics = (props: any) => {
-    return <div className={'row w-100 mt-23 line-wrapper background-color--secondary-2'}>
+    return <div className={'row w-100 mt-23 line-wrapper background-color--yellow-light'}>
         <div className={'col-20 position-center flex-column'}>
             <span className={'fs-14 color--dark-2 fw--700'}>Viewed</span>
             <span className={'fs-14 color--dark-2 fw--700 pt-8 color-green'}>{props.items.length}</span>
