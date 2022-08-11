@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Pagination } from '../../../../shared/components/paginator/paginator';
 import { CONSTANTS } from '../../../../shared/constants';
 import { Field } from '../../../../shared/form/field';
 import { Form } from '../../../../shared/form/form';
@@ -10,6 +11,7 @@ import { Sort } from './sort-header';
 export interface FilterLaneProps {
     passData: (data: any) => void;
     sort: Sort | null;
+    pagination: Pagination | null;
 }
 
 export const FilterLane = (props: FilterLaneProps) => {
@@ -52,18 +54,17 @@ export const FilterLane = (props: FilterLaneProps) => {
     }, 'job-filters');
     const client = useClient();
 
-    const fetchJobs = async (query?: any) => {
+    const fetchJobs = async () => {
         try {
-            const pagination = query?.pagination ? query?.pagination : {};
-            const response = await client.client('/users/recruiter/get-ads', 'GET', undefined, { pagination, sort: props.sort });
+            const response = await client.client('/users/recruiter/get-ads', 'GET', undefined, { ...(props.pagination || {}), sort: props?.sort });
 
             if (!response || !response?.items) {
-                throw new Error('SomethingWentWrong');
+                throw new Error('Something went wrong');
             }
 
             props.passData(response);
         } catch (e) {
-            console.log(e);
+            console.warn(e);
         }
     };
 
@@ -78,9 +79,9 @@ export const FilterLane = (props: FilterLaneProps) => {
     return <Form
         noSuccessModal={true}
         noErrorModal={true}
-        onSubmit={(payload: any) => fetchJobs(payload)}
+        onSubmit={(payload: any) => fetchJobs()}
         form={form}
-        submitButton={{ className: 'w-100 h-px-34 letter-spacing-3 fs-14 hover-opacity', title: 'Filter', type: 'submit' }}
+        submitButton={{ className: 'h-px-34 letter-spacing-3 fs-14 hover-opacity', title: 'Filter', type: 'submit' }}
         buttonWrapper={'mt-20 display-flex align-items-end'}
         className={'row justify-content-space-between'}
         {...client}

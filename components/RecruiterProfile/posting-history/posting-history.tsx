@@ -25,7 +25,11 @@ export const PostingHistory = () => {
 
     return <div className={'py-50 w-100 px-30 position-center flex-column'}>
         <div className={'max-width-800'}>
-            <FilterLane sort={sort} passData={(data: any) => getJobs(data)}/>
+            <FilterLane
+                pagination={{ limit: paginatedData.limit, page: paginatedData.page }}
+                sort={sort}
+                passData={(data: any) => getJobs(data)}
+            />
             <JobAnalytics items={paginatedData.items}/>
             <Listing onChange={(sort) => setSort(sort)} posts={paginatedData?.items}/>
             <Paginator

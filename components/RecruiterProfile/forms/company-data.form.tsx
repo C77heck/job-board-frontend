@@ -66,7 +66,7 @@ export const CompanyDataForm = (props: any) => {
         if (!props.endpoint) {
             return;
         }
-        console.log({ ...props }, client);
+
         await client.client(props.endpoint, props.method, { body: data });
     };
 

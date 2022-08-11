@@ -30,6 +30,7 @@ export const useClient = (env: 'api' | 'attachment' = 'api'): ClientProps => {
     const client = async (url: string, method: Methods = 'GET', options?: RequestInit, query?: any) => {
         try {
             setIsLoading(true);
+
             const response: any = await request.fetch(url, method, options, query);
 
             if (!response) {
@@ -37,6 +38,7 @@ export const useClient = (env: 'api' | 'attachment' = 'api'): ClientProps => {
             }
 
             setIsLoading(false);
+
             setSuccessMessage(response?.message || 'Success');
 
             return response;

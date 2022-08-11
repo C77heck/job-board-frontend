@@ -11,6 +11,11 @@ export interface PaginationProp {
     middle: any[] | null;
 }
 
+export interface Pagination {
+    page: number;
+    limit: number;
+}
+
 export class Paginator extends React.Component<any, any> {
 
     public getMiddlePaginatorValues(pages: number[], page: number): number[] {

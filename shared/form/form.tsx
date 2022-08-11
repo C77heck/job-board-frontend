@@ -1,5 +1,5 @@
 import { Fragment, useContext, useEffect, useState } from 'react';
-import { debounceTime, distinctUntilChanged, Subject, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { Button, ButtonProps } from '../components/buttons/button';
 import { FormContext } from '../contexts/form.context';
 import { ClientProps } from '../hooks/client';
@@ -37,7 +37,6 @@ export const Form = (props: FormProps) => {
         const subscription = $onFormValidity.pipe(
             debounceTime(500),
             distinctUntilChanged(),
-            tap(a => console.log('DONT MIND'))
         ).subscribe(checkValidity as any);
 
         return () => subscription.unsubscribe();
@@ -54,9 +53,9 @@ export const Form = (props: FormProps) => {
     const submit = async (e: any) => {
         e.preventDefault();
         props.onSubmit(getPayload(namespace));
-        console.log(error, !error, props.noSuccessModal && props.onSuccess && !error);
+
         if (props.noSuccessModal && props.onSuccess && !error) {
-            // props.onSuccess();
+            props.onSuccess();
         }
     };
     // review this logic

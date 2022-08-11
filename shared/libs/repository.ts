@@ -60,9 +60,10 @@ export class Repository {
             if (query.hasOwnProperty(prop)) {
                 switch (prop) {
                     case 'pagination':
-                        queryManager.add(prop, query[prop].toString());
+                        console.log({ prop, value: query[prop] });
+                        queryManager.add(prop, query[prop]?.toString());
                     case 'sort':
-                        queryManager.add(prop, query[prop].toString());
+                        queryManager.add(prop, query[prop]?.toString());
                     default:
                         queryManager.add(prop, query[prop]);
                 }
