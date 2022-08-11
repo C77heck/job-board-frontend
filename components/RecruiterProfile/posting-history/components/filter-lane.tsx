@@ -76,11 +76,12 @@ export const FilterLane = (props: FilterLaneProps) => {
     }, [props.sort]);
 
     return <Form
-        noModals={true}
+        noSuccessModal={true}
+        noErrorModal={true}
         onSubmit={(payload: any) => fetchJobs(payload)}
         form={form}
         submitButton={{ className: 'w-100 h-px-34 letter-spacing-3 fs-14 hover-opacity', title: 'Filter', type: 'submit' }}
-        buttonWrapper={'mt-20 col-100 col-md-40 col-lg-17 display-flex align-items-end'}
+        buttonWrapper={'mt-20 display-flex align-items-end'}
         className={'row justify-content-space-between'}
         {...client}
     >

@@ -103,7 +103,8 @@ export const JobForm = (props: JobCardProps & any) => {
             form={form}
             className={'row justify-content-space-between'}
             onSubmit={(payload: any) => submit(payload)}
-            submitButton={{ className: 'mt-60 col-100 col-md-40 col-lg-22 margin-auto', title: 'Post', type: 'submit' }}
+            submitButton={{ className: 'mt-60 margin-auto', title: 'Post', type: 'submit' }}
+            buttonWrapper={'col-100'}
             onSuccess={() => window.location.reload()}
             {...client}
         >

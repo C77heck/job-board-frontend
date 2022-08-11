@@ -31,13 +31,17 @@ export const useClient = (env: 'api' | 'attachment' = 'api'): ClientProps => {
         try {
             setIsLoading(true);
             const response: any = await request.fetch(url, method, options, query);
+
+            if (!response) {
+                throw new Error('Something went wrong');
+            }
+
             setIsLoading(false);
             setSuccessMessage(response?.message || 'Success');
 
             return response;
         } catch (e: any) {
             const error = parseError(e);
-            console.log(error);
             setError(error);
             setIsLoading(false);
             if (e?.code === 401 && isLoggedIn) {

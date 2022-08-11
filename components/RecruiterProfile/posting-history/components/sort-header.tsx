@@ -36,9 +36,9 @@ export const SortHeader = (props: SortHeaderProps) => {
 
     return <div
         onClick={clickHandler}
-        className={'w-100 position-center hover-opacity'}
+        className={'w-100 position-center hover-opacity position-relative'}
     >
-        <span>{direction}</span>
+        <span className={'position-absolute left-0'}>{direction}</span>
         <span className={'uppercase fs-16 fw--700'}>{props.title}</span>
     </div>;
 };

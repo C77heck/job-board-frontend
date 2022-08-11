@@ -63,7 +63,8 @@ export const ProfileBoxForm = (props: any) => {
             form={form}
             className={'row justify-content-space-between'}
             onSubmit={(payload: any) => submit(payload)}
-            submitButton={{ className: 'mt-20 col-100 col-md-40 col-lg-22 margin-auto', title: 'Update', type: 'submit' }}
+            submitButton={{ className: 'mt-20 margin-auto', title: 'Update', type: 'submit' }}
+            buttonWrapper={'col-100'}
             onSuccess={() => window.location.reload()}
             {...client}
         >

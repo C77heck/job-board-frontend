@@ -1,6 +1,6 @@
 .button {
     box-sizing: border-box;
-    width: 6rem;
+    width: 14rem;
     height: 4rem;
     border: none;
     outline: none;
@@ -30,6 +30,7 @@
         height: 4.7rem;
         background-color: var(--color-secondary-1);
         font-size: 19px;
+        width: 18rem;
     }
 
     &--login {

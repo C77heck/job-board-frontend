@@ -39,7 +39,8 @@ const Search = (props: any) => {
             form={form}
             className={'w-90 row justify-content-space-around align-items-end pb-22'}
             onSubmit={(payload: any) => search(payload)}
-            submitButton={{ title: 'Find', buttonStyle: 'submit', className: 'col-20' }}
+            submitButton={{ title: 'Find', buttonStyle: 'submit', className: '' }}
+            buttonWrapper={'col-20'}
             {...client}
         >
             <Input {...form?.fields?.what} namespace={form.namespace}/>

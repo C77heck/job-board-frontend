@@ -15,7 +15,8 @@ interface FormProps extends ClientProps {
     onError?: () => void;
     children: any;
     form: FormStructure;
-    noModals?: boolean;
+    noSuccessModal?: boolean;
+    noErrorModal?: boolean;
     buttonWrapper?: string;
 }
 
@@ -53,9 +54,9 @@ export const Form = (props: FormProps) => {
     const submit = async (e: any) => {
         e.preventDefault();
         props.onSubmit(getPayload(namespace));
-
-        if (props.noModals && props.onSuccess) {
-            props.onSuccess();
+        console.log(error, !error, props.noSuccessModal && props.onSuccess && !error);
+        if (props.noSuccessModal && props.onSuccess && !error) {
+            // props.onSuccess();
         }
     };
     // review this logic
@@ -81,20 +82,21 @@ export const Form = (props: FormProps) => {
             className={props.className}
         >
             {props.children}
-            {props.submitButton && <div className={props.buttonWrapper}><Button
+            {props.submitButton && <div className={`${props.buttonWrapper}`}><Button
                 isLoading={isLoading}
                 disabled={isFormValid}
                 type={'submit'}
+                className={`${props.submitButton?.className || ''}`}
                 {...props.submitButton}
             /></div>}
         </form>
         <ErrorModal
-            show={!!error && !props.noModals}
+            show={!!error && !props.noErrorModal}
             errorMessage={error}
             onClick={manageErrorClose}
         />
         <SuccessModal
-            show={!!successMessage && !props.noModals}
+            show={!!successMessage && !props.noSuccessModal}
             successMessage={successMessage}
             onClick={manageSuccessClose}
         />

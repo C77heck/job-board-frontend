@@ -1,5 +1,4 @@
 // https://microsoft.github.io/PowerBI-JavaScript/interfaces/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.requestinit.html
-import { HttpError } from './http-error';
 import { QueryManager } from './query.manager';
 
 export type Methods = 'GET' | 'POST' | 'PUT' | 'OPTIONS' | 'PATCH' | 'DELETE';
@@ -40,14 +39,13 @@ export class Repository {
             const responseData = await response.json();
 
             if (!response.ok) {
-                throw new HttpError(responseData?.message, responseData?.statusCode);
+                throw { message: responseData?.error || 'Something went wrong', code: response?.status || 500 };
             }
 
             return responseData;
         } catch (error: any) {
-            console.log(error);
             abortController.abort();
-            throw new HttpError(error?.message, error?.code);
+            throw error;
         }
     }
 
