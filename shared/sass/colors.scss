@@ -205,6 +205,10 @@
     }
 
     .color {
+        &--primary {
+            color: var(--color-secondary-1);
+        }
+
         &--light {
             color: var(--color-light);
         }

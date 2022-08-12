@@ -16,75 +16,79 @@ export interface Pagination {
     limit: number;
 }
 
-export class Paginator extends React.Component<any, any> {
+export interface PaginatorProps {
+    maxLength?: number;
+    fetchPage: (page: number) => void;
+    total: number;
+    currentPage: number;
+}
+
+export class Paginator extends React.Component<PaginatorProps, any> {
+    public paginationMap = {
+        startDot: false,
+        startDotRef: false,
+        start: 1,
+        endDot: false,
+        endDotRef: false,
+        middle: [],
+        end: null,
+    };
 
     public getMiddlePaginatorValues(pages: number[], page: number): number[] {
-        const trimmedPages = pages.map(i => i);
-        trimmedPages.pop();
-        trimmedPages.shift();
+        const trimmedPages = pages.slice(1, pages.length - 1).map(i => i);
 
-        if (page === 0) {
-            return trimmedPages.slice(0, page + 4);
+        switch (page) {
+            case 0:
+                return trimmedPages.slice(0, page + 4);
+            case 1:
+                return trimmedPages.slice(page - 1, page + 2);
+            case pages.length - 1:
+                return trimmedPages.slice(page - 4, page);
+            default:
+                return page > pages.length - 4
+                    ? trimmedPages.slice(page - 3, page + 1)
+                    : trimmedPages.slice(page - 2, page + 2);
         }
-        if (page === 1) {
-            return trimmedPages.slice(page - 1, page + 2);
-        }
-        if (page === pages.length - 1) {
-            return trimmedPages.slice(page - 4, page);
-        }
-        if (page > pages.length - 4) {
-            return trimmedPages.slice(page - 3, page + 1);
-        }
-
-        return trimmedPages.slice(page - 2, page + 2);
     }
 
     public getPaginationMap(total: number, page: number = 1): PaginationProp {
-
+        const paginationMaxLength = this.props?.maxLength || 7;
         if (total === 1) {
-            return {
-                startDot: false,
-                startDotRef: false,
-                start: 1,
-                endDot: false,
-                endDotRef: false,
-                middle: [],
-                end: null,
-            };
+            return this.paginationMap;
         }
+
         const pages = Array.from({ length: total }, (v, i) => i);
         const start = pages[0];
         const end = pages[pages.length - 1];
 
-        if (pages.length <= 7) {
+        if (pages.length <= paginationMaxLength) {
             return {
-                startDot: false,
-                startDotRef: false,
+                ...this.paginationMap,
                 start: start,
-                endDot: false,
-                endDotRef: false,
                 middle: pages.slice(1, pages.length - 1),
                 end: end
             };
         }
+
         const middle = this.getMiddlePaginatorValues(pages, page);
 
         return {
             start: start,
-            startDot: pages.length > 7 && page > 2,
+            startDot: pages.length > paginationMaxLength && page > 2,
             startDotRef: middle[0] - 1,
             middle: middle,
-            endDot: pages.length > 7 && page <= pages.length - 5,
+            endDot: pages.length > paginationMaxLength && page <= pages.length - 5,
             endDotRef: middle[middle.length - 1] + 1,
             end: end
         };
     }
 
     public renderOption({ item, currentPage, isDot }: any) {
-        const classes = this.getClasses(currentPage === item, 'color-background--secondary color--light', 'color--dark');
+        const classes = this.getClasses(currentPage === item, 'background-color--secondary-1 color--light', 'hover-primary');
+
         return <div key={item} className={`px-2 min-width-fit-content w-px-30 ${classes} position-center border-radius-px-4`}>
             <a
-                className={'text--paginator cursor-pointer hover-primary'}
+                className={'text--paginator cursor-pointer'}
                 onClick={() => this.props.fetchPage(item)}
             >
                 {!isDot ? item + 1 : '...'}
@@ -92,29 +96,33 @@ export class Paginator extends React.Component<any, any> {
         </div>;
     }
 
-    public renderArrowRight(isActive: boolean, page?: number) {
+    public renderNext() {
+        const { total, currentPage } = this.props;
+        const isActive = currentPage < total - 1 && total !== 1;
         const colour = isActive ? 'hover-primary' : 'color--disabled';
 
         return <div
-            className={`${colour} px-10 cursor-pointer display-flex align-items-end`}
-            onClick={() => isActive && this.props.fetchPage(page)}
+            className={'px-10 cursor-pointer display-flex align-items-end'}
+            onClick={() => isActive && this.props.fetchPage(currentPage + 1)}
         >
             <ArrowRight
-                className={'px-10 cursor-pointer hover-opacity'}
+                className={`${colour} px-10 cursor-pointer`}
                 width={16}
             />
         </div>;
     }
 
-    public renderArrowLeft(isActive: boolean, page?: number) {
-        const colour = isActive ? 'hover-primary' : 'color--disabled';
+    public renderPrev() {
+        const { currentPage } = this.props;
+        const isActive = currentPage > 0;
+        const colour = isActive ? 'hover-primary' : 'color--dark-3';
 
         return <div
-            className={`${colour} px-10 cursor-pointer display-flex align-items-end`}
-            onClick={() => isActive && this.props.fetchPage(page)}
+            className={'px-10 cursor-pointer display-flex align-items-end'}
+            onClick={() => isActive && this.props.fetchPage(currentPage - 1)}
         >
             <ArrowLeft
-                className={'px-10 cursor-pointer hover-opacity'}
+                className={`${colour} px-10 cursor-pointer`}
                 width={16}
             />
         </div>;
@@ -124,26 +132,18 @@ export class Paginator extends React.Component<any, any> {
         return isTrue ? classIfTrue : classIfFalse;
     }
 
-    public renderPaginator() {
+    public render() {
         const { total, currentPage } = this.props;
         const { startDot, startDotRef, start, endDot, endDotRef, end, middle } = this.getPaginationMap(total, currentPage);
-        const shouldPrevBeDisabled = currentPage > 1;
-        const shouldNextBeDisabled = currentPage < total - 1 && total !== 1;
-        const prevHref = currentPage - 1;
-        const nextHref = currentPage + 1;
 
         return <div className={'position-center py-6 mt-7'}>
-            {this.renderArrowLeft(shouldPrevBeDisabled, prevHref)}
+            {this.renderPrev()}
             {this.renderOption({ ...this.props, item: start })}
             {startDot && this.renderOption({ ...this.props, item: startDotRef, isDot: true })}
             {(middle || []).map(item => this.renderOption({ ...this.props, item, key: item }))}
             {endDot && this.renderOption({ ...this.props, item: endDotRef, isDot: true })}
             {end && this.renderOption({ ...this.props, item: end })}
-            {this.renderArrowRight(shouldNextBeDisabled, nextHref)}
+            {this.renderNext()}
         </div>;
-    }
-
-    public render() {
-        return this.renderPaginator();
     }
 }

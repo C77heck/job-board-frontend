@@ -27,7 +27,7 @@ export class Repository {
             case 'GET':
                 return new Request(this.formatUrl(path, query), this.formatOptions(options, abortController, method));
             default:
-                return new Request(this.formatUrl(path, query), this.formatOptions(options, abortController, method));
+                return new Request(this.formatUrl(path), this.formatOptions(options, abortController, method));
         }
     }
 

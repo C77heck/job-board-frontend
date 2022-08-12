@@ -8,7 +8,7 @@ import { FormStructure } from './form.structure';
 import { SuccessModal } from './success.modal';
 
 interface FormProps extends ClientProps {
-    onSubmit: (payload: any) => void;
+    onSubmit: (payload: any) => Promise<void>;
     submitButton?: ButtonProps;
     className?: string;
     onSuccess?: () => void;
@@ -52,7 +52,7 @@ export const Form = (props: FormProps) => {
 
     const submit = async (e: any) => {
         e.preventDefault();
-        props.onSubmit(getPayload(namespace));
+        await props.onSubmit(getPayload(namespace));
 
         if (props.noSuccessModal && props.onSuccess && !error) {
             props.onSuccess();
