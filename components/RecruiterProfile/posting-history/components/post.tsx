@@ -7,24 +7,25 @@ import { JobEditModal } from '../../../AdsListScreen/Components/job-edit.modal';
 export const Post = (props: JobCardProps) => {
     const { title, expiresOn, description, location, salary, className, editable, logo } = props;
     const { formattedText } = formatLongText(description, 50);
+
     //  TODO -> DONT FORGET THE MOBILE DESIGN.
-    return <div className={'row line-wrapper'}>
-        <div className={'col-18 position-center'}>
+    return <div className={'row line-wrapper h-px-110'}>
+        <div className={'col-20 display-flex align-items-center justify-content-start'}>
             <h2 className={'fs-15 fw--500'}>{title}</h2>
         </div>
-        <div className={'col-17 position-center'}>
+        <div className={'col-20 display-flex align-items-center justify-content-start'}>
             <h2 className={'fs-15 fw--500'}>{salary}</h2>
         </div>
-        <div className={'col-16 position-center'}>
+        <div className={'col-17 display-flex align-items-center justify-content-start'}>
             <p className={'fs-15 fw--500'}>{location}</p>
         </div>
-        <div className={'col-17 position-center'}>
+        <div className={'col-17 display-flex align-items-center justify-content-start'}>
             <h2 className={'fs-15 fw--400'}>{moment(expiresOn).format('YYYY.MM.DD.')}</h2>
         </div>
-        <div className={'col-16 position-center'}>
-            <p className={'fs-15 fw--5000'}>{formattedText}</p>
+        <div className={'col-13 position-center'}>
+            status checker
         </div>
-        <div className={'col-16 position-center'}>
+        <div className={'col-13 position-center'}>
             <JobEditModal {...props}/>
         </div>
     </div>;

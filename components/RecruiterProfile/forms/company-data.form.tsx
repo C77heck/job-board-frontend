@@ -50,7 +50,6 @@ export const CompanyDataForm = (props: any) => {
     }, 'user-data-update'));
 
     useEffect(() => {
-        console.log(props.data);
         for (const prop in form.fields) {
             // @ts-ignore
             if (props?.[prop]) {

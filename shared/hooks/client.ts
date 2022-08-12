@@ -43,6 +43,7 @@ export const useClient = (env: 'api' | 'attachment' = 'api'): ClientProps => {
 
             return response;
         } catch (e: any) {
+            console.log({ hookLevelError: e });
             const error = parseError(e);
             setError(error);
             setIsLoading(false);

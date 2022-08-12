@@ -52,11 +52,12 @@ export const FilterLane = (props: FilterLaneProps) => {
             wrapperClasses: 'h-px-33',
         }),
     }, 'job-filters');
+    
     const client = useClient();
 
     const fetchJobs = async () => {
         try {
-            const response = await client.client('/users/recruiter/get-ads', 'GET', undefined, { ...(props.pagination || {}), sort: props?.sort });
+            const response = await client.client('/users/recruiter/get-ads', 'GET', undefined, { pagination: props.pagination, sort: props?.sort });
 
             if (!response || !response?.items) {
                 throw new Error('Something went wrong');
@@ -74,7 +75,7 @@ export const FilterLane = (props: FilterLaneProps) => {
 
     useEffect(() => {
         (async () => await fetchJobs())();
-    }, [props.sort]);
+    }, [props.sort, props.pagination]);
 
     return <Form
         noSuccessModal={true}

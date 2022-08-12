@@ -17,6 +17,14 @@ export class QueryManager {
         return this.query.get(prop);
     }
 
+    public addNestedObject<T>(parent: string, obj: T) {
+        const keys = Object.keys(obj || {});
+
+        for (const key of keys) {
+            this.add(`${parent}[${key}]`, `${obj?.[key as keyof T]}`);
+        }
+    }
+
     public add(prop: string, value: string) {
         this.query.set(prop, value);
     }

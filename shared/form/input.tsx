@@ -75,7 +75,6 @@ export const Input = (props: FieldProps) => {
     const { INPUTS: { TEXTAREA, SEARCHABLE, SEARCHABLE_DROPDOWN, DROPDOWN, RANGE, CHECKBOX, DATEPICKER } } = CONSTANTS;
 
     useEffect(() => {
-        console.log(props.value);
         setValue(props.value as string);
     }, [props.value]);
 

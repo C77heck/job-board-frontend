@@ -10,23 +10,23 @@ export const Listing = (props: { posts: JobCardProps[], onChange: (sort: Sort) =
         </div>;
     }
 
-    const header = <div className={'row w-100 py-15'}>
-        <div className={'col-18 position-center'}>
-            <SortHeader onChange={props.onChange} title={'Title'} property={'title'}/>
+    const header = <div className={'row w-100 py-15 px-13'}>
+        <div className={'col-20 position-center'}>
+            <SortHeader align={'left'} onChange={props.onChange} title={'Title'} property={'title'}/>
+        </div>
+        <div className={'col-20 position-center'}>
+            <SortHeader align={'left'} onChange={props.onChange} title={'Salary'} property={'salary'}/>
         </div>
         <div className={'col-17 position-center'}>
-            <SortHeader onChange={props.onChange} title={'Salary'} property={'salary'}/>
-        </div>
-        <div className={'col-16 position-center'}>
-            <SortHeader onChange={props.onChange} title={'Location'} property={'location'}/>
+            <SortHeader align={'left'} onChange={props.onChange} title={'Location'} property={'location'}/>
         </div>
         <div className={'col-17 position-center'}>
-            <SortHeader onChange={props.onChange} title={'Posted at'} property={'created_at'}/>
+            <SortHeader align={'left'} onChange={props.onChange} title={'Posted at'} property={'created_at'}/>
         </div>
-        <div className={'col-16 position-center'}>
-            <SortHeader disabled={true} title={'Description'}/>
+        <div className={'col-13 position-center'}>
+            <SortHeader disabled={true} title={'Status'}/>
         </div>
-        <div className={'col-16 position-center'}>
+        <div className={'col-13 position-center'}>
             <SortHeader disabled={true} title={'Edit'}/>
         </div>
     </div>;
