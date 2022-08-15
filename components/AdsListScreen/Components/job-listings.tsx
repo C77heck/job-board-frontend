@@ -9,6 +9,13 @@ export interface Job {
     location?: string;
     salary?: string;
     logo?: string;
+    analytics: {
+        viewed: number;
+        appliedFor: number;
+        standard: number;
+        featured: number;
+        premium: number;
+    };
 }
 
 interface JobListingsProp {

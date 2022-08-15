@@ -24,7 +24,7 @@ export interface PaginatorProps {
 }
 
 export class Paginator extends React.Component<PaginatorProps, any> {
-    public paginationMap = {
+    public paginationMap: PaginationProp = {
         startDot: false,
         startDotRef: false,
         start: 1,
