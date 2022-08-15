@@ -10,11 +10,16 @@ const dummyLocationFilters = [
     { id: '6', title: 'South-midlands', items: 54 },
     { id: '7', title: 'Glasgow', items: 1 },
 ];
-export const FilterColumn = (props: any) => {
+
+export interface FilterColumnProps {
+    passData: (data: any) => void;
+}
+
+export const FilterColumn = (props: FilterColumnProps) => {
     return <div className={'display-flex flex-column'}>
-        <Filters title={'Location'} filters={dummyLocationFilters}/>
-        <Filters title={'Type of Company'} filters={dummyLocationFilters}/>
-        <Filters title={'Date posted'} filters={dummyLocationFilters}/>
-        <FilterButtons title={'Related roles'} filters={dummyLocationFilters}/>
+        <Filters title={'Location'} filters={dummyLocationFilters as any}/>
+        <Filters title={'Type of Company'} filters={dummyLocationFilters as any}/>
+        <Filters title={'Date posted'} filters={dummyLocationFilters as any}/>
+        <FilterButtons title={'Related roles'} filters={dummyLocationFilters as any}/>
     </div>;
 };

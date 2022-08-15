@@ -5,7 +5,7 @@ export interface FilterProps {
     title?: string;
 }
 
-const Filter = ({ id, title, items }: FilterItem) => {
+const Filter = ({ id, title, items }: any) => {
     return <div className={'filter-block--item col-100 py-5 px-13 display-flex hover-secondary--background'}>
         <span className={'fs-15'}>{title}</span>
         <span className={'fs-10 pl-7 text-color--yellow'}>{items}</span>

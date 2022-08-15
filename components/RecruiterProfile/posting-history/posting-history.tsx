@@ -20,7 +20,6 @@ export const PostingHistory = () => {
         page: 0
     });
 
-    // todo need to seperate the pagination logic to prevent circles.
     const getJobs = (data: any) => {
         setPaginatedData(data);
     };

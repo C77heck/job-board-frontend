@@ -7,5 +7,9 @@ export const useSession = () => {
         setSessionId(id);
     };
 
+    const sendViewEvent = (id: string) => {
+        setSessionId(id);
+    };
+
     return { sessionId, setNewSessionId };
 };
