@@ -43,7 +43,6 @@ export const JobCard = (props: JobCardProps) => {
                     <LocationIcon className={'display-flex align-items-center justify-content-start pt-1'} width={19}/>
                     <p className={'fs-15 fw--500 pl-8 text-color--yellow'}>{location}</p>
                 </div>
-
             </div>
             <div className={'display-flex'}>
                 <CalendarIcon className={'display-flex align-items-center'} width={16}/>
