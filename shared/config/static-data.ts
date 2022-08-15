@@ -1,6 +1,6 @@
 export const folder = {
     recruiter: 'recruiter',
-    employee: 'employee'
+    'job-seeker': 'job-seeker'
 };
 export const staticData = {
     commonLinks: {
@@ -13,13 +13,13 @@ export const staticData = {
         //favourites: `/${folder.recruiter}/favourites`, // TODO -> We should have this as part of our facebook kind of dev.
         adEdit: `/${folder.recruiter}/ad-edit`,
     },
-    employeeLinks: {
-        favourites: `/${folder.employee}/favourites`,
-        jobSeekerProfile: `/${folder.employee}/job-seeker-profile`,
+    jobSeekerLinks: {
+        favourites: `/${folder?.['job-seeker']}/favourites`,
+        jobSeekerProfile: `/${folder?.['job-seeker']}/job-seeker-profile`,
     },
 };
 
 export const getLinks = () => {
-    const { employeeLinks, employerLinks, commonLinks } = staticData;
-    return { ...employeeLinks, ...employerLinks, ...commonLinks };
+    const { jobSeekerLinks, employerLinks, commonLinks } = staticData;
+    return { ...jobSeekerLinks, ...employerLinks, ...commonLinks };
 };

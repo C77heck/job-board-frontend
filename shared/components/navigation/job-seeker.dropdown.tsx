@@ -2,12 +2,12 @@ import * as React from 'react';
 import { LogoutIcon } from '../icons/icons';
 import { NavLink } from './libs/nav-link';
 
-export const EmployeeDropdown = (props: any) => {
+export const JobSeekerDropdown = (props: any) => {
     return <div className={'row'}>
-        <NavLink href={'/employee/job-seeker-profile'}>
+        <NavLink href={'/job-seeker/job-seeker-profile'}>
             <span className={'col-100 display-block fs-16 pt-5 text-align-left hover-secondary'}>Profile</span>
         </NavLink>
-        <NavLink href={'/employee/my-jobs'}>
+        <NavLink href={'/job-seeker/my-jobs'}>
             <span className={'col-100 display-block fs-16 pt-5 text-align-left hover-secondary'}>Jobs</span>
         </NavLink>
         <div className={'col-100 pt-5'}>
