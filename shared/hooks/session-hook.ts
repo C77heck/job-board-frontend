@@ -11,13 +11,11 @@ export const useSession = () => {
 
     const sendViewEvent = async (sessionId: string, adId: string) => {
         try {
-            const data = JSON.stringify({ sessionId, adId });
+            const response = await client(`/ads/add-view`, 'POST', { body: { sessionId, adId } });
 
-            const response = await client(`/add-view`, 'POST', { body: data });
-
-            console.log(response);
+            console.log({ response });
         } catch (e) {
-            console.log(e, error);
+            console.log({ e, error });
         }
     };
 

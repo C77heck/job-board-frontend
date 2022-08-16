@@ -1,11 +1,9 @@
 import { useContext, useEffect } from 'react';
-import { AuthContext } from '../../../contexts/auth.context';
 import { SessionContext } from '../../../contexts/session.context';
 import { useClient } from '../../../hooks/client';
 import { Storage } from '../../../libs/storage';
 
 export const Analyitics = () => {
-    const { isLoggedIn } = useContext(AuthContext);
     const { sessionId, setNewSessionId } = useContext(SessionContext);
     const storage = new Storage('sessionId');
     const { client, error, } = useClient();
@@ -26,6 +24,7 @@ export const Analyitics = () => {
     };
 
     useEffect(() => {
+        console.log('Analytics component', { sessionId });
         if (!sessionId) {
             const storedSessionId = storage.get();
             if (storedSessionId) {

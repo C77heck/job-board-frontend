@@ -38,7 +38,7 @@ const Search = (props: any) => {
         <Form
             form={form}
             className={'w-90 row justify-content-space-around align-items-end pb-22'}
-            onSubmit={(payload: any) => search(payload)}
+            onSubmit={async (payload: any) => await search(payload)}
             submitButton={{ title: 'Find', buttonStyle: 'submit', className: '' }}
             buttonWrapper={'col-20'}
             {...client}

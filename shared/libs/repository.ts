@@ -3,6 +3,10 @@ import { QueryManager } from './query.manager';
 
 export type Methods = 'GET' | 'POST' | 'PUT' | 'OPTIONS' | 'PATCH' | 'DELETE';
 
+export interface RequestOptions extends RequestInit {
+    body?: any;
+}
+
 export class Repository {
     public baseUrl = process?.env?.NEXT_PUBLIC_API || '';
     public headers: string[][] = [['Content-Type', 'application/json']];
@@ -22,7 +26,7 @@ export class Repository {
         this.headers.push(['Authorization', `Bearer ${token}`]);
     }
 
-    public getRequest(path: string, method: Methods = 'GET', options: RequestInit, query: any, abortController: AbortController) {
+    public getRequest(path: string, method: Methods = 'GET', options: RequestOptions, query: any, abortController: AbortController) {
         switch (method) {
             case 'GET':
                 return new Request(this.formatUrl(path, query), this.formatOptions(options, abortController, method));
@@ -31,7 +35,7 @@ export class Repository {
         }
     }
 
-    public async fetch(path: string, method: Methods = 'GET', options: RequestInit = {}, query: any = {}) {
+    public async fetch(path: string, method: Methods = 'GET', options: RequestOptions = {}, query: any = {}) {
         const abortController = new AbortController();
         try {
             const request = this.getRequest(path, method, options, query, abortController);

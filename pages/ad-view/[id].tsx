@@ -1,23 +1,22 @@
 import { NextPage } from 'next';
 import { useRouter, withRouter } from 'next/router';
-import { useContext, useEffect } from 'react';
-import { SessionContext } from '../../shared/contexts/session.context';
+import { useEffect, useState } from 'react';
+import { Job } from '../../components/AdsListScreen/Components/job-listings';
+import { AdCard } from '../../components/AdViewScreen/ad-card';
 import { useClient } from '../../shared/hooks/client';
-import { useSession } from '../../shared/hooks/session-hook';
 import { BaseLayoutWidth } from '../../shared/layouts/base-layout-width';
 import { BaseLayout } from '../../shared/layouts/base.layout';
 
 const Id: NextPage = withRouter((props: any) => {
-    const { sessionId } = useContext(SessionContext);
-    const { sendViewEvent } = useSession();
     const router = useRouter();
     const { client } = useClient();
+    const [adData, setAdData] = useState<Job | null>(null);
 
     const getAd = async () => {
         try {
             const response = await client(`/ads/get-by-id/${router.query.id}`);
 
-            console.log(response);
+            setAdData(response.payload);
         } catch (e) {
             console.log(e);
         }
@@ -25,14 +24,15 @@ const Id: NextPage = withRouter((props: any) => {
 
     useEffect(() => {
         if (router.query.id) {
-            (async () => await sendViewEvent(sessionId, router.query.id as string))();
             (async () => await getAd())();
         }
     }, []);
 
     return <BaseLayout auth={false} meta={{ title: 'jobs', keywords: 'jobs', description: 'jobs' }}>
         <BaseLayoutWidth>
-            some text
+            <div className={'row position-center mt-150 mb-50'}>
+                <AdCard data={adData} adId={router.query.id as string}/>
+            </div>
         </BaseLayoutWidth>
     </BaseLayout>;
 });

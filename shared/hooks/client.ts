@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { AuthContext } from '../contexts/auth.context';
 import { parseError } from '../libs/error-parsers';
-import { Methods, Repository } from '../libs/repository';
+import { Methods, Repository, RequestOptions } from '../libs/repository';
 
 export interface ClientProps {
     isLoading: boolean;
@@ -9,7 +9,7 @@ export interface ClientProps {
     clearError: () => void;
     successMessage: string;
     clearMessage: () => void;
-    client: (url: string, method?: Methods, options?: RequestInit, query?: any) => Promise<any>;
+    client: (url: string, method?: Methods, options?: RequestOptions, query?: any) => Promise<any>;
 }
 
 export const useClient = (env: 'api' | 'attachment' = 'api'): ClientProps => {
@@ -27,7 +27,7 @@ export const useClient = (env: 'api' | 'attachment' = 'api'): ClientProps => {
         setSuccessMessage('');
     };
 
-    const client = async (url: string, method: Methods = 'GET', options?: RequestInit, query?: any) => {
+    const client = async (url: string, method: Methods = 'GET', options?: RequestOptions, query?: any) => {
         try {
             setIsLoading(true);
 

@@ -28,7 +28,7 @@ export const JobAnalytics = (props: JobAnalyticsProps) => {
                 result[prop] += item?.analytics?.[prop as keyof Job['analytics']] || 0;
             }
         }
-        console.log(result);
+
         setAnalytics(result);
     };
 
