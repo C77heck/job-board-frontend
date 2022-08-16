@@ -28,7 +28,6 @@ export const Analyitics = () => {
     useEffect(() => {
         if (!sessionId) {
             const storedSessionId = storage.get();
-            console.log('we got it triggred');
             if (storedSessionId) {
                 return setNewSessionId(storedSessionId);
             }
