@@ -26,10 +26,16 @@ export const Analyitics = () => {
     };
 
     useEffect(() => {
-        if (!isLoggedIn && !sessionId) {
+        if (!sessionId) {
+            const storedSessionId = storage.get();
+            console.log('we got it triggred');
+            if (storedSessionId) {
+                return setNewSessionId(storedSessionId);
+            }
+
             (async () => await getSessionId())();
         }
-    }, [isLoggedIn, sessionId]);
+    }, [sessionId]);
 
     return null;
 };

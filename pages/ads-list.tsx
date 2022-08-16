@@ -85,8 +85,8 @@ const AdsList: NextPage = (props: any) => {
     const getJobAds = async () => {
         try {
             const response = await client('/ads/get-all-ads');
-
-            if (!response || !response.length) {
+            console.log(response);
+            if (!response) {
                 throw new Error('Something went wrong');
             }
 

@@ -3,6 +3,7 @@ import React from 'react';
 import { Button } from '../../../shared/components/buttons/button';
 import { CalendarIcon, FavouriteIcon, LocationIcon, MoneyIcon } from '../../../shared/components/icons/icons';
 import { NavLink } from '../../../shared/components/navigation/libs/nav-link';
+import { getLinks } from '../../../shared/config/static-data';
 import { formatLongText } from '../../../shared/libs/helpers';
 import { CompanyLogo } from './company-logo';
 import { Job } from './job-listings';
@@ -18,9 +19,9 @@ export interface JobCardProps extends Job {
 export const JobCard = (props: JobCardProps) => {
     const { title, expiresOn, description, location, salary, className, logo } = props;
     const actionButton = <Button title={<FavouriteIcon width={25} className={'text-color--dark hover-secondary'}/>} buttonStyle={'transparent'}/>;
-
+    const { adView } = getLinks();
     const { formattedText, isFormatted } = formatLongText(description, 420);
-    const href = `/ad-view?ad=${props.id}`;
+    const href = `${adView}/${props._id}`;
 
     return <div className={`${className} row pb-8 job-board pt-19 pb-28 px-20`}>
         <div className={'col-11'}>

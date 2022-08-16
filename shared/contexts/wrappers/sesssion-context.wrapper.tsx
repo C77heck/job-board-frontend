@@ -1,7 +1,7 @@
 import { useSession } from '../../hooks/session-hook';
 import { SessionContext } from '../session.context';
 
-export const SesssionContextWrapper = (props: any) => {
+export const SessionContextWrapper = (props: any) => {
     const session = useSession();
 
     return <SessionContext.Provider value={session}>
