@@ -61,6 +61,8 @@ const getButtonType = (type: string) => {
             return 'button button--filter';
         case 'filter-buttons':
             return 'button button--filter-buttons';
+        case 'navbar-search-button':
+            return 'button button--navbar-search';
         default:
             return 'button';
     }

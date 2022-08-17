@@ -28,7 +28,7 @@ const Id: NextPage = withRouter((props: any) => {
         }
     }, []);
 
-    return <BaseLayout auth={false} meta={{ title: 'jobs', keywords: 'jobs', description: 'jobs' }}>
+    return <BaseLayout showSearchBar={true} auth={false} meta={{ title: 'jobs', keywords: 'jobs', description: 'jobs' }}>
         <BaseLayoutWidth>
             <div className={'row position-center mt-150 mb-50'}>
                 <AdCard data={adData} adId={router.query.id as string}/>

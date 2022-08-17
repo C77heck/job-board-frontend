@@ -68,7 +68,6 @@ export const Input = (props: FieldProps) => {
     const [hasError, setHasError] = useState(false);
     const [value, setValue] = useState('');
     const [isInFocus, setIsInFocus] = useState(true);
-    // TODO -> probably will need to move over the error from props to state...
     const [errorMessage, setErrorMessage] = useState('');
     const prodRef: RefObject<HTMLDivElement> = React.createRef();
     const { setData } = useContext(FormContext);

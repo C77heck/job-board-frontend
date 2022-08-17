@@ -7,6 +7,11 @@ import { NavLink } from '../libs/nav-link';
 import { LoginButton } from '../login.button';
 import { RegisterCv } from '../register-cv';
 import { RegisterRecruiter } from '../register-recruiter';
+import { SearchBar } from './search-bar';
+
+export interface DesktopNavbarProps {
+    showSearchBar?: boolean;
+}
 
 export const DesktopNavbar = (props: any) => {
     // todo -> need to factor in if the visitor is a job seeker or an employer for links to show.
@@ -82,5 +87,6 @@ export const DesktopNavbar = (props: any) => {
             </div>
 
         </div>
+        <SearchBar show={props.showSearchBar}/>
     </nav>;
 };

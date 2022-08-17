@@ -5,6 +5,10 @@ import { DesktopNavbar } from './desktop/desktop-navbar';
 import { Analyitics } from './libs/analyitics';
 import { MobileNavbar } from './mobile/mobile-navbar';
 
+export interface NavbarProps {
+    showSearchBar?: boolean;
+}
+
 export const NavBar = (props: any) => {
     const { isLoggedIn, userId, userData, token, type, whoami } = useContext(AuthContext);
 
@@ -16,7 +20,7 @@ export const NavBar = (props: any) => {
 
     return <Portal elementId={'navbar'}>
         <Analyitics/>
-        <DesktopNavbar className={"display-none display-md-flex"} isLoggedIn={isLoggedIn}/>
-        <MobileNavbar className={"display-flex display-md-none"} isLoggedIn={isLoggedIn}/>
+        <DesktopNavbar showSearchBar={props.showSearchBar} className={"display-none display-md-flex"} isLoggedIn={isLoggedIn}/>
+        <MobileNavbar showSearchBar={props.showSearchBar} className={"display-flex display-md-none"} isLoggedIn={isLoggedIn}/>
     </Portal>;
 };

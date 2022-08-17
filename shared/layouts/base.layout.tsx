@@ -6,14 +6,21 @@ import { FormContextWrapper } from '../contexts/wrappers/form-context.wrapper';
 import { SessionContextWrapper } from '../contexts/wrappers/sesssion-context.wrapper';
 import { Meta } from './meta';
 
-export const BaseLayout = (props: { children: any; auth: boolean; meta: Meta; className?: string; }) => {
+export interface BaseLayoutProps {
+    showSearchBar?: boolean;
+    children: any;
+    auth: boolean;
+    meta: Meta;
+    className?: string;
+}
 
+export const BaseLayout = (props: BaseLayoutProps) => {
     return <>
         <Meta {...props.meta}/>
         <SessionContextWrapper>
             <AuthContextWrapper>
                 <FormContextWrapper>
-                    <NavBar/>
+                    <NavBar showSearchBar={props.showSearchBar}/>
                     <main className={`position-center ${props.className}`}>
                         {props.auth ? <Auth>{props.children}</Auth> : props.children}
                     </main>
