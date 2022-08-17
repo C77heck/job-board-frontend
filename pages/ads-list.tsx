@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import { FilterColumn } from '../components/AdsListScreen/Components/filter-column';
@@ -7,58 +6,8 @@ import { Paginator } from '../shared/components/paginator/paginator';
 import { useClient } from '../shared/hooks/client';
 import { BaseLayoutWidth } from '../shared/layouts/base-layout-width';
 import { BaseLayout } from '../shared/layouts/base.layout';
-import { priceFormat } from '../shared/libs/helpers';
 
-export const dummyJobs = [
-    {
-        id: '6',
-        title: 'Chef de partie',
-        salary: priceFormat(3324),
-        description: 'Be the first of your friends to declare, \'I love where I work!\' and actually mean it. Laugh hard and work hard with some of the best and brightest in the tech industry. Our client has created the world\'s first marketplace for live experiences by developing the technology that lets anyone create, share and find new things to do. Currently 180 countries host events using their platform, with over 1.5 million events taking place every year and 5 million tickets being processed every month!',
-        date: moment().format('YYYY.MM.DD.'),
-        location: 'London'
-    },
-    {
-        id: '1',
-        title: '.NET Developer, .NET 6, C#, Azure, JavaScript, Agile - London',
-        salary: priceFormat(3324),
-        description: 'Be the first of your friends to declare, \'I love where I work!\' and actually mean it. Laugh hard and work hard with some of the best and brightest in the tech industry. Our client has created the world\'s first marketplace for live experiences by developing the technology that lets anyone create, share and find new things to do. Currently 180 countries host events using their platform, with over 1.5 million events taking place every year and 5 million tickets being processed every month!',
-        date: moment().format('YYYY.MM.DD.'),
-        location: 'London'
-    },
-    {
-        id: '2',
-        title: 'JavaScript Developer Angular\n',
-        salary: priceFormat(3324),
-        description: 'Be the first of your friends to declare, \'I love where I work!\' and actually mean it. Laugh hard and work hard with some of the best and brightest in the tech industry. Our client has created the world\'s first marketplace for live experiences by developing the technology that lets anyone create, share and find new things to do. Currently 180 countries host events using their platform, with over 1.5 million events taking place every year and 5 million tickets being processed every month!',
-        date: moment().format('YYYY.MM.DD.'),
-        location: 'London'
-    },
-    {
-        id: '3',
-        title: 'Head chef',
-        salary: priceFormat(3324),
-        description: 'Be the first of your friends to declare, \'I love where I work!\' and actually mean it. Laugh hard and work hard with some of the best and brightest in the tech industry. Our client has created the world\'s first marketplace for live experiences by developing the technology that lets anyone create, share and find new things to do. Currently 180 countries host events using their platform, with over 1.5 million events taking place every year and 5 million tickets being processed every month!',
-        date: moment().format('YYYY.MM.DD.'),
-        location: 'London'
-    },
-    {
-        id: '4',
-        title: 'Senior Full Stack JavaScript Developer\n',
-        salary: priceFormat(3324),
-        description: 'Be the first of your friends to declare, \'I love where I work!\' and actually mean it. Laugh hard and work hard with some of the best and brightest in the tech industry. Our client has created the world\'s first marketplace for live experiences by developing the technology that lets anyone create, share and find new things to do. Currently 180 countries host events using their platform, with over 1.5 million events taking place every year and 5 million tickets being processed every month!',
-        date: moment().format('YYYY.MM.DD.'),
-        location: 'London'
-    },
-    {
-        id: '5',
-        title: 'Waitress',
-        salary: priceFormat(3324),
-        description: 'Be the first of your friends to declare, \'I love where I work!\' and actually mean it. Laugh hard and work hard with some of the best and brightest in the tech industry. Our client has created the world\'s first marketplace for live experiences by developing the technology that lets anyone create, share and find new things to do. Currently 180 countries host events using their platform, with over 1.5 million events taking place every year and 5 million tickets being processed every month!',
-        date: moment().format('YYYY.MM.DD.'),
-        location: 'London'
-    },
-];
+// TODO -> NEED TO CHECK THE URL FOR FILTERS. MAKE THE OTHER FILTERS THE SAME AND PERHAPS TURN IT INTO BASE64
 const AdsList: NextPage = (props: any) => {
     const { client, error } = useClient();
     const [paginatedData, setPaginatedData] = useState({
