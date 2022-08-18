@@ -18,10 +18,6 @@ export const SearchBar = (props: { show?: boolean }) => {
         setBase64Query(query.encodeBase64());
     }, [data]);
 
-    useEffect(() => {
-        console.log(base64Query);
-    }, [base64Query]);
-
     if (!props.show) {
         return null;
     }
