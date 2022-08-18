@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { QueryManager } from '../../../libs/query.manager';
 import { Button } from '../../buttons/button';
 import { MagnifyingGlassIcon } from '../../icons/icons';
 import { Hr } from '../../ui-misc/hr';
@@ -9,6 +10,17 @@ export const SearchBar = (props: { show?: boolean }) => {
         what: '',
         where: ''
     });
+    const query = new QueryManager('');
+    const [base64Query, setBase64Query] = useState('');
+
+    useEffect(() => {
+        query.addObj(data);
+        setBase64Query(query.encodeBase64());
+    }, [data]);
+
+    useEffect(() => {
+        console.log(base64Query);
+    }, [base64Query]);
 
     if (!props.show) {
         return null;
@@ -35,7 +47,7 @@ export const SearchBar = (props: { show?: boolean }) => {
                             onChange={(e) => setData({ ...data, where: e?.target?.value })}/>
                     </div>
                 </div>
-                <NavLink href={`/ads-list?what=${data.what}&where=${data.where}`}>
+                <NavLink href={`/ads-list?${base64Query}`}>
                     <Button title={'Find'} buttonStyle={'navbar-search-button'} className={''}/>
                 </NavLink>
             </div>

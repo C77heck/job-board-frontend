@@ -6,6 +6,7 @@ import { Paginator } from '../shared/components/paginator/paginator';
 import { useClient } from '../shared/hooks/client';
 import { BaseLayoutWidth } from '../shared/layouts/base-layout-width';
 import { BaseLayout } from '../shared/layouts/base.layout';
+import { QueryManager } from '../shared/libs/query.manager';
 
 // TODO -> NEED TO CHECK THE URL FOR FILTERS. MAKE THE OTHER FILTERS THE SAME AND PERHAPS TURN IT INTO BASE64
 const AdsList: NextPage = (props: any) => {
@@ -23,6 +24,8 @@ const AdsList: NextPage = (props: any) => {
         page: 0
     });
 
+    const [query, setQuery] = useState(null);
+
     const getJobs = (data: any) => {
         setPaginatedData(data);
     };
@@ -31,9 +34,14 @@ const AdsList: NextPage = (props: any) => {
         setPagination({ ...pagination, page });
     };
 
+    useEffect(() => {
+        const query = new QueryManager(window.location.search);
+        setQuery(query.decodeBase64());
+    }, []);
+
     const getJobAds = async () => {
         try {
-            const response = await client('/ads/get-all-ads');
+            const response = await client('/ads/get-all-ads', 'GET', {}, query);
 
             if (!response) {
                 throw new Error('Something went wrong');
