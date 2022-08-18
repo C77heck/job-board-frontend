@@ -71,16 +71,27 @@ export class QueryManager {
     }
 
     public encodeBase64() {
-        return `base=${this.encode(this.getQuery())}`;
+        return `base=${this.encode(this.getAsObject())}`;
     }
 
-    public decodeBase64() {
-        const query = this.getAsObject();
+    public decode(base64: string) {
+        const decodedString = decode(base64);
 
-        const rawQuery = decode(query?.base || '');
+        return JSON.parse(decodedString);
+    }
 
-        const queryManager = new QueryManager(rawQuery);
+    public static decodeBase64(queryString: string) {
+        try {
+            const manager = new QueryManager(queryString);
 
-        return queryManager.getAsObject();
+            const query = manager.getAsObject();
+
+            const queryAsObject = manager.decode(query?.base || '');
+
+            return queryAsObject;
+        } catch (e) {
+            console.log({ decodeMethod: e });
+            return null;
+        }
     }
 }

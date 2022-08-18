@@ -24,8 +24,6 @@ const AdsList: NextPage = (props: any) => {
         page: 0
     });
 
-    const [query, setQuery] = useState(null);
-
     const getJobs = (data: any) => {
         setPaginatedData(data);
     };
@@ -34,14 +32,12 @@ const AdsList: NextPage = (props: any) => {
         setPagination({ ...pagination, page });
     };
 
-    useEffect(() => {
-        const query = new QueryManager(window.location.search);
-        setQuery(query.decodeBase64());
-    }, []);
-
+    // TODO -> BUILD A LISTENER THAT CHECKS THE QUERY PERIODICALLY
     const getJobAds = async () => {
         try {
-            const response = await client('/ads/get-all-ads', 'GET', {}, query);
+            const filters = QueryManager.decodeBase64(window.location.search);
+            // TODO -> SORT AND PAGINATION TO DO
+            const response = await client('/ads/get-all-ads', 'GET', {}, { filters });
 
             if (!response) {
                 throw new Error('Something went wrong');
