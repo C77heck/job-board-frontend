@@ -2,7 +2,16 @@ import * as React from 'react';
 import { Backdrop } from '../modal/backdrop';
 import { Portal } from '../portal';
 
-export const Spinner = (props: any) => {
+export interface SpinnerProps {
+    isLoading: boolean;
+    asOverlay?: boolean;
+}
+
+export const Spinner = (props: SpinnerProps) => {
+    if (!props.isLoading) {
+        return null;
+    }
+
     return <Portal elementId={'spinner'}>{props.asOverlay ? <Backdrop><SvgSpinner/></Backdrop> : <SvgSpinner/>}</Portal>;
 };
 

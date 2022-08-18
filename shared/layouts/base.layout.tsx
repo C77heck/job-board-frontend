@@ -1,6 +1,7 @@
 import { NavBar } from '../../shared/components/navigation/navbar';
 import { Auth } from '../components/auth/auth';
 import { Footer } from '../components/navigation/footer/footer';
+import { Spinner } from '../components/spinner/spinner';
 import { AuthContextWrapper } from '../contexts/wrappers/auth-context.wrapper';
 import { FormContextWrapper } from '../contexts/wrappers/form-context.wrapper';
 import { SessionContextWrapper } from '../contexts/wrappers/sesssion-context.wrapper';
@@ -12,6 +13,7 @@ export interface BaseLayoutProps {
     auth: boolean;
     meta: Meta;
     className?: string;
+    isLoading?: boolean;
 }
 
 export const BaseLayout = (props: BaseLayoutProps) => {
@@ -22,6 +24,7 @@ export const BaseLayout = (props: BaseLayoutProps) => {
                 <FormContextWrapper>
                     <NavBar showSearchBar={props.showSearchBar}/>
                     <main className={`position-center ${props.className}`}>
+                        <Spinner asOverlay={true} isLoading={props.isLoading}/>
                         {props.auth ? <Auth>{props.children}</Auth> : props.children}
                     </main>
                 </FormContextWrapper>

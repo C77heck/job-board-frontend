@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react';
+import { Spinner } from '../../../shared/components/spinner/spinner';
+import { useClient } from '../../../shared/hooks/client';
 import { FilterButtons } from './filter-buttons';
 import { Filters } from './filters';
 
@@ -16,10 +19,32 @@ export interface FilterColumnProps {
 }
 
 export const FilterColumn = (props: FilterColumnProps) => {
+    const { client, error, isLoading } = useClient();
+    const [filterOptions, setFilterOptions] = useState({
+        location: [],
+        companyType: [],
+        postedAt: [],
+        relatedRoles: [],
+    });
+    const getFilterOptions = async () => {
+        try {
+            const filterOptions = await client('/ad-filters');
+
+            setFilterOptions(filterOptions);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    useEffect(() => {
+        (async () => await getFilterOptions())();
+    }, []);
+
     return <div className={'display-flex flex-column'}>
-        <Filters title={'Location'} filters={dummyLocationFilters as any}/>
-        <Filters title={'Type of Company'} filters={dummyLocationFilters as any}/>
-        <Filters title={'Date posted'} filters={dummyLocationFilters as any}/>
-        <FilterButtons title={'Related roles'} filters={dummyLocationFilters as any}/>
+        <Spinner isLoading={isLoading}/>
+        <Filters title={'Location'} filters={filterOptions?.location}/>
+        <Filters className={'mt-15'} title={'Type of Company'} filters={filterOptions?.companyType}/>
+        <Filters className={'mt-15'} title={'Date posted'} filters={filterOptions?.postedAt}/>
+        <FilterButtons title={'Related roles'} filters={filterOptions?.relatedRoles}/>
     </div>;
 };

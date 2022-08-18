@@ -7,6 +7,7 @@ import { BaseLayout } from '../../shared/layouts/base.layout';
 const JobSeekerProfile: NextPage = (props: any) => {
 
     return <BaseLayout
+        isLoading={true}
         auth={false}
         meta={{ title: 'home page', keywords: 'whatever', description: 'some description' }}
         className={'flex-column job-seeker-profile'}

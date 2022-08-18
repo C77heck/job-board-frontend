@@ -17,7 +17,7 @@ const dummyPostings = [
 
 // TODO -> make sure that this page content will be changed based on who the user is.
 const MyJobs: NextPage = () => {
-    return <BaseLayout showSearchBar={true} auth={false} meta={{ title: 'home page', keywords: 'whatever', description: 'some description' }}>
+    return <BaseLayout isLoading={true}  showSearchBar={true} auth={false} meta={{ title: 'home page', keywords: 'whatever', description: 'some description' }}>
         <HomeScreenHeader>
             <BaseLayoutWidth>
                 <Search/>
