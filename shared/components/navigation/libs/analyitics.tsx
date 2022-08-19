@@ -24,7 +24,6 @@ export const Analyitics = () => {
     };
 
     useEffect(() => {
-        console.log('Analytics component', { sessionId });
         if (!sessionId) {
             const storedSessionId = storage.get();
             if (storedSessionId) {

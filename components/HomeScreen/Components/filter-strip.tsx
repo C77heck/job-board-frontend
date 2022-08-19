@@ -3,7 +3,8 @@ import { Button } from '../../../shared/components/buttons/button';
 export interface FilterItem {
     id: string;
     title: string;
-    property: number | string | undefined;
+    property: string;
+    items: number; // how many jobs
 }
 
 const Filter = ({ title, property }: FilterItem) => {

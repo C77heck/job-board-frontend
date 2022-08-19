@@ -1,13 +1,14 @@
 import { NextPage } from 'next';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { timer } from 'rxjs';
 import { FilterColumn } from '../components/AdsListScreen/Components/filter-column';
 import { JobListings } from '../components/AdsListScreen/Components/job-listings';
+import { UrlListener } from '../shared/components/navigation/libs/url-listener';
 import { Paginator } from '../shared/components/paginator/paginator';
 import { useClient } from '../shared/hooks/client';
 import { BaseLayoutWidth } from '../shared/layouts/base-layout-width';
 import { BaseLayout } from '../shared/layouts/base.layout';
 import { QueryManager } from '../shared/libs/query.manager';
-
 // TODO -> NEED TO CHECK THE URL FOR FILTERS. MAKE THE OTHER FILTERS THE SAME AND PERHAPS TURN IT INTO BASE64
 const AdsList: NextPage = (props: any) => {
     const { client, error, isLoading } = useClient();
@@ -49,6 +50,15 @@ const AdsList: NextPage = (props: any) => {
         }
     };
 
+    const timerRef = useRef(timer(0, 1500));
+
+    useEffect(() => {
+
+        const subscription = timerRef.current.subscribe(v => console.log('timer', v));
+
+        return subscription.unsubscribe();
+    }, []);
+
     useEffect(() => {
         (async () => await getJobAds())();
     }, []);
@@ -59,6 +69,7 @@ const AdsList: NextPage = (props: any) => {
 
     return <BaseLayout isLoading={isLoading} auth={false} meta={{ title: 'jobs', keywords: 'jobs', description: 'jobs' }}>
         <BaseLayoutWidth>
+            <UrlListener urlChanged={() => getJobAds()}/>
             <div className={'row display-flex justify-content-center align-items-start mt-150 mb-50'}>
                 <div className={'col-20'}>
                     <FilterColumn passData={(data: any) => getJobs(data)}/>

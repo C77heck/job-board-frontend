@@ -5,10 +5,18 @@ import { decode, encode } from 'js-base64';
  * we can return the whole query string as an object or an object as a query string.
  */
 export class QueryManager {
-    query: URLSearchParams;
+    public query: URLSearchParams;
+    public url?: string;
 
-    constructor(queryString: string = '') {
+    constructor(queryString: string = '', location?: Location) {
         this.query = new URLSearchParams(queryString);
+
+        if (location) {
+            const origin = location?.origin || '';
+            const pathname = location?.pathname || '';
+
+            this.url = `${origin}${pathname}`;
+        }
     }
 
     public get(prop: string): any {
@@ -17,6 +25,17 @@ export class QueryManager {
         }
 
         return this.query.get(prop);
+    }
+
+    public testPushState(window: any) {
+        const url = new URL(window?.location);
+        url.searchParams.set('key', "value");
+
+        window.history.pushState(null, '', url.toString());
+    }
+
+    public pushState() {
+        window.history.pushState(null, '', `${this.url}?${this.getQuery()}`);
     }
 
     public addNestedObject<T>(parent: string, obj: T) {
@@ -90,7 +109,6 @@ export class QueryManager {
 
             return queryAsObject;
         } catch (e) {
-            console.log({ decodeMethod: e });
             return null;
         }
     }

@@ -1,9 +1,17 @@
 import { Button } from '../../../shared/components/buttons/button';
+import { useUrlManagerHook } from '../../../shared/hooks/url-manager-hook';
 import { FilterItem } from '../../HomeScreen/Components/filter-strip';
 import { FilterProps } from './filters';
 
 const Filter = ({ title, id, property }: FilterItem) => {
-    return <Button className={'m-4'} title={title} buttonStyle={'filter-buttons'} onClick={() => console.log(id, property)}/>;
+    const { addToUrl } = useUrlManagerHook();
+
+    return <Button
+        className={'m-4'}
+        title={title}
+        buttonStyle={'filter-buttons'}
+        onClick={() => addToUrl(property, id)}
+    />;
 };
 
 export const FilterButtons = ({ title, filters }: FilterProps) => {

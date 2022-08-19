@@ -1,3 +1,4 @@
+import { useUrlManagerHook } from '../../../shared/hooks/url-manager-hook';
 import { FilterItem } from '../../HomeScreen/Components/filter-strip';
 
 export interface FilterProps {
@@ -7,7 +8,9 @@ export interface FilterProps {
 }
 
 const Filter = ({ id, title, items }: any) => {
-    return <div className={'filter-block--item col-100 py-5 px-13 display-flex hover-secondary--background'}>
+    const { addToUrl } = useUrlManagerHook();
+
+    return <div onClick={() => addToUrl(title, id)} className={'filter-block--item col-100 py-5 px-13 display-flex hover-secondary--background'}>
         <span className={'fs-15'}>{title}</span>
         <span className={'fs-10 pl-7 text-color--yellow'}>{items}</span>
     </div>;

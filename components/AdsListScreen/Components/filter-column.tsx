@@ -28,13 +28,17 @@ export const FilterColumn = (props: FilterColumnProps) => {
     });
     const getFilterOptions = async () => {
         try {
-            const filterOptions = await client('/ad-filters');
+            const filterOptions = await client('/ads/ad-filters');
 
             setFilterOptions(filterOptions);
         } catch (e) {
             console.log(e);
         }
     };
+
+    // const url = new URL(window.location);
+    // url.searchParams.set('key', value);
+    // window.history.pushState(null, '', url.toString());
 
     useEffect(() => {
         (async () => await getFilterOptions())();
