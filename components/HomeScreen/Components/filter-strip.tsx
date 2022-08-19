@@ -2,15 +2,20 @@ import { Button } from '../../../shared/components/buttons/button';
 import { useUrlManagerHook } from '../../../shared/hooks/url-manager-hook';
 
 export interface FilterItem {
-    id: string;
+    value: string;
     title: string;
-    property: string;
     items: number; // how many jobs
 }
 
-const Filter = ({ title, property, id }: FilterItem) => {
+export interface FilterProps {
+    data: FilterItem;
+    property: string;
+}
+
+const Filter = ({ data: { title, value }, property }: FilterProps) => {
     const { addToUrl } = useUrlManagerHook();
-    return <Button title={title} buttonStyle={'filter'} onClick={() => addToUrl(property, id)}/>;
+
+    return <Button title={title} buttonStyle={'filter'} onClick={() => addToUrl(property, value)}/>;
 };
 
 export interface Filters {
@@ -19,6 +24,6 @@ export interface Filters {
 
 export const FilterStrip = ({ filters }: Filters) => {
     return <div className={'display-flex'}>
-        {(filters || []).map(filter => <Filter key={filter.id} {...filter}/>)}
+        {(filters || []).map(filter => <Filter key={filter.value} property={'something'} data={filter}/>)}
     </div>;
 };

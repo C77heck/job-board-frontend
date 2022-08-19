@@ -5,6 +5,7 @@ export interface FilterProps {
     filters: FilterItem[];
     title?: string;
     className?: string;
+    property?: string;
 }
 
 const Filter = ({ id, title, items, property }: any) => {
@@ -16,13 +17,13 @@ const Filter = ({ id, title, items, property }: any) => {
     </div>;
 };
 
-export const Filters = ({ filters, title, className }: FilterProps) => {
+export const Filters = ({ filters, title, className, property }: FilterProps) => {
     if (!filters) {
         return null;
     }
 
     return <div className={`filter-block row ${className}`}>
         {title && <h3 className={'px-13 pt-5 pb-12 fs-16 fw--900'}>{title}</h3>}
-        {(filters || []).map(filter => <Filter key={filter.id} {...filter} />)}
+        {(filters || []).map(filter => <Filter key={filter.value} {...filter} property={property}/>)}
     </div>;
 };

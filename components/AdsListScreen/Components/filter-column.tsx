@@ -46,9 +46,9 @@ export const FilterColumn = (props: FilterColumnProps) => {
 
     return <div className={'display-flex flex-column'}>
         <Spinner isLoading={isLoading}/>
-        <Filters title={'Location'} filters={filterOptions?.location}/>
-        <Filters className={'mt-15'} title={'Type of Company'} filters={filterOptions?.companyType}/>
-        <Filters className={'mt-15'} title={'Date posted'} filters={filterOptions?.postedAt}/>
-        <FilterButtons title={'Related roles'} filters={filterOptions?.relatedRoles}/>
+        <Filters title={'Location'} property={'location'} filters={filterOptions?.location}/>
+        <Filters className={'mt-15'} property={'companyType'} title={'Type of Company'} filters={filterOptions?.companyType}/>
+        <Filters className={'mt-15'} property={'postedAt'} title={'Date posted'} filters={filterOptions?.postedAt}/>
+        <FilterButtons title={'Related roles'} property={'relatedRoles'} filters={filterOptions?.relatedRoles}/>
     </div>;
 };
