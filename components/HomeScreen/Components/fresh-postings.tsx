@@ -32,7 +32,7 @@ const Posting = ({ title, description, location, salary, className }: Post) => {
 export const FreshPostings = ({ data }: { data: Post[] }) => {
 
     return <div className={'display-flex flex-column mt-130 justify-content-center align-items-center'}>
-        <FilterStrip filters={dummyFilters}/>
+        <FilterStrip filters={dummyFilters as any}/>
         <div className={'w-100 py-20 px-30 fresh-postings row'}>
             {(data || []).map(d => <Posting className={'col-20 mt-15'} key={d.id} {...d} />)}
         </div>
