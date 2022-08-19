@@ -36,7 +36,7 @@ const AdsList: NextPage = (props: any) => {
         try {
             const filters = QueryManager.decodeBase64(window.location.search);
             // TODO -> SORT AND PAGINATION TO DO
-            const response = await client('/ads/get-all-ads', 'GET', {}, { filters, pagination });
+            const response = await client('/ads', 'GET', {}, { filters, pagination });
 
             if (!response) {
                 throw new Error('Something went wrong');
