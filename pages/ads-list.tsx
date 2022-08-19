@@ -1,6 +1,5 @@
 import { NextPage } from 'next';
-import { useEffect, useRef, useState } from 'react';
-import { timer } from 'rxjs';
+import { useEffect, useState } from 'react';
 import { FilterColumn } from '../components/AdsListScreen/Components/filter-column';
 import { JobListings } from '../components/AdsListScreen/Components/job-listings';
 import { UrlListener } from '../shared/components/navigation/libs/url-listener';
@@ -18,7 +17,6 @@ const AdsList: NextPage = (props: any) => {
         total: 0,
         page: 0
     });
-
     const [pagination, setPagination] = useState({
         limit: 6,
         total: 0,
@@ -49,15 +47,6 @@ const AdsList: NextPage = (props: any) => {
             console.log(e, error);
         }
     };
-
-    const timerRef = useRef(timer(0, 1500));
-
-    useEffect(() => {
-
-        const subscription = timerRef.current.subscribe(v => console.log('timer', v));
-
-        return subscription.unsubscribe();
-    }, []);
 
     useEffect(() => {
         (async () => await getJobAds())();
@@ -91,4 +80,5 @@ const AdsList: NextPage = (props: any) => {
         </BaseLayoutWidth>
     </BaseLayout>;
 };
+
 export default AdsList;
