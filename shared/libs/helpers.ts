@@ -1,3 +1,6 @@
+import moment from 'moment';
+import { Storage } from './storage';
+
 export const objectToArray = (object: any) => {
     const arr = [];
     for (const prop in object) {
@@ -93,4 +96,24 @@ export const formatLongText = (text?: string, maxLength?: number) => {
         formattedText: isShortEnough ? text : `${text.slice(0, maxLength)}...`,
         isFormatted: !isShortEnough
     };
+};
+
+export const saveLogs = (data: any) => {
+    const storage = new Storage('error-logs');
+
+    try {
+        const existingData: { log: string; created_at: string }[] = storage.get();
+        console.log(data);
+        if (!existingData) {
+            storage.set([{ log: data, created_at: moment().toString() }]);
+        }
+
+        existingData.push({ log: data, created_at: moment().toString() });
+
+        storage.set(existingData);
+    } catch (e: any) {
+        storage.set([{ log: e.toString(), reated_at: moment().toString() }]);
+
+        console.log({ log_saving_failed: e });
+    }
 };

@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { UserType } from '../contexts/auth.context';
-import { redirect } from '../libs/helpers';
+import { redirect, saveLogs } from '../libs/helpers';
 import { Repository } from '../libs/repository';
 import { Storage } from '../libs/storage';
 
@@ -49,6 +49,7 @@ export const useAuth = () => {
     useEffect(() => {
         const data = storage.get();
         if (isLoggedIn && data && !hasNotExpired(data)) {
+            saveLogs('authHook');
             signout();
         }
         if (data && hasNotExpired(data) && !isLoggedIn) {
@@ -86,12 +87,17 @@ export const useAuth = () => {
 
     const whoami = async (type: UserType) => {
         try {
+            console.log({ type });
+            return;
             const endpoint = getEndpoint(type);
+            console.log({ type });
             const request = new Repository(token, 'api');
+            console.log({ type });
             const response = await request.fetch(endpoint, 'GET');
 
             setUserData(response.userData);
         } catch (e: any) {
+            saveLogs(`authHook catch ${e}`);
             signout();
         }
     };

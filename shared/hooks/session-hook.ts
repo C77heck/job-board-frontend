@@ -11,7 +11,7 @@ export const useSession = () => {
 
     const sendViewEvent = async (sessionId: string, adId: string) => {
         try {
-            await client(`/ads/add-view`, 'POST', { body: { sessionId, adId } });
+            await client(`/users/job-seeker/add-view`, 'POST', { body: { sessionId, adId } });
         } catch (e) {
             console.log({ e, error });
         }

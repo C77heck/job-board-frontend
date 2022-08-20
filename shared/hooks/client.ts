@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { AuthContext } from '../contexts/auth.context';
 import { parseError } from '../libs/error-parsers';
+import { saveLogs } from '../libs/helpers';
 import { Methods, Repository, RequestOptions } from '../libs/repository';
 
 export interface ClientProps {
@@ -48,6 +49,7 @@ export const useClient = (env: 'api' | 'attachment' = 'api'): ClientProps => {
             setError(error);
             setIsLoading(false);
             if (e?.code === 401 && isLoggedIn) {
+                saveLogs('client');
                 signout();
             }
         }

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/auth.context';
+import { saveLogs } from '../../libs/helpers';
 import { Button } from '../buttons/button';
 import { LoginIcon } from '../icons/icons';
 import { JobSeekerDropdown } from './job-seeker.dropdown';
@@ -13,6 +14,7 @@ export const LoginButton = ({ isMobile }: any) => {
 
     const signoutHandler = () => {
         try {
+            saveLogs('signoutHandler');
             signout();
             window.location.reload();
         } catch (e) {

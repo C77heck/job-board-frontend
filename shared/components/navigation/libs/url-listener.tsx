@@ -7,7 +7,6 @@ export const UrlListener = (props: { urlChanged: () => void }) => {
     const [url, setUrl] = useState('');
 
     const checkUrl = () => {
-        console.log('seetting it', window.location.search);
         setUrl(window.location.search);
     };
 
@@ -18,7 +17,6 @@ export const UrlListener = (props: { urlChanged: () => void }) => {
     }, []);
 
     useEffect(() => {
-        console.log('reload triggered');
         props.urlChanged();
     }, [url]);
 
