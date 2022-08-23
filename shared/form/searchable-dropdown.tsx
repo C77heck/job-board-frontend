@@ -66,27 +66,31 @@ export class SearchableDropdown extends Component<SearchableDropdownProps, any> 
         });
     }
 
+    public handleWrapperClick() {
+        console.log('wrapper getting cliocked finsih this fucking component');
+        this.setState({ show: !this.state.show });
+    }
+
     public searchableDropdown() {
         return <div ref={this.divRef}>
-            <div onClick={() => this.setState({ show: !this.state.show })}>
+            <div onClick={() => this.handleWrapperClick()}>
                 <input
                     className={'input'}
                     onChange={(e) => this.props.handleChange(e)}
                     value={this.props.value as string}
-                    type={this.props.type || 'text'}
+                    type={'text'}
                     name={this.props.name}
                     id={this.props.id}
-                    readOnly={this.props.readOnly}
+                    readOnly={true}
                     required={this.props.required}
                     placeholder={this.props.placeholder}
-                    autoComplete={this.props.autoComplete}
                     disabled={this.props.disabled}
                     onFocus={() => this.setState({ isInFocus: true })}
                     onKeyDown={(e) => this.manageKeyEvent(e)}
                     onKeyDownCapture={(e) => this.manageKeyEvent(e)}
                 />
             </div>
-            <div className={`${this.props.className} dropdown-general dropdown dropdown--${this.state.show ? 'show' : 'hide'}`}>
+            <div className={`${this.props.className} dropdown-general dropdown dropdown--${true ? 'show' : 'hide'}`}>
                 <ul>
                     {(this.state.searchedOptions || []).map(option => this.renderOption(option))}
                 </ul>
