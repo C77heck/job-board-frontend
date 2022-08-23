@@ -32,6 +32,8 @@ export class SearchableDropdown extends Component<SearchableDropdownProps, any> 
 
     public componentDidMount() {
         this.assignClickHandler();
+        console.log(this.props.options);
+        this.setState({ searchedOptions: this.props.options });
     }
 
     public componentWillUnmount() {
@@ -47,7 +49,6 @@ export class SearchableDropdown extends Component<SearchableDropdownProps, any> 
     }
 
     public handleClickOutside(event: any) {
-        console.log(this.divRef);
         if (!this.divRef?.current?.contains(event.target)) {
             this.setState({ isInFocus: false, state: false });
         }
@@ -60,9 +61,15 @@ export class SearchableDropdown extends Component<SearchableDropdownProps, any> 
     }
 
     public manageSearch() {
-        const regex = new RegExp(this.state.searchedValue, 'i');
+        const regex = new RegExp(this.state?.searchedValue || '', 'i');
+        const searchedOptions = this.props.options?.filter(({ value }) => regex.test(value));
+        console.log({
+            searchedValue: this.state.searchedValue,
+            sortedOptions: searchedOptions
+        });
+
         this.setState({
-            searchedOptions: this.props.options?.filter(({ value }) => regex.test(value))
+            searchedOptions: searchedOptions
         });
     }
 
@@ -72,10 +79,10 @@ export class SearchableDropdown extends Component<SearchableDropdownProps, any> 
     }
 
     public searchableDropdown() {
-        return <div ref={this.divRef}>
+        return <div className={'w-100'} ref={this.divRef}>
             <div onClick={() => this.handleWrapperClick()}>
                 <input
-                    className={'input'}
+                    className={'input searchable-input'}
                     onChange={(e) => this.props.handleChange(e)}
                     value={this.props.value as string}
                     type={'text'}
@@ -90,10 +97,8 @@ export class SearchableDropdown extends Component<SearchableDropdownProps, any> 
                     onKeyDownCapture={(e) => this.manageKeyEvent(e)}
                 />
             </div>
-            <div className={`${this.props.className} dropdown-general dropdown dropdown--${true ? 'show' : 'hide'}`}>
-                <ul>
-                    {(this.state.searchedOptions || []).map(option => this.renderOption(option))}
-                </ul>
+            <div className={`${this.props.className} dropdown-general dropdown dropdown--searchable dropdown--${this.state.show ? 'show' : 'hide'} display-flex flex-column`}>
+                {(this.state.searchedOptions || []).map(option => this.renderOption(option))}
             </div>
         </div>;
     }
@@ -117,27 +122,18 @@ export class SearchableDropdown extends Component<SearchableDropdownProps, any> 
         }
     }
 
-    public renderOption({ value, title }: OptionProps) {
+    public renderOption(option: OptionProps) {
+        const { value, title } = option;
         const isChosen = this.props.value === value;
-
-        return <li
+        console.log({ option });
+        return <span
             onFocus={() => console.log('its on focus', value)}
             key={`${value}-${title}`}
             onClick={() => this.props.onClickHandler(isChosen, value)}
-            className={`${isChosen && 'text-color--active'}`}
+            className={`${isChosen && 'text-color--secondary-1 '} fs-14 hover-primary`}
         >
             {title}
-        </li>;
-    }
-
-    public manageOptions() {
-        const hasValue = !!this.props.value;
-        const hasOptions = !!this.state.searchedOptions?.length;
-
-        if (hasValue && hasOptions && this.state.isInFocus) {
-            return 'dropdown dropdown--show';
-        }
-        return 'dropdown dropdown--hide';
+        </span>;
     }
 
     public render() {

@@ -42,9 +42,13 @@ interface NormalWrapperProps extends FieldProps {
     errorMessage: string;
     children: any;
     isInFocus: boolean;
+    isOverflowHidden?: boolean;
 }
 
-const NormalWrapper = (props: NormalWrapperProps) => {
+const InputWrapper = (props: NormalWrapperProps) => {
+    const errorClass = `error-${props.hasError && !props.isInFocus ? 'show' : 'hide'}--div`;
+    const overflowClass = `${props.isOverflowHidden ? '' : 'overflow-hidden'}`;
+    const wrapperClasses = `position-center input-wrapper ${props.wrapperClasses} ${errorClass} ${overflowClass}`;
     return <div
         className={`display-flex flex-column ${props.className}`}
         ref={props.prodRef}
@@ -55,9 +59,7 @@ const NormalWrapper = (props: NormalWrapperProps) => {
         >
             {props.label}
         </label>}
-        <div
-            className={`position-center input-wrapper overflow-hidden ${props.wrapperClasses} error-${props.hasError && !props.isInFocus ? 'show' : 'hide'}--div`}
-        >
+        <div className={wrapperClasses}>
             {props.children}
         </div>
         {!!props.hasError && !props.isInFocus && <small className={'error-show'}>{props.errorMessage || props.errorMessage}</small>}
@@ -177,7 +179,14 @@ export const Input = (props: FieldProps) => {
 
     const element = props?.element || '';
 
-    return element === CHECKBOX || element === TEXTAREA
-        ? manageInputType(element)
-        : <NormalWrapper {...props} {...{ prodRef, hasError, errorMessage, isInFocus }}>{manageInputType(element)}</NormalWrapper>;
+    switch (element) {
+        case CHECKBOX:
+            return manageInputType(element);
+        case TEXTAREA:
+            return manageInputType(element);
+        case SEARCHABLE_DROPDOWN:
+            return <InputWrapper {...props} {...{ prodRef, hasError, errorMessage, isInFocus }} isOverflowHidden={true}>{manageInputType(element)}</InputWrapper>;
+        default:
+            return <InputWrapper {...props} {...{ prodRef, hasError, errorMessage, isInFocus }}>{manageInputType(element)}</InputWrapper>;
+    }
 };

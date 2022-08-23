@@ -82,6 +82,11 @@
         opacity: 0;
         z-index: -4;
     }
+
+    &--searchable {
+        left: -1px;
+        width: 100%;
+    }
 }
 
 .dropdown-general {
@@ -92,6 +97,7 @@
     border-radius: 4px;
     box-shadow: 1px 11px 8px 3px var(--color-shadow);
     min-width: 120px;
+
 }
 
 .question-button {
@@ -130,4 +136,13 @@ textarea {
         max-width: 100%;
         object-fit: contain;
     }
+}
+
+.searchable-input {
+    color: var(--color-secondary-1);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+    font-family: 'Oswald', sans-serif;
 }
