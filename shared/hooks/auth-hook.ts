@@ -65,7 +65,7 @@ export const useAuth = () => {
         redirect('/');
     };
 
-    // TODO -> Will need an expiry ddate. make sure to use my own date manager.
+    // TODO -> Will need an expiry date. make sure to use my own date manager.
     const signin = (userData: UserProps) => {
         setToken(userData?.token);
         setUserId(userData?.userId);
@@ -87,12 +87,8 @@ export const useAuth = () => {
 
     const whoami = async (type: UserType) => {
         try {
-            console.log({ type });
-            return;
             const endpoint = getEndpoint(type);
-            console.log({ type });
             const request = new Repository(token, 'api');
-            console.log({ type });
             const response = await request.fetch(endpoint, 'GET');
 
             setUserData(response.userData);

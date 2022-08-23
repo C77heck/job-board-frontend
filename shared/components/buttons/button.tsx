@@ -15,6 +15,7 @@ export interface ButtonProps {
 }
 
 export const Button = (props: ButtonProps) => {
+    const width = props.isLoading ? 15 : 0;
     return <button
         type={props.type || 'button'}
         className={`${getButtonType(props.buttonStyle || '')} ${props.className} position-center`}
@@ -23,11 +24,9 @@ export const Button = (props: ButtonProps) => {
         disabled={props.disabled}
         onClick={props.onClick}
     >
-
-        {props.isLoading
-            ? <span className={`${props.textColor} fs-13 display-flex`}><SpinnerIcon width={15}/><span
-                className={'pl-10 pt-1'}>Loading...</span></span>
-            : <span className={`${props.textColor} position-center`}>{props.title}</span>}
+        <span className={`${props.textColor} position-center`}>
+            <SpinnerIcon className={'move-right-6'} width={width}/>{props.title}
+        </span>
     </button>;
 };
 

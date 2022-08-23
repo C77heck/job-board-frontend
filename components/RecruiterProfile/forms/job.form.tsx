@@ -76,6 +76,24 @@ export const JobForm = (props: JobCardProps & any) => {
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
         }),
+        jobType: new Field({
+            name: 'jobType',
+            label: 'Type of job',
+            value: props?.jobType || [],
+            options: ['Permanent', 'Remote', 'Contract', 'Part Time', 'Temporary'],
+            className: 'col-100 mt-11',
+            labelClass: 'fs-15 fw--700 mb-2',
+            element: 'searchable_dropdown',
+        }),
+        industryType: new Field({
+            name: 'industryType',
+            label: 'Type of industry',
+            value: props?.industryType || [],
+            options: ['Permanent', 'Remote', 'Contract', 'Part Time', 'Temporary'],
+            className: 'col-100 mt-11',
+            labelClass: 'fs-15 fw--700 mb-2',
+            element: 'searchable_dropdown',
+        }),
     }, 'user-register'));
 
     useEffect(() => {
@@ -121,6 +139,8 @@ export const JobForm = (props: JobCardProps & any) => {
             </div>
             <div className={'col-md-50 mx-md-20 col-100'}>
                 <Input {...form?.fields?.expiresOn} namespace={form.namespace}/>
+                <Input {...form?.fields?.jobType} namespace={form.namespace}/>
+                <Input {...form?.fields?.industryType} namespace={form.namespace}/>
                 <Input {...form?.fields?.isPremium} namespace={form.namespace}/>
                 <Input {...form?.fields?.description} namespace={form.namespace}/>
             </div>

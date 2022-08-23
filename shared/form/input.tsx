@@ -9,7 +9,7 @@ import { TextInput } from './text-input';
 import { Textarea } from './textarea';
 import { ValidatorInterface } from './validators/validator-interface';
 
-export interface FieldProps {
+export interface FieldProps<TOptions = string[]> {
     type: string;
     name: string;
     id: string | undefined;
@@ -24,7 +24,7 @@ export interface FieldProps {
     getData: (value: any, hasError: boolean) => void;
     errorMessage: string;
     label: string;
-    options: string[];
+    options: any[];
     element: 'text' | 'dropdown' | 'searchable' | 'searchable_dropdown' | 'textarea' | 'checkbox' | 'datepicker' | string;
     isNumberOnly: boolean;
     value: string | string[] | null;
@@ -130,10 +130,8 @@ export const Input = (props: FieldProps) => {
                 />; // will need the dropdown
             case SEARCHABLE_DROPDOWN:
                 return <SearchableDropdown
-                    onFocus={() => setIsInFocus(true)}
-                    onBlur={() => setIsInFocus(false)}
+                    currentValue={'something'}
                     {...props}
-                    divRef={prodRef}
                     handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                     value={value}
                     onClickHandler={(isChosen: boolean, value: string) => onClickHandler(isChosen, value)}

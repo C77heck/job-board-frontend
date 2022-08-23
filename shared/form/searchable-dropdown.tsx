@@ -1,15 +1,29 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+import { FieldProps } from './input';
 
 export interface OptionProps {
-    id: number | string;
-    name: string;
-    symbol: string;
-    price: number;
+    value: string;
+    title: string;
 }
 
-export class SearchableDropdown extends Component<any, any> {
-    public state = { value: '', hasError: false, errorMessage: '', searchedOptions: [], isInFocus: false };
-    public divRef = this.props.divRef;
+export interface SearchableDropdownProps extends FieldProps<OptionProps> {
+    currentValue: string;
+    handleChange: (e: any) => void;
+    onClickHandler: (onChange: any, value: string) => void;
+}
+
+export class SearchableDropdown extends Component<SearchableDropdownProps, any> {
+    public state = {
+        show: false,
+        value: '',
+        hasError: false,
+        errorMessage: '',
+        searchedOptions: [],
+        isInFocus: false,
+        searchedValue: ''
+    };
+
+    public divRef: React.RefObject<any> = React.createRef();
 
     constructor(props: any) {
         super(props);
@@ -33,49 +47,51 @@ export class SearchableDropdown extends Component<any, any> {
     }
 
     public handleClickOutside(event: any) {
-        if (!this.divRef.current.contains(event.target)) {
-            this.setState({ isInFocus: false });
+        console.log(this.divRef);
+        if (!this.divRef?.current?.contains(event.target)) {
+            this.setState({ isInFocus: false, state: false });
         }
     }
 
     public componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
-        if (prevProps.value !== this.props.value) {
+        if (prevState.searchedValue !== this.state.searchedValue) {
             this.manageSearch();
         }
     }
 
     public manageSearch() {
-        const regex = new RegExp(this.props.value, 'i');
+        const regex = new RegExp(this.state.searchedValue, 'i');
         this.setState({
-            searchedOptions: this.props.options?.filter(({ name }: OptionProps) => regex.test(name))
+            searchedOptions: this.props.options?.filter(({ value }) => regex.test(value))
         });
     }
 
     public searchableDropdown() {
-        return <Fragment>
-            <input
-                className={'input'}
-                onChange={(e) => this.props.handleChange(e)}
-                value={this.props.value}
-                type={this.props.type || 'text'}
-                name={this.props.name}
-                id={this.props.id}
-                readOnly={this.props.readOnly}
-                required={this.props.required}
-                placeholder={this.props.placeholder}
-                autoComplete={this.props.autoComplete}
-                disabled={this.props.disabled}
-                onFocus={() => this.setState({ isInFocus: true })}
-                onKeyDown={(e) => this.manageKeyEvent(e)}
-                onKeyDownCapture={(e) => this.manageKeyEvent(e)}
-                onKeyPress={(e) => this.manageKeyEvent(e)}
-            />
-            <div className={`input-dropdown ${this.manageOptions()}`}>
+        return <div ref={this.divRef}>
+            <div onClick={() => this.setState({ show: !this.state.show })}>
+                <input
+                    className={'input'}
+                    onChange={(e) => this.props.handleChange(e)}
+                    value={this.props.value as string}
+                    type={this.props.type || 'text'}
+                    name={this.props.name}
+                    id={this.props.id}
+                    readOnly={this.props.readOnly}
+                    required={this.props.required}
+                    placeholder={this.props.placeholder}
+                    autoComplete={this.props.autoComplete}
+                    disabled={this.props.disabled}
+                    onFocus={() => this.setState({ isInFocus: true })}
+                    onKeyDown={(e) => this.manageKeyEvent(e)}
+                    onKeyDownCapture={(e) => this.manageKeyEvent(e)}
+                />
+            </div>
+            <div className={`${this.props.className} dropdown-general dropdown dropdown--${this.state.show ? 'show' : 'hide'}`}>
                 <ul>
                     {(this.state.searchedOptions || []).map(option => this.renderOption(option))}
                 </ul>
             </div>
-        </Fragment>;
+        </div>;
     }
 
     public manageKeyEvent({ key }: React.KeyboardEvent<HTMLInputElement>) {
@@ -97,16 +113,16 @@ export class SearchableDropdown extends Component<any, any> {
         }
     }
 
-    public renderOption({ name, symbol }: OptionProps) {
-        const isChosen = this.props.value === name;
+    public renderOption({ value, title }: OptionProps) {
+        const isChosen = this.props.value === value;
 
         return <li
-            onFocus={() => console.log('its on focus', name)}
-            key={`${name}-${symbol}`}
-            onClick={() => this.props.onClickHandler(isChosen, name)}
+            onFocus={() => console.log('its on focus', value)}
+            key={`${value}-${title}`}
+            onClick={() => this.props.onClickHandler(isChosen, value)}
             className={`${isChosen && 'text-color--active'}`}
         >
-            {name}
+            {title}
         </li>;
     }
 
