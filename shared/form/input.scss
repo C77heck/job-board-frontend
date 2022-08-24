@@ -148,3 +148,29 @@ textarea {
     display: block;
     font-family: 'Oswald', sans-serif;
 }
+
+.search-bar-input {
+    border: solid 1px var(--text-color-light) !important;
+    border-radius: 4px;
+    padding: 5px;
+    height: 30px !important;
+    margin: 5px 0;
+    font-family: 'Oswald', sans-serif;
+    color: var(--text-color-medium);
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.arrow-wrapper {
+    padding: 0 4px;
+    border-left: solid 1px var(--color-dark-2)
+}
+
+.select-input-active-option {
+    border: 1px solid var(--color-secondary-1);
+    padding: 1px 3px;
+    background-color: #15bd9e33;
+    color: var(--color-secondary-1) !important;
+}

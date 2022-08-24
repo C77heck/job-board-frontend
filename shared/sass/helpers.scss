@@ -461,6 +461,9 @@
         .#{fs- + $i} {
             font-size: $i + px !important;
         }
+        .#{line-height- + $i} {
+            line-height: $i + px !important;
+        }
         .#{fs-sm- + $i} {
             @media (min-width: $sm) {
                 font-size: $i + px !important;

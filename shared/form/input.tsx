@@ -4,7 +4,7 @@ import { FormContext } from '../contexts/form.context';
 import { Checkbox } from './checkbox';
 import { Datepicker } from './datepicker';
 import { RangeInput } from './range-input';
-import { SearchableDropdown } from './searchable-dropdown';
+import { OptionProps, SearchableDropdown } from './searchable-dropdown';
 import { TextInput } from './text-input';
 import { Textarea } from './textarea';
 import { ValidatorInterface } from './validators/validator-interface';
@@ -68,7 +68,7 @@ const InputWrapper = (props: NormalWrapperProps) => {
 
 export const Input = (props: FieldProps) => {
     const [hasError, setHasError] = useState(false);
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState<any>('');
     const [isInFocus, setIsInFocus] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
     const prodRef: RefObject<HTMLDivElement> = React.createRef();
@@ -108,7 +108,7 @@ export const Input = (props: FieldProps) => {
         setValue(val);
     };
 
-    const onClickHandler = (isChosen: boolean, option: string) => {
+    const onClickHandler = (isChosen: boolean, option: OptionProps) => {
         setValue(isChosen ? '' : option);
     };
 
@@ -136,7 +136,7 @@ export const Input = (props: FieldProps) => {
                     {...props}
                     handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                     value={value}
-                    onClickHandler={(isChosen: boolean, value: string) => onClickHandler(isChosen, value)}
+                    onClickHandler={(isChosen: boolean, option: OptionProps) => onClickHandler(isChosen, option)}
                 />;
             case TEXTAREA:
                 return <Textarea
