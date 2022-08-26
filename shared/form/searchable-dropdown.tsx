@@ -69,8 +69,6 @@ export class SearchableDropdown extends Component<SearchableDropdownProps, Searc
             this.manageSearch();
         }
         if (prevState.show !== this.state.show) {
-            console.log('triggered', this.state.show);
-
             this.assignKeyDownListener(this.state.show);
         }
     }
