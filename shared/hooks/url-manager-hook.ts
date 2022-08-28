@@ -7,5 +7,11 @@ export const useUrlManagerHook = () => {
         queryManager.pushState();
     };
 
-    return { addToUrl };
+    const addMultiple = (object: any) => {
+        const queryManager = new QueryManager(window.location.search, window.location);
+        queryManager.addObj(object);
+        queryManager.pushState();
+    };
+
+    return { addToUrl, addMultiple };
 };

@@ -3,11 +3,14 @@ import { useEffect, useState } from 'react';
 import { timer } from 'rxjs';
 
 export const UrlListener = (props: { urlChanged: () => void }) => {
-    const [$timerObservable] = useState(timer(0, 1500));
+    const [$timerObservable] = useState(timer(0, 300));
     const [url, setUrl] = useState('');
 
     const checkUrl = () => {
-        setUrl(window.location.search);
+        const searchUrl = window.location.search;
+        if (url !== searchUrl) {
+            setUrl(searchUrl);
+        }
     };
 
     useEffect(() => {
@@ -17,6 +20,10 @@ export const UrlListener = (props: { urlChanged: () => void }) => {
     }, []);
 
     useEffect(() => {
+        if (!url) {
+            return;
+        }
+
         props.urlChanged();
     }, [url]);
 

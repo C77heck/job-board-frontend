@@ -18,7 +18,7 @@ export interface Pagination {
 
 export interface PaginatorProps {
     maxLength?: number;
-    fetchPage: (page: number) => void;
+    pageChange: (page: number) => void;
     total: number;
     currentPage: number;
 }
@@ -33,6 +33,14 @@ export class Paginator extends React.Component<PaginatorProps, any> {
         middle: [],
         end: null,
     };
+
+    public state = {
+        activeItem: NaN,
+    };
+
+    public componentDidMount() {
+        this.setState({ activeItem: this.props.currentPage });
+    }
 
     public getMiddlePaginatorValues(pages: number[], page: number): number[] {
         const trimmedPages = pages.slice(1, pages.length - 1).map(i => i);
@@ -83,17 +91,23 @@ export class Paginator extends React.Component<PaginatorProps, any> {
         };
     }
 
-    public renderOption({ item, currentPage, isDot }: any) {
-        const classes = this.getClasses(currentPage === item, 'background-color--secondary-1 color--light', 'hover-primary');
+    public renderOption({ item, isDot }: any) {
+        const classes = this.getClasses(this.state.activeItem === item, 'background-color--secondary-1 color--light', 'hover-primary');
 
         return <div key={item} className={`px-2 min-width-fit-content w-px-30 ${classes} position-center border-radius-px-4`}>
             <a
-                className={'text--paginator cursor-pointer'}
-                onClick={() => this.props.fetchPage(item)}
+                className={'text--paginator cursor-pointer w-100 position-center'}
+                onClick={() => this.manageOnChange(item)}
             >
-                {!isDot ? item + 1 : '...'}
+                <span>{!isDot ? item + 1 : '...'}</span>
             </a>
         </div>;
+    }
+
+    public manageOnChange(item: number) {
+        this.setState({ activeItem: item });
+
+        this.props.pageChange(item);
     }
 
     public renderNext() {
@@ -103,7 +117,7 @@ export class Paginator extends React.Component<PaginatorProps, any> {
 
         return <div
             className={'px-10 cursor-pointer display-flex align-items-end'}
-            onClick={() => isActive && this.props.fetchPage(currentPage + 1)}
+            onClick={() => isActive && this.manageOnChange(currentPage + 1)}
         >
             <ArrowRight
                 className={`${colour} px-10 cursor-pointer`}
@@ -119,7 +133,7 @@ export class Paginator extends React.Component<PaginatorProps, any> {
 
         return <div
             className={'px-10 cursor-pointer display-flex align-items-end'}
-            onClick={() => isActive && this.props.fetchPage(currentPage - 1)}
+            onClick={() => isActive && this.manageOnChange(currentPage - 1)}
         >
             <ArrowLeft
                 className={`${colour} px-10 cursor-pointer`}

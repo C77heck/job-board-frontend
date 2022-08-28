@@ -5,37 +5,36 @@ import { JobListings } from '../components/AdsListScreen/Components/job-listings
 import { UrlListener } from '../shared/components/navigation/libs/url-listener';
 import { Paginator } from '../shared/components/paginator/paginator';
 import { useClient } from '../shared/hooks/client';
+import { useUrlManagerHook } from '../shared/hooks/url-manager-hook';
 import { BaseLayoutWidth } from '../shared/layouts/base-layout-width';
 import { BaseLayout } from '../shared/layouts/base.layout';
 import { QueryManager } from '../shared/libs/query.manager';
 // TODO -> NEED TO CHECK THE URL FOR FILTERS. MAKE THE OTHER FILTERS THE SAME AND PERHAPS TURN IT INTO BASE64
 const AdsList: NextPage = (props: any) => {
     const { client, error, isLoading } = useClient();
+    const { addMultiple } = useUrlManagerHook();
+
     const [paginatedData, setPaginatedData] = useState({
         items: [],
         limit: 6,
         total: 0,
         page: 0
     });
+
     const [pagination, setPagination] = useState({
         limit: 6,
         total: 0,
         page: 0
     });
 
-    const getJobs = (data: any) => {
-        setPaginatedData(data);
-    };
+    useEffect(() => {
+        addMultiple(pagination);
+    }, [pagination]);
 
-    const paginate = (page: number) => {
-        setPagination({ ...pagination, page });
-    };
-
-    // TODO -> BUILD A LISTENER THAT CHECKS THE QUERY PERIODICALLY
     const getJobAds = async () => {
         try {
             const filters = QueryManager.decodeBase64(window.location.search);
-            // TODO -> SORT AND PAGINATION TO DO
+
             const response = await client('/ads', 'GET', {}, { filters, pagination });
 
             if (!response) {
@@ -48,20 +47,12 @@ const AdsList: NextPage = (props: any) => {
         }
     };
 
-    useEffect(() => {
-        (async () => await getJobAds())();
-    }, []);
-
-    useEffect(() => {
-        (async () => await getJobAds())();
-    }, [pagination]);
-
     return <BaseLayout isLoading={isLoading} auth={false} meta={{ title: 'jobs', keywords: 'jobs', description: 'jobs' }}>
         <BaseLayoutWidth>
             <UrlListener urlChanged={() => getJobAds()}/>
             <div className={'row display-flex justify-content-center align-items-start mt-150 mb-50'}>
                 <div className={'col-20'}>
-                    <FilterColumn passData={(data: any) => getJobs(data)}/>
+                    <FilterColumn passData={(data: any) => setPaginatedData(data)}/>
                 </div>
                 <div className={'col-80 pl-40 h-100'}>
                     <JobListings jobs={paginatedData.items}/>
@@ -72,7 +63,7 @@ const AdsList: NextPage = (props: any) => {
                         <Paginator
                             total={paginatedData.total}
                             currentPage={paginatedData.page}
-                            fetchPage={paginate}
+                            pageChange={(page) => setPagination({ ...pagination, page })}
                         />
                     </div>
                 </div>

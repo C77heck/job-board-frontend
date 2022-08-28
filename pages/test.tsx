@@ -1,11 +1,11 @@
 import type { NextPage } from 'next';
 import * as React from 'react';
-import { useEffect, useRef, useState } from 'react';
-import { EventManager } from '../components/event.manager';
+import { useEffect } from 'react';
 import { CONSTANTS } from '../shared/constants';
 import { Field } from '../shared/form/field';
 import { FormStructure } from '../shared/form/form.structure';
 import { Input } from '../shared/form/input';
+import { useEvent } from '../shared/hooks/event-hook';
 
 export interface TestObservable {
     name: string;
@@ -24,21 +24,15 @@ const Test: NextPage = () => {
             element: 'searchable_dropdown',
         }),
     }, 'something');
-    const ref = useRef(null);
-    const [event, setEvent] = useState<EventManager>();
+    const { event, emit, unsubscribe, subscribe } = useEvent('synthetic');
     useEffect(() => {
-        const event = new EventManager('synthetic');
-        setEvent(event);
-    }, []);
+        subscribe((e) => console.log('hook getting triggered', (e as CustomEvent).detail));
 
-    useEffect(() => {
-        const ev = new EventManager('synthetic');
-
-        ev?.subscribe(() => console.log('got listened'));
+        return () => unsubscribe();
     }, []);
 
     return <div className={'w-100 position-center'}>
-        <div onClick={() => event?.emit()} ref={ref} className={'w-px-300'}>
+        <div onClick={() => emit({ what: 'that' })} className={'w-px-300'}>
             <Input {...form?.fields?.industryType} namespace={form.namespace}/>
         </div>
     </div>;

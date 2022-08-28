@@ -64,7 +64,7 @@ export const SingleUploader = (props: SingleUploaderProps) => {
             const body = { ...fileData, file, compressionQuality: 'high', alt: props.alt };
             setIsLoading(false);
 
-            return await client('/create', 'post', { body: body as any, headers: { 'Content-Type': 'multipart/form-data' } });
+            return await client('/create', 'POST', { body: body as any, headers: { 'Content-Type': 'multipart/form-data' } });
         } catch (e) {
             setIsLoading(false);
         }
