@@ -15,12 +15,14 @@ export const FilterColumn = (props: FilterColumnProps) => {
         companyType: [],
         postedAt: [],
         relatedRoles: [],
+        jobType: [],
+        industryType: [],
     });
     const getFilterOptions = async () => {
         try {
             const filterOptions = await client('/ads/ad-filters');
-
-            setFilterOptions(filterOptions);
+            console.log({ filterOptions });
+            setFilterOptions(filterOptions.filter);
         } catch (e) {
             console.log(e);
         }
@@ -34,6 +36,8 @@ export const FilterColumn = (props: FilterColumnProps) => {
         <Spinner isLoading={isLoading}/>
         <Filters title={'Location'} property={'location'} filters={filterOptions?.location}/>
         <Filters className={'mt-15'} property={'companyType'} title={'Type of Company'} filters={filterOptions?.companyType}/>
+        <Filters className={'mt-15'} property={'industryType'} title={'Industry'} filters={filterOptions?.industryType}/>
+        <Filters className={'mt-15'} property={'jobType'} title={'Job type'} filters={filterOptions?.jobType}/>
         <Filters className={'mt-15'} property={'postedAt'} title={'Date posted'} filters={filterOptions?.postedAt}/>
         <FilterButtons title={'Related roles'} property={'relatedRoles'} filters={filterOptions?.relatedRoles}/>
     </div>;
