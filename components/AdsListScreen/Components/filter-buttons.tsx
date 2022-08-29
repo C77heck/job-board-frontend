@@ -1,6 +1,6 @@
 import { Button } from '../../../shared/components/buttons/button';
 import { useUrlManagerHook } from '../../../shared/hooks/url-manager-hook';
-import { FilterProps } from './filters';
+import { FiltersProps } from './filters';
 
 const Filter = ({ value, title, items, property }: any) => {
     const { addToUrl } = useUrlManagerHook();
@@ -13,7 +13,7 @@ const Filter = ({ value, title, items, property }: any) => {
     />;
 };
 
-export const FilterButtons = ({ title, filters, property }: FilterProps) => {
+export const FilterButtons = ({ title, filters, property }: FiltersProps) => {
     if (!filters) {
         return null;
     }

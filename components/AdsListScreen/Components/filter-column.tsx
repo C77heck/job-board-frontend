@@ -31,7 +31,8 @@ export const FilterColumn = (props: FilterColumnProps) => {
     useEffect(() => {
         (async () => await getFilterOptions())();
     }, []);
-
+    // TODO -> posted_at needs work so that it shows like so: 1 week old, 2 weeks old, month old... and so on.
+    // probably on the backed to create it.
     return <div className={'display-flex flex-column'}>
         <Spinner isLoading={isLoading}/>
         <Filters title={'Location'} property={'location'} filters={filterOptions?.location}/>
