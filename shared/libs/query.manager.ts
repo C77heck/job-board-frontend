@@ -86,6 +86,10 @@ export class QueryManager {
         return encode(JSON.stringify(data));
     }
 
+    public encodeBase64() {
+        return `base=${this.encode(this.getQuery())}`;
+    }
+
     public decode(base64: string) {
         if (!base64) {
             return base64;

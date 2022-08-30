@@ -26,7 +26,7 @@ const Test: NextPage = () => {
     const { addToUrl } = useUrlManagerHook();
 
     return <div className={'w-100 position-center'}>
-        <div onClick={() => addToUrl('suck', Math.random())} className={'w-px-300'}>
+        <div onClick={() => addToUrl('suck', Math.random().toString())} className={'w-px-300'}>
             <Input {...form?.fields?.industryType} namespace={form.namespace}/>
         </div>
     </div>;
