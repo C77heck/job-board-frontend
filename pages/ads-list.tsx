@@ -34,7 +34,7 @@ const AdsList: NextPage = (props: any) => {
     const getJobAds = async () => {
         try {
             const filters = QueryManager.decodeBase64(window.location.search);
-
+            console.log(filters, window.location.search);
             const response = await client('/ads', 'GET', {}, { filters, pagination });
 
             if (!response) {
@@ -47,10 +47,10 @@ const AdsList: NextPage = (props: any) => {
         }
     };
 
-    return <BaseLayout isLoading={isLoading} auth={false} meta={{ title: 'jobs', keywords: 'jobs', description: 'jobs' }}>
+    return <BaseLayout showSearchBar={true} isLoading={isLoading} auth={false} meta={{ title: 'jobs', keywords: 'jobs', description: 'jobs' }}>
         <BaseLayoutWidth>
             <UrlListener urlChanged={() => getJobAds()}/>
-            <div className={'row display-flex justify-content-center align-items-start mt-150 mb-50'}>
+            <div className={'row display-flex justify-content-center align-items-start mt-220 mb-50'}>
                 <div className={'col-20'}>
                     <FilterColumn passData={(data: any) => setPaginatedData(data)}/>
                 </div>

@@ -3,7 +3,7 @@ import { Backdrop } from '../modal/backdrop';
 import { Portal } from '../portal';
 
 export interface SpinnerProps {
-    isLoading: boolean;
+    isLoading?: boolean;
     asOverlay?: boolean;
 }
 
