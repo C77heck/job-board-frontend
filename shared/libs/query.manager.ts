@@ -35,7 +35,7 @@ export class QueryManager {
         const keys = Object.keys(obj || {});
 
         for (const key of keys) {
-            this.add(`${parent}[${key}]`, `${obj?.[key as keyof T]}`);
+            this.query.set(`${parent}[${key}]`, `${obj?.[key as keyof T]}`);
         }
     }
 
@@ -43,17 +43,16 @@ export class QueryManager {
         const keys = Object.keys(obj || {});
 
         for (const key of keys) {
-            this.add(key, `${obj[key as keyof T]}`);
+            this.query.set(key, `${obj[key as keyof T]}`);
         }
     }
 
     public add(prop: string, value: string) {
-        const query = this.getAsObject();
-
-        const queryAsObject = this.decode(query?.base || '');
-
-        queryAsObject[prop] = value;
         this.query.set(prop, value);
+
+        if (this.url) {
+            this.pushState();
+        }
     }
 
     public has(prop: string): boolean {
@@ -87,14 +86,28 @@ export class QueryManager {
         return encode(JSON.stringify(data));
     }
 
-    public encodeBase64() {
-        return `base=${this.encode(this.getAsObject())}`;
-    }
-
     public decode(base64: string) {
+        if (!base64) {
+            return base64;
+        }
+
         const decodedString = decode(base64);
 
         return JSON.parse(decodedString);
+    }
+
+    public addAsBase64(key: string, value: string) {
+        try {
+            const decodedQuery = QueryManager.decodeBase64(this.getQuery());
+
+            const secondaryManager = new QueryManager(decodedQuery);
+
+            secondaryManager.addObj({ ...decodedQuery, [key]: value });
+
+            this.add('base', this.encode(secondaryManager.getQuery()));
+        } catch (e) {
+            return null;
+        }
     }
 
     public static decodeBase64(queryString: string) {
@@ -105,7 +118,7 @@ export class QueryManager {
 
             const queryAsObject = manager.decode(query?.base || '');
 
-            return queryAsObject;
+            return !!queryAsObject ? queryAsObject : {};
         } catch (e) {
             return null;
         }
