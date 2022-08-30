@@ -48,6 +48,11 @@ export class QueryManager {
     }
 
     public add(prop: string, value: string) {
+        const query = this.getAsObject();
+
+        const queryAsObject = this.decode(query?.base || '');
+
+        queryAsObject[prop] = value;
         this.query.set(prop, value);
     }
 
@@ -91,7 +96,7 @@ export class QueryManager {
 
         return JSON.parse(decodedString);
     }
-    
+
     public static decodeBase64(queryString: string) {
         try {
             const manager = new QueryManager(queryString);
