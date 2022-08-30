@@ -373,6 +373,10 @@
                 color: var(--color-light) !important;
             }
 
+            &:hover div {
+                border-color: var(--color-light) !important;
+            }
+
             &:active span {
                 transform: translateY(1px);
             }

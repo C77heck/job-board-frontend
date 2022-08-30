@@ -15,11 +15,14 @@ export interface FilterProps {
 
 const Filter = ({ filter, property }: FilterProps) => {
     const { title, value, items } = filter;
+    console.log({ items });
     const { addToUrl } = useUrlManagerHook();
 
     return <div onClick={() => addToUrl(property, value)} className={'filter-block--item col-100 py-5 px-13 display-flex hover-secondary--background'}>
         <span className={'fs-15'}>{title}</span>
-        <span className={'fs-10 pl-7 text-color--yellow'}>{items}</span>
+        <div className={'filter-items-counter'}>
+            <span className={'fs-10 text-color--yellow'}>{items}</span>
+        </div>
     </div>;
 };
 
