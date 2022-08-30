@@ -110,6 +110,20 @@ export class QueryManager {
         }
     }
 
+    public addMultipleAsBase64(obj: any) {
+        try {
+            const decodedQuery = QueryManager.decodeBase64(this.getQuery());
+
+            const secondaryManager = new QueryManager(decodedQuery);
+
+            secondaryManager.addObj({ ...decodedQuery, ...obj });
+
+            this.add('base', this.encode(secondaryManager.getQuery()));
+        } catch (e) {
+            return null;
+        }
+    }
+
     public static decodeBase64(queryString: string) {
         try {
             const manager = new QueryManager(queryString);
