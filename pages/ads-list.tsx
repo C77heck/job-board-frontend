@@ -8,6 +8,7 @@ import { useClient } from '../shared/hooks/client';
 import { useUrlManagerHook } from '../shared/hooks/url-manager-hook';
 import { BaseLayoutWidth } from '../shared/layouts/base-layout-width';
 import { BaseLayout } from '../shared/layouts/base.layout';
+import { extractFilters } from '../shared/libs/helpers';
 import { QueryManager } from '../shared/libs/query.manager';
 // TODO -> NEED TO CHECK THE URL FOR FILTERS. MAKE THE OTHER FILTERS THE SAME AND PERHAPS TURN IT INTO BASE64
 const AdsList: NextPage = (props: any) => {
@@ -33,9 +34,8 @@ const AdsList: NextPage = (props: any) => {
 
     const getJobAds = async () => {
         try {
-            const filters = QueryManager.decodeBase64(window.location.search);
-            console.log({ filters }, window.location.search);
-            // todo remove the pagination bits from the urls
+            const query = QueryManager.decodeBase64(window.location.search);
+            const filters = extractFilters(query);
             const response = await client('/ads', 'GET', {}, { pagination, filters });
 
             if (!response) {

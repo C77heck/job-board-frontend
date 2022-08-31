@@ -117,3 +117,22 @@ export const saveLogs = (data: any) => {
         console.log({ log_saving_failed: e });
     }
 };
+
+export const extractFilters = (query: any) => {
+    const filters: any = {};
+    for (const prop in query) {
+        switch (prop) {
+            case 'page':
+                break;
+            case 'limit':
+                break;
+            case 'total':
+                break;
+            default:
+                filters[prop] = query[prop];
+                break;
+        }
+    }
+
+    return filters;
+};

@@ -71,7 +71,6 @@ export class Repository {
                         queryManager.addNestedObject(prop, query[prop]);
                         break;
                     case 'filters':
-                        console.log({ prop, value: query[prop] });
                         queryManager.addNestedObject(prop, query[prop]);
                         break;
                     default:

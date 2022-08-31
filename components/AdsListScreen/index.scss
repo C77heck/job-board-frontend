@@ -46,3 +46,18 @@
     align-items: center;
     margin-left: 5px;
 }
+
+.filter {
+    &--active {
+        background-color: var(--color-secondary-1);
+        color: white;
+
+        & span {
+            color: white;
+        }
+
+        & div {
+            border-color: white;
+        }
+    }
+}
