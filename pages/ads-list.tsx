@@ -35,6 +35,7 @@ const AdsList: NextPage = (props: any) => {
         try {
             const filters = QueryManager.decodeBase64(window.location.search);
             console.log({ filters }, window.location.search);
+            // todo remove the pagination bits from the urls
             const response = await client('/ads', 'GET', {}, { pagination, filters });
 
             if (!response) {
