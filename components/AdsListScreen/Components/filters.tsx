@@ -15,7 +15,6 @@ export interface FilterProps {
 
 const Filter = ({ filter, property }: FilterProps) => {
     const { title, value, items } = filter;
-    console.log({ items });
     const { addToUrl } = useUrlManagerHook();
 
     return <div onClick={() => addToUrl(property, value)} className={'filter-block--item col-100 py-5 px-13 display-flex hover-secondary--background'}>

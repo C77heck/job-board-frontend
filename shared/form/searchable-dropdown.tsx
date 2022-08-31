@@ -134,7 +134,7 @@ export class SearchableDropdown extends Component<SearchableDropdownProps, Searc
     public manageSteps(direction: 'up' | 'down') {
         try {
             const index = this.getIndex(direction);
-            console.log({ index });
+
             switch (direction) {
                 case 'up':
                     this.props.handleChange({ target: { value: this.state.searchedOptions[this.getIndex(direction)] } });

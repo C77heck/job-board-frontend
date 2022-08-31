@@ -103,7 +103,7 @@ export const saveLogs = (data: any) => {
 
     try {
         const existingData: { log: string; created_at: string }[] = storage.get();
-        console.log(data);
+
         if (!existingData) {
             storage.set([{ log: data, created_at: moment().toString() }]);
         }

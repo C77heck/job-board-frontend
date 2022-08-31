@@ -21,7 +21,7 @@ export const FilterColumn = (props: FilterColumnProps) => {
     const getFilterOptions = async () => {
         try {
             const filterOptions = await client('/ads/ad-filters');
-            console.log({ filterOptions });
+
             setFilterOptions(filterOptions.filter);
         } catch (e) {
             console.log(e);

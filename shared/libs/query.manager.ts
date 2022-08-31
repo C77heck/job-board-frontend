@@ -97,7 +97,9 @@ export class QueryManager {
 
         const decodedString = decode(base64);
 
-        return JSON.parse(decodedString);
+        const manager = new QueryManager(decodedString);
+
+        return manager.getAsObject();
     }
 
     public addAsBase64(key: string, value: string) {
@@ -138,6 +140,7 @@ export class QueryManager {
 
             return !!queryAsObject ? queryAsObject : {};
         } catch (e) {
+            console.log(e);
             return null;
         }
     }

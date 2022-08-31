@@ -59,14 +59,19 @@ export class Repository {
         }
 
         const queryManager = new QueryManager();
-
+        console.log({ query });
         for (const prop in query) {
+            console.log({ prop });
             if (query.hasOwnProperty(prop)) {
                 switch (prop) {
                     case 'pagination':
                         queryManager.addNestedObject(prop, query[prop]);
                         break;
                     case 'sort':
+                        queryManager.addNestedObject(prop, query[prop]);
+                        break;
+                    case 'filters':
+                        console.log({ prop, value: query[prop] });
                         queryManager.addNestedObject(prop, query[prop]);
                         break;
                     default:

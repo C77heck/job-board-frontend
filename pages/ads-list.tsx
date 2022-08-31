@@ -34,8 +34,8 @@ const AdsList: NextPage = (props: any) => {
     const getJobAds = async () => {
         try {
             const filters = QueryManager.decodeBase64(window.location.search);
-            console.log(filters, window.location.search);
-            const response = await client('/ads', 'GET', {}, { filters, pagination });
+            console.log({ filters }, window.location.search);
+            const response = await client('/ads', 'GET', {}, { pagination, filters });
 
             if (!response) {
                 throw new Error('Something went wrong');
