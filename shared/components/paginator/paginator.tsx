@@ -27,7 +27,7 @@ export class Paginator extends React.Component<PaginatorProps, any> {
     public paginationMap: PaginationProp = {
         startDot: false,
         startDotRef: false,
-        start: 1,
+        start: 0,
         endDot: false,
         endDotRef: false,
         middle: [],
@@ -61,7 +61,7 @@ export class Paginator extends React.Component<PaginatorProps, any> {
 
     public getPaginationMap(total: number, page: number = 1): PaginationProp {
         const paginationMaxLength = this.props?.maxLength || 7;
-        if (total === 1) {
+        if (total <= 1) {
             return this.paginationMap;
         }
 

@@ -29,6 +29,7 @@ const AdsList: NextPage = (props: any) => {
     });
 
     useEffect(() => {
+        console.log(pagination);
         addMultiple(pagination);
     }, [pagination]);
 

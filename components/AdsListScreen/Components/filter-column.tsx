@@ -17,6 +17,7 @@ export const FilterColumn = (props: FilterColumnProps) => {
         relatedRoles: [],
         jobType: [],
         industryType: [],
+        salaries: [],
     });
     const getFilterOptions = async () => {
         try {
@@ -39,6 +40,7 @@ export const FilterColumn = (props: FilterColumnProps) => {
         <Filters className={'mt-15'} property={'industryType'} title={'Industry'} filters={filterOptions?.industryType}/>
         <Filters className={'mt-15'} property={'jobType'} title={'Job type'} filters={filterOptions?.jobType}/>
         <Filters className={'mt-15'} property={'postedAt'} title={'Date posted'} filters={filterOptions?.postedAt}/>
+        <Filters className={'mt-15'} property={'salaries'} title={'Salary'} filters={filterOptions?.salaries}/>
         <FilterButtons title={'Related roles'} property={'relatedRoles'} filters={filterOptions?.relatedRoles}/>
     </div>;
 };
