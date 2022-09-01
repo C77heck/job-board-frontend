@@ -44,9 +44,10 @@ export const numArray = (number: number, value: any = false) => {
 export const redirect = (location: string, inSite: boolean = true) => {
     if (inSite) {
         const baseUrl = window.location.origin;
-        window.location.replace(`${baseUrl}${location}`);
+
+        window.location.href = `${baseUrl}${location}`;
     } else {
-        window.location.replace(location);
+        window.location.href = location;
     }
 };
 
