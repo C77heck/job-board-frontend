@@ -11,14 +11,6 @@ export interface AdCardProps {
     isLoading?: boolean;
 }
 
-// TODO -> SEARCH BAR FOR THE NAVBAR probably just stuck one on top and show only if on this page.
-// BACK BUTTON AND OR NEXT ON THE RIGHT
-// THE CARD: TITLE, DETAILS WITH ICONS
-// ACTION BUTTONS BOTH HERE AND ON THE BOTTOM OF THE CARD
-// ALERT CREATION, APPLY, EDIT APPLICATION, SAVE
-// RELATED JOBS LINE ON THE BOTTOM
-// SHARE POSSIBILITIES.
-
 export const AdCard = (props: AdCardProps) => {
     const { sessionId, sendViewEvent } = useContext(SessionContext);
 

@@ -4,11 +4,11 @@ export const ActionButtons = (props: any) => {
     // TODO -> needs icons!!
     return <div className={'row'}>
         <div className={'col-33 display-flex justify-content-start'}>
-            <Button buttonStyle={'filter'} title={'Create alert'}/></div>
+            <Button buttonStyle={'border'} title={'Create alert'}/></div>
         <div className={'col-33 position-center'}>
             <Button buttonStyle={'secondary'} title={'Apply'}/></div>
         <div className={'col-33 display-flex justify-content-end'}>
-            <Button buttonStyle={'filter'} title={'Save'}/>
+            <Button buttonStyle={'border'} title={'Save'}/>
         </div>
     </div>;
 };

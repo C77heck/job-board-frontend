@@ -1,5 +1,5 @@
 import React from 'react';
-import { FavouriteIcon, LocationIcon, MoneyIcon } from '../../shared/components/icons/icons';
+import { BusinessIcon, FavouriteIcon, JobTypeIcon, LocationIcon, MoneyIcon } from '../../shared/components/icons/icons';
 import { priceFormat } from '../../shared/libs/helpers';
 import { getFreshnesByDate } from '../../shared/libs/project-helpers';
 // TODO -> add icons for the missing bits.
@@ -29,11 +29,14 @@ export const SmallAdCard = (props: any) => {
             </div>
         </div>
 
-        <div className={'col-100 py-2'}>
-            <p className={'fs-12 pl-5 text-color--yellow'}>{props?.data?.company || ' - '}</p>
-        </div>
-        <div className={'col-100 py-2'}>
-            <p className={'fs-12 pl-5 text-color--yellow'}>{props?.data?.jobType || ' - '}</p>
-        </div>
+        {props?.data?.company && <div className={'col-100 py-2'}>
+            <BusinessIcon width={10}/>
+            <p className={'fs-12 pl-5 text-color--yellow'}>props?.data?.company</p>
+        </div>}
+
+        {props?.data?.jobType && <div className={'col-100 py-2'}>
+            <JobTypeIcon width={10}/>
+            <p className={'fs-12 pl-5 text-color--yellow'}>props?.data?.jobType</p>
+        </div>}
     </div>;
 };

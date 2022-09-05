@@ -185,6 +185,20 @@
         }
     }
 
+    &--border {
+        background-color: white;
+        height: 100%;
+        font-weight: bold;
+        letter-spacing: 1px;
+        font-size: 1.6rem;
+        color: var(--text-color-medium);
+        border: 1px solid var(--text-color-medium);
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
     &--navbar-search {
         height: 33px;
         width: 10rem;
