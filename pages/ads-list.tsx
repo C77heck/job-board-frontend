@@ -8,6 +8,7 @@ import { useClient } from '../shared/hooks/client';
 import { useUrlManagerHook } from '../shared/hooks/url-manager-hook';
 import { BaseLayoutWidth } from '../shared/layouts/base-layout-width';
 import { BaseLayout } from '../shared/layouts/base.layout';
+import { handleErrors } from '../shared/libs/handle-errors';
 import { extractFilters } from '../shared/libs/helpers';
 import { QueryManager } from '../shared/libs/query.manager';
 
@@ -29,7 +30,6 @@ const AdsList: NextPage = (props: any) => {
     });
 
     useEffect(() => {
-        console.log(pagination);
         addMultiple(pagination);
     }, [pagination]);
 
@@ -45,7 +45,7 @@ const AdsList: NextPage = (props: any) => {
 
             setPaginatedData(response);
         } catch (e) {
-            console.log(e, error);
+            handleErrors(e, error);
         }
     };
 

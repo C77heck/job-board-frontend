@@ -59,9 +59,9 @@ export class Repository {
         }
 
         const queryManager = new QueryManager();
-        console.log({ query });
+
         for (const prop in query) {
-            console.log({ prop });
+
             if (query.hasOwnProperty(prop)) {
                 switch (prop) {
                     case 'pagination':

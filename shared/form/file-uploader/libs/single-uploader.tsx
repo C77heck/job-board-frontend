@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useClient } from '../../../hooks/client';
+import { handleErrors } from '../../../libs/handle-errors';
 import { Attachment, FileData, SingleUploaderProps } from './uploader.interfaces';
 
 export const SingleUploader = (props: SingleUploaderProps) => {
     const [attachment, setAttachment] = useState<Attachment | null>(null);
     const [uploadQuantity, setUploadsQuantity] = useState<number>(0);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const { client } = useClient('attachment');
+    const { client, error } = useClient('attachment');
 
     useEffect(() => {
         props.getAttachment(attachment);
@@ -27,7 +28,7 @@ export const SingleUploader = (props: SingleUploaderProps) => {
 
             setIsLoading(false);
         } catch (e) {
-            console.log(e);
+            handleErrors(e, error);
             setIsLoading(false);
         }
 
@@ -53,7 +54,7 @@ export const SingleUploader = (props: SingleUploaderProps) => {
                 const upload = await createAttachment(fileAsBuffer, fileData);
                 setAttachment(upload.attachment);
             } catch (err) {
-                console.log(err);
+                handleErrors(err);
             }
         };
     };

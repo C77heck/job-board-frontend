@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { SessionContext } from '../../../contexts/session.context';
 import { useClient } from '../../../hooks/client';
+import { handleErrors } from '../../../libs/handle-errors';
 import { Storage } from '../../../libs/storage';
 
 export const Analyitics = () => {
@@ -19,7 +20,7 @@ export const Analyitics = () => {
             setNewSessionId(response.sessionId);
             storage.set(response.sessionId);
         } catch (e) {
-            console.log(e, error);
+            handleErrors(e, error);
         }
     };
 

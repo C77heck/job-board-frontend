@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { handleErrors } from '../libs/handle-errors';
 import { useClient } from './client';
 
 export const useSession = () => {
@@ -13,7 +14,7 @@ export const useSession = () => {
         try {
             await client(`/users/job-seeker/add-view`, 'POST', { body: { sessionId, adId } });
         } catch (e) {
-            console.log({ e, error });
+            handleErrors(e, error );
         }
     };
 

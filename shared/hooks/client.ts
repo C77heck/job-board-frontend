@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { AuthContext } from '../contexts/auth.context';
 import { parseError } from '../libs/error-parsers';
+import { handleErrors } from '../libs/handle-errors';
 import { saveLogs } from '../libs/helpers';
 import { Methods, Repository, RequestOptions } from '../libs/repository';
 
@@ -44,7 +45,7 @@ export const useClient = (env: 'api' | 'attachment' = 'api'): ClientProps => {
 
             return response;
         } catch (e: any) {
-            console.log({ hookLevelError: e });
+            handleErrors({ hookLevelError: e });
             const error = parseError(e);
             setError(error);
             setIsLoading(false);

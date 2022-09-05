@@ -1,4 +1,5 @@
 import { decode, encode } from 'js-base64';
+import { handleErrors } from './handle-errors';
 
 /**
  * @description this class can manage query string as well as single layer objects
@@ -150,7 +151,7 @@ export class QueryManager {
 
             return !!queryAsObject ? queryAsObject : {};
         } catch (e) {
-            console.log(e);
+            handleErrors(e);
             return null;
         }
     }

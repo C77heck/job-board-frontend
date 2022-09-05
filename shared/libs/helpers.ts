@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { handleErrors } from './handle-errors';
 import { Storage } from './storage';
 
 export const objectToArray = (object: any) => {
@@ -115,7 +116,7 @@ export const saveLogs = (data: any) => {
     } catch (e: any) {
         storage.set([{ log: e.toString(), reated_at: moment().toString() }]);
 
-        console.log({ log_saving_failed: e });
+        handleErrors({ log_saving_failed: e });
     }
 };
 

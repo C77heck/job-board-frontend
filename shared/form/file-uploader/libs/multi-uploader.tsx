@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useClient } from '../../../hooks/client';
+import { handleErrors } from '../../../libs/handle-errors';
 import { Attachment, FileData, MultiUploaderProps } from './uploader.interfaces';
 
 export const MultiUploader = (props: MultiUploaderProps) => {
@@ -59,7 +60,7 @@ export const MultiUploader = (props: MultiUploaderProps) => {
 
                 setAttachment(upload.attachment || '');
             } catch (err) {
-                console.log(err);
+                handleErrors(err);
             }
         };
     };

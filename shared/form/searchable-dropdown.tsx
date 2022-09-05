@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ArrowDown, ArrowUp } from '../components/icons/icons';
+import { handleErrors } from '../libs/handle-errors';
 import { FieldProps } from './input';
 
 export interface OptionProps {
@@ -137,16 +138,16 @@ export class SearchableDropdown extends Component<SearchableDropdownProps, Searc
 
             switch (direction) {
                 case 'up':
-                    this.props.handleChange({ target: { value: this.state.searchedOptions[this.getIndex(direction)] } });
+                    this.props.handleChange({ target: { value: this.state.searchedOptions[index] } });
                     break;
                 case 'down':
-                    this.props.handleChange({ target: { value: this.state.searchedOptions[this.getIndex(direction)] } });
+                    this.props.handleChange({ target: { value: this.state.searchedOptions[index] } });
                     break;
                 default:
                     break;
             }
         } catch (e) {
-            console.log(e);
+            handleErrors(e);
         }
     }
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Spinner } from '../../../shared/components/spinner/spinner';
 import { useClient } from '../../../shared/hooks/client';
+import { handleErrors } from '../../../shared/libs/handle-errors';
 import { FilterButtons } from './filter-buttons';
 import { Filters } from './filters';
 
@@ -25,7 +26,7 @@ export const FilterColumn = (props: FilterColumnProps) => {
 
             setFilterOptions(filterOptions.filter);
         } catch (e) {
-            console.log(e);
+            handleErrors(e,error);
         }
     };
 

@@ -6,10 +6,11 @@ import { AdCard } from '../../components/AdViewScreen/ad-card';
 import { useClient } from '../../shared/hooks/client';
 import { BaseLayoutWidth } from '../../shared/layouts/base-layout-width';
 import { BaseLayout } from '../../shared/layouts/base.layout';
+import { handleErrors } from '../../shared/libs/handle-errors';
 
 const Id: NextPage = withRouter((props: any) => {
     const router = useRouter();
-    const { client } = useClient();
+    const { client, isLoading, error } = useClient();
     const [adData, setAdData] = useState<Job | null>(null);
 
     const getAd = async () => {
@@ -18,7 +19,7 @@ const Id: NextPage = withRouter((props: any) => {
 
             setAdData(response.payload);
         } catch (e) {
-            console.log(e);
+            handleErrors(e, error);
         }
     };
 
@@ -31,7 +32,7 @@ const Id: NextPage = withRouter((props: any) => {
     return <BaseLayout showSearchBar={true} auth={false} meta={{ title: 'jobs', keywords: 'jobs', description: 'jobs' }}>
         <BaseLayoutWidth>
             <div className={'row position-center mt-150 mb-50'}>
-                <AdCard data={adData} adId={router.query.id as string}/>
+                <AdCard isLoading={isLoading} data={adData} adId={router.query.id as string}/>
             </div>
         </BaseLayoutWidth>
     </BaseLayout>;
