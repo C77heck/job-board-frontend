@@ -1,8 +1,9 @@
-import { useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { Hr } from '../../shared/components/ui-misc/hr';
 import { SessionContext } from '../../shared/contexts/session.context';
-import { BaseLayoutWidth } from '../../shared/layouts/base-layout-width';
-import { BaseLayout } from '../../shared/layouts/base.layout';
 import { Job } from '../AdsListScreen/Components/job-listings';
+import { ActionButtons } from './action-buttons';
+import { AdDetails } from './ad-details';
 
 export interface AdCardProps {
     adId?: string;
@@ -31,21 +32,20 @@ export const AdCard = (props: AdCardProps) => {
         return null;
     }
 
-    return <BaseLayout
-        showSearchBar={true}
-        isLoading={props.isLoading}
-        auth={false}
-        meta={{ title: 'jobs', keywords: 'jobs', description: 'jobs' }}
-    >
-        <BaseLayoutWidth>
+    return <div className={'w-100 position-center ad-view-wrapper'}>
+        <div className={'w-80'}>
             <div className={'w-100'}>
-                <span>{props.data.title}</span>
-                <span>{props.data.location}</span>
-                <span>{props.data.logo}</span>
-                <span>{props.data.description}</span>
-                <span>{props.data.salary}</span>
+                <h1 className={''}>{props.data.title}</h1>
             </div>
-            ;
-        </BaseLayoutWidth>
-    </BaseLayout>;
+            <AdDetails {...props} />
+            <Hr className={'my-30'}/>
+            <div className={'w-100 position-center flex-column'}>
+                <ActionButtons/>
+                <div className={'w-80 py-30'}>
+                    <span>{props.data.description}</span>
+                </div>
+                <ActionButtons/>
+            </div>
+        </div>
+    </div>;
 };

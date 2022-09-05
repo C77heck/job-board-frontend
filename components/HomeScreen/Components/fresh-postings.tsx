@@ -20,7 +20,7 @@ const dummyFilters = [
     { id: '6', title: 'Jobs by company', property: 'Jobs by company' },
 ];
 
-const Posting = ({ title, description, location, salary, className }: Post) => {
+export const Posting = ({ title, description, location, salary, className }: Post) => {
     return <div className={`display-flex flex-column ${className}`}>
         <h3 className={'text-color--light-1 fs-18 letter-spacing-1'}>{title} <span className={'text-color--secondary-2 fs-14 fw--400'}>({priceFormat(+salary)})</span></h3>
         <p className={'text-color--light-1 fs-14 fw--400'}>{location}</p>
