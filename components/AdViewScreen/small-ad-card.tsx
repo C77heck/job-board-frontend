@@ -3,7 +3,7 @@ import { FavouriteIcon, LocationIcon, MoneyIcon } from '../../shared/components/
 import { priceFormat } from '../../shared/libs/helpers';
 // TODO -> add icons for the missing bits.
 export const SmallAdCard = (props: any) => {
-    return <div className={'row small-ad-card hover-scale'}>
+    return <div className={'row small-ad-card hover-scale box-shadow--light'}>
         <div className={'col-100 display-flex justify-content-space-between'}>
             <span>posted when...</span>
             <FavouriteIcon width={15}/>
