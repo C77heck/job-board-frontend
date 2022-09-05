@@ -10,7 +10,7 @@ import { BaseLayoutWidth } from '../shared/layouts/base-layout-width';
 import { BaseLayout } from '../shared/layouts/base.layout';
 import { extractFilters } from '../shared/libs/helpers';
 import { QueryManager } from '../shared/libs/query.manager';
-// TODO -> NEED TO CHECK THE URL FOR FILTERS. MAKE THE OTHER FILTERS THE SAME AND PERHAPS TURN IT INTO BASE64
+
 const AdsList: NextPage = (props: any) => {
     const { client, error, isLoading } = useClient();
     const { addMultiple } = useUrlManagerHook();

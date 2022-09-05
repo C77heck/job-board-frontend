@@ -14,7 +14,7 @@ const Filter = ({ value, title, items, property }: any) => {
 };
 
 export const FilterButtons = ({ title, filters, property }: FiltersProps) => {
-    if (!filters) {
+    if (!filters || !filters?.length) {
         return null;
     }
 

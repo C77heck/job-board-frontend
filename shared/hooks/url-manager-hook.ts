@@ -12,9 +12,11 @@ export const useUrlManagerHook = () => {
 
     const addToUrl = (key: string, value: string) => {
         const queryManager = new QueryManager(window.location.search, window.location);
+
         if (getIsInQuery(key, value)) {
-            return queryManager.addAsBase64(key, '');
+            return queryManager.removeFromBase64(key);
         }
+
         return queryManager.addAsBase64(key, value);
     };
 

@@ -1,4 +1,3 @@
-import { useEvent } from '../../../shared/hooks/event-hook';
 import { JobCard } from "./job-card";
 
 export interface Job {
@@ -25,10 +24,16 @@ interface JobListingsProp {
 }
 
 export const JobListings = (props: JobListingsProp) => {
-    const { event, emit, unsubscribe, subscribe } = useEvent('synthetic');
+    const jobs = (props.jobs || []);
 
-    return <div onClick={() => emit({ data: 'changed' })} className={'w-px-800 box-shadow'}>
-        {(props.jobs || []).map((job, index) => <JobCard
+    if (!jobs?.length) {
+        return <div className={'position-center'}>
+            <span className={'fs-25'}>Sorry, no results were found</span>
+        </div>;
+    }
+
+    return <div className={'w-px-800 box-shadow'}>
+        {jobs.map((job, index) => <JobCard
             key={job._id}
             className={props.jobs.length - 1 > index ? 'border-bottom-none' : ''}
             {...job}

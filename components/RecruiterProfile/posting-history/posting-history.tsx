@@ -40,7 +40,7 @@ export const PostingHistory = () => {
             <Paginator
                 total={paginatedData.total}
                 currentPage={paginatedData.page}
-                fetchPage={paginate}
+                pageChange={paginate}
             />
         </div>
     </div>;

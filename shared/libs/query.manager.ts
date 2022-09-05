@@ -59,10 +59,20 @@ export class QueryManager {
         return this.query.has(prop);
     }
 
-    public remove(prop: string): string {
-        this.query.delete(prop);
+    public remove(prop: string) {
+        return this.query.delete(prop);
+    }
 
-        return 'successfully removed';
+    public removeFromBase64(key: string) {
+        const decodedQuery = QueryManager.decodeBase64(this.getQuery());
+
+        delete decodedQuery[key];
+
+        const secondaryManager = new QueryManager(decodedQuery);
+
+        secondaryManager.addObj(decodedQuery);
+
+        this.add('base', this.encode(secondaryManager.getQuery()));
     }
 
     public getAsObject() {
