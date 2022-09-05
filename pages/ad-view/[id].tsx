@@ -37,7 +37,7 @@ const Id: NextPage = withRouter((props: any) => {
                 <AdCard isLoading={isLoading} data={adData} adId={router.query.id as string}/>
                 <div className={'w-100 position-center'}>
                     <div className={'w-80'}>
-                        <SimilarAds/>
+                        <SimilarAds adId={router.query.id as string}/>
                         <Hr className={'my-20'}/>
                         <div className={'w-100'}>
                     <span>

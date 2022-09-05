@@ -30,7 +30,6 @@ export const SmallAdCard = (props: any) => {
         </div>
         <div className={'col-100'}>
             <p className={'fs-14 pl-5 text-color--yellow'}>{'job type'}</p>
-
         </div>
     </div>;
 };
