@@ -531,10 +531,7 @@
         .#{flex-basis- + $i} {
             flex-basis: $i * 1% !important;
         }
-        .#{move-right- + $i} {
-            position: relative;
-            right: $i + px !important;
-        }
+
         .#{move-left- + $i} {
             position: relative;
             left: $i + px !important;

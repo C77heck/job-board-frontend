@@ -25,9 +25,9 @@ export const Button = (props: ButtonProps) => {
         disabled={props.disabled}
         onClick={props.onClick}
     >
-        {props.children ? props.children : <div className={'position-center'}>
-            <SpinnerIcon className={'move-right-6'} width={width}/>
-            <span className={`${props.textColor}`}>{props.title}</span>
+        {props.children ? props.children : <div className={'position-center position-relative'}>
+            <SpinnerIcon className={'position-absolute left-5'} width={width}/>
+            <span>{props.title}</span>
         </div>}
     </button>;
 };

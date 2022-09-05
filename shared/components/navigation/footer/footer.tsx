@@ -37,7 +37,7 @@ export const Footer = (props: any) => {
             <Button className={'ml-15 position-center hover-facebook'} title={<FacebookIcon width={26}/>} buttonStyle={'transparent'}/>
         </div>
         <div className={'w-100 position-center footer'}>
-            <p className={'fs-12 fw--400 text-color--light-1'}>
+            <p className={'fs-12 fw--400 color--light'}>
                 © Copyright and database rights Honest jobs Group Ltd 2022
             </p>
         </div>

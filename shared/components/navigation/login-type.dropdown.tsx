@@ -24,7 +24,7 @@ export const LoginTypeDropdown = (props: any) => {
     </div>;
     return <ProfileDropdown
         className={'move-right w-px-160'}
-        trigger={<LoginIcon width={24} className={'text-color--light-1 pt-3 hover-opacity'}/>}
+        trigger={<LoginIcon width={24} className={'color--light pt-3 hover-opacity'}/>}
         content={content}
     />;
 };

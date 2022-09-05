@@ -25,11 +25,10 @@ export const LoginButton = ({ isMobile }: any) => {
 
     if (isLoggedIn) {
         return <Button
-            textColor={'text-color--light-1'}
             buttonStyle={'transparent'}
             title={<ProfileDropdown
                 className={'move-right'}
-                trigger={<LoginIcon width={24} className={'text-color--light-1 pt-3 hover-opacity'}/>}
+                trigger={<LoginIcon width={24} className={'color--light pt-3 hover-opacity'}/>}
                 content={type === 'job-seeker' ? <JobSeekerDropdown signoutHandler={signoutHandler}/> : <RecruiterDropdown signoutHandler={signoutHandler}/>}
             />}
             onClick={() => console.log('signout pressed')}

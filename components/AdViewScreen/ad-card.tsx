@@ -24,20 +24,18 @@ export const AdCard = (props: AdCardProps) => {
         return null;
     }
 
-    return <div className={'w-100 position-center ad-view-wrapper'}>
-        <div className={'w-80'}>
-            <div className={'w-100'}>
-                <h1 className={''}>{props.data.title}</h1>
+    return <div className={''}>
+        <div className={'w-100'}>
+            <h1 className={''}>{props.data.title}</h1>
+        </div>
+        <AdDetails {...props} />
+        <Hr className={'my-30'}/>
+        <div className={'w-100 position-center flex-column'}>
+            <ActionButtons/>
+            <div className={'w-80 py-30'}>
+                <span>{props.data.description}</span>
             </div>
-            <AdDetails {...props} />
-            <Hr className={'my-30'}/>
-            <div className={'w-100 position-center flex-column'}>
-                <ActionButtons/>
-                <div className={'w-80 py-30'}>
-                    <span>{props.data.description}</span>
-                </div>
-                <ActionButtons/>
-            </div>
+            <ActionButtons/>
         </div>
     </div>;
 };

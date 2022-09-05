@@ -7,7 +7,6 @@ export const RegisterCv = ({ isMobile }: any) => {
         type={'job-seeker'}
         isMobile={isMobile}
         trigger={<Button
-            textColor={'text-color--light-1 fs-mlg-17 fs-16'}
             buttonStyle={'primary'}
             title={'Register CV'}
         />}

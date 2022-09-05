@@ -32,25 +32,24 @@ const Id: NextPage = withRouter((props: any) => {
     }, [router]);
 
     return <BaseLayout showSearchBar={true} auth={false} meta={{ title: 'jobs', keywords: 'jobs', description: 'jobs' }}>
-        <BaseLayoutWidth>
+        <BaseLayoutWidth className={'background-color--light-2'}>
             <div className={'row position-center mt-220 mb-50'}>
-                <AdCard isLoading={isLoading} data={adData} adId={router.query.id as string}/>
-                <div className={'w-100 position-center'}>
-                    <div className={'w-80'}>
+                <div className={'w-80 background-color--light-1 p-20 display-flex flex-column'}>
+                    <AdCard isLoading={isLoading} data={adData} adId={router.query.id as string}/>
+                    <div className={'w-100 position-center flex-column'}>
                         <SimilarAds adId={router.query.id as string}/>
                         <Hr className={'my-20'}/>
                         <div className={'w-100'}>
                     <span>
                         <span className={'fw--700'}>Please note: </span>
                          You should never need to provide bank account details or any other financial information,
-                        or make any form of payment, when applying for a job. If you are ever asked to do this by a recruiter on our site please contact us with the advertiser's company name and the title of the job vacancy.
+                        or make any form of payment, when applying for a job. If you are ever asked to do this by a recruiter on our site please contact us with the advertiser&apos;s company name and the title of the job vacancy.
                     </span>
                         </div>
                     </div>
                 </div>
-
             </div>
-        </BaseLayoutWidth>
+        </BaseLayoutWidth>;
     </BaseLayout>;
 });
 

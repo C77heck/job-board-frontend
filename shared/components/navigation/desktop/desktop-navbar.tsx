@@ -71,14 +71,13 @@ export const DesktopNavbar = (props: any) => {
                 <div className={'col-50 display-flex justify-content-end align-items-center'}>
                     <Button
                         className={'ml-13'}
-                        textColor={'text-color--light-1'}
                         buttonStyle={'transparent'}
-                        title={<NotificationIcon width={23} className={`hover-opacity text-color--light-1 pt-2`}/>}
+                        title={<NotificationIcon width={23} className={`hover-opacity color--light pt-2`}/>}
                         onClick={() => console.log('favourite')}
                     />
                     <div className={'ml-13'}>
                         <NavLink href={favourites}>
-                            <FavouriteIcon width={23} className={`hover-opacity text-color--light-1`}/>
+                            <FavouriteIcon width={23} className={`hover-opacity color--light`}/>
                         </NavLink>
                     </div>
                     <div className={'ml-13 position-relative'}><LoginButton/></div>
