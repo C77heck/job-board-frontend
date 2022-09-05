@@ -14,9 +14,10 @@ export const ActionButtons = (props: any) => {
         </div>
         <div className={'col-33 position-center'}>
             <Button className={'h-px-35 w-px-180'} buttonStyle={'secondary'}>
-                <span className={'fs-17 color--light'}>Send application</span>
+                <div>
+                    <span className={'fs-15 color--light'}>Send application</span>
+                </div>
             </Button>
-
         </div>
         <div className={'col-33 display-flex justify-content-end'}>
             <Button className={'h-px-35'} buttonStyle={'border'}>

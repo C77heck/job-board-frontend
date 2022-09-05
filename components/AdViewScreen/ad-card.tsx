@@ -26,7 +26,7 @@ export const AdCard = (props: AdCardProps) => {
 
     return <div className={''}>
         <div className={'w-100'}>
-            <h1 className={''}>{props.data.title}</h1>
+            <h1 className={'fs-35 color--primary'}>{props.data.title}</h1>
         </div>
         <AdDetails {...props} />
         <Hr className={'my-30'}/>
