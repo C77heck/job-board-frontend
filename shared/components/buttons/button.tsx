@@ -9,9 +9,10 @@ export interface ButtonProps {
     id?: string;
     disabled?: boolean;
     onClick?: (e: any) => void;
-    title: string | JSX.Element;
+    title?: string | JSX.Element;
     isLoading?: boolean;
     textColor?: string;
+    children?: any;
 }
 
 export const Button = (props: ButtonProps) => {
@@ -24,9 +25,10 @@ export const Button = (props: ButtonProps) => {
         disabled={props.disabled}
         onClick={props.onClick}
     >
-        <span className={`${props.textColor} position-center`}>
-            <SpinnerIcon className={'move-right-6'} width={width}/>{props.title}
-        </span>
+        {props.children ? props.children : <div className={'position-center'}>
+            <SpinnerIcon className={'move-right-6'} width={width}/>
+            <span className={`${props.textColor}`}>{props.title}</span>
+        </div>}
     </button>;
 };
 
