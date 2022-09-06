@@ -27,7 +27,7 @@ export const Button = (props: ButtonProps) => {
     >
         {props.children ? props.children : <div className={'position-center position-relative'}>
             <SpinnerIcon className={'position-absolute left-5'} width={width}/>
-            <span>{props.title}</span>
+            <span className={'color--light'}>{props.title}</span>
         </div>}
     </button>;
 };

@@ -10,11 +10,11 @@ export interface NavbarProps {
 }
 
 export const NavBar = (props: any) => {
-    const { isLoggedIn, userId, userData, token, type, whoami } = useContext(AuthContext);
+    const { isLoggedIn, userId, userData, token, role, whoami } = useContext(AuthContext);
 
     useEffect(() => {
         if (isLoggedIn && userId && !userData) {
-            (async () => await whoami(type as UserType))();
+            (async () => await whoami(role as UserType))();
         }
     }, [userId]);
 

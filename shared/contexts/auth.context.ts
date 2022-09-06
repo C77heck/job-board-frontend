@@ -6,7 +6,7 @@ export const AuthContext = createContext({
     userId: '',
     token: '',
     isLoggedIn: false,
-    type: '',
+    role: '',
     userData: {} as UserData | null,
     whoami: (type: UserType) => {
     },

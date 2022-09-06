@@ -14,6 +14,7 @@ export interface UserData {
     meta: any;
     logo: string;
     company?: CompanyData;
+    favourites?: string[];
 }
 
 export interface CompanyData {
@@ -27,7 +28,7 @@ export interface UserProps extends UserData {
     userId: string;
     token: string;
     expiry: Date;
-    type: UserType;
+    role: UserType;
 }
 
 export const useAuth = () => {
@@ -35,7 +36,7 @@ export const useAuth = () => {
     const [token, setToken] = useState('');
     const [userData, setUserData] = useState<UserData | null>(null);
     const [userId, setUserId] = useState('');
-    const [type, setType] = useState('');
+    const [role, setRole] = useState('');
     const storage = new Storage('auth');
 
     const hasNotExpired = (data: UserProps) => {
@@ -70,8 +71,8 @@ export const useAuth = () => {
         setToken(userData?.token);
         setUserId(userData?.userId);
         setIsLoggedIn(true);
-        setType(userData.type);
-        storage.set({ token: userData.token, userId: userData.userId, expiry: userData.expiry, type: userData.type });
+        setRole(userData.role);
+        storage.set({ token: userData.token, userId: userData.userId, expiry: userData.expiry, role: userData.role });
     };
 
     const getEndpoint = (type: UserType) => {
@@ -98,5 +99,5 @@ export const useAuth = () => {
         }
     };
 
-    return { isLoggedIn, token, userId, userData, type, whoami, signout, signin };
+    return { isLoggedIn, token, userId, userData, role, whoami, signout, signin };
 };
