@@ -1,11 +1,44 @@
+import { useState } from 'react';
 import { Button } from '../../shared/components/buttons/button';
 import { EnvelopeIcon, FavouriteIcon } from '../../shared/components/icons/icons';
+import { SuccessModal } from '../../shared/form/success.modal';
+import { useClient } from '../../shared/hooks/client';
+import { handleErrors } from '../../shared/libs/handle-errors';
 
 export const ActionButtons = (props: any) => {
+    const { client, error } = useClient();
+    const [message, setMessage] = useState('');
+    const createAlert = async (id: string) => {
+        try {
+            const response = await client(`/ads/create-alert/:${id}`);
+
+            if (!response?.message) {
+                throw new Error('Something went wrong');
+            }
+
+            setMessage(response.message);
+        } catch (e) {
+            handleErrors(e, error);
+        }
+    };
+
+    const addToFavourites = async (id: string) => {
+        try {
+            const response = await client(`/ads/add-to-favourites/:${id}`);
+
+            if (!response?.message) {
+                throw new Error('Something went wrong');
+            }
+
+            setMessage(response.message);
+        } catch (e) {
+            handleErrors(e, error);
+        }
+    };
     // TODO -> needs icons!!
     return <div className={'row'}>
         <div className={'col-33 display-flex justify-content-start'}>
-            <Button className={'h-px-35'} buttonStyle={'border'}>
+            <Button onClick={() => createAlert(props.adId)} className={'h-px-35'} buttonStyle={'border'}>
                 <div className={'w-100 position-center position-relative'}>
                     <EnvelopeIcon className={'position-absolute left-6 position-center color--dark-1'} width={14}/>
                     <span className={'ml-16'}>Create alert</span>
@@ -20,12 +53,17 @@ export const ActionButtons = (props: any) => {
             </Button>
         </div>
         <div className={'col-33 display-flex justify-content-end'}>
-            <Button className={'h-px-35'} buttonStyle={'border'}>
+            <Button onClick={() => addToFavourites(props.adId)} className={'h-px-35'} buttonStyle={'border'}>
                 <div className={'w-100 position-center position-relative'}>
                     <FavouriteIcon className={'position-absolute left-16 position-center color--dark-1'} width={17}/>
                     <span className={'ml-16'}>Save</span>
                 </div>
             </Button>
         </div>
+        <SuccessModal
+            successMessage={message}
+            show={!!message}
+            onClick={(message) => setMessage(message)}
+        />
     </div>;
 };
