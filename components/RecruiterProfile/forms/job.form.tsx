@@ -14,7 +14,6 @@ import { JobCardProps } from '../../AdsListScreen/Components/job-card';
 export const JobForm = (props: JobCardProps & any) => {
     const { INPUTS: { CHECKBOX, TEXTAREA, DATEPICKER } } = CONSTANTS;
     const client = useClient();
-    const [showForm, setShowForm] = useState(false);
     const [form, setForm] = useState(new FormStructure({
         title: new Field({
             name: 'title',
@@ -80,7 +79,7 @@ export const JobForm = (props: JobCardProps & any) => {
             name: 'jobType',
             label: 'Type of job',
             value: props?.jobType || [],
-            options: ['Permanent', 'Remote', 'Contract', 'Part Time', 'Temporary'],
+            options: CONSTANTS.OPTIONS.JOB_TYPE,
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
             element: 'searchable_dropdown',
@@ -89,7 +88,7 @@ export const JobForm = (props: JobCardProps & any) => {
             name: 'industryType',
             label: 'Type of industry',
             value: props?.industryType || [],
-            options: ['Permanent', 'Remote', 'Contract', 'Part Time', 'Temporary'],
+            options: CONSTANTS.OPTIONS.INDUSTRY_TYPE,
             className: 'col-100 mt-11',
             labelClass: 'fs-15 fw--700 mb-2',
             element: 'searchable_dropdown',
@@ -103,7 +102,6 @@ export const JobForm = (props: JobCardProps & any) => {
                 // @ts-ignore
                 form.fields?.[prop]?.value = props?.[prop];
                 setForm(form);
-                setShowForm(true);
             }
         }
     }, []);

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Hr } from '../../shared/components/ui-misc/hr';
 import { SessionContext } from '../../shared/contexts/session.context';
+import { htmlParser } from '../../shared/libs/project-helpers';
 import { Job } from '../AdsListScreen/Components/job-listings';
 import { ActionButtons } from './action-buttons';
 import { AdDetails } from './ad-details';
@@ -31,11 +32,11 @@ export const AdCard = (props: AdCardProps) => {
         <AdDetails {...props} />
         <Hr className={'my-30'}/>
         <div className={'w-100 position-center flex-column'}>
-            <ActionButtons/>
+            <ActionButtons adId={props.adId}/>
             <div className={'w-80 py-30'}>
-                <span>{props.data.description}</span>
+                <span>{htmlParser(props.data.description)}</span>
             </div>
-            <ActionButtons/>
+            <ActionButtons adId={props.adId}/>
         </div>
     </div>;
 };

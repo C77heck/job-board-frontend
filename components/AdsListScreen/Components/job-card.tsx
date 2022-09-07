@@ -5,6 +5,7 @@ import { CalendarIcon, FavouriteIcon, LocationIcon, MoneyIcon } from '../../../s
 import { NavLink } from '../../../shared/components/navigation/libs/nav-link';
 import { getLinks } from '../../../shared/config/static-data';
 import { formatLongText } from '../../../shared/libs/helpers';
+import { parseSalary } from '../../../shared/libs/project-helpers';
 import { CompanyLogo } from './company-logo';
 import { Job } from './job-listings';
 
@@ -35,7 +36,7 @@ export const JobCard = (props: JobCardProps) => {
             <div className={'display-flex pb-8'}>
                 <div className={'display-flex'}>
                     <MoneyIcon className={'display-flex align-items-center'} width={20}/>
-                    <h2 className={'fs-17 fw--700 pl-8 text-color--yellow'}>{salary}</h2>
+                    <h2 className={'fs-17 fw--700 pl-8 text-color--yellow'}>{parseSalary(salary)}</h2>
                 </div>
                 <div className={'display-flex pl-8'}>
                     <LocationIcon className={'display-flex align-items-center justify-content-start pt-1'} width={19}/>

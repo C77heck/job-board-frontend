@@ -11,7 +11,7 @@ import { LoginTypeDropdown } from './login-type.dropdown';
 import { RecruiterDropdown } from './recruiter-dropdown';
 
 export const LoginButton = ({ isMobile }: any) => {
-    const { signout, isLoggedIn, type } = useContext(AuthContext);
+    const { signout, isLoggedIn, role } = useContext(AuthContext);
 
     const signoutHandler = () => {
         try {
@@ -29,7 +29,7 @@ export const LoginButton = ({ isMobile }: any) => {
             title={<ProfileDropdown
                 className={'move-right'}
                 trigger={<LoginIcon width={24} className={'color--light pt-3 hover-opacity'}/>}
-                content={type === 'job-seeker' ? <JobSeekerDropdown signoutHandler={signoutHandler}/> : <RecruiterDropdown signoutHandler={signoutHandler}/>}
+                content={role === 'job-seeker' ? <JobSeekerDropdown signoutHandler={signoutHandler}/> : <RecruiterDropdown signoutHandler={signoutHandler}/>}
             />}
             onClick={() => console.log('signout pressed')}
         />;

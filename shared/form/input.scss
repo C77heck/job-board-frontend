@@ -5,6 +5,7 @@
     display: inline-block;
     position: relative;
     background-color: var(--color-light);
+    height: 40px;
 
     & input {
         width: 100%;
@@ -86,6 +87,8 @@
     &--searchable {
         left: -1px;
         width: 100%;
+        max-height: 300px;
+        overflow: scroll;
     }
 }
 

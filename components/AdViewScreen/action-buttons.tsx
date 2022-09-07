@@ -8,11 +8,12 @@ import { handleErrors } from '../../shared/libs/handle-errors';
 
 export const ActionButtons = (props: any) => {
     const { client, error } = useClient();
-    const { userData } = useAuth();
+    const { userData, role } = useAuth();
     const [message, setMessage] = useState('');
     const createAlert = async (id: string) => {
         try {
-            const response = await client(`/ads/create-alert/:${id}`);
+            console.log(id);
+            const response = await client(`/ads/create-alert/${id}`, 'PUT', { headers: [['role', role]] });
 
             if (!response?.message) {
                 throw new Error('Something went wrong');
@@ -30,7 +31,7 @@ export const ActionButtons = (props: any) => {
 
             const endpoint = (userData?.favourites || []).includes(id) ? 'remove-from-favourites' : 'add-to-favourites';
 
-            const response = await client(`/users/job-seeker/${endpoint}/:${id}`);
+            const response = await client(`/users/${role}/${endpoint}/${id}`, 'PUT');
 
             if (!response?.message) {
                 throw new Error('Something went wrong');
@@ -41,7 +42,12 @@ export const ActionButtons = (props: any) => {
             handleErrors(e, error);
         }
     };
-    // TODO -> needs icons!!
+
+    const manageSuccess = (message: string) => {
+        setMessage(message);
+        window.location.reload();
+    };
+
     return <div className={'row'}>
         <div className={'col-33 display-flex justify-content-start'}>
             <Button onClick={() => createAlert(props.adId)} className={'h-px-35'} buttonStyle={'border'}>
@@ -69,7 +75,7 @@ export const ActionButtons = (props: any) => {
         <SuccessModal
             successMessage={message}
             show={!!message}
-            onClick={(message) => setMessage(message)}
+            onClick={(message) => manageSuccess(message)}
         />
     </div>;
 };

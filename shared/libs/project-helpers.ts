@@ -1,4 +1,6 @@
+import Parser from 'html-react-parser';
 import moment from 'moment';
+import { priceFormat } from './helpers';
 
 export const getFreshnesByDate = (date: string) => {
     const getDateOptions = () => {
@@ -22,4 +24,26 @@ export const getFreshnesByDate = (date: string) => {
     } else if (dateOptions['24'].isAfter(createdAt)) {
         return 'Posted recently';
     }
+};
+
+export const parseSalary = (salary?: string) => {
+    if (!salary) {
+        return ' - ';
+    }
+
+    const parsedToNumber = +salary;
+
+    if (parsedToNumber !== NaN) {
+        return priceFormat(parsedToNumber);
+    }
+
+    return salary;
+};
+
+export const htmlParser = (htmlToParse?: string) => {
+    if (!htmlToParse) {
+        return ' - ';
+    }
+
+    return Parser(htmlToParse);
 };
