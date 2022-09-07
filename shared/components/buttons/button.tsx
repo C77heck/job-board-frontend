@@ -66,6 +66,8 @@ const getButtonType = (type: string) => {
             return 'button button--navbar-search';
         case 'border':
             return 'button button--border';
+        case 'border-grey':
+            return 'button button--border-grey';
         default:
             return 'button';
     }

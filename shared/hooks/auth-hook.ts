@@ -91,7 +91,6 @@ export const useAuth = () => {
             const endpoint = getEndpoint(type);
             const request = new Repository(token, 'api');
             const response = await request.fetch(endpoint, 'GET');
-
             setUserData(response.userData);
         } catch (e: any) {
             saveLogs(`authHook catch ${e}`);

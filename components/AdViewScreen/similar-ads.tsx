@@ -31,6 +31,6 @@ export const SimilarAds = (props: { adId?: string; }) => {
 
     // todo -> should like 6 or 8 depends need another card
     return <div className={'row py-40 justify-content-space-between'}>
-        {(items || []).map((data: any) => <div key={data.id} className={'col-32 mb-18'}><SmallAdCard data={data}/></div>)}
+        {(items || []).map((data: any) => <div key={data._id} className={'col-32 mb-18'}><SmallAdCard data={data}/></div>)}
     </div>;
 };

@@ -12,14 +12,19 @@ export interface ClientProps {
     successMessage: string;
     clearMessage: () => void;
     client: (url: string, method?: Methods, options?: RequestOptions, query?: any) => Promise<any>;
+    setHeader: (headerRecord: string[]) => void;
 }
 
 export const useClient = (env: 'api' | 'attachment' = 'api'): ClientProps => {
     const { token, signout, isLoggedIn } = useContext(AuthContext);
-    const request: any = new Repository(token, env);
+    const request: Repository = new Repository(token, env);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+
+    const setHeader = (headerRecord: string[]) => {
+        request.setHeader(headerRecord[0], headerRecord[1]);
+    };
 
     const clearError = () => {
         setError('');
@@ -56,5 +61,5 @@ export const useClient = (env: 'api' | 'attachment' = 'api'): ClientProps => {
         }
     };
 
-    return { client, isLoading, error, clearError, successMessage, clearMessage };
+    return { client, isLoading, error, clearError, successMessage, clearMessage, setHeader };
 };

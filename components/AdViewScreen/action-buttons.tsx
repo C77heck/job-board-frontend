@@ -1,19 +1,26 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Button } from '../../shared/components/buttons/button';
 import { EnvelopeIcon, FavouriteIcon } from '../../shared/components/icons/icons';
+import { AuthContext } from '../../shared/contexts/auth.context';
 import { SuccessModal } from '../../shared/form/success.modal';
-import { useAuth } from '../../shared/hooks/auth-hook';
 import { useClient } from '../../shared/hooks/client';
 import { handleErrors } from '../../shared/libs/handle-errors';
 
 export const ActionButtons = (props: any) => {
-    const { client, error } = useClient();
-    const { userData, role } = useAuth();
+    const { client, error, setHeader } = useClient();
+    const { userData, role } = useContext(AuthContext);
     const [message, setMessage] = useState('');
+    const [isFavourite, setIsFavourite] = useState(false);
+    const [hasAlert, setHasAlert] = useState(false);
+    useEffect(() => {
+        setIsFavourite(!!(userData?.favourites || []).find((favourites: any) => favourites?.id.toString() === props.adId));
+    }, [userData]);
+
     const createAlert = async (id: string) => {
         try {
-            console.log(id);
-            const response = await client(`/ads/create-alert/${id}`, 'PUT', { headers: [['role', role]] });
+            setHeader(['role', role]);
+
+            const response = await client(`/ads/create-alert/${id}`, 'PUT');
 
             if (!response?.message) {
                 throw new Error('Something went wrong');
@@ -29,7 +36,7 @@ export const ActionButtons = (props: any) => {
         try {
             const id = props.adId;
 
-            const endpoint = (userData?.favourites || []).includes(id) ? 'remove-from-favourites' : 'add-to-favourites';
+            const endpoint = isFavourite ? 'remove-from-favourites' : 'add-to-favourites';
 
             const response = await client(`/users/${role}/${endpoint}/${id}`, 'PUT');
 
@@ -65,10 +72,10 @@ export const ActionButtons = (props: any) => {
             </Button>
         </div>
         <div className={'col-33 display-flex justify-content-end'}>
-            <Button onClick={() => manageFavourites()} className={'h-px-35'} buttonStyle={'border'}>
+            <Button onClick={() => manageFavourites()} className={'h-px-35'} buttonStyle={isFavourite ? 'border-grey' : 'border'}>
                 <div className={'w-100 position-center position-relative'}>
                     <FavouriteIcon className={'position-absolute left-16 position-center color--dark-1'} width={17}/>
-                    <span className={'ml-16'}>Save</span>
+                    <span className={'ml-16'}>{isFavourite ? 'Saved' : 'Save'}</span>
                 </div>
             </Button>
         </div>

@@ -242,6 +242,23 @@
         }
     }
 
+    &--border-grey {
+        background-color: var(--color-disabled-lighter);
+        height: 100%;
+        border: 1px solid var(--text-color-medium);
+
+        & div span {
+            color: var(--text-color-medium);
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
     &--navbar-search {
         height: 33px;
         width: 10rem;
