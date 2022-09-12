@@ -19,14 +19,14 @@ export const Button = (props: ButtonProps) => {
     const width = props.isLoading ? 15 : 0;
     return <button
         type={props.type || 'button'}
-        className={`${getButtonType(props.buttonStyle || '')} ${props.className} position-center`}
+        className={`${getButtonType(props.buttonStyle || '')} ${props.className} position-center position-relative`}
         name={props.name}
         id={props.id}
         disabled={props.disabled}
         onClick={props.onClick}
     >
-        {props.children ? props.children : <div className={'position-center position-relative'}>
-            <SpinnerIcon className={'position-absolute left-5'} width={width}/>
+        {props.children ? props.children : <div className={'position-center'}>
+            <SpinnerIcon className={'position-absolute left-16 top-11'} width={width}/>
             <span className={'color--light'}>{props.title}</span>
         </div>}
     </button>;

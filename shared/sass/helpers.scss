@@ -540,7 +540,10 @@
 
     @for $i from 1 through 100 {
         .#{left- + $i} {
-            left: $i * 1% !important;
+            left: $i * 1 + px !important;
+        }
+        .#{top- + $i} {
+            top: $i * 1 + px !important;
         }
         .#{border-radius- + $i} {
             border-radius: $i + px !important;
