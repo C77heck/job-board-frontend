@@ -6,6 +6,7 @@ import { Repository } from '../libs/repository';
 import { Storage } from '../libs/storage';
 
 export interface UserData {
+    id: string;
     first_name: string;
     last_name: string;
     email: string;

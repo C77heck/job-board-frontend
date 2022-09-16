@@ -12,9 +12,13 @@ export const useSession = () => {
 
     const sendViewEvent = async (sessionId: string, adId: string) => {
         try {
+            if (!adId) {
+                throw new Error('Missing ad id');
+            }
+
             await client(`/users/job-seeker/add-view`, 'POST', { body: { sessionId, adId } });
         } catch (e) {
-            handleErrors(e, error );
+            handleErrors(e, error);
         }
     };
 

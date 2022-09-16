@@ -19,7 +19,7 @@ export const AdCard = (props: AdCardProps) => {
         if (sessionId) {
             (async () => await sendViewEvent(sessionId, props.adId as string))();
         }
-    }, [sessionId]);
+    }, [sessionId, props.adId]);
 
     if (!props.data) {
         return null;

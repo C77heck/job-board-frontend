@@ -24,9 +24,21 @@ export const ActionButtons = (props: ActionButtonProps) => {
     }, [userData]);
 
     useEffect(() => {
-        console.log(props.data);
-        setHasAlert(props.data);
-    }, [props.data]);
+        if (!userData) {
+            return;
+        }
+
+        setHasAlert(() => {
+            switch (role) {
+                case 'job-seeker':
+                    return !!(props.data?.jobSeekerAlerts || []).filter((item: any) => item.id.toString() === userData.id.toString()).length;
+                case 'recruiter':
+                    return !!(props.data?.jobSeekerAlerts || []).filter((item: any) => item.id.toString() === userData.id.toString()).length;
+                default:
+                    return false;
+            }
+        });
+    }, [props.data, userData]);
 
     const createAlert = async (id: string) => {
         try {
