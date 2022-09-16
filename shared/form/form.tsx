@@ -54,14 +54,8 @@ export const Form = (props: FormProps) => {
         e.preventDefault();
         await props.onSubmit(getPayload(namespace));
 
-        console.log({
-            isTrue: props.noSuccessModal && props.onSuccess && !error,
-            error: error
-        });
-
         if (props.noSuccessModal && props.onSuccess && !error) {
-
-            // props.onSuccess();
+            props.onSuccess();
         }
     };
     // review this logic

@@ -32,11 +32,11 @@ export const AdCard = (props: AdCardProps) => {
         <AdDetails {...props} />
         <Hr className={'my-30'}/>
         <div className={'w-100 position-center flex-column'}>
-            <ActionButtons adId={props.adId}/>
+            <ActionButtons data={props.data} adId={props.adId}/>
             <div className={'w-80 py-30'}>
                 <span>{htmlParser(props.data.description)}</span>
             </div>
-            <ActionButtons adId={props.adId}/>
+            <ActionButtons data={props.data} adId={props.adId}/>
         </div>
     </div>;
 };
