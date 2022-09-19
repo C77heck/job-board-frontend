@@ -76,6 +76,23 @@ export const ActionButtons = (props: ActionButtonProps) => {
         }
     };
 
+    const sendApplication = async () => {
+        try {
+            const id = props.adId;
+            // todo -> send application and if it is already applied for by the user then disable the button.
+
+            const response = await client(`/users/apply/${id}`, 'POST');
+
+            if (!response?.message) {
+                throw new Error('Something went wrong');
+            }
+
+            setMessage(response.message);
+        } catch (e) {
+            handleErrors(e, error);
+        }
+    };
+
     const manageSuccess = (message: string) => {
         setMessage(message);
         window.location.reload();
@@ -91,13 +108,17 @@ export const ActionButtons = (props: ActionButtonProps) => {
                 >
                     <div className={'w-100 position-center position-relative'}>
                         <EnvelopeIcon className={'position-absolute left-6 position-center color--dark-1'} width={14}/>
-                        <span className={'ml-16'}>{hasAlert ? 'Disable alert' : 'Create alert'}</span>
+                        <span className={'ml-16'}>{hasAlert ? 'Delete alert' : 'Create alert'}</span>
                     </div>
                 </Button>
             </AuthWrapper>
         </div>
         <div className={'col-33 position-center'}>
-            <Button className={'h-px-35 w-px-180'} buttonStyle={'secondary'}>
+            <Button
+                className={'h-px-35 w-px-180'}
+                buttonStyle={'secondary'}
+                onClick={() => sendApplication()}
+            >
                 <div>
                     <span className={'fs-15 color--light'}>Send application</span>
                 </div>
