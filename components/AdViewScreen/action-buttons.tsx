@@ -33,18 +33,20 @@ export const ActionButtons = (props: ActionButtonProps) => {
                 case 'job-seeker':
                     return !!(props.data?.jobSeekerAlerts || []).filter((item: any) => item.id.toString() === userData.id.toString()).length;
                 case 'recruiter':
-                    return !!(props.data?.jobSeekerAlerts || []).filter((item: any) => item.id.toString() === userData.id.toString()).length;
+                    return !!(props.data?.recruiterAlerts || []).filter((item: any) => item.id.toString() === userData.id.toString()).length;
                 default:
                     return false;
             }
         });
     }, [props.data, userData]);
 
-    const createAlert = async (id: string) => {
+    const manageAlerts = async (id: string) => {
         try {
             setHeader(['role', role]);
 
-            const response = await client(`/ads/create-alert/${id}`, 'PUT');
+            const endpoint = hasAlert ? 'remove-alert' : 'create-alert';
+
+            const response = await client(`/ads/${endpoint}/${id}`, 'PUT');
 
             if (!response?.message) {
                 throw new Error('Something went wrong');
@@ -83,13 +85,13 @@ export const ActionButtons = (props: ActionButtonProps) => {
         <div className={'col-33 display-flex justify-content-start'}>
             <AuthWrapper>
                 <Button
-                    onClick={() => createAlert(props.adId)}
+                    onClick={() => manageAlerts(props.adId)}
                     className={'h-px-35'}
                     buttonStyle={hasAlert ? 'border-grey' : 'border'}
                 >
                     <div className={'w-100 position-center position-relative'}>
                         <EnvelopeIcon className={'position-absolute left-6 position-center color--dark-1'} width={14}/>
-                        <span className={'ml-16'}>Create alert</span>
+                        <span className={'ml-16'}>{hasAlert ? 'Disable alert' : 'Create alert'}</span>
                     </div>
                 </Button>
             </AuthWrapper>
