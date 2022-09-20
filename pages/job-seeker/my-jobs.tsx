@@ -15,9 +15,9 @@ const dummyPostings = [
     { id: '7', title: 'Social Worker', description: 'description', location: 'London', salary: '3000' },
 ];
 
-// TODO -> make sure that this page content will be changed based on who the user is.
+// TODO -> THE IS LOADING TO BE DYNAMIC
 const MyJobs: NextPage = () => {
-    return <BaseLayout isLoading={true}  showSearchBar={true} auth={false} meta={{ title: 'home page', keywords: 'whatever', description: 'some description' }}>
+    return <BaseLayout isLoading={false} showSearchBar={true} auth={false} meta={{ title: 'home page', keywords: 'whatever', description: 'some description' }}>
         <HomeScreenHeader>
             <BaseLayoutWidth>
                 <Search/>

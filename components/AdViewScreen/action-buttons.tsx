@@ -106,7 +106,7 @@ export const ActionButtons = (props: ActionButtonProps) => {
                     className={'h-px-35'}
                     buttonStyle={hasAlert ? 'border-grey' : 'border'}
                 >
-                    <div className={'w-100 position-center position-relative'}>
+                    <div className={'position-center position-relative w-px-130'}>
                         <EnvelopeIcon className={'position-absolute left-6 position-center color--dark-1'} width={14}/>
                         <span className={'ml-16'}>{hasAlert ? 'Delete alert' : 'Create alert'}</span>
                     </div>
@@ -131,7 +131,7 @@ export const ActionButtons = (props: ActionButtonProps) => {
                     className={'h-px-35'}
                     buttonStyle={isFavourite ? 'border-grey' : 'border'}
                 >
-                    <div className={'w-100 position-center position-relative'}>
+                    <div className={'position-center position-relative w-px-130'}>
                         <FavouriteIcon className={'position-absolute left-16 position-center color--dark-1'} width={17}/>
                         <span className={'ml-16'}>{isFavourite ? 'Saved' : 'Save'}</span>
                     </div>

@@ -17,19 +17,22 @@ export interface BaseLayoutProps {
 }
 
 export const BaseLayout = (props: BaseLayoutProps) => {
-    return <>
-        <Meta {...props.meta}/>
-        <SessionContextWrapper>
-            <AuthContextWrapper>
-                <FormContextWrapper>
-                    <NavBar showSearchBar={props.showSearchBar}/>
-                    <main className={`position-center ${props.className}`}>
-                        <Spinner asOverlay={true} isLoading={props.isLoading}/>
-                        {props.auth ? <Auth>{props.children}</Auth> : props.children}
-                    </main>
-                </FormContextWrapper>
-            </AuthContextWrapper>
-        </SessionContextWrapper>
-        <Footer/>
-    </>;
-};
+        console.log({ props, isLoading: props.isLoading });
+        return <>
+            <Meta {...props.meta}/>
+            <SessionContextWrapper>
+                <AuthContextWrapper>
+                    <FormContextWrapper>
+                        <NavBar showSearchBar={props.showSearchBar}/>
+                        <main className={`position-center ${props.className}`}>
+                            <Spinner asOverlay={true} isLoading={props.isLoading}/>
+                            {props.auth ? <Auth>{props.children}</Auth> : props.children}
+                        </main>
+                    </FormContextWrapper>
+                </AuthContextWrapper>
+            </SessionContextWrapper>
+            <Footer/>
+        </>;
+    }
+;
+;

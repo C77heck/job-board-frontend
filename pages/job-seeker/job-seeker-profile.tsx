@@ -5,9 +5,9 @@ import { BaseLayoutWidth } from '../../shared/layouts/base-layout-width';
 import { BaseLayout } from '../../shared/layouts/base.layout';
 
 const JobSeekerProfile: NextPage = (props: any) => {
-
+// TODO -> THE IS LOADING TO BE DYNAMIC
     return <BaseLayout
-        isLoading={true}
+        isLoading={false}
         auth={false}
         meta={{ title: 'home page', keywords: 'whatever', description: 'some description' }}
         className={'flex-column job-seeker-profile'}
