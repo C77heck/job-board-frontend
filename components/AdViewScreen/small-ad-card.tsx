@@ -16,7 +16,7 @@ export const SmallAdCard = (props: any) => {
                 <FavouriteIcon width={15}/>
             </div>
             <div className={'col-100 py-2'}>
-                <h2 className={'fs-18 color--primary'}>{props.data?.title || ' - '}</h2>
+                <h2 className={'fs-18 color--secondary-1'}>{props.data?.title || ' - '}</h2>
             </div>
             <div className={'col-100 py-2'}>
                 <div className={'display-flex'}>

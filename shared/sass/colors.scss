@@ -79,9 +79,6 @@
 
 
     .color {
-        &--primary {
-            color: var(--color-secondary-1);
-        }
 
         &--disabled {
             color: var(--color-shadow);
@@ -111,13 +108,6 @@
             color: var(--color-shadow);
         }
 
-        &--secondary-3 {
-            color: var(--color-secondary-3);
-        }
-
-        &--dark {
-            color: var(--color-dark-2);
-        }
 
         &--secondary-1 {
             color: var(--color-secondary-1);
@@ -125,6 +115,10 @@
 
         &--secondary-2 {
             color: var(--color-secondary-2);
+        }
+
+        &--secondary-3 {
+            color: var(--color-secondary-3);
         }
 
         &--yellow {
