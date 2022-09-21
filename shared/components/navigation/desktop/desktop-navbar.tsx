@@ -28,7 +28,7 @@ export const DesktopNavbar = (props: any) => {
             <div className={'row base-layout-width'}>
                 <div className={'col-50'}>
                     <NavLink href={'/'}>
-                        <h2 className={'fs-40 fw--900 text-color--secondary-1 hover-opacity'}>Honest jobs</h2>
+                        <h2 className={'fs-40 fw--900 color--secondary-1 hover-opacity'}>Honest jobs</h2>
                     </NavLink>
                 </div>
                 <div className={'col-50 display-flex justify-content-end'}>

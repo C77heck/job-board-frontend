@@ -28,7 +28,7 @@ export const EditModal = (props: EditModalProps) => {
         className={'border-radius-px-5 p-15 z-100 box-shadow'}
         content={content}
         size={{ sm: 90, md: 75, lg: 65, xl: 50 }}
-        header={<h2 className={'header--3 text-color--primary-1 text-align-center'}>{props.title}</h2>}
+        header={<h2 className={'header--3 color--primary-1 text-align-center'}>{props.title}</h2>}
         show={show}
     />;
 };
