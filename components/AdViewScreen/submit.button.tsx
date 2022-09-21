@@ -13,12 +13,35 @@ export interface ActionButtonProps {
 
 export const SubmitButton = (props: ActionButtonProps) => {
     const { client, error } = useClient();
-    const { userData, role } = useContext(AuthContext);
+    const { userData, role, isLoggedIn } = useContext(AuthContext);
     const [message, setMessage] = useState('');
+    const [hasApplied, setHasApplied] = useState(false);
 
     useEffect(() => {
-        console.log(userData);
+        if (userData && isLoggedIn) {
+            (async () => checkIfUserHasAlreadyApplied())();
+        }
     }, [userData]);
+
+    const checkIfUserHasAlreadyApplied = async () => {
+        try {
+            const adId = props.adId;
+
+            if (!adId) {
+                return;
+            }
+
+            const response = await client(`/users/job-seeker/has-applied/${adId}`);
+
+            if (!response?.hasApplied) {
+                throw new Error('Something went wrong');
+            }
+
+            setHasApplied(response?.hasApplied);
+        } catch (e) {
+            handleErrors(e, error);
+        }
+    };
 
     const sendApplication = async () => {
         if (role !== 'job-seeker') {
@@ -45,17 +68,29 @@ export const SubmitButton = (props: ActionButtonProps) => {
         window.location.reload();
     };
 
+    const submitButton = <Button
+        className={'h-px-35 w-px-180'}
+        buttonStyle={'secondary'}
+        onClick={() => sendApplication()}
+    >
+        <div>
+            <span className={'fs-15 color--light'}>Send application</span>
+        </div>
+    </Button>;
+
+    const alreadySubmittedComponent = <Button
+        className={'h-px-35 w-px-180'}
+        buttonStyle={'transparent'}
+        disabled={true}
+    >
+        <div>
+            <span className={'fs-15 color--light'}>Already applied</span>
+        </div>
+    </Button>;
+
     return <div className={''}>
         <AuthWrapper>
-            <Button
-                className={'h-px-35 w-px-180'}
-                buttonStyle={'secondary'}
-                onClick={() => sendApplication()}
-            >
-                <div>
-                    <span className={'fs-15 color--light'}>Send application</span>
-                </div>
-            </Button>
+            {hasApplied ? alreadySubmittedComponent : submitButton}
         </AuthWrapper>
 
         <SuccessModal
