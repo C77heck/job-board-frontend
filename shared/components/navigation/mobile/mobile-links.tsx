@@ -8,7 +8,7 @@ export const MobileLinks = (props: any) => {
     const getColor = useCallback((link: string) => {
         const genericClasses = 'text-decoration-none uppercase fs-21 white-space-nowrap py-20 fw--700';
         return window.location.pathname === link
-            ? `${genericClasses} text-color--active`
+            ? `${genericClasses} color--secondary-2`
             : `${genericClasses}`;
     }, []);
 

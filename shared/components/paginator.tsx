@@ -10,8 +10,8 @@ interface Paginator {
 export const Paginator = (props: Paginator) => {
     const { total, currentPage, fetchPage } = props;
     const { startDot, startDotRef, start, endDot, endDotRef, end, middle } = getPaginationMap(total, currentPage);
-    const shouldPrevBeDisabled = currentPage > 1 ? 'hover-primary' : 'color-custom--disabled';
-    const shouldNextBeDisabled = currentPage < total - 1 && total !== 1 ? 'hover-primary' : 'color-custom--disabled';
+    const shouldPrevBeDisabled = currentPage > 1 ? 'hover-primary' : 'color--disabled';
+    const shouldNextBeDisabled = currentPage < total - 1 && total !== 1 ? 'hover-primary' : 'color--disabled';
     const prevHref = () => currentPage > 1 && fetchPage(currentPage - 1);
     const nextHref = () => currentPage < total && total !== 1 && fetchPage(currentPage + 1);
 
@@ -27,7 +27,7 @@ export const Paginator = (props: Paginator) => {
 };
 
 const Option = ({ fetchPage, item, currentPage, isDot }: any) => {
-    const classes = getClasses(currentPage === item, 'color-custom--1 border-radius-px-4');
+    const classes = getClasses(currentPage === item, 'color--light background-color--secondary-3 border-radius-px-4');
     return <div>
         <a
             className={`fs-25 fw--700 px-12 cursor-pointer hover-primary ${classes}`}

@@ -17,7 +17,7 @@ export const ErrorModal = (props: ErrorModalProps) => {
     });
 
     const content = <div className={'position-center flex-column'}>
-        <h4 className={'fs-17 mb-30 text-color--lighter'}>{props.errorMessage}</h4>
+        <h4 className={'fs-17 mb-30'}>{props.errorMessage}</h4>
         <Button
             title={'Ok'}
             buttonStyle={'error'}
@@ -33,7 +33,7 @@ export const ErrorModal = (props: ErrorModalProps) => {
         className={'border-radius-px-5 p-15 z-100 box-shadow'}
         content={content}
         size={{ sm: 80, md: 60, lg: 40, xl: 30 }}
-        header={<h2 className={'header--3 text-color--error-2 text-align-center'}>Error</h2>}
+        header={<h2 className={'header--3 color--error-2 text-align-center'}>Error</h2>}
         show={show}
     />;
 };

@@ -22,10 +22,10 @@ const dummyFilters = [
 
 export const Posting = ({ title, description, location, salary, className }: Post) => {
     return <div className={`display-flex flex-column ${className}`}>
-        <h3 className={'color--light fs-18 letter-spacing-1'}>{title} <span className={'text-color--secondary-2 fs-14 fw--400'}>({priceFormat(+salary)})</span></h3>
+        <h3 className={'color--light fs-18 letter-spacing-1'}>{title} <span className={'color--secondary-2 fs-14 fw--400'}>({priceFormat(+salary)})</span></h3>
         <p className={'color--light fs-14 fw--400'}>{location}</p>
         <p className={'color--light fs-12 fw--400 mb-5'}>{description}</p>
-        <NavLink href={'/'}><p className={'fs-12 fw--400 text-color--secondary-2 hover-opacity'}>See more...</p></NavLink>
+        <NavLink href={'/'}><p className={'fs-12 fw--400 color--secondary-2 hover-opacity'}>See more...</p></NavLink>
     </div>;
 };
 

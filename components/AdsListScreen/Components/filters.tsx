@@ -21,7 +21,7 @@ const Filter = ({ filter, property }: FilterProps) => {
     return <div onClick={() => addToUrl(property, value)} className={`${activeClass} filter-block--item col-100 py-5 px-13 display-flex`}>
         <span className={'fs-15'}>{title}</span>
         <div className={'filter-items-counter'}>
-            <span className={'fs-10 text-color--yellow'}>{items}</span>
+            <span className={'fs-10 color--yellow'}>{items}</span>
         </div>
     </div>;
 };

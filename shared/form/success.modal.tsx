@@ -17,7 +17,7 @@ export const SuccessModal = (props: SuccessModalProps) => {
     });
 
     const content = <div className={'position-center flex-column'}>
-        <h4 className={'fs-17 mb-30 text-color--lighter'}>{props.successMessage}</h4>
+        <h4 className={'fs-17 mb-30'}>{props.successMessage}</h4>
         <Button
             title={'Ok'}
             buttonStyle={'success'}

@@ -19,7 +19,7 @@ export interface JobCardProps extends Job {
 
 export const JobCard = (props: JobCardProps) => {
     const { title, expiresOn, description, location, salary, className, logo } = props;
-    const actionButton = <Button title={<FavouriteIcon width={25} className={'text-color--dark hover-secondary'}/>} buttonStyle={'transparent'}/>;
+    const actionButton = <Button title={<FavouriteIcon width={25} className={'color--dark-2 hover-secondary'}/>} buttonStyle={'transparent'}/>;
     const { adView } = getLinks();
     const { formattedText, isFormatted } = formatLongText(description, 420);
     const href = `${adView}/${props._id}`;
@@ -30,27 +30,27 @@ export const JobCard = (props: JobCardProps) => {
         </div>
         <div className={'col-89 display-flex flex-column'}>
             <div className={'display-flex justify-content-space-between'}>
-                <NavLink href={href}><h2 className={'fs-19 fw--700 pb-3 text-color--secondary-1 hover-opacity'}>{title}</h2></NavLink>
+                <NavLink href={href}><h2 className={'fs-19 fw--700 pb-3 color--secondary-1 hover-opacity'}>{title}</h2></NavLink>
                 {actionButton}
             </div>
             <div className={'display-flex pb-8'}>
                 <div className={'display-flex'}>
                     <MoneyIcon className={'display-flex align-items-center'} width={20}/>
-                    <h2 className={'fs-17 fw--700 pl-8 text-color--yellow'}>{parseSalary(salary)}</h2>
+                    <h2 className={'fs-17 fw--700 pl-8 color--yellow'}>{parseSalary(salary)}</h2>
                 </div>
                 <div className={'display-flex pl-8'}>
                     <LocationIcon className={'display-flex align-items-center justify-content-start pt-1'} width={19}/>
-                    <p className={'fs-15 fw--500 pl-8 text-color--yellow'}>{location}</p>
+                    <p className={'fs-15 fw--500 pl-8 color--yellow'}>{location}</p>
                 </div>
             </div>
             <div className={'display-flex'}>
                 <CalendarIcon className={'display-flex align-items-center'} width={16}/>
-                <h2 className={'fs-15 fw--400 pl-8 text-color--yellow'}>{moment(expiresOn).format('YYYY.MM.DD.')}</h2>
+                <h2 className={'fs-15 fw--400 pl-8 color--yellow'}>{moment(expiresOn).format('YYYY.MM.DD.')}</h2>
             </div>
             <div className={'display-flex'}>
                 <p className={'fs-13 fw--400 pt-16'}>
                     {formattedText}
-                    {isFormatted && <NavLink href={href}><span className={'fs-13 fw--400 pt-16 hover-opacity text-color--secondary-1'}>See more</span></NavLink>}
+                    {isFormatted && <NavLink href={href}><span className={'fs-13 fw--400 pt-16 hover-opacity color--secondary-1'}>See more</span></NavLink>}
                 </p>
             </div>
         </div>

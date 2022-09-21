@@ -21,24 +21,24 @@ export const SmallAdCard = (props: any) => {
             <div className={'col-100 py-2'}>
                 <div className={'display-flex'}>
                     <LocationIcon className={'display-flex align-items-center justify-content-start pt-1'} width={9}/>
-                    <p className={'fs-14 pl-5 text-color--yellow'}>{props.data?.location || ' - '}</p>
+                    <p className={'fs-14 pl-5 color--yellow'}>{props.data?.location || ' - '}</p>
                 </div>
             </div>
             <div className={'col-100 py-2'}>
                 <div className={'display-flex'}>
                     <MoneyIcon className={'display-flex align-items-center'} width={10}/>
-                    <p className={'fs-11 pl-5 text-color--yellow'}>{props.data?.salary && priceFormat(props.data.salary)}</p>
+                    <p className={'fs-11 pl-5 olor--yellow'}>{props.data?.salary && priceFormat(props.data.salary)}</p>
                 </div>
             </div>
 
             {props.data?.company && <div className={'col-100 py-2'}>
                 <BusinessIcon width={10}/>
-                <p className={'fs-12 pl-5 text-color--yellow'}>props.data?.company</p>
+                <p className={'fs-12 pl-5 color--yellow'}>props.data?.company</p>
             </div>}
 
             {props.data?.jobType && <div className={'col-100 py-2'}>
                 <JobTypeIcon width={10}/>
-                <p className={'fs-12 pl-5 text-color--yellow'}>props.data?.jobType</p>
+                <p className={'fs-12 pl-5 color--yellow'}>props.data?.jobType</p>
             </div>}
         </div>
     </NavLink>;

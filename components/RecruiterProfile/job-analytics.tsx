@@ -47,23 +47,23 @@ export const JobAnalytics = (props: JobAnalyticsProps) => {
     return <div className={'row w-100 mt-23 line-wrapper background-color--yellow-light'}>
         <div className={'col-20 position-center flex-column'}>
             <span className={'fs-14 color--dark-2 fw--700'}>Viewed</span>
-            <span className={'fs-14 color--dark-2 fw--700 pt-8 color-green'}>{normalizeVAlue(analytics.viewed)}</span>
+            <span className={'fs-14 color--dark-2 fw--700 pt-8'}>{normalizeVAlue(analytics.viewed)}</span>
         </div>
         <div className={'col-20 position-center flex-column'}>
             <span className={'fs-14 color--dark-2 fw--700'}>Applied for</span>
-            <span className={'fs-14 color--dark-2 fw--700 pt-8 color-green'}>{normalizeVAlue(analytics.appliedFor)}</span>
+            <span className={'fs-14 color--dark-2 fw--700 pt-8'}>{normalizeVAlue(analytics.appliedFor)}</span>
         </div>
         <div className={'col-20 position-center flex-column'}>
             <span className={'fs-14 color--dark-2 fw--700'}>Standard</span>
-            <span className={'fs-14 color--dark-2 fw--700 pt-8 color-green'}>{normalizeVAlue(analytics.standard)}</span>
+            <span className={'fs-14 color--dark-2 fw--700 pt-8'}>{normalizeVAlue(analytics.standard)}</span>
         </div>
         <div className={'col-20 position-center flex-column'}>
             <span className={'fs-14 color--dark-2 fw--700'}>Featured</span>
-            <span className={'fs-14 color--dark-2 fw--700 pt-8 color-green'}>{normalizeVAlue(analytics.featured)}</span>
+            <span className={'fs-14 color--dark-2 fw--700 pt-8'}>{normalizeVAlue(analytics.featured)}</span>
         </div>
         <div className={'col-20 position-center flex-column'}>
             <span className={'fs-14 color--dark-2 fw--700'}>Premium</span>
-            <span className={'fs-14 color--dark-2 fw--700 pt-8 color-green'}>{normalizeVAlue(analytics.premium)}</span>
+            <span className={'fs-14 color--dark-2 fw--700 pt-8'}>{normalizeVAlue(analytics.premium)}</span>
         </div>
     </div>;
 };

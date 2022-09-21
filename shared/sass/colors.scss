@@ -48,24 +48,8 @@
             background-color: var(--color-primary-2);
         }
 
-        &--secondary-1 {
-            background-color: var(--color-secondary-1);
-        }
-
-        &--secondary-2 {
-            background-color: var(--color-secondary-2);
-        }
-
-        &--error-1 {
-            background-color: var(--color-error-1);
-        }
-
-        &--error-2 {
-            background-color: var(--color-error-2);
-        }
-
-        &--error-3 {
-            background-color: var(--color-error-3);
+        &--yellow-light {
+            background-color: var(--color-yellow-light);
         }
 
         &--light-1 {
@@ -76,59 +60,26 @@
             background-color: var(--color-light-2);
         }
 
-        &--grey {
-            background-color: var(--color-shadow);
-        }
-
-        &--grey-2 {
-            background-color: var(--text-color-dark);
-        }
-
         &--dark-2 {
             background-color: var(--color-dark-4);
         }
 
-        &--active {
-            background-color: var(--color-primary-2);
+        &--secondary-1 {
+            background-color: var(--color-secondary-1);
         }
 
-        &--yellow-light {
-            background-color: var(--color-yellow-light);
+        &--secondary-2 {
+            background-color: var(--color-secondary-2);
+        }
+
+        &--secondary-3 {
+            background-color: var(--color-secondary-3);
         }
     }
 
     .text-color {
-        &--error-1 {
-            color: var(--color-error-1);
-        }
-
-        &--error-2 {
-            color: var(--color-error-2);
-        }
-
-        &--light-1 {
-            color: var(--color-light);
-        }
-
-
-        &--light-2 {
-            color: var(--color-shadow);
-        }
-
         &--dark {
             color: var(--color-dark-2);
-        }
-
-        &--primary-1 {
-            color: var(--color-primary-1);
-        }
-
-        &--primary-2 {
-            color: var(--color-primary-2);
-        }
-
-        &--primary-3 {
-            color: var(--color-primary-3);
         }
 
         &--secondary-1 {
@@ -139,78 +90,38 @@
             color: var(--color-secondary-2);
         }
 
-        &--secondary-3 {
-            color: var(--color-secondary-3);
-        }
-
         &--yellow {
             color: var(--color-yellow);
         }
-    }
 
 
-    // these are the indicator colours for the watch cards
-    .color-green {
-        &--light {
-            color: var(--color-light);
-            background-color: var(--color-success-1);
+        &--error-1 {
+            color: var(--color-error-1);
         }
 
-        &--normal {
-            color: var(--color-light);
-            background-color: var(--color-success-2);
+        &--error-2 {
+            color: var(--color-error-2);
         }
 
-        &--dark {
-            color: var(--color-light);
-            background-color: var(--color-success-3);
-        }
-    }
 
-    .color-red {
-        &--light {
-            color: var(--color-light);
-            background-color: var(--color-failure-1);
-        }
-
-        &--normal {
-            color: var(--color-light);
-            background-color: var(--color-failure-2);
-        }
-
-        &--dark {
-            color: var(--color-light);
-            background-color: var(--color-failure-3);
+        &--primary-1 {
+            color: var(--color-primary-1);
         }
     }
 
 
-    .color-custom {
-        &--1 {
-            color: var(--color-light);
-            background-color: var(--color-secondary-3);
-        }
 
-        &--secondary-3 {
-            color: var(--color-secondary-3);
+    .color {
+        &--primary {
+            color: var(--color-secondary-1);
         }
 
         &--disabled {
             color: var(--color-shadow);
         }
 
-        &--gold {
-            color: var(--color-primary-4);
-        }
-
         &--grey {
             color: var(--color-shadow);
-        }
-    }
-
-    .color {
-        &--primary {
-            color: var(--color-secondary-1);
         }
 
         &--light {
@@ -232,6 +143,12 @@
         &--dark-3 {
             color: var(--color-shadow);
         }
+
+        &--secondary-3 {
+            color: var(--color-secondary-3);
+        }
+
+
     }
 
     .color-inherit {
