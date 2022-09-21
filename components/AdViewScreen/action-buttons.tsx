@@ -1,11 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
-import { Button } from '../../shared/components/buttons/button';
-import { EnvelopeIcon, FavouriteIcon } from '../../shared/components/icons/icons';
-import { AuthWrapper } from '../../shared/components/navigation/libs/auth-wrapper';
-import { AuthContext } from '../../shared/contexts/auth.context';
-import { SuccessModal } from '../../shared/form/success.modal';
-import { useClient } from '../../shared/hooks/client';
-import { handleErrors } from '../../shared/libs/handle-errors';
+import { CreateAlertButton } from './create-alert.button';
+import { FavouritesButton } from './favourites.button';
+import { SubmitButton } from './submit.button';
 
 export interface ActionButtonProps {
     adId: string;
@@ -13,135 +8,15 @@ export interface ActionButtonProps {
 }
 
 export const ActionButtons = (props: ActionButtonProps) => {
-    const { client, error, setHeader } = useClient();
-    const { userData, role } = useContext(AuthContext);
-    const [message, setMessage] = useState('');
-    const [isFavourite, setIsFavourite] = useState(false);
-    const [hasAlert, setHasAlert] = useState(false);
-
-    useEffect(() => {
-        setIsFavourite(!!(userData?.favourites || []).find((favourites: any) => favourites?.id.toString() === props.adId));
-    }, [userData]);
-
-    useEffect(() => {
-        if (!userData) {
-            return;
-        }
-
-        setHasAlert(() => {
-            switch (role) {
-                case 'job-seeker':
-                    return !!(props.data?.jobSeekerAlerts || []).filter((item: any) => item.id.toString() === userData.id.toString()).length;
-                case 'recruiter':
-                    return !!(props.data?.recruiterAlerts || []).filter((item: any) => item.id.toString() === userData.id.toString()).length;
-                default:
-                    return false;
-            }
-        });
-    }, [props.data, userData]);
-
-    const manageAlerts = async (id: string) => {
-        try {
-            setHeader(['role', role]);
-
-            const endpoint = hasAlert ? 'remove-alert' : 'create-alert';
-
-            const response = await client(`/ads/${endpoint}/${id}`, 'PUT');
-
-            if (!response?.message) {
-                throw new Error('Something went wrong');
-            }
-
-            setMessage(response.message);
-        } catch (e) {
-            handleErrors(e, error);
-        }
-    };
-
-    const manageFavourites = async () => {
-        try {
-            const id = props.adId;
-
-            const endpoint = isFavourite ? 'remove-from-favourites' : 'add-to-favourites';
-
-            const response = await client(`/users/${role}/${endpoint}/${id}`, 'PUT');
-
-            if (!response?.message) {
-                throw new Error('Something went wrong');
-            }
-
-            setMessage(response.message);
-        } catch (e) {
-            handleErrors(e, error);
-        }
-    };
-
-    const sendApplication = async () => {
-        try {
-            const id = props.adId;
-            // todo -> send application and if it is already applied for by the user then disable the button.
-
-            const response = await client(`/users/apply/${id}`, 'POST');
-
-            if (!response?.message) {
-                throw new Error('Something went wrong');
-            }
-
-            setMessage(response.message);
-        } catch (e) {
-            handleErrors(e, error);
-        }
-    };
-
-    const manageSuccess = (message: string) => {
-        setMessage(message);
-        window.location.reload();
-    };
-
     return <div className={'row'}>
         <div className={'col-33 display-flex justify-content-start'}>
-            <AuthWrapper>
-                <Button
-                    onClick={() => manageAlerts(props.adId)}
-                    className={'h-px-35'}
-                    buttonStyle={hasAlert ? 'border-grey' : 'border'}
-                >
-                    <div className={'position-center position-relative w-px-130'}>
-                        <EnvelopeIcon className={'position-absolute left-6 position-center color--dark-1'} width={14}/>
-                        <span className={'ml-16'}>{hasAlert ? 'Delete alert' : 'Create alert'}</span>
-                    </div>
-                </Button>
-            </AuthWrapper>
+            <CreateAlertButton {...props} />
         </div>
         <div className={'col-33 position-center'}>
-            <Button
-                className={'h-px-35 w-px-180'}
-                buttonStyle={'secondary'}
-                onClick={() => sendApplication()}
-            >
-                <div>
-                    <span className={'fs-15 color--light'}>Send application</span>
-                </div>
-            </Button>
+            <SubmitButton {...props} />
         </div>
         <div className={'col-33 display-flex justify-content-end'}>
-            <AuthWrapper>
-                <Button
-                    onClick={() => manageFavourites()}
-                    className={'h-px-35'}
-                    buttonStyle={isFavourite ? 'border-grey' : 'border'}
-                >
-                    <div className={'position-center position-relative w-px-130'}>
-                        <FavouriteIcon className={'position-absolute left-16 position-center color--dark-1'} width={17}/>
-                        <span className={'ml-16'}>{isFavourite ? 'Saved' : 'Save'}</span>
-                    </div>
-                </Button>
-            </AuthWrapper>
+            <FavouritesButton {...props} />
         </div>
-        <SuccessModal
-            successMessage={message}
-            show={!!message}
-            onClick={(message) => manageSuccess(message)}
-        />
     </div>;
 };

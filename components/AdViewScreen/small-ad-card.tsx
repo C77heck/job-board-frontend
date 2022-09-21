@@ -3,7 +3,7 @@ import { BusinessIcon, FavouriteIcon, JobTypeIcon, LocationIcon, MoneyIcon } fro
 import { NavLink } from '../../shared/components/navigation/libs/nav-link';
 import { priceFormat } from '../../shared/libs/helpers';
 import { getFreshnesByDate } from '../../shared/libs/project-helpers';
-// TODO -> add icons for the missing bits.
+// TODO -> _add icons for the missing bits.
 export const SmallAdCard = (props: any) => {
     if (!props.data) {
         return null;
