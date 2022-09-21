@@ -58,7 +58,7 @@ export const CreateAlertButton = (props: ActionButtonProps) => {
         <AuthWrapper>
             <Button
                 onClick={() => manageAlerts(props.adId)}
-                className={'h-px-35'}
+                className={'h-px-35 w-px-141'}
                 buttonStyle={hasAlert ? 'border-grey' : 'border'}
             >
                 <div className={'position-center position-relative w-px-130'}>

@@ -45,7 +45,7 @@ export const FavouritesButton = (props: ActionButtonProps) => {
         <AuthWrapper>
             <Button
                 onClick={() => manageFavourites()}
-                className={'h-px-35'}
+                className={'h-px-35 w-px-141'}
                 buttonStyle={isFavourite ? 'border-grey' : 'border'}
             >
                 <div className={'position-center position-relative w-px-130'}>

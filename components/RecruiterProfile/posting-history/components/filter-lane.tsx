@@ -52,7 +52,7 @@ export const FilterLane = (props: FilterLaneProps) => {
             wrapperClasses: 'h-px-33',
         }),
     }, 'job-filters');
-    
+
     const client = useClient();
 
     const fetchJobs = async () => {
@@ -82,7 +82,7 @@ export const FilterLane = (props: FilterLaneProps) => {
         noErrorModal={true}
         onSubmit={(payload: any) => fetchJobs()}
         form={form}
-        submitButton={{ className: 'h-px-34 letter-spacing-3 fs-14 hover-opacity', title: 'Filter', type: 'submit' }}
+        submitButton={{ className: 'h-px-34 letter-spacing-3 fs-14 hover-opacity w-px-145', title: 'Filter', type: 'submit' }}
         buttonWrapper={'mt-20 display-flex align-items-end'}
         className={'row justify-content-space-between'}
         {...client}

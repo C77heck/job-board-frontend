@@ -53,7 +53,7 @@ export const LoginForm = (props: LoginFormProps) => {
             noSuccessModal={true}
             form={form}
             onSubmit={(payload: any) => submit(payload)}
-            submitButton={{ className: 'mt-20 margin-auto', title: 'Login', type: 'submit' }}
+            submitButton={{ className: 'mt-20 margin-auto w-px-145', title: 'Login', type: 'submit' }}
             buttonWrapper={'col-100'}
             className={'row margin-auto w-60'}
             onSuccess={() => window.location.reload()}
