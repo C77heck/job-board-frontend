@@ -2,8 +2,10 @@ import { useContext, useEffect, useState } from 'react';
 import { Button } from '../../shared/components/buttons/button';
 import { AuthWrapper } from '../../shared/components/navigation/libs/auth-wrapper';
 import { AuthContext } from '../../shared/contexts/auth.context';
+import { ErrorModal } from '../../shared/form/error-modal';
 import { SuccessModal } from '../../shared/form/success.modal';
 import { useClient } from '../../shared/hooks/client';
+import { useTranslate } from '../../shared/hooks/translate.hook';
 import { handleErrors } from '../../shared/libs/handle-errors';
 
 export interface ActionButtonProps {
@@ -16,6 +18,8 @@ export const SubmitButton = (props: ActionButtonProps) => {
     const { userData, role, isLoggedIn } = useContext(AuthContext);
     const [message, setMessage] = useState('');
     const [hasApplied, setHasApplied] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const { trans } = useTranslate();
 
     useEffect(() => {
         if (userData && isLoggedIn) {
@@ -45,6 +49,7 @@ export const SubmitButton = (props: ActionButtonProps) => {
 
     const sendApplication = async () => {
         if (role !== 'job-seeker') {
+            setErrorMessage(trans('you.need.to.be.a.job-seeker'));
             return;
         }
 
@@ -98,5 +103,7 @@ export const SubmitButton = (props: ActionButtonProps) => {
             show={!!message}
             onClick={(message) => manageSuccess(message)}
         />
+
+        <ErrorModal show={!!errorMessage} onClick={(value) => setErrorMessage(value)} errorMessage={errorMessage}/>
     </div>;
 };
