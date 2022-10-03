@@ -30,7 +30,7 @@ export const CreateAlertButton = (props: ActionButtonProps) => {
             }
         });
     }, [props.data, userData]);
-    
+
     const manageAlerts = async (id: string) => {
         try {
             setHeader(['role', role]);

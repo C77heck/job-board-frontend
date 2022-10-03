@@ -1,5 +1,5 @@
 import React from 'react';
-import { SpinnerIcon } from '../icons/icons';
+import { ButtonContent } from './button-content';
 
 export interface ButtonProps {
     type?: "button" | "submit" | "reset" | undefined;
@@ -16,7 +16,6 @@ export interface ButtonProps {
 }
 
 export const Button = (props: ButtonProps) => {
-    const width = props.isLoading ? 15 : 0;
     return <button
         type={props.type || 'button'}
         className={`${getButtonType(props.buttonStyle || '')} ${props.className} position-center position-relative`}
@@ -25,10 +24,10 @@ export const Button = (props: ButtonProps) => {
         disabled={props.disabled}
         onClick={props.onClick}
     >
-        {props.children ? props.children : <div className={'position-center'}>
-            <SpinnerIcon className={'color--light position-absolute left-px-16 top-px-11'} width={width}/>
-            <span className={'color--light'}>{props.title}</span>
-        </div>}
+        <ButtonContent
+            isLoading={props.isLoading}
+            content={props.children ? props.children : <span className={'color--light fs-16'}>{props.title}</span>}
+        />
     </button>;
 };
 
