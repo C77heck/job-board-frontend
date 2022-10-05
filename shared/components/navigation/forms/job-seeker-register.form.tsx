@@ -98,7 +98,9 @@ export const JobSeekerRegisterForm = (props: any) => {
             </div>
         </Form>
         <div className={'position-center py-15'}>
-            <Button title={'login'} buttonStyle={'link'} onClick={props.onClick}/>
+            <Button buttonStyle={'link'} onClick={props.onClick}>
+                <span className={'hover-opacity color--secondary-1 fs-16'}>login</span>
+            </Button>
         </div>
     </div>;
 };

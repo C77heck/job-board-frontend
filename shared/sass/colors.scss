@@ -9,7 +9,7 @@
         --color-secondary-1: #15bd9e;
         --color-secondary-2: #5fda8b;
         --color-secondary-3: #8fd7a9;
-        --color-yellow: #d4b664;
+        --color-yellow: #d4ac40;
         --color-yellow-light: #eee370;
         --color-border: #d5cdcd;
         --color-disabled-lighter: #b7b9be;
@@ -50,6 +50,10 @@
 
         &--yellow-light {
             background-color: var(--color-yellow-light);
+        }
+
+        &--yellow {
+            background-color: var(--color-yellow);
         }
 
         &--light-1 {

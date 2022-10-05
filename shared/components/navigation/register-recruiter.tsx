@@ -6,6 +6,8 @@ export const RegisterRecruiter = ({ isMobile }: any) => {
     return <LoginModal
         type={'recruiter'}
         isMobile={isMobile}
-        trigger={<Button title={'Advertise now'} buttonStyle={'secondary'} className={'ml-20 mt-3'}/>}
+        trigger={<Button buttonStyle={'secondary'} className={'ml-20 mt-3'}>
+            <span className={'fs-15 color--light letter-spacing-2'}>Advertise now</span>
+        </Button>}
     />;
 };

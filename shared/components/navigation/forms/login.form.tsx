@@ -63,7 +63,9 @@ export const LoginForm = (props: LoginFormProps) => {
             <Input {...form?.fields?.password} namespace={form.namespace}/>
         </Form>
         <div className={'position-center py-15'}>
-            <Button title={'Register'} buttonStyle={'link'} onClick={props.onClick}/>
+            <Button buttonStyle={'link'} onClick={props.onClick}>
+                <span className={'hover-opacity color--secondary-1 fs-16'}>Register</span>
+            </Button>
         </div>
     </div>;
 };

@@ -1,12 +1,12 @@
 import moment from 'moment';
 import React from 'react';
-import { Button } from '../../../shared/components/buttons/button';
-import { CalendarIcon, FavouriteIcon, LocationIcon, MoneyIcon } from '../../../shared/components/icons/icons';
+import { CalendarIcon, LocationIcon, MoneyIcon } from '../../../shared/components/icons/icons';
 import { NavLink } from '../../../shared/components/navigation/libs/nav-link';
 import { getLinks } from '../../../shared/config/static-data';
 import { formatLongText } from '../../../shared/libs/helpers';
 import { parseSalary } from '../../../shared/libs/project-helpers';
 import { CompanyLogo } from './company-logo';
+import { FavouriteButton } from './favourite-button';
 import { Job } from './job-listings';
 
 export interface JobCardProps extends Job {
@@ -19,7 +19,6 @@ export interface JobCardProps extends Job {
 
 export const JobCard = (props: JobCardProps) => {
     const { title, expiresOn, description, location, salary, className, logo } = props;
-    const actionButton = <Button title={<FavouriteIcon width={25} className={'color--dark-2 hover-secondary'}/>} buttonStyle={'transparent'}/>;
     const { adView } = getLinks();
     const { formattedText, isFormatted } = formatLongText(description, 420);
     const href = `${adView}/${props._id}`;
@@ -30,8 +29,10 @@ export const JobCard = (props: JobCardProps) => {
         </div>
         <div className={'col-89 display-flex flex-column'}>
             <div className={'display-flex justify-content-space-between'}>
-                <NavLink href={href}><h2 className={'fs-19 fw--700 pb-3 color--secondary-1 hover-opacity'}>{title}</h2></NavLink>
-                {actionButton}
+                <NavLink href={href}>
+                    <h2 className={'fs-19 fw--700 pb-3 color--secondary-1 hover-opacity'}>{title}</h2>
+                </NavLink>
+                <FavouriteButton id={props._id}/>
             </div>
             <div className={'display-flex pb-8'}>
                 <div className={'display-flex'}>
@@ -50,7 +51,9 @@ export const JobCard = (props: JobCardProps) => {
             <div className={'display-flex'}>
                 <p className={'fs-13 fw--400 pt-16'}>
                     {formattedText}
-                    {isFormatted && <NavLink href={href}><span className={'fs-13 fw--400 pt-16 hover-opacity color--secondary-1'}>See more</span></NavLink>}
+                    {isFormatted && <NavLink href={href}>
+                        <span className={'fs-13 fw--400 pt-16 hover-opacity color--secondary-1'}>See more</span>
+                    </NavLink>}
                 </p>
             </div>
         </div>

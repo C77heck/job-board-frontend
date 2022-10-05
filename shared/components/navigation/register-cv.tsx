@@ -8,7 +8,9 @@ export const RegisterCv = ({ isMobile }: any) => {
         isMobile={isMobile}
         trigger={<Button
             buttonStyle={'primary'}
-            title={'Register CV'}
-        />}
+            className={'background-color--yellow'}
+        >
+            <span className={'fs-15 color--light letter-spacing-2'}>Register CV</span>
+        </Button>}
     />;
 };

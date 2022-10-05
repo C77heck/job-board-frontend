@@ -14,7 +14,7 @@ export const NavBar = (props: any) => {
 
     useEffect(() => {
         console.log({
-            isLoggedIn, userId, userData, role
+            isLoggedIn, userId, userData, role, isTrue: isLoggedIn && userId && !userData
         });
         if (isLoggedIn && userId && !userData) {
             (async () => await whoami(role as UserType))();
