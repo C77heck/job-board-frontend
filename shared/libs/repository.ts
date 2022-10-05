@@ -15,6 +15,7 @@ export class Repository {
         if (token) {
             this.setAuth(token);
         }
+
         this.baseUrl = env === 'api' ? process?.env?.NEXT_PUBLIC_API || '' : process?.env?.NEXT_PUBLIC_ATTACHMENT || '';
     }
 
@@ -29,6 +30,7 @@ export class Repository {
     public getRequest(path: string, method: Methods = 'GET', options: RequestOptions, query: any, abortController: AbortController) {
         switch (method) {
             case 'GET':
+                console.log(this.formatUrl(path, query), this.formatOptions(options, abortController, method), this.headers);
                 return new Request(this.formatUrl(path, query), this.formatOptions(options, abortController, method));
             default:
                 return new Request(this.formatUrl(path), this.formatOptions(options, abortController, method));

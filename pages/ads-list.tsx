@@ -1,9 +1,10 @@
 import { NextPage } from 'next';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FilterColumn } from '../components/AdsListScreen/Components/filter-column';
 import { JobListings } from '../components/AdsListScreen/Components/job-listings';
 import { UrlListener } from '../shared/components/navigation/libs/url-listener';
 import { Paginator } from '../shared/components/paginator/paginator';
+import { AuthContext } from '../shared/contexts/auth.context';
 import { useClient } from '../shared/hooks/client';
 import { useUrlManagerHook } from '../shared/hooks/url-manager-hook';
 import { BaseLayoutWidth } from '../shared/layouts/base-layout-width';
@@ -15,6 +16,9 @@ import { QueryManager } from '../shared/libs/query.manager';
 const AdsList: NextPage = (props: any) => {
     const { client, error, isLoading } = useClient();
     const { addMultiple } = useUrlManagerHook();
+    const { isLoggedIn, token, role } = useContext(AuthContext);
+
+    console.log({ token, isLoggedIn, role });
 
     const [paginatedData, setPaginatedData] = useState({
         items: [],
