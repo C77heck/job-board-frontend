@@ -15,7 +15,7 @@ export const RegisterRecruiter = (props: any) => {
             <h3 className={'fs-18 fw--700'}>Are you recruiting?</h3>
         </div>
         <div className={'col-30 display-flex justify-content-end align-items-center'}>
-            <NavLink href={'/recruiter-registration'}>
+            <NavLink noFullWidth={true} href={'/recruiter-registration'}>
                 <Button buttonStyle={'secondary'} className={'ml-20 mt-3'}>
                     <span className={'fs-15 color--light letter-spacing-2'}>Advertise now</span>
                 </Button>
