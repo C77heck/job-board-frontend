@@ -1,16 +1,16 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '../../shared/components/buttons/button';
 import { FavouriteIcon } from '../../shared/components/icons/icons';
 import { AuthWrapper } from '../../shared/components/navigation/libs/auth-wrapper';
-import { AuthContext } from '../../shared/contexts/auth.context';
 import { SuccessModal } from '../../shared/form/success.modal';
-import { useClient } from '../../shared/hooks/client';
+import { useClient } from '../../shared/hooks/client.hook';
+import { useAuthContext } from '../../shared/hooks/context-hooks/auth-context.hook';
 import { handleErrors } from '../../shared/libs/handle-errors';
 import { ActionButtonProps } from './action-buttons';
 
 export const FavouritesButton = (props: ActionButtonProps) => {
-    const { client, error, setHeader } = useClient();
-    const { userData, role } = useContext(AuthContext);
+    const { client, error } = useClient();
+    const { userData, role } = useAuthContext();
     const [message, setMessage] = useState('');
     const [isFavourite, setIsFavourite] = useState(false);
 

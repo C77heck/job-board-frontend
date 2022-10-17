@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Spinner } from '../../../shared/components/spinner/spinner';
-import { useClient } from '../../../shared/hooks/client';
+import { useClient } from '../../../shared/hooks/client.hook';
 import { handleErrors } from '../../../shared/libs/handle-errors';
 import { FilterButtons } from './filter-buttons';
 import { Filters } from './filters';

@@ -9,12 +9,13 @@ import { Form } from '../../../shared/form/form';
 import { FormStructure } from '../../../shared/form/form.structure';
 import { Input } from '../../../shared/form/input';
 import { requiredValidator } from '../../../shared/form/validators/required-validator';
-import { useClient } from '../../../shared/hooks/client';
+import { useClient } from '../../../shared/hooks/client.hook';
+import { useAuthContext } from '../../../shared/hooks/context-hooks/auth-context.hook';
 
 export const RecruiterInfoForm = (props: any) => {
     const { INPUTS: { CHECKBOX } } = CONSTANTS;
     const client = useClient();
-    const { signin } = useContext(AuthContext);
+    const { signin } = useAuthContext();
     const [form, setForm] = useState(new FormStructure({
         first_name: new Field({
             name: 'first_name',

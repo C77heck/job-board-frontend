@@ -1,4 +1,4 @@
-import { useSession } from '../../hooks/session-hook';
+import { useSession } from '../../hooks/session.hook';
 import { SessionContext } from '../session.context';
 
 export const SessionContextWrapper = (props: any) => {

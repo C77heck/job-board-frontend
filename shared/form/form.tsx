@@ -2,7 +2,7 @@ import { Fragment, useContext, useEffect, useState } from 'react';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { Button, ButtonProps } from '../components/buttons/button';
 import { FormContext } from '../contexts/form.context';
-import { ClientProps } from '../hooks/client';
+import { ClientProps } from '../hooks/client.hook';
 import { ErrorModal } from './error-modal';
 import { FormStructure } from './form.structure';
 import { SuccessModal } from './success.modal';

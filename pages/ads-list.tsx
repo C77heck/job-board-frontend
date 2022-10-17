@@ -5,8 +5,9 @@ import { JobListings } from '../components/AdsListScreen/Components/job-listings
 import { UrlListener } from '../shared/components/navigation/libs/url-listener';
 import { Paginator } from '../shared/components/paginator/paginator';
 import { AuthContext } from '../shared/contexts/auth.context';
-import { useClient } from '../shared/hooks/client';
-import { useUrlManagerHook } from '../shared/hooks/url-manager-hook';
+import { useClient } from '../shared/hooks/client.hook';
+import { useAuthContext } from '../shared/hooks/context-hooks/auth-context.hook';
+import { useUrlManagerHook } from '../shared/hooks/url-manager.hook';
 import { BaseLayoutWidth } from '../shared/layouts/base-layout-width';
 import { BaseLayout } from '../shared/layouts/base.layout';
 import { handleErrors } from '../shared/libs/handle-errors';
@@ -16,7 +17,7 @@ import { QueryManager } from '../shared/libs/query.manager';
 const AdsList: NextPage = (props: any) => {
     const { client, error, isLoading } = useClient();
     const { addMultiple } = useUrlManagerHook();
-    const { isLoggedIn, token, role } = useContext(AuthContext);
+    const { isLoggedIn, token, role } = useAuthContext();
 
     console.log({ token, isLoggedIn, role });
 

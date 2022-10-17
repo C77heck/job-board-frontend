@@ -1,4 +1,4 @@
-import { useUrlManagerHook } from '../../../shared/hooks/url-manager-hook';
+import { useUrlManagerHook } from '../../../shared/hooks/url-manager.hook';
 import { FilterItem } from '../../HomeScreen/Components/filter-strip';
 
 export interface FiltersProps {

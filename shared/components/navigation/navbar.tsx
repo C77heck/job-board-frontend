@@ -1,5 +1,6 @@
-import { useContext, useEffect } from 'react';
-import { AuthContext, UserType } from '../../contexts/auth.context';
+import { useEffect } from 'react';
+import { UserType } from '../../contexts/auth.context';
+import { useAuthContext } from '../../hooks/context-hooks/auth-context.hook';
 import { Portal } from '../portal';
 import { DesktopNavbar } from './desktop/desktop-navbar';
 import { Analyitics } from './libs/analyitics';
@@ -10,7 +11,7 @@ export interface NavbarProps {
 }
 
 export const NavBar = (props: any) => {
-    const { isLoggedIn, userId, userData, token, role, whoami } = useContext(AuthContext);
+    const { isLoggedIn, userId, userData, token, role, whoami } = useAuthContext();
 
     useEffect(() => {
         if (isLoggedIn && userId && !userData) {

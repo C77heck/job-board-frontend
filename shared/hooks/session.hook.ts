@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { handleErrors } from '../libs/handle-errors';
-import { useClient } from './client';
+import { useClient } from './client.hook';
 
 export const useSession = () => {
     const [sessionId, setSessionId] = useState('');

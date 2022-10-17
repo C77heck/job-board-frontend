@@ -42,12 +42,15 @@ export const TabViewer = (props: TabViewerProps) => {
             buttonStyle={'filter-buttons'}
             className={`${isActive} mx-10`}
             key={value}
-            title={display}
-        />;
+        >
+            <span>{display}</span>
+        </Button>;
     };
 
     return <div className={'w-100'}>
-        <div className={'display-flex justify-content-center'}>{props.tabs.tabNames.map((tabName: TabNames) => tabButton(tabName))}</div>
+        <div className={'display-flex justify-content-center'}>
+            {props.tabs.tabNames.map((tabName: TabNames) => tabButton(tabName))}
+        </div>
         <div className={'mt-30 px-50'}>
             {activeElement}
         </div>

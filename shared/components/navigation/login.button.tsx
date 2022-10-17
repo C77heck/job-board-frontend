@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { useContext } from 'react';
-import { AuthContext } from '../../contexts/auth.context';
+import { useAuthContext } from '../../hooks/context-hooks/auth-context.hook';
 import { handleErrors } from '../../libs/handle-errors';
 import { saveLogs } from '../../libs/helpers';
 import { Button } from '../buttons/button';
@@ -11,7 +10,7 @@ import { LoginTypeDropdown } from './login-type.dropdown';
 import { RecruiterDropdown } from './recruiter-dropdown';
 
 export const LoginButton = ({ isMobile }: any) => {
-    const { signout, isLoggedIn, role } = useContext(AuthContext);
+    const { signout, isLoggedIn, role } = useAuthContext();
 
     const signoutHandler = () => {
         try {

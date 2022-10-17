@@ -1,9 +1,8 @@
-import { useContext } from 'react';
+import { useAuthContext } from '../../hooks/context-hooks/auth-context.hook';
 import { ErrorScreen } from './error.screen';
-import { AuthContext } from '../../contexts/auth.context';
 
 export const Auth = (props: any) => {
-    const { isLoggedIn } = useContext(AuthContext);
+    const { isLoggedIn } = useAuthContext();
 
     return isLoggedIn ? props.children : <ErrorScreen/>;
 };

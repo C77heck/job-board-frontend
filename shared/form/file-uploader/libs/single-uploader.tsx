@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { useClient } from '../../../hooks/client';
+import { useClient } from '../../../hooks/client.hook';
 import { handleErrors } from '../../../libs/handle-errors';
 import { Attachment, FileData, SingleUploaderProps } from './uploader.interfaces';
 

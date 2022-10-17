@@ -4,7 +4,7 @@ import { CONSTANTS } from '../shared/constants';
 import { Field } from '../shared/form/field';
 import { FormStructure } from '../shared/form/form.structure';
 import { Input } from '../shared/form/input';
-import { useUrlManagerHook } from '../shared/hooks/url-manager-hook';
+import { useUrlManagerHook } from '../shared/hooks/url-manager.hook';
 
 export interface TestObservable {
     name: string;

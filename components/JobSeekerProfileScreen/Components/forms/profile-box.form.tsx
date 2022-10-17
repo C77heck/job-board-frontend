@@ -9,7 +9,8 @@ import { Form } from '../../../../shared/form/form';
 import { FormStructure } from '../../../../shared/form/form.structure';
 import { Input } from '../../../../shared/form/input';
 import { requiredValidator } from '../../../../shared/form/validators/required-validator';
-import { useClient } from '../../../../shared/hooks/client';
+import { useClient } from '../../../../shared/hooks/client.hook';
+import { useAuthContext } from '../../../../shared/hooks/context-hooks/auth-context.hook';
 
 // TODO -> these will have to be dealt with. probably with an attachment service.
 // we could build a local service that serves staff from the local machine.
@@ -20,7 +21,7 @@ import { useClient } from '../../../../shared/hooks/client';
 export const ProfileBoxForm = (props: any) => {
     const { INPUTS: { TEXTAREA } } = CONSTANTS;
     const client = useClient();
-    const { signin, userId } = useContext(AuthContext);
+    const { signin, userId } = useAuthContext();
     const [form, setForm] = useState(new FormStructure({
         first_name: new Field({
             name: 'first_name',

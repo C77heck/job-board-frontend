@@ -32,10 +32,7 @@ export const DesktopNavbar = (props: any) => {
                     </NavLink>
                 </div>
                 <div className={'col-50 display-flex justify-content-end'}>
-                    <div className={'display-flex align-items-center'}>
-                        <h3 className={'fs-18 fw--700'}>Are you recruiting?</h3>
-                        <RegisterRecruiter/>
-                    </div>
+                    <RegisterRecruiter/>
                 </div>
             </div>
 

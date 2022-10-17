@@ -1,9 +1,9 @@
-import { useContext, useState } from 'react';
-import { AuthContext } from '../contexts/auth.context';
+import { useState } from 'react';
 import { parseError } from '../libs/error-parsers';
 import { handleErrors } from '../libs/handle-errors';
 import { saveLogs } from '../libs/helpers';
 import { Methods, Repository, RequestOptions } from '../libs/repository';
+import { useAuthContext } from './context-hooks/auth-context.hook';
 
 export interface ClientProps {
     isLoading: boolean;
@@ -16,7 +16,7 @@ export interface ClientProps {
 }
 
 export const useClient = (env: 'api' | 'attachment' = 'api'): ClientProps => {
-    const { token, signout, isLoggedIn } = useContext(AuthContext);
+    const { token, signout, isLoggedIn } = useAuthContext();
     const request: Repository = new Repository(token, env);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');

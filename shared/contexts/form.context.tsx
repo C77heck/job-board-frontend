@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 import { FormOptions, FormStructure } from '../form/form.structure';
-import { ValueProp } from '../hooks/form-hook';
+import { ValueProp } from '../hooks/form.hook';
 
 export const FormContext = createContext({
     setData: (propName: string, data: ValueProp, namespace: string) => {

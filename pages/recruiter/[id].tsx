@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import { useRouter, withRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Job } from '../../components/AdsListScreen/Components/job-listings';
-import { useClient } from '../../shared/hooks/client';
+import { useClient } from '../../shared/hooks/client.hook';
 import { BaseLayoutWidth } from '../../shared/layouts/base-layout-width';
 import { BaseLayout } from '../../shared/layouts/base.layout';
 import { handleErrors } from '../../shared/libs/handle-errors';

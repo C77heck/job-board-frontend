@@ -1,14 +1,14 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '../../../shared/components/buttons/button';
 import { FavouriteFullIcon, FavouriteIcon } from '../../../shared/components/icons/icons';
-import { AuthContext } from '../../../shared/contexts/auth.context';
 import { SuccessModal } from '../../../shared/form/success.modal';
-import { useClient } from '../../../shared/hooks/client';
+import { useClient } from '../../../shared/hooks/client.hook';
+import { useAuthContext } from '../../../shared/hooks/context-hooks/auth-context.hook';
 import { handleErrors } from '../../../shared/libs/handle-errors';
 
 export const FavouriteButton = (props: { id?: string }) => {
     const { client, error, setHeader } = useClient();
-    const { userData, role } = useContext(AuthContext);
+    const { userData, role } = useAuthContext();
     const [message, setMessage] = useState('');
     const [isFavourite, setIsFavourite] = useState(false);
 

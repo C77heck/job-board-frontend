@@ -5,7 +5,7 @@ import { Job } from '../../components/AdsListScreen/Components/job-listings';
 import { AdCard } from '../../components/AdViewScreen/ad-card';
 import { SimilarAds } from '../../components/AdViewScreen/similar-ads';
 import { Hr } from '../../shared/components/ui-misc/hr';
-import { useClient } from '../../shared/hooks/client';
+import { useClient } from '../../shared/hooks/client.hook';
 import { BaseLayoutWidth } from '../../shared/layouts/base-layout-width';
 import { BaseLayout } from '../../shared/layouts/base.layout';
 import { handleErrors } from '../../shared/libs/handle-errors';

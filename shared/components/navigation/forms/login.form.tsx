@@ -1,14 +1,13 @@
 import moment from 'moment';
 import * as React from "react";
-import { useContext } from "react";
-import { AuthContext } from "../../../contexts/auth.context";
 import { Field } from "../../../form/field";
 import { Form } from "../../../form/form";
 import { FormStructure } from "../../../form/form.structure";
 import { Input } from '../../../form/input';
 import { emailValidator } from "../../../form/validators/email-validator";
 import { requiredValidator } from "../../../form/validators/required-validator";
-import { useClient } from "../../../hooks/client";
+import { useClient } from "../../../hooks/client.hook";
+import { useAuthContext } from '../../../hooks/context-hooks/auth-context.hook';
 import { Button } from "../../buttons/button";
 
 export interface LoginFormProps {
@@ -18,7 +17,7 @@ export interface LoginFormProps {
 
 export const LoginForm = (props: LoginFormProps) => {
     const client = useClient();
-    const { signin } = useContext(AuthContext);
+    const { signin } = useAuthContext();
 
     const form = new FormStructure({
         email: new Field({

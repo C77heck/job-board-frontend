@@ -1,5 +1,5 @@
 import { Button } from '../../../shared/components/buttons/button';
-import { useUrlManagerHook } from '../../../shared/hooks/url-manager-hook';
+import { useUrlManagerHook } from '../../../shared/hooks/url-manager.hook';
 
 export interface FilterItem {
     value: string;

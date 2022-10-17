@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Hr } from '../../shared/components/ui-misc/hr';
-import { SessionContext } from '../../shared/contexts/session.context';
+import { useSessionContext } from '../../shared/hooks/context-hooks/session-context.hook';
 import { htmlParser } from '../../shared/libs/project-helpers';
 import { Job } from '../AdsListScreen/Components/job-listings';
 import { ActionButtons } from './action-buttons';
@@ -13,7 +13,7 @@ export interface AdCardProps {
 }
 
 export const AdCard = (props: AdCardProps) => {
-    const { sessionId, sendViewEvent } = useContext(SessionContext);
+    const { sessionId, sendViewEvent } = useSessionContext();
 
     useEffect(() => {
         if (sessionId) {
