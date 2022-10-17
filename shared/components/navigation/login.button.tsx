@@ -9,7 +9,7 @@ import { ProfileDropdown } from './libs/profile-dropdown';
 import { LoginTypeDropdown } from './login-type.dropdown';
 import { RecruiterDropdown } from './recruiter-dropdown';
 
-export const LoginButton = ({ isMobile }: any) => {
+export const LoginButton = (props: any) => {
     const { signout, isLoggedIn, role } = useAuthContext();
 
     const signoutHandler = () => {
@@ -28,7 +28,9 @@ export const LoginButton = ({ isMobile }: any) => {
             title={<ProfileDropdown
                 className={'move-right'}
                 trigger={<LoginIcon width={24} className={'color--light pt-3 hover-opacity'}/>}
-                content={role === 'job-seeker' ? <JobSeekerDropdown signoutHandler={signoutHandler}/> : <RecruiterDropdown signoutHandler={signoutHandler}/>}
+                content={role === 'job-seeker'
+                    ? <JobSeekerDropdown signoutHandler={signoutHandler}/>
+                    : <RecruiterDropdown signoutHandler={signoutHandler}/>}
             />}
             onClick={() => console.log('signout pressed')}
         />;

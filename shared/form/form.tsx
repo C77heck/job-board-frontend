@@ -53,12 +53,17 @@ export const Form = (props: FormProps) => {
     const submit = async (e: any) => {
         e.preventDefault();
         await props.onSubmit(getPayload(namespace));
+    };
 
-        if (props.noSuccessModal && props.onSuccess && !error) {
+    useEffect(() => {
+        // there's a latency of state update coming from the client so we handle the success with useEffect
+        // to make sure we don't fire the onSuccess handler in case of error
+        if ((props.noSuccessModal && props.onSuccess) && (!error || successMessage)) {
+            console.log();
             props.onSuccess();
         }
-    };
-    // review this logic
+    }, [error, successMessage, props.onSuccess, props.noSuccessModal]);
+
     const manageSuccessClose = () => {
         if (props.onSuccess) {
             props.onSuccess();
