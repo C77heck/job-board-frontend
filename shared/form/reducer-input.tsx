@@ -1,6 +1,5 @@
-import React, { RefObject, useCallback, useContext, useEffect, useState } from 'react';
+import React, { RefObject, useCallback, useState } from 'react';
 import { CONSTANTS } from '../constants';
-import { FormContext } from '../contexts/form.context';
 import { DispatchFunction } from '../hooks/form-reducer.hook';
 import { Checkbox } from './checkbox';
 import { Datepicker } from './datepicker';
@@ -28,7 +27,7 @@ export interface FieldProps<TOptions = string[]> {
     options: any[];
     element: 'text' | 'dropdown' | 'searchable' | 'searchable_dropdown' | 'textarea' | 'checkbox' | 'datepicker' | string;
     isNumberOnly: boolean;
-    value: string | string[] | null;
+    value: string | string[] | null | OptionProps;
     onChange: DispatchFunction;
     namespace: string;
     labelClass: string;
@@ -66,26 +65,13 @@ const InputWrapper = (props: NormalWrapperProps) => {
         {!!props.hasError && !props.isInFocus && <small className={'error-show'}>{props.errorMessage || props.errorMessage}</small>}
     </div>;
 };
-
-export const Input = (props: FieldProps) => {
+// todo turn this into a reducer hook
+export const ReducerInput = (props: FieldProps) => {
     const [hasError, setHasError] = useState(false);
-    const [value, setValue] = useState<any>('');
     const [isInFocus, setIsInFocus] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
     const prodRef: RefObject<HTMLDivElement> = React.createRef();
-    const { setData } = useContext(FormContext);
-    const { INPUTS: { TEXTAREA, SEARCHABLE, SEARCHABLE_DROPDOWN, DROPDOWN, RANGE, CHECKBOX, DATEPICKER } } = CONSTANTS;
-
-    useEffect(() => {
-        setValue(props.value as string);
-    }, [props.value]);
-
-    useEffect(() => {
-        const { hasError, errorMessage } = validate(value);
-        setHasError(hasError);
-        setErrorMessage(errorMessage);
-        setData(props.name, { value, isValid: !hasError }, props.namespace);
-    }, [value]);
+    const { INPUTS } = CONSTANTS;
 
     const removeNonNumericValues = useCallback((value: string) => {
         const isNumeric = /^-?\d*\.?\d*$/;
@@ -105,75 +91,78 @@ export const Input = (props: FieldProps) => {
     };
 
     const handleChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
+        const { hasError, errorMessage } = validate(value);
         const val = props.isNumberOnly ? removeNonNumericValues(value) : value;
-        setValue(val);
+        props.onChange({ value: val, valid: !hasError, inputName: props.name });
+        setHasError(hasError);
+        setErrorMessage(errorMessage);
     };
 
     const onClickHandler = (isChosen: boolean, option: OptionProps) => {
-        setValue(isChosen ? '' : option);
+        props.onChange({ value: isChosen ? '' : option.value, valid: !hasError, inputName: props.name });
     };
 
     const manageInputType = (element: string) => {
         switch (element) {
-            case DROPDOWN:
+            case INPUTS.DROPDOWN:
                 return <TextInput
                     onFocus={() => setIsInFocus(true)}
                     onBlur={() => setIsInFocus(false)}
                     {...props}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-                    value={value}
+                    handleChange={handleChange}
+                    value={props.value}
                 />; // will need the dropdown
-            case SEARCHABLE:
+            case INPUTS.SEARCHABLE:
                 return <TextInput
                     onFocus={() => setIsInFocus(true)}
                     onBlur={() => setIsInFocus(false)}
                     {...props}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-                    value={value}
+                    handleChange={handleChange}
+                    value={props.value}
                 />; // will need the dropdown
-            case SEARCHABLE_DROPDOWN:
+            case INPUTS.SEARCHABLE_DROPDOWN:
                 return <SearchableDropdown
                     currentValue={'something'}
                     {...props}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-                    value={value}
+                    handleChange={handleChange}
+                    value={props.value as OptionProps}
                     onClickHandler={(isChosen: boolean, option: OptionProps) => onClickHandler(isChosen, option)}
                 />;
-            case TEXTAREA:
+            case INPUTS.TEXTAREA:
                 return <Textarea
                     onFocus={() => setIsInFocus(true)}
                     onBlur={() => setIsInFocus(false)}
                     {...props}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-                    value={value}
+                    handleChange={handleChange}
+                    value={props.value}
                 />;  // will need the textarea
-            case RANGE:
+            case INPUTS.RANGE:
                 return <RangeInput
                     {...props}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-                    value={value}
+                    handleChange={handleChange}
+                    value={props.value}
                 />;
-            case CHECKBOX:
+            case INPUTS.CHECKBOX:
                 return <Checkbox
                     {...props}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-                    value={value}
+                    handleChange={handleChange}
+                    value={props.value}
                 />;
-            case DATEPICKER:
+            case INPUTS.DATEPICKER:
                 return <Datepicker
                     onFocus={() => setIsInFocus(true)}
                     onBlur={() => setIsInFocus(false)}
                     {...props}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-                    value={value}
+                    handleChange={handleChange}
+                    value={props.value}
                 />;
             default:
                 return <TextInput
                     onFocus={() => setIsInFocus(true)}
                     onBlur={() => setIsInFocus(false)}
                     {...props}
-                    handleChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
-                    value={value}
+                    handleChange={handleChange}
+                    value={props.value}
                 />;
         }
     };
@@ -181,11 +170,11 @@ export const Input = (props: FieldProps) => {
     const element = props?.element || '';
 
     switch (element) {
-        case CHECKBOX:
+        case INPUTS.CHECKBOX:
             return manageInputType(element);
-        case TEXTAREA:
+        case INPUTS.TEXTAREA:
             return manageInputType(element);
-        case SEARCHABLE_DROPDOWN:
+        case INPUTS.SEARCHABLE_DROPDOWN:
             return <InputWrapper {...props} {...{ prodRef, hasError, errorMessage, isInFocus }} isOverflowHidden={true}>{manageInputType(element)}</InputWrapper>;
         default:
             return <InputWrapper {...props} {...{ prodRef, hasError, errorMessage, isInFocus }}>{manageInputType(element)}</InputWrapper>;

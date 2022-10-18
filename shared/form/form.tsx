@@ -22,6 +22,7 @@ interface FormProps extends ClientProps {
 
 export const Form = (props: FormProps) => {
     const [isFormValid, setIsFormValid] = useState(false);
+    const [requestReceived, setRequestReceived] = useState(false);
     const { formData, getPayload, setForm } = useContext(FormContext);
     const namespace = props.form?.namespace;
     const fields = props.form?.fields;
@@ -53,16 +54,15 @@ export const Form = (props: FormProps) => {
     const submit = async (e: any) => {
         e.preventDefault();
         await props.onSubmit(getPayload(namespace));
+        setRequestReceived(true);
     };
 
     useEffect(() => {
-        // there's a latency of state update coming from the client so we handle the success with useEffect
-        // to make sure we don't fire the onSuccess handler in case of error
-        if ((props.noSuccessModal && props.onSuccess) && (!error || successMessage)) {
-            console.log();
+        if (requestReceived && (props.noSuccessModal && props.onSuccess) && !error) {
+            setRequestReceived(false);
             props.onSuccess();
         }
-    }, [error, successMessage, props.onSuccess, props.noSuccessModal]);
+    }, [requestReceived]);
 
     const manageSuccessClose = () => {
         if (props.onSuccess) {

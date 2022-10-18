@@ -15,6 +15,8 @@ export interface ChangeAction extends Input {
     type: 'CHANGE';
 }
 
+export type DispatchFunction = (input: Input) => void;
+
 // the state will be the initial and current state object we pass over
 // figure a generic insertion for the state as we dont know the type of it
 // we can dispatch different actions based on presets below of the reducer
@@ -57,7 +59,7 @@ export const useFormReducer = (inputs: any) => {
         return true;
     };
 
-    const inputHandler = useCallback(({ inputName, value, valid }: Input) => {
+    const inputHandler: DispatchFunction = useCallback(({ inputName, value, valid }: Input) => {
         dispatch({ inputName, value, valid, type: 'CHANGE' });
     }, []);
 

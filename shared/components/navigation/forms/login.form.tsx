@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { Field } from "../../../form/field";
 import { Form } from "../../../form/form";
 import { FormStructure } from "../../../form/form.structure";
-import { Input } from '../../../form/input';
+import { ReducerInput } from '../../../form/reducer-input';
 import { emailValidator } from "../../../form/validators/email-validator";
 import { requiredValidator } from "../../../form/validators/required-validator";
 import { useClient } from "../../../hooks/client.hook";
@@ -71,11 +71,15 @@ export const LoginForm = (props: LoginFormProps) => {
             onSuccess={() => window.location.reload()}
             {...client}
         >
-            <Input
+            <ReducerInput
                 {...form?.fields?.email}
+                value={inputState.email}
+                onChange={inputHandler}
             />
-            <Input
+            <ReducerInput
                 {...form?.fields?.password}
+                onChange={inputHandler}
+                value={inputState.password}
             />
         </Form>
         <div className={'position-center py-15'}>
