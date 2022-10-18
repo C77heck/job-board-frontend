@@ -20,7 +20,7 @@ export interface LoginFormProps {
 export const LoginForm = (props: LoginFormProps) => {
     const client = useClient();
     const { signin } = useAuthContext();
-    const { inputState: { inputs }, inputHandler, isFormValid, destroy } = useFormReducer({
+    const { inputState: { inputs }, inputHandler, isFormValid, destroy, getPayload } = useFormReducer({
         inputs: {
             email: {
                 value: '',
@@ -54,7 +54,7 @@ export const LoginForm = (props: LoginFormProps) => {
     }, 'login-form');
 
     useEffect(() => {
-        console.log({ inputs, isFormValid });
+        console.log({ inputs: getPayload() });
     }, [inputs]);
     const submit = async () => {
         if (!isFormValid) {

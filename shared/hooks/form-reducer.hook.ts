@@ -25,7 +25,11 @@ export interface DestroyAction {
     type: 'DESTROY';
 }
 
-export type ActionType = SetAction | ChangeAction | DestroyAction;
+export interface GetPayloadAction {
+    type: 'GET_PAYLOAD';
+}
+
+export type ActionType = SetAction | ChangeAction | DestroyAction | GetPayloadAction;
 
 export interface DispatchInputOptions extends Input {
     inputName: string;
@@ -66,6 +70,7 @@ export interface ReducerResponse {
     isFormValid: boolean;
     setFormData: DispatchFunction<InputState['inputs']>;
     destroy: DispatchFunction<void>;
+    getPayload: () => any;
 }
 
 export const useFormReducer = (inputs: any): ReducerResponse => {
@@ -98,5 +103,13 @@ export const useFormReducer = (inputs: any): ReducerResponse => {
         dispatch({ type: 'DESTROY' });
     }, []);
 
-    return { inputState, inputHandler, isFormValid, setFormData, destroy };
+    const getPayload = useCallback(() => {
+        const payload: any = {};
+
+        Object.keys(inputState.inputs).forEach(key => payload[key] = { [key]: inputState.inputs[key].value });
+
+        return payload;
+    }, []);
+
+    return { inputState, inputHandler, isFormValid, setFormData, getPayload, destroy };
 };
