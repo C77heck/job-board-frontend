@@ -1,13 +1,16 @@
-import React, { RefObject, useCallback, useState } from 'react';
-import { CONSTANTS } from '../constants';
-import { DispatchFunction } from '../hooks/reducers/form-reducer.hook';
+import React, { RefObject, useCallback } from 'react';
+import { CONSTANTS } from '../../constants';
+import { DispatchFunction } from '../../hooks/reducers/form-reducer.hook';
+import { useInput } from '../../hooks/reducers/input-reducer.hook';
+import { ValidatorInterface } from '../validators/validator-interface';
+
 import { Checkbox } from './checkbox';
 import { Datepicker } from './datepicker';
+import { InputWrapper } from './libs/input-wrapper';
 import { RangeInput } from './range-input';
 import { OptionProps, SearchableDropdown } from './searchable-dropdown';
 import { TextInput } from './text-input';
 import { Textarea } from './textarea';
-import { ValidatorInterface } from './validators/validator-interface';
 
 export interface FieldProps<TOptions = string[]> {
     type?: string;
@@ -34,40 +37,8 @@ export interface FieldProps<TOptions = string[]> {
     cols?: number;
 }
 
-interface NormalWrapperProps extends FieldProps {
-    prodRef: RefObject<any>;
-    hasError: boolean;
-    errorMessage: string;
-    children: any;
-    isInFocus: boolean;
-    isOverflowHidden?: boolean;
-}
-
-const InputWrapper = (props: NormalWrapperProps) => {
-    const errorClass = `error-${props.hasError && !props.isInFocus ? 'show' : 'hide'}--div`;
-    const overflowClass = `${props.isOverflowHidden ? '' : 'overflow-hidden'}`;
-    const wrapperClasses = `position-center input-wrapper ${props.wrapperClasses} ${errorClass} ${overflowClass}`;
-    return <div
-        className={`display-flex flex-column ${props.className}`}
-        ref={props.prodRef}
-    >
-        {props.label && <label
-            className={`input-label error-${props.hasError && !props.isInFocus ? 'show' : 'hide'}--label ${props.labelClass}`}
-            htmlFor={props.name}
-        >
-            {props.label}
-        </label>}
-        <div className={wrapperClasses}>
-            {props.children}
-        </div>
-        {!!props.hasError && !props.isInFocus && <small className={'error-show'}>{props.errorMessage || props.errorMessage}</small>}
-    </div>;
-};
-
 export const Input = (props: FieldProps) => {
-    const [hasError, setHasError] = useState(false);
-    const [isInFocus, setIsInFocus] = useState(true);
-    const [errorMessage, setErrorMessage] = useState('');
+    const { state, handleDataChange, focusChange } = useInput({ hasError: false, isInFocus: true, errorMessage: '' });
     const prodRef: RefObject<HTMLDivElement> = React.createRef();
     const { INPUTS } = CONSTANTS;
 
@@ -92,28 +63,27 @@ export const Input = (props: FieldProps) => {
         const { hasError, errorMessage } = validate(value);
         const val = props.isNumberOnly ? removeNonNumericValues(value) : value;
         props.onChange({ value: val, valid: !hasError, inputName: props.name });
-        setHasError(hasError);
-        setErrorMessage(errorMessage);
+        handleDataChange({ hasError, errorMessage });
     };
 
     const onClickHandler = (isChosen: boolean, option: OptionProps) => {
-        props.onChange({ value: isChosen ? '' : option.value, valid: !hasError, inputName: props.name });
+        props.onChange({ value: isChosen ? '' : option.value, valid: !state.hasError, inputName: props.name });
     };
 
     const manageInputType = (element: string) => {
         switch (element) {
             case INPUTS.DROPDOWN:
                 return <TextInput
-                    onFocus={() => setIsInFocus(true)}
-                    onBlur={() => setIsInFocus(false)}
+                    onFocus={() => focusChange(true)}
+                    onBlur={() => focusChange(false)}
                     {...props}
                     handleChange={handleChange}
                     value={props.value}
                 />; // will need the dropdown
             case INPUTS.SEARCHABLE:
                 return <TextInput
-                    onFocus={() => setIsInFocus(true)}
-                    onBlur={() => setIsInFocus(false)}
+                    onFocus={() => focusChange(true)}
+                    onBlur={() => focusChange(false)}
                     {...props}
                     handleChange={handleChange}
                     value={props.value}
@@ -128,8 +98,8 @@ export const Input = (props: FieldProps) => {
                 />;
             case INPUTS.TEXTAREA:
                 return <Textarea
-                    onFocus={() => setIsInFocus(true)}
-                    onBlur={() => setIsInFocus(false)}
+                    onFocus={() => focusChange(true)}
+                    onBlur={() => focusChange(false)}
                     {...props}
                     handleChange={handleChange}
                     value={props.value}
@@ -148,16 +118,16 @@ export const Input = (props: FieldProps) => {
                 />;
             case INPUTS.DATEPICKER:
                 return <Datepicker
-                    onFocus={() => setIsInFocus(true)}
-                    onBlur={() => setIsInFocus(false)}
+                    onFocus={() => focusChange(true)}
+                    onBlur={() => focusChange(false)}
                     {...props}
                     handleChange={handleChange}
                     value={props.value}
                 />;
             default:
                 return <TextInput
-                    onFocus={() => setIsInFocus(true)}
-                    onBlur={() => setIsInFocus(false)}
+                    onFocus={() => focusChange(true)}
+                    onBlur={() => focusChange(false)}
                     {...props}
                     handleChange={handleChange}
                     value={props.value}
@@ -173,8 +143,8 @@ export const Input = (props: FieldProps) => {
         case INPUTS.TEXTAREA:
             return manageInputType(element);
         case INPUTS.SEARCHABLE_DROPDOWN:
-            return <InputWrapper {...props} {...{ prodRef, hasError, errorMessage, isInFocus }} isOverflowHidden={true}>{manageInputType(element)}</InputWrapper>;
+            return <InputWrapper {...props} {...{ prodRef, ...state }} isOverflowHidden={true}>{manageInputType(element)}</InputWrapper>;
         default:
-            return <InputWrapper {...props} {...{ prodRef, hasError, errorMessage, isInFocus }}>{manageInputType(element)}</InputWrapper>;
+            return <InputWrapper {...props} {...{ prodRef, ...state }}>{manageInputType(element)}</InputWrapper>;
     }
 };
