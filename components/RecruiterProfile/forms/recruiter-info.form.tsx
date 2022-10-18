@@ -7,7 +7,7 @@ import { AuthContext } from '../../../shared/contexts/auth.context';
 import { Field } from '../../../shared/form/field';
 import { Form } from '../../../shared/form/form';
 import { FormStructure } from '../../../shared/form/form.structure';
-import { Input } from '../../../shared/form/input';
+import { Input } from '../../../shared/form/old-input';
 import { requiredValidator } from '../../../shared/form/validators/required-validator';
 import { useClient } from '../../../shared/hooks/client.hook';
 import { useAuthContext } from '../../../shared/hooks/context-hooks/auth-context.hook';

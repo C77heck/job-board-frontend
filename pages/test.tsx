@@ -3,7 +3,7 @@ import * as React from 'react';
 import { CONSTANTS } from '../shared/constants';
 import { Field } from '../shared/form/field';
 import { FormStructure } from '../shared/form/form.structure';
-import { Input } from '../shared/form/input';
+import { Input } from '../shared/form/old-input';
 import { useUrlManagerHook } from '../shared/hooks/url-manager.hook';
 
 export interface TestObservable {

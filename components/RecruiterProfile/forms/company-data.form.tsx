@@ -5,7 +5,7 @@ import { Field } from '../../../shared/form/field';
 import { IconUploader } from '../../../shared/form/file-uploader/icon-uploader';
 import { Form } from '../../../shared/form/form';
 import { FormStructure } from '../../../shared/form/form.structure';
-import { Input } from '../../../shared/form/input';
+import { Input } from '../../../shared/form/old-input';
 import { requiredValidator } from '../../../shared/form/validators/required-validator';
 import { useClient } from '../../../shared/hooks/client.hook';
 

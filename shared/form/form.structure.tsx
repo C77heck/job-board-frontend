@@ -1,4 +1,4 @@
-import { FieldProps } from './input';
+import { FieldProps } from './old-input';
 
 export interface FormOptions {
     [key: string]: FieldProps;

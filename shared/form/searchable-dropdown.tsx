@@ -43,7 +43,7 @@ export class SearchableDropdown extends Component<SearchableDropdownProps, Searc
 
     public componentDidMount() {
         this.assignClickHandler();
-        this.setState({ searchedOptions: this.props.options });
+        this.setState({ searchedOptions: this.props?.options || [] });
     }
 
     public componentWillUnmount() {
@@ -153,7 +153,7 @@ export class SearchableDropdown extends Component<SearchableDropdownProps, Searc
 
     public manageSearch() {
         const regex = new RegExp(this.state?.searchedValue || '', 'i');
-        const searchedOptions = this.props.options?.filter(({ title }) => regex.test(title));
+        const searchedOptions = (this.props?.options || []).filter(({ title }) => regex.test(title));
 
         this.setState({ searchedOptions });
     }

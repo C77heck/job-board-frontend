@@ -4,7 +4,7 @@ import { CONSTANTS } from '../../../../shared/constants';
 import { Field } from '../../../../shared/form/field';
 import { Form } from '../../../../shared/form/form';
 import { FormStructure } from '../../../../shared/form/form.structure';
-import { Input } from '../../../../shared/form/input';
+import { Input } from '../../../../shared/form/old-input';
 import { useClient } from '../../../../shared/hooks/client.hook';
 import { Sort } from './sort-header';
 

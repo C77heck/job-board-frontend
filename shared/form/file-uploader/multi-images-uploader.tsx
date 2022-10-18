@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { FormContext } from '../../contexts/form.context';
-import { FieldProps } from '../input';
+import { FieldProps } from '../old-input';
 import { FileDisplay } from './libs/file-display';
 import { Lightbox } from './libs/lightbox';
 import { MultiUploader } from './libs/multi-uploader';

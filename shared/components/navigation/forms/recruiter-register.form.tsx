@@ -3,7 +3,7 @@ import * as React from "react";
 import { Field } from "../../../form/field";
 import { Form } from "../../../form/form";
 import { FormStructure } from "../../../form/form.structure";
-import { Input } from '../../../form/input';
+import { Input } from '../../../form/old-input';
 import { emailValidator } from "../../../form/validators/email-validator";
 import { requiredValidator } from "../../../form/validators/required-validator";
 import { useClient } from "../../../hooks/client.hook";
