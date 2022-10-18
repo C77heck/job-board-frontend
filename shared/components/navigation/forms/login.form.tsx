@@ -20,7 +20,7 @@ export interface LoginFormProps {
 export const LoginForm = (props: LoginFormProps) => {
     const client = useClient();
     const { signin } = useAuthContext();
-    const { inputState, inputHandler, isFormValid } = useFormReducer({
+    const { inputState: { inputs }, inputHandler, isFormValid, destroy } = useFormReducer({
         inputs: {
             email: {
                 value: '',
@@ -54,18 +54,18 @@ export const LoginForm = (props: LoginFormProps) => {
     }, 'login-form');
 
     useEffect(() => {
-        console.log({ inputState, isFormValid });
-    }, [inputState]);
+        console.log({ inputs, isFormValid });
+    }, [inputs]);
     const submit = async () => {
-        console.log({ inputState, isFormValid });
         if (!isFormValid) {
             return;
         }
 
-        const response: any = await client.client(props.endpoint, 'POST', { body: inputState.inputs });
+        const response: any = await client.client(props.endpoint, 'POST', { body: inputs });
 
         if (!client.error && !!response) {
             signin({ ...(response?.userData || {}), expiry: moment() });
+            destroy();
         }
     };
 
@@ -83,13 +83,13 @@ export const LoginForm = (props: LoginFormProps) => {
         >
             <ReducerInput
                 {...form?.fields?.email}
-                value={inputState.inputs.email.value}
+                value={inputs.email.value}
                 onChange={inputHandler}
             />
             <ReducerInput
                 {...form?.fields?.password}
                 onChange={inputHandler}
-                value={inputState.inputs.password.value}
+                value={inputs.password.value}
             />
         </Form>
         <div className={'position-center py-15'}>

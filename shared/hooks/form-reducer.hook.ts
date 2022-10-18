@@ -21,16 +21,19 @@ export interface ChangeAction extends Input {
     inputName: string;
 }
 
+export interface DestroyAction {
+    type: 'DESTROY';
+}
+
+export type ActionType = SetAction | ChangeAction | DestroyAction;
+
 export interface DispatchInputOptions extends Input {
     inputName: string;
 }
 
 export type DispatchFunction<TOptions> = (options: TOptions) => void;
 
-// the state will be the initial and current state object we pass over
-// figure a generic insertion for the state as we dont know the type of it
-// we can dispatch different actions based on presets below of the reducer
-const formReducer = (state: InputState, action: SetAction | ChangeAction): InputState => {
+const formReducer = (state: InputState, action: ActionType): InputState => {
     switch (action.type) {
         case 'SET':
             return {
@@ -47,6 +50,11 @@ const formReducer = (state: InputState, action: SetAction | ChangeAction): Input
                     [inputName]: { value, valid },
                 }
             };
+        case 'DESTROY':
+            const newState: any = {};
+            Object.keys(state).forEach(key => newState[key] = { value: '', valid: false });
+
+            return newState;
         default:
             return state;
     }
@@ -57,11 +65,12 @@ export interface ReducerResponse {
     inputHandler: DispatchFunction<DispatchInputOptions>;
     isFormValid: boolean;
     setFormData: DispatchFunction<InputState['inputs']>;
+    destroy: DispatchFunction<void>;
 }
 
 export const useFormReducer = (inputs: any): ReducerResponse => {
     const [isFormValid, setIsFormValid] = useState(false);
-    const [inputState, dispatch] = useReducer(formReducer, { inputs, isFormValid });
+    const [inputState, dispatch] = useReducer(formReducer, inputs);
 
     useEffect(() => {
         setIsFormValid(validate(inputState));
@@ -85,5 +94,9 @@ export const useFormReducer = (inputs: any): ReducerResponse => {
         dispatch({ type: 'SET', inputs: inputs });
     }, []);
 
-    return { inputState, inputHandler, isFormValid, setFormData };
+    const destroy: DispatchFunction<void> = useCallback(() => {
+        dispatch({ type: 'DESTROY' });
+    }, []);
+
+    return { inputState, inputHandler, isFormValid, setFormData, destroy };
 };
