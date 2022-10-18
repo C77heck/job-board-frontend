@@ -1,29 +1,40 @@
 import { useCallback, useEffect, useReducer, useState } from "react";
 
 export interface Input {
-    inputName: string;
-    value: string | number | boolean;
+    value: any;
     valid: boolean;
+}
+
+export interface InputState {
+    inputs: { [key: string]: Input };
+    isFormValid: boolean;
 }
 
 export interface SetAction {
     type: 'SET';
-    inputs: Input;
+    inputs: InputState['inputs'];
+    inputName?: string;
 }
 
 export interface ChangeAction extends Input {
     type: 'CHANGE';
+    inputName: string;
 }
 
-export type DispatchFunction = (input: Input) => void;
+export interface DispatchInputOptions extends Input {
+    inputName: string;
+}
+
+export type DispatchFunction<TOptions> = (options: TOptions) => void;
 
 // the state will be the initial and current state object we pass over
 // figure a generic insertion for the state as we dont know the type of it
 // we can dispatch different actions based on presets below of the reducer
-const formReducer = (state: any, action: SetAction | ChangeAction) => {
+const formReducer = (state: InputState, action: SetAction | ChangeAction): InputState => {
     switch (action.type) {
         case 'SET':
             return {
+                ...state,
                 inputs: action.inputs,
             };
         case 'CHANGE':
@@ -41,9 +52,16 @@ const formReducer = (state: any, action: SetAction | ChangeAction) => {
     }
 };
 
-export const useFormReducer = (inputs: any) => {
-    const [inputState, dispatch] = useReducer(formReducer, { inputs, isFormValid: false });
+export interface ReducerResponse {
+    inputState: InputState;
+    inputHandler: DispatchFunction<DispatchInputOptions>;
+    isFormValid: boolean;
+    setFormData: DispatchFunction<InputState['inputs']>;
+}
+
+export const useFormReducer = (inputs: any): ReducerResponse => {
     const [isFormValid, setIsFormValid] = useState(false);
+    const [inputState, dispatch] = useReducer(formReducer, { inputs, isFormValid });
 
     useEffect(() => {
         setIsFormValid(validate(inputState));
@@ -59,13 +77,13 @@ export const useFormReducer = (inputs: any) => {
         return true;
     };
 
-    const inputHandler: DispatchFunction = useCallback(({ inputName, value, valid }: Input) => {
+    const inputHandler: DispatchFunction<DispatchInputOptions> = useCallback(({ inputName, value, valid }) => {
         dispatch({ inputName, value, valid, type: 'CHANGE' });
     }, []);
 
-    const setFormData = useCallback((inputs) => {
+    const setFormData: DispatchFunction<InputState['inputs']> = useCallback((inputs) => {
         dispatch({ type: 'SET', inputs: inputs });
     }, []);
 
-    return [inputState, inputHandler, isFormValid, setFormData];
+    return { inputState, inputHandler, isFormValid, setFormData };
 };

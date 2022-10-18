@@ -20,15 +20,18 @@ export interface LoginFormProps {
 export const LoginForm = (props: LoginFormProps) => {
     const client = useClient();
     const { signin } = useAuthContext();
-    const [inputState, inputHandler, isFormValid, setFormData] = useFormReducer({
-        email: {
-            value: '',
-            valid: false
+    const { inputState, inputHandler, isFormValid } = useFormReducer({
+        inputs: {
+            email: {
+                value: '',
+                valid: false
+            },
+            password: {
+                value: '',
+                valid: false
+            }
         },
-        password: {
-            value: '',
-            valid: false
-        }
+        isFormValid: false
     });
     const form = new FormStructure({
         email: new Field({
@@ -51,10 +54,16 @@ export const LoginForm = (props: LoginFormProps) => {
     }, 'login-form');
 
     useEffect(() => {
-        console.log({ client });
-    }, [client]);
-    const submit = async (body: any) => {
-        const response: any = await client.client(props.endpoint, 'POST', { body });
+        console.log({ inputState, isFormValid });
+    }, [inputState]);
+    const submit = async () => {
+        console.log({ inputState, isFormValid });
+        if (!isFormValid) {
+            return;
+        }
+
+        const response: any = await client.client(props.endpoint, 'POST', { body: inputState.inputs });
+
         if (!client.error && !!response) {
             signin({ ...(response?.userData || {}), expiry: moment() });
         }
@@ -63,8 +72,9 @@ export const LoginForm = (props: LoginFormProps) => {
     return <div>
         <Form
             noSuccessModal={true}
+            isFormValid={isFormValid}
             form={form}
-            onSubmit={(payload: any) => submit(payload)}
+            onSubmit={() => submit()}
             submitButton={{ className: 'mt-20 margin-auto w-px-145', title: 'Login', type: 'submit' }}
             buttonWrapper={'col-100'}
             className={'row margin-auto w-60'}
@@ -73,13 +83,13 @@ export const LoginForm = (props: LoginFormProps) => {
         >
             <ReducerInput
                 {...form?.fields?.email}
-                value={inputState.email}
+                value={inputState.inputs.email.value}
                 onChange={inputHandler}
             />
             <ReducerInput
                 {...form?.fields?.password}
                 onChange={inputHandler}
-                value={inputState.password}
+                value={inputState.inputs.password.value}
             />
         </Form>
         <div className={'position-center py-15'}>
