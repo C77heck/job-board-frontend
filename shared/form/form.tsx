@@ -2,7 +2,6 @@ import { Fragment, useEffect, useState } from 'react';
 import { Button, ButtonProps } from '../components/buttons/button';
 import { ClientProps } from '../hooks/client.hook';
 import { ErrorModal } from './error-modal';
-import { FormStructure } from './form.structure';
 import { SuccessModal } from './success.modal';
 
 interface FormProps extends ClientProps {
@@ -12,7 +11,6 @@ interface FormProps extends ClientProps {
     onSuccess?: () => void;
     onError?: () => void;
     children: any;
-    form: FormStructure;
     isFormValid: boolean;
     noSuccessModal?: boolean;
     noErrorModal?: boolean;

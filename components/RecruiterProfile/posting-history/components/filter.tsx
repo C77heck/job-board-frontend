@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { Field } from '../../../../shared/form/field';
-import { FormStructure } from '../../../../shared/form/form.structure';
-import { Input } from '../../../../shared/form/old-input';
+import { Input } from '../../../../shared/form/inputs/input';
+import { useForm } from '../../../../shared/hooks/reducers/form-reducer.hook';
 
 export interface FilterProps {
     name: string;
@@ -10,15 +9,23 @@ export interface FilterProps {
 }
 
 export const Filter = (props: FilterProps) => {
-    const form = new FormStructure({
-        [props.name]: new Field({
-            name: props.name,
-            label: props.label,
-            value: '',
-            className: 'col-100 mt-11',
-            labelClass: 'fs-15 fw--700 mb-2',
-        }),
-    }, props.namespace);
+    const { inputState: { inputs }, inputHandler } = useForm({
+        inputs: {
+            [props.name]: {
+                value: '',
+                valid: false
+            },
+        },
+        isFormValid: false
+    });
 
-    return <Input {...form?.fields?.first_name} namespace={form.namespace}/>;
+    return <Input
+        name={props.name}
+        label={props.label}
+        className={'col-100 mt-11'}
+        labelClass={'fs-15 fw--700 mb-2'}
+        onChange={inputHandler}
+        value={inputs[props.name].value}
+        validators={[]}
+    />;
 };

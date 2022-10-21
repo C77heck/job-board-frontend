@@ -1,9 +1,7 @@
 import moment from 'moment';
 import * as React from 'react';
-import { Field } from "../../../form/field";
 import { Form } from "../../../form/form";
-import { FormStructure } from "../../../form/form.structure";
-import { Input } from '../../../form/input';
+import { Input } from '../../../form/inputs/input';
 import { emailValidator } from "../../../form/validators/email-validator";
 import { requiredValidator } from "../../../form/validators/required-validator";
 import { useClient } from "../../../hooks/client.hook";
@@ -33,25 +31,6 @@ export const LoginForm = (props: LoginFormProps) => {
         isFormValid: false
     });
 
-    const form = new FormStructure({
-        email: new Field({
-            name: 'email',
-            label: 'Email',
-            validators: [emailValidator],
-            className: 'col-100 mt-11',
-            labelClass: 'fs-15 fw--700 mb-2',
-        }),
-        password: new Field({
-            name: 'password',
-            label: 'Password',
-            value: null,
-            validators: [requiredValidator],
-            className: 'col-100 mt-11',
-            labelClass: 'fs-15 fw--700 mb-2',
-            type: 'password',
-        }),
-    }, 'login-form');
-
     const submit = async () => {
         if (!isFormValid) {
             return;
@@ -69,7 +48,6 @@ export const LoginForm = (props: LoginFormProps) => {
         <Form
             noSuccessModal={true}
             isFormValid={isFormValid}
-            form={form}
             onSubmit={() => submit()}
             submitButton={{ className: 'mt-20 margin-auto w-px-145', title: 'Login', type: 'submit' }}
             buttonWrapper={'col-100'}

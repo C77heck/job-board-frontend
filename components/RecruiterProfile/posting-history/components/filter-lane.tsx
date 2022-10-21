@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
 import { Pagination } from '../../../../shared/components/paginator/paginator';
 import { CONSTANTS } from '../../../../shared/constants';
-import { Field } from '../../../../shared/form/field';
 import { Form } from '../../../../shared/form/form';
-import { FormStructure } from '../../../../shared/form/form.structure';
-import { Input } from '../../../../shared/form/old-input';
+import { Input } from '../../../../shared/form/inputs/input';
 import { useClient } from '../../../../shared/hooks/client.hook';
+import { useForm } from '../../../../shared/hooks/reducers/form-reducer.hook';
 import { Sort } from './sort-header';
 
 export interface FilterLaneProps {
@@ -16,42 +15,27 @@ export interface FilterLaneProps {
 
 export const FilterLane = (props: FilterLaneProps) => {
     const { INPUTS: { DROPDOWN } } = CONSTANTS;
-    const form = new FormStructure({
-        search: new Field({
-            name: 'search',
-            label: 'Search',
-            value: '',
-            className: 'col-100 mt-11',
-            labelClass: 'fs-15 fw--700 mb-2',
-            wrapperClasses: 'h-px-33',
-        }),
-        status: new Field({
-            name: 'status',
-            label: 'Status',
-            value: '',
-            className: 'col-100 mt-11',
-            labelClass: 'fs-15 fw--700 mb-2',
-            wrapperClasses: 'h-px-33',
-            options: [],
-            element: DROPDOWN,
-        }),
-        from: new Field({
-            name: 'from',
-            label: 'From',
-            value: '',
-            className: 'col-100 mt-11',
-            labelClass: 'fs-15 fw--700 mb-2',
-            wrapperClasses: 'h-px-33',
-        }),
-        till: new Field({
-            name: 'till',
-            label: 'Till',
-            value: '',
-            className: 'col-100 mt-11',
-            labelClass: 'fs-15 fw--700 mb-2',
-            wrapperClasses: 'h-px-33',
-        }),
-    }, 'job-filters');
+    const { inputState: { inputs }, inputHandler, isFormValid, destroy, getPayload } = useForm({
+        inputs: {
+            search: {
+                value: '',
+                valid: false
+            },
+            status: {
+                value: '',
+                valid: false
+            },
+            from: {
+                value: '',
+                valid: false
+            },
+            till: {
+                value: '',
+                valid: false
+            }
+        },
+        isFormValid: false
+    });
 
     const client = useClient();
 
@@ -78,26 +62,63 @@ export const FilterLane = (props: FilterLaneProps) => {
     }, [props.sort, props.pagination]);
 
     return <Form
+        isFormValid={isFormValid}
         noSuccessModal={true}
         noErrorModal={true}
-        onSubmit={(payload: any) => fetchJobs()}
-        form={form}
+        onSubmit={() => fetchJobs()}
         submitButton={{ className: 'h-px-34 letter-spacing-3 fs-14 hover-opacity w-px-145', title: 'Filter', type: 'submit' }}
         buttonWrapper={'mt-20 display-flex align-items-end'}
         className={'row justify-content-space-between'}
         {...client}
     >
         <div className={'col-17 mx-3'}>
-            <Input {...form?.fields?.search} namespace={form.namespace}/>
+            <Input
+                value={inputs.search.value}
+                name={'search'}
+                label={'Search'}
+                validators={[]}
+                className={'col-100 mt-11'}
+                labelClass={'fs-15 fw--700 mb-2'}
+                wrapperClasses={'h-px-33'}
+                onChange={inputHandler}
+            />
         </div>
         <div className={'col-17 mx-3'}>
-            <Input {...form?.fields?.status} namespace={form.namespace}/>
+            <Input
+                value={inputs.status.value}
+                name={'status'}
+                label={'Status'}
+                validators={[]}
+                className={'col-100 mt-11'}
+                labelClass={'fs-15 fw--700 mb-2'}
+                wrapperClasses={'h-px-33'}
+                onChange={inputHandler}
+                element={DROPDOWN}
+            />
         </div>
         <div className={'col-17 mx-3'}>
-            <Input {...form?.fields?.from} namespace={form.namespace}/>
+            <Input
+                value={inputs.from.value}
+                name={'from'}
+                label={'From'}
+                validators={[]}
+                className={'col-100 mt-11'}
+                labelClass={'fs-15 fw--700 mb-2'}
+                wrapperClasses={'h-px-33'}
+                onChange={inputHandler}
+            />
         </div>
         <div className={'col-17 mx-3'}>
-            <Input {...form?.fields?.till} namespace={form.namespace}/>
+            <Input
+                value={inputs.till.value}
+                name={'till'}
+                label={'Till'}
+                validators={[]}
+                className={'col-100 mt-11'}
+                labelClass={'fs-15 fw--700 mb-2'}
+                wrapperClasses={'h-px-33'}
+                onChange={inputHandler}
+            />
         </div>
     </Form>;
 };
