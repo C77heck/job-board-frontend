@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from 'react';
-import { FormContext } from '../../contexts/form.context';
-import { FieldProps } from '../old-input';
+import { useEffect, useState } from 'react';
+import { FieldProps } from '../inputs/input';
 import { FileDisplay } from './libs/file-display';
 import { Lightbox } from './libs/lightbox';
 import { MultiUploader } from './libs/multi-uploader';
@@ -8,7 +7,6 @@ import { Attachment } from './libs/uploader.interfaces';
 
 export interface IconUploaderProps extends Omit<FieldProps, 'value'> {
     name: string;
-    namespace: string;
     alt?: string;
     id: string;
     value: string[];
@@ -18,7 +16,6 @@ export const MultiImagesUploader = (props: IconUploaderProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const [options, setOptions] = useState({ numberOfImg: 0, display: '', attachments: [''] });
     const [uploadedAttachments, setUploadedAttachments] = useState<Attachment[] | { url: string }[]>([]);
-    const { setData } = useContext(FormContext);
 
     useEffect(() => {
         setOptions({
@@ -26,8 +23,7 @@ export const MultiImagesUploader = (props: IconUploaderProps) => {
             display: uploadedAttachments[0]?.url || '',
             attachments: uploadedAttachments.map(att => att.url),
         });
-
-        setData(props.name, { value: uploadedAttachments.map(a => a.url), isValid: true }, props.namespace);
+        props.onChange({ value: uploadedAttachments.map(a => a.url), valid: true, inputName: props.name });
     }, [uploadedAttachments]);
 
     useEffect(() => {

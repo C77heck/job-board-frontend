@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { AuthContextWrapper } from '../../contexts/wrappers/auth-context.wrapper';
-import { FormContextWrapper } from '../../contexts/wrappers/form-context.wrapper';
 import { SessionContextWrapper } from '../../contexts/wrappers/sesssion-context.wrapper';
 import { Close } from '../icons/icons';
 import { Portal } from '../portal';
@@ -133,14 +132,12 @@ export class Modal extends React.Component<ModalProps, any> {
             </div>
             <SessionContextWrapper>
                 <AuthContextWrapper>
-                    <FormContextWrapper>
-                        <Portal elementId={this.props.portal || 'modals'}>
-                            <div>
-                                {this.renderOverlay()}
-                                {this.renderModal()}
-                            </div>
-                        </Portal>
-                    </FormContextWrapper>
+                    <Portal elementId={this.props.portal || 'modals'}>
+                        <div>
+                            {this.renderOverlay()}
+                            {this.renderModal()}
+                        </div>
+                    </Portal>
                 </AuthContextWrapper>
             </SessionContextWrapper>
         </div>;

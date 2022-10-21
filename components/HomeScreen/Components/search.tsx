@@ -5,7 +5,7 @@ import { useForm } from '../../../shared/hooks/reducers/form-reducer.hook';
 
 const Search = (props: any) => {
     const client = useClient();
-    const { inputState: { inputs }, inputHandler, isFormValid, destroy, getPayload } = useForm({
+    const { inputState: { inputs }, inputHandler, isFormValid, getPayload } = useForm({
         inputs: {
             what: {
                 value: '',

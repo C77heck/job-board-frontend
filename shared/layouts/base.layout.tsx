@@ -3,7 +3,6 @@ import { Auth } from '../components/auth/auth';
 import { Footer } from '../components/navigation/footer/footer';
 import { Spinner } from '../components/spinner/spinner';
 import { AuthContextWrapper } from '../contexts/wrappers/auth-context.wrapper';
-import { FormContextWrapper } from '../contexts/wrappers/form-context.wrapper';
 import { SessionContextWrapper } from '../contexts/wrappers/sesssion-context.wrapper';
 import { Meta } from './meta';
 
@@ -21,13 +20,11 @@ export const BaseLayout = (props: BaseLayoutProps) => {
         <Meta {...props.meta}/>
         <SessionContextWrapper>
             <AuthContextWrapper>
-                <FormContextWrapper>
-                    <NavBar showSearchBar={props.showSearchBar}/>
-                    <main className={`position-center ${props.className}`}>
-                        <Spinner asOverlay={true} isLoading={props.isLoading}/>
-                        {props.auth ? <Auth>{props.children}</Auth> : props.children}
-                    </main>
-                </FormContextWrapper>
+                <NavBar showSearchBar={props.showSearchBar}/>
+                <main className={`position-center ${props.className}`}>
+                    <Spinner asOverlay={true} isLoading={props.isLoading}/>
+                    {props.auth ? <Auth>{props.children}</Auth> : props.children}
+                </main>
             </AuthContextWrapper>
         </SessionContextWrapper>
         <Footer/>

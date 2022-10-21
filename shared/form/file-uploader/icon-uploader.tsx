@@ -1,12 +1,11 @@
-import { useContext, useEffect, useState } from 'react';
-import { FormContext } from '../../contexts/form.context';
+import { useEffect, useState } from 'react';
+import { FieldProps } from '../inputs/input';
 import { FileDisplay } from './libs/file-display';
 import { SingleUploader } from './libs/single-uploader';
 import { Attachment } from './libs/uploader.interfaces';
 
-export interface IconUploaderProps {
+export interface IconUploaderProps extends Omit<FieldProps, 'value'> {
     name: string;
-    namespace: string;
     alt?: string;
     value?: string;
 }
@@ -14,10 +13,9 @@ export interface IconUploaderProps {
 export const IconUploader = (props: IconUploaderProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const [uploadedAttachment, setUploadedAttachment] = useState<Attachment | null>({ url: props.value } as any);
-    const { setData } = useContext(FormContext);
 
     useEffect(() => {
-        setData(props.name, { value: uploadedAttachment?.url, isValid: true }, props.namespace);
+        props.onChange({ value: uploadedAttachment?.url, valid: true, inputName: props.name });
     }, [uploadedAttachment]);
 
     useEffect(() => {
