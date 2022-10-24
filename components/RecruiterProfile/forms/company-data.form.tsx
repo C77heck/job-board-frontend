@@ -1,93 +1,109 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { CONSTANTS } from '../../../shared/constants';
-import { Field } from '../../../shared/form/field';
 import { IconUploader } from '../../../shared/form/file-uploader/icon-uploader';
 import { Form } from '../../../shared/form/form';
-import { FormStructure } from '../../../shared/form/form.structure';
-import { Input } from '../../../shared/form/old-input';
+import { Input } from '../../../shared/form/inputs/input';
 import { requiredValidator } from '../../../shared/form/validators/required-validator';
 import { useClient } from '../../../shared/hooks/client.hook';
+import { useForm } from '../../../shared/hooks/reducers/form-reducer.hook';
 
 export const CompanyDataForm = (props: any) => {
     const { INPUTS: { TEXTAREA } } = CONSTANTS;
     const client = useClient();
-    const [showForm, setShowForm] = useState(false);
-    const [form, setForm] = useState(new FormStructure({
-        logo: new Field({
-            name: 'logo',
-            value: props.data?.logo?.data || '',
-            validators: [requiredValidator],
-            className: 'col-100 mt-11',
-            labelClass: 'fs-15 fw--700 mb-2',
-        }),
-        company_name: new Field({
-            name: 'company_name',
-            label: 'Company name',
-            value: props.data?.company_name?.data || '',
-            validators: [requiredValidator],
-            className: 'col-100 mt-11',
-            labelClass: 'fs-15 fw--700 mb-2',
-        }),
-        address: new Field({
-            name: 'address',
-            label: 'Address',
-            value: props.data?.address?.data || '',
-            validators: [requiredValidator],
-            className: 'col-100 mt-11',
-            labelClass: 'fs-15 fw--700 mb-2',
-        }),
-        description: new Field({
-            name: 'description',
-            label: 'Description',
-            value: props.data?.description?.data || '',
-            validators: [],
-            className: 'col-100 mt-11',
-            labelClass: 'fs-15 fw--700 mb-2',
-            element: TEXTAREA,
-            rows: 7
-        }),
-    }, 'user-data-update'));
+    const { inputState: { inputs }, inputHandler, isFormValid, getPayload, setFormData } = useForm({
+        inputs: {
+            logo: {
+                value: '',
+                valid: false
+            },
+            company_name: {
+                value: '',
+                valid: false
+            },
+            address: {
+                value: '',
+                valid: false
+            },
+            description: {
+                value: [],
+                valid: false
+            }
+        },
+        isFormValid: false
+    });
 
     useEffect(() => {
-        for (const prop in form.fields) {
-            // @ts-ignore
-            if (props?.[prop]) {
-                // @ts-ignore
-                form.fields?.[prop]?.value = props?.[prop];
-                setForm(form);
-                setShowForm(true);
-            }
-        }
-    }, [props.data]);
+        const inputs: any = {};
+        for (const key of Object.keys(inputs)) {
+            if (!props?.[key]) continue;
 
-    const submit = async (data: any) => {
+            inputs[key] = props[key];
+        }
+
+        setFormData(inputs);
+    }, []);
+
+    const submit = async () => {
         if (!props.endpoint) {
             return;
         }
 
-        await client.client(props.endpoint, props.method, { body: data });
+        await client.client(props.endpoint, props.method, { body: getPayload(inputs) });
     };
 
     return <div>
         <Form
-            form={form}
             className={'row justify-content-space-between'}
-            onSubmit={(payload: any) => submit(payload)}
+            isFormValid={isFormValid}
+            onSubmit={() => submit()}
             submitButton={{ className: 'mt-60 margin-auto w-px-145', title: 'Post', type: 'submit' }}
             buttonWrapper={'col-100'}
             onSuccess={() => window.location.reload()}
             {...client}
         >
             <div className={'col-30 display-flex justify-content-start align-items-center'}>
-                <IconUploader {...form?.fields?.logo} value={form?.fields?.logo?.value as string} namespace={form.namespace}/>
+                <IconUploader
+                    alt={'logo'}
+                    value={inputs.logo.value}
+                    name={'logo'}
+                    validators={[requiredValidator]}
+                    className={'col-100 mt-11'}
+                    labelClass={'fs-15 fw--700 mb-2'}
+                    onChange={inputHandler}
+                />
             </div>
             <div className={'col-70'}>
-                <Input {...form?.fields?.company_name} namespace={form.namespace}/>
-                <Input {...form?.fields?.address} namespace={form.namespace}/>
+                <Input
+                    onChange={inputHandler}
+                    value={inputs.company_name.value}
+                    name={'company_name'}
+                    label={'Company name'}
+                    validators={[requiredValidator]}
+                    className={'col-100 mt-11'}
+                    labelClass={'fs-15 fw--700 mb-2'}
+                />
+                <Input
+                    onChange={inputHandler}
+                    value={inputs.address.value}
+                    name={'address'}
+                    label={'Address'}
+                    validators={[requiredValidator]}
+                    className={'col-100 mt-11'}
+                    labelClass={'fs-15 fw--700 mb-2'}
+                />
             </div>
             <div className={'col-100'}>
-                <Input {...form?.fields?.description} namespace={form.namespace}/>
+                <Input
+                    onChange={inputHandler}
+                    value={inputs.description.value}
+                    name={'description'}
+                    label={'Description'}
+                    validators={[requiredValidator]}
+                    className={'col-100 mt-11'}
+                    labelClass={'fs-15 fw--700 mb-2'}
+                    element={TEXTAREA}
+                />
             </div>
         </Form>
     </div>;
