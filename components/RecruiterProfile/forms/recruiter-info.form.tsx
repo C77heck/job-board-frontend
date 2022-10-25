@@ -13,7 +13,7 @@ export const RecruiterInfoForm = (props: any) => {
     const { INPUTS: { CHECKBOX } } = CONSTANTS;
     const client = useClient();
     const { signin } = useAuthContext();
-    const { inputState: { inputs }, inputHandler, isFormValid, getPayload, setFormData } = useForm({
+    const { inputState: { inputs }, inputHandler, isFormValid, getPayload } = useForm({
         inputs: {
             first_name: {
                 value: '',

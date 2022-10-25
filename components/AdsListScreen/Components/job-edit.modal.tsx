@@ -5,7 +5,11 @@ import { EditModal } from '../../../shared/form/edit-modal';
 import { JobForm } from '../../RecruiterProfile/forms/job.form';
 import { JobCardProps } from './job-card';
 
-export const JobEditModal = (props: JobCardProps) => {
+export interface JobEditModalProps{
+    inputs: JobCardProps
+}
+
+export const JobEditModal = (props: JobEditModalProps) => {
     const [show, setShow] = useState(false);
 
     return <div>
@@ -16,7 +20,7 @@ export const JobEditModal = (props: JobCardProps) => {
         />
         <EditModal
             show={show}
-            content={<JobForm {...props} endpoint={`/users/recruiter/update-ad/${props._id}`} method={'PUT'}/>}
+            content={<JobForm inputs={props.inputs} endpoint={`/users/recruiter/update-ad/${props.inputs._id}`} isUpdate={true} method={'PUT'}/>}
             title={'Edit post'}
             onClick={(show) => setShow(show)}
         />

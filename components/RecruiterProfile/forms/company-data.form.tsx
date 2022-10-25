@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useEffect } from "react";
 import { CONSTANTS } from '../../../shared/constants';
 import { IconUploader } from '../../../shared/form/file-uploader/icon-uploader';
 import { Form } from '../../../shared/form/form';
@@ -11,38 +10,27 @@ import { useForm } from '../../../shared/hooks/reducers/form-reducer.hook';
 export const CompanyDataForm = (props: any) => {
     const { INPUTS: { TEXTAREA } } = CONSTANTS;
     const client = useClient();
-    const { inputState: { inputs }, inputHandler, isFormValid, getPayload, setFormData } = useForm({
+    const { inputState: { inputs }, inputHandler, isFormValid, getPayload } = useForm({
         inputs: {
             logo: {
-                value: '',
+                value: props?.logo || '',
                 valid: false
             },
             company_name: {
-                value: '',
+                value: props?.company_name || '',
                 valid: false
             },
             address: {
-                value: '',
+                value: props?.address || '',
                 valid: false
             },
             description: {
-                value: [],
+                value: props?.description || [],
                 valid: false
             }
         },
         isFormValid: false
     });
-
-    useEffect(() => {
-        const inputs: any = {};
-        for (const key of Object.keys(inputs)) {
-            if (!props?.[key]) continue;
-
-            inputs[key] = props[key];
-        }
-
-        setFormData(inputs);
-    }, []);
 
     const submit = async () => {
         if (!props.endpoint) {

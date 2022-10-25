@@ -38,7 +38,7 @@ const formReducer = (state: InputState, action: ActionType): InputState => {
         case 'SET':
             return {
                 ...state,
-                inputs: action.inputs,
+                inputs: { ...state.inputs, ...action.inputs },
             };
         case 'CHANGE':
             const { value, valid, inputName } = action;

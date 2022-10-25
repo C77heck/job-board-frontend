@@ -8,9 +8,16 @@ import { Input } from '../../../shared/form/inputs/input';
 import { requiredValidator } from '../../../shared/form/validators/required-validator';
 import { useClient } from '../../../shared/hooks/client.hook';
 import { useForm } from '../../../shared/hooks/reducers/form-reducer.hook';
+import { Methods } from '../../../shared/libs/repository';
 import { JobCardProps } from '../../AdsListScreen/Components/job-card';
 
-export const JobForm = (props: JobCardProps & any) => {
+export interface JobFormProps extends JobCardProps {
+    isUpdate?: boolean;
+    method: Methods;
+    inputs?: any;
+}
+
+export const JobForm = (props: JobFormProps) => {
     const { INPUTS: { CHECKBOX, TEXTAREA, DATEPICKER, SEARCHABLE_DROPDOWN } } = CONSTANTS;
     const client = useClient();
     const { inputState: { inputs }, inputHandler, isFormValid, getPayload, setFormData } = useForm({
@@ -56,11 +63,16 @@ export const JobForm = (props: JobCardProps & any) => {
     });
 
     useEffect(() => {
-        const inputs: any = {};
-        for (const key of Object.keys(inputs)) {
-            if (!props?.[key]) continue;
+        if (!props.isUpdate || !props.inputs) {
+            return;
+        }
 
-            inputs[key] = props[key];
+        const inputs: any = {};
+
+        for (const key of Object.keys(props.inputs)) {
+            if (!(props.inputs as any)?.[key]) continue;
+
+            inputs[key] = { value: (props.inputs as any)?.[key] || '', valid: false };
         }
 
         setFormData(inputs);

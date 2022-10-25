@@ -47,7 +47,6 @@ export const RecruiterRegisterForm = (props: any) => {
 
         if (!client.error && !!response?.userDat) {
             signin({ ...(response?.userData || {}), expiry: moment() });
-            destroy();
         }
     };
 

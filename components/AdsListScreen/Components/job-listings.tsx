@@ -8,8 +8,12 @@ export interface Job {
     expiresOn?: string;
     location?: string;
     salary?: string;
+    images?: string[];
     logo?: string;
-    analytics: {
+    jobType?: string;
+    industryType?: string;
+    isPremium?: string;
+    analytics?: {
         viewed: number;
         appliedFor: number;
         standard: number;

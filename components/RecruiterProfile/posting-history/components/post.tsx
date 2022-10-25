@@ -5,7 +5,7 @@ import { JobCardProps } from '../../../AdsListScreen/Components/job-card';
 import { JobEditModal } from '../../../AdsListScreen/Components/job-edit.modal';
 
 export const Post = (props: JobCardProps) => {
-    const { title, expiresOn, description, location, salary, className, editable, logo } = props;
+    const { title, expiresOn, description, location, salary, className, logo } = props;
     const { formattedText } = formatLongText(description, 50);
 
     //  TODO -> DONT FORGET THE MOBILE DESIGN.
@@ -26,7 +26,7 @@ export const Post = (props: JobCardProps) => {
             status checker
         </div>
         <div className={'col-13 position-center'}>
-            <JobEditModal {...props}/>
+            <JobEditModal inputs={props}/>
         </div>
     </div>;
 };

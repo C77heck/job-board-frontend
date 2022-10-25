@@ -9,17 +9,11 @@ import { useClient } from '../../../../shared/hooks/client.hook';
 import { useAuthContext } from '../../../../shared/hooks/context-hooks/auth-context.hook';
 import { useForm } from '../../../../shared/hooks/reducers/form-reducer.hook';
 
-// TODO -> these will have to be dealt with. probably with an attachment service.
-// we could build a local service that serves staff from the local machine.
-//     logo?: string,
-//     meta?: string[],
-//     images?: string[];
-
 export const ProfileBoxForm = (props: any) => {
     const { INPUTS: { TEXTAREA } } = CONSTANTS;
     const client = useClient();
     const { signin } = useAuthContext();
-    const { inputState: { inputs }, inputHandler, isFormValid, getPayload, setFormData } = useForm({
+    const { inputState: { inputs }, inputHandler, isFormValid, getPayload } = useForm({
         inputs: {
             first_name: {
                 value: '',

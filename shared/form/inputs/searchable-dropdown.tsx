@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { ArrowDown, ArrowUp } from '../components/icons/icons';
-import { handleErrors } from '../libs/handle-errors';
+import { ArrowDown, ArrowUp } from '../../components/icons/icons';
+import { handleErrors } from '../../libs/handle-errors';
+
 import { FieldProps } from './input';
 
 export interface OptionProps {

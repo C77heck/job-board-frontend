@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Eyeicon } from '../components/icons/icons';
+import { Eyeicon } from '../../components/icons/icons';
 
 export class TextInput extends Component<any, any> {
     public state = {

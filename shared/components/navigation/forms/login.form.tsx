@@ -1,5 +1,6 @@
 import moment from 'moment';
 import * as React from 'react';
+import { useEffect } from 'react';
 import { Form } from "../../../form/form";
 import { Input } from '../../../form/inputs/input';
 import { emailValidator } from "../../../form/validators/email-validator";
@@ -12,12 +13,15 @@ import { Button } from "../../buttons/button";
 export interface LoginFormProps {
     endpoint: string;
     onClick: () => void;
+    email?: string;
+    password?: string;
 }
 
 export const LoginForm = (props: LoginFormProps) => {
     const client = useClient();
     const { signin } = useAuthContext();
-    const { inputState: { inputs }, inputHandler, isFormValid, destroy, getPayload } = useForm({
+
+    const { inputState: { inputs }, inputHandler, isFormValid, getPayload } = useForm({
         inputs: {
             email: {
                 value: '',
@@ -31,6 +35,10 @@ export const LoginForm = (props: LoginFormProps) => {
         isFormValid: false
     });
 
+    useEffect(() => {
+
+    });
+
     const submit = async () => {
         if (!isFormValid) {
             return;
@@ -40,7 +48,6 @@ export const LoginForm = (props: LoginFormProps) => {
 
         if (!client.error && !!response) {
             signin({ ...(response?.userData || {}), expiry: moment() });
-            destroy();
         }
     };
 
@@ -65,8 +72,8 @@ export const LoginForm = (props: LoginFormProps) => {
                 onChange={inputHandler}
             />
             <Input
-                name={'email'}
-                label={'Email'}
+                name={'password'}
+                label={'Password'}
                 validators={[requiredValidator]}
                 className={'col-100 mt-11'}
                 labelClass={'fs-15 fw--700 mb-2'}
