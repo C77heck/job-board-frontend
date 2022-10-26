@@ -36,7 +36,7 @@ export const RecruiterRegisterForm = (props: any) => {
                 valid: false
             },
             companyType: {
-                value: '',
+                value: false,
                 valid: false
             },
             securityQuestion: {
@@ -127,14 +127,13 @@ export const RecruiterRegisterForm = (props: any) => {
             />
             <Input
                 name={'companyType'}
-                label={'Company type'}
+                label={'I represent a recruitment firm'}
                 validators={[]}
-                options={CONSTANTS.OPTIONS.JOB_TYPE}
                 className={'col-100 mt-11'}
                 labelClass={'fs-15 fw--700 mb-2'}
                 onChange={inputHandler}
                 value={inputs.companyType.value}
-                element={'searchable_dropdown'}
+                element={'checkbox'}
             />
             <Input
                 name={'securityQuestion'}
