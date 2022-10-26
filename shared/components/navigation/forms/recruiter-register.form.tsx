@@ -12,7 +12,7 @@ import { Button } from "../../buttons/button";
 export const RecruiterRegisterForm = (props: any) => {
     const client = useClient();
     const { signin } = useAuthContext();
-    const { inputState: { inputs }, inputHandler, isFormValid, destroy, getPayload } = useForm({
+    const { inputState: { inputs }, inputHandler, isFormValid, getPayload } = useForm({
         inputs: {
             company_name: {
                 value: '',
@@ -68,7 +68,7 @@ export const RecruiterRegisterForm = (props: any) => {
                     className={'col-100 mt-11'}
                     labelClass={'fs-15 fw--700 mb-2'}
                     onChange={inputHandler}
-                    value={inputs.first_name.value}
+                    value={inputs.company_name.value}
                 />
                 <Input
                     name={'email'}

@@ -35,11 +35,6 @@ export type DispatchFunction<TOptions> = (options: TOptions) => void;
 
 const formReducer = (state: InputState, action: ActionType): InputState => {
     switch (action.type) {
-        case 'SET':
-            return {
-                ...state,
-                inputs: { ...state.inputs, ...action.inputs },
-            };
         case 'CHANGE':
             const { value, valid, inputName } = action;
 
@@ -50,11 +45,6 @@ const formReducer = (state: InputState, action: ActionType): InputState => {
                     [inputName]: { value, valid },
                 }
             };
-        case 'DESTROY':
-            const newState: any = {};
-            Object.keys(state).forEach(key => newState[key] = { value: '', valid: false });
-
-            return newState;
         default:
             return state;
     }
@@ -64,8 +54,6 @@ export interface ReducerResponse {
     inputState: InputState;
     inputHandler: DispatchFunction<DispatchInputOptions>;
     isFormValid: boolean;
-    setFormData: DispatchFunction<InputState['inputs']>;
-    destroy: DispatchFunction<void>;
     getPayload: (state: any) => any;
 }
 
@@ -91,14 +79,6 @@ export const useForm = (inputs: any): ReducerResponse => {
         dispatch({ inputName, value, valid, type: 'CHANGE' });
     }, []);
 
-    const setFormData: DispatchFunction<InputState['inputs']> = useCallback((inputs) => {
-        dispatch({ type: 'SET', inputs: inputs });
-    }, []);
-
-    const destroy: DispatchFunction<void> = useCallback(() => {
-        dispatch({ type: 'DESTROY' });
-    }, []);
-
     const getPayload = useCallback((inputs: any) => {
         const payload: any = {};
 
@@ -107,5 +87,5 @@ export const useForm = (inputs: any): ReducerResponse => {
         return payload;
     }, []);
 
-    return { inputState, inputHandler, isFormValid, setFormData, getPayload, destroy };
+    return { inputState, inputHandler, isFormValid, getPayload };
 };

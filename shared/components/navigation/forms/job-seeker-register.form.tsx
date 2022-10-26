@@ -1,18 +1,20 @@
 import moment from 'moment';
 import * as React from "react";
+import { CvUploader } from '../../../form/file-uploader/cv-uploader';
 import { Form } from "../../../form/form";
 import { Input } from '../../../form/inputs/input';
 import { emailValidator } from "../../../form/validators/email-validator";
+import { comparePassword } from '../../../form/validators/password-confirmation';
 import { requiredValidator } from "../../../form/validators/required-validator";
 import { useClient } from "../../../hooks/client.hook";
 import { useAuthContext } from '../../../hooks/context-hooks/auth-context.hook';
 import { useForm } from '../../../hooks/reducers/form-reducer.hook';
-import { Button } from "../../buttons/button";
+import { redirect } from '../../../libs/helpers';
 
 export const JobSeekerRegisterForm = (props: any) => {
     const client = useClient();
     const { signin } = useAuthContext();
-    const { inputState: { inputs }, inputHandler, isFormValid, destroy, getPayload } = useForm({
+    const { inputState: { inputs }, inputHandler, isFormValid, getPayload } = useForm({
         inputs: {
             first_name: {
                 value: '',
@@ -30,12 +32,36 @@ export const JobSeekerRegisterForm = (props: any) => {
                 value: '',
                 valid: false
             },
+            passwordConfirm: {
+                value: '',
+                valid: false
+            },
+            cv: {
+                value: null,
+                valid: false
+            },
+            educationLevel: {
+                value: '',
+                valid: false
+            },
+            currentJobTitle: {
+                value: '',
+                valid: false
+            },
+            currentSalary: {
+                value: '',
+                valid: false
+            },
             securityQuestion: {
                 value: '',
                 valid: false
             },
             securityAnswer: {
                 value: '',
+                valid: false
+            },
+            profileShare: {
+                value: false,
                 valid: false
             }
         },
@@ -51,6 +77,8 @@ export const JobSeekerRegisterForm = (props: any) => {
 
         if (!client.error && !!response?.userDat) {
             signin({ ...(response?.userData || {}), expiry: moment() });
+
+            redirect('/');
         }
     };
 
@@ -59,7 +87,7 @@ export const JobSeekerRegisterForm = (props: any) => {
             isFormValid={isFormValid}
             className={'row justify-content-space-between'}
             onSubmit={() => submit()}
-            submitButton={{ className: 'mt-20 margin-auto w-px-145', title: 'Register', type: 'submit' }}
+            submitButton={{ className: 'mt-60 margin-auto w-px-145', title: 'Register', type: 'submit' }}
             buttonWrapper={'col-100'}
             onSuccess={() => window.location.reload()}
             {...client}
@@ -93,8 +121,20 @@ export const JobSeekerRegisterForm = (props: any) => {
                     onChange={inputHandler}
                     value={inputs.email.value}
                 />
-            </div>
-            <div className={'col-md-50 mx-md-20 col-100'}>
+                <div className={'row pt-30'}>
+                    <div className={'col-70 display-flex align-items-center'}>
+                        <span className={'fs-15 fw--700 mb-2'}>Upload CV:</span>
+                    </div>
+                    <div className={'col-30 position-center'}>
+                        <CvUploader
+                            name={'cv'}
+                            validators={[requiredValidator]}
+                            onChange={inputHandler}
+                            value={inputs.cv.value}
+                        />
+                    </div>
+                </div>
+
                 <Input
                     name={'password'}
                     label={'Password'}
@@ -104,6 +144,46 @@ export const JobSeekerRegisterForm = (props: any) => {
                     labelClass={'fs-15 fw--700 mb-2'}
                     onChange={inputHandler}
                     value={inputs.password.value}
+                />
+                <Input
+                    name={'passwordConfirm'}
+                    label={'Password again'}
+                    validators={[comparePassword(inputs.password.value)]} // password validator to do
+                    type={'password'}
+                    className={'col-100 mt-11'}
+                    labelClass={'fs-15 fw--700 mb-2'}
+                    onChange={inputHandler}
+                    value={inputs.passwordConfirm.value}
+                />
+            </div>
+            <div className={'col-md-50 mx-md-20 col-100'}>
+
+                <Input
+                    name={'educationLevel'}
+                    label={'Highest level of education'}
+                    validators={[requiredValidator]}
+                    className={'col-100 mt-11'}
+                    labelClass={'fs-15 fw--700 mb-2'}
+                    onChange={inputHandler}
+                    value={inputs.educationLevel.value}
+                />
+                <Input
+                    name={'currentJobTitle'}
+                    label={'Current/most recent job title'}
+                    validators={[requiredValidator]}
+                    className={'col-100 mt-11'}
+                    labelClass={'fs-15 fw--700 mb-2'}
+                    onChange={inputHandler}
+                    value={inputs.currentJobTitle.value}
+                />
+                <Input
+                    name={'currentSalary'}
+                    label={'Current/most recent salary'}
+                    validators={[requiredValidator]}
+                    className={'col-100 mt-11'}
+                    labelClass={'fs-15 fw--700 mb-2'}
+                    onChange={inputHandler}
+                    value={inputs.currentSalary.value}
                 />
                 <Input
                     name={'securityQuestion'}
@@ -124,12 +204,17 @@ export const JobSeekerRegisterForm = (props: any) => {
                     onChange={inputHandler}
                     value={inputs.securityAnswer.value}
                 />
+                <Input
+                    element={'checkbox'}
+                    name={'profileShare'}
+                    label={'Share your profile with trusted employers looking for candidates like you'}
+                    validators={[]}
+                    className={'col-100 mt-11'}
+                    labelClass={'fs-15 fw--700 mb-2'}
+                    onChange={inputHandler}
+                    value={inputs.profileShare.value}
+                />
             </div>
         </Form>
-        <div className={'position-center py-15'}>
-            <Button buttonStyle={'link'} onClick={props.onClick}>
-                <span className={'hover-opacity color--secondary-1 fs-16'}>login</span>
-            </Button>
-        </div>
     </div>;
 };

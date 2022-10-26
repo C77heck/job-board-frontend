@@ -6,9 +6,7 @@ export class Checkbox extends Component<any, any> {
     };
 
     public renderCheckIcon(isActive: boolean) {
-        return <div className={'display-flex question-circle justify-content-center align-items-center'}>
-            <div className={`question-circle--filling background-color--primary-1 ${!isActive && 'scale-0'}`}/>
-        </div>;
+        return;
     }
 
     public componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
@@ -28,7 +26,9 @@ export class Checkbox extends Component<any, any> {
             onClick={() => this.handleOnClick()}
             type={'button'}
         >
-            {this.renderCheckIcon(this.state.active)}
+            <div className={'display-flex question-circle justify-content-center align-items-center mt-3'}>
+                <div className={`question-circle--filling background-color--primary-1 ${!this.state.active && 'scale-0'}`}/>
+            </div>
             <span className={'typo-small-inter fw-700 pl-5 pt-1'}>{this.props.label}</span>
         </button>;
     }

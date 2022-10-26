@@ -10,25 +10,28 @@ import { useForm } from '../../../shared/hooks/reducers/form-reducer.hook';
 export const CompanyDataForm = (props: any) => {
     const { INPUTS: { TEXTAREA } } = CONSTANTS;
     const client = useClient();
-    const { inputState: { inputs }, inputHandler, isFormValid, getPayload } = useForm({
-        inputs: {
-            logo: {
-                value: props?.logo || '',
-                valid: false
-            },
-            company_name: {
-                value: props?.company_name || '',
-                valid: false
-            },
-            address: {
-                value: props?.address || '',
-                valid: false
-            },
-            description: {
-                value: props?.description || [],
-                valid: false
-            }
+
+    const form = {
+        logo: {
+            value: props?.logo || '',
+            valid: false
         },
+        company_name: {
+            value: props?.company_name || '',
+            valid: false
+        },
+        address: {
+            value: props?.address || '',
+            valid: false
+        },
+        description: {
+            value: props?.description || [],
+            valid: false
+        }
+    };
+
+    const { inputState: { inputs }, inputHandler, isFormValid, getPayload } = useForm({
+        inputs: form,
         isFormValid: false
     });
 

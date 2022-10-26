@@ -1,6 +1,5 @@
 import moment from 'moment';
 import * as React from "react";
-import { useEffect } from "react";
 import { CONSTANTS } from '../../../shared/constants';
 import { MultiImagesUploader } from '../../../shared/form/file-uploader/multi-images-uploader';
 import { Form } from '../../../shared/form/form';
@@ -20,63 +19,49 @@ export interface JobFormProps extends JobCardProps {
 export const JobForm = (props: JobFormProps) => {
     const { INPUTS: { CHECKBOX, TEXTAREA, DATEPICKER, SEARCHABLE_DROPDOWN } } = CONSTANTS;
     const client = useClient();
-    const { inputState: { inputs }, inputHandler, isFormValid, getPayload, setFormData } = useForm({
-        inputs: {
-            title: {
-                value: '',
-                valid: false
-            },
-            salary: {
-                value: '',
-                valid: false
-            },
-            location: {
-                value: '',
-                valid: false
-            },
-            images: {
-                value: [],
-                valid: false
-            },
-            expiresOn: {
-                value: moment().add(1, 'month').format('YYYY-MM-DD').toString(),
-                valid: false
-            },
-            isPremium: {
-                value: false,
-                valid: false
-            },
-            description: {
-                value: '',
-                valid: false
-            },
-            jobType: {
-                value: '',
-                valid: false
-            },
-            industryType: {
-                value: '',
-                valid: false
-            },
+    const form = {
+        title: {
+            value: props?.title || '',
+            valid: false
         },
+        salary: {
+            value: props?.salary || '',
+            valid: false
+        },
+        location: {
+            value: props?.location || '',
+            valid: false
+        },
+        images: {
+            value: props?.images || [],
+            valid: false
+        },
+        expiresOn: {
+            value: props?.expiresOn || moment().add(1, 'month').format('YYYY-MM-DD').toString(),
+            valid: false
+        },
+        isPremium: {
+            value: props?.isPremium || false,
+            valid: false
+        },
+        description: {
+            value: props?.description || '',
+            valid: false
+        },
+        jobType: {
+            value: props?.jobType || '',
+            valid: false
+        },
+        industryType: {
+            value: props?.industryType || '',
+            valid: false
+        },
+    };
+
+    const { inputState: { inputs }, inputHandler, isFormValid, getPayload } = useForm({
+        inputs: form,
         isFormValid: false
     });
-
-    useEffect(() => {
-        if (!props.isUpdate || !props.inputs) {
-            return;
-        }
-
-        const inputs: any = {};
-
-        for (const key of Object.keys(props.inputs)) {
-            if (!(props.inputs as any)?.[key]) continue;
-
-            inputs[key] = { value: (props.inputs as any)?.[key] || '', valid: false };
-        }
-
-        setFormData(inputs);
-    }, []);
 
     const submit = async () => {
         if (!isFormValid || !props.endpoint) {

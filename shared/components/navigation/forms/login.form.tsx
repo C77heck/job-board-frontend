@@ -1,6 +1,5 @@
 import moment from 'moment';
 import * as React from 'react';
-import { useEffect } from 'react';
 import { Form } from "../../../form/form";
 import { Input } from '../../../form/inputs/input';
 import { emailValidator } from "../../../form/validators/email-validator";
@@ -9,10 +8,11 @@ import { useClient } from "../../../hooks/client.hook";
 import { useAuthContext } from '../../../hooks/context-hooks/auth-context.hook';
 import { useForm } from '../../../hooks/reducers/form-reducer.hook';
 import { Button } from "../../buttons/button";
+import { NavLink } from '../libs/nav-link';
 
 export interface LoginFormProps {
+    link: string;
     endpoint: string;
-    onClick: () => void;
     email?: string;
     password?: string;
 }
@@ -33,10 +33,6 @@ export const LoginForm = (props: LoginFormProps) => {
             }
         },
         isFormValid: false
-    });
-
-    useEffect(() => {
-
     });
 
     const submit = async () => {
@@ -82,9 +78,11 @@ export const LoginForm = (props: LoginFormProps) => {
             />
         </Form>
         <div className={'position-center py-15'}>
-            <Button buttonStyle={'link'} onClick={props.onClick}>
-                <span className={'hover-opacity color--secondary-1 fs-16'}>Register</span>
-            </Button>
+            <NavLink noFullWidth href={props.link}>
+                <Button buttonStyle={'link'}>
+                    <span className={'hover-opacity color--secondary-1 fs-16'}>Register</span>
+                </Button>
+            </NavLink>
         </div>
     </div>;
 };
