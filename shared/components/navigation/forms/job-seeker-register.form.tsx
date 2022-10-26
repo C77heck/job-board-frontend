@@ -4,6 +4,7 @@ import { CvUploader } from '../../../form/file-uploader/cv-uploader';
 import { Form } from "../../../form/form";
 import { Input } from '../../../form/inputs/input';
 import { emailValidator } from "../../../form/validators/email-validator";
+import { onlyNumberValidator } from '../../../form/validators/only-number-validator';
 import { comparePassword } from '../../../form/validators/password-confirmation';
 import { requiredValidator } from "../../../form/validators/required-validator";
 import { useClient } from "../../../hooks/client.hook";
@@ -179,7 +180,7 @@ export const JobSeekerRegisterForm = (props: any) => {
                 <Input
                     name={'currentSalary'}
                     label={'Current/most recent salary'}
-                    validators={[requiredValidator]}
+                    validators={[onlyNumberValidator]}
                     className={'col-100 mt-11'}
                     labelClass={'fs-15 fw--700 mb-2'}
                     onChange={inputHandler}
