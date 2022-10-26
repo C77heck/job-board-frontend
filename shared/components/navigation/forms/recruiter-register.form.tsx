@@ -7,7 +7,6 @@ import { requiredValidator } from "../../../form/validators/required-validator";
 import { useClient } from "../../../hooks/client.hook";
 import { useAuthContext } from '../../../hooks/context-hooks/auth-context.hook';
 import { useForm } from '../../../hooks/reducers/form-reducer.hook';
-import { Button } from "../../buttons/button";
 
 export const RecruiterRegisterForm = (props: any) => {
     const client = useClient();
@@ -55,7 +54,7 @@ export const RecruiterRegisterForm = (props: any) => {
             isFormValid={isFormValid}
             className={'row justify-content-space-between'}
             onSubmit={() => submit()}
-            submitButton={{ className: 'mt-20 margin-auto w-px-145', title: 'Register', type: 'submit' }}
+            submitButton={{ className: 'mt-60 margin-auto w-px-145', title: 'Register', type: 'submit' }}
             buttonWrapper={'col-100'}
             onSuccess={() => window.location.reload()}
             {...client}
@@ -113,10 +112,5 @@ export const RecruiterRegisterForm = (props: any) => {
                 />
             </div>
         </Form>
-        <div className={'position-center py-15'}>
-            <Button buttonStyle={'link'} onClick={props.onClick}>
-                <span className={'hover-opacity color--secondary-1 fs-16'}>login</span>
-            </Button>
-        </div>
     </div>;
 };

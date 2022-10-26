@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Job } from '../../components/AdsListScreen/Components/job-listings';
 import { RecruiterRegisterForm } from '../../shared/components/navigation/forms/recruiter-register.form';
@@ -30,8 +31,11 @@ const Registration: NextPage = (props: any) => {
     }, [router]);
 
     return <BaseLayout showSearchBar={true} auth={false} meta={{ title: 'jobs', keywords: 'jobs', description: 'jobs' }}>
-        <BaseLayoutWidth className={'background-color--light-2'}>
-            <div className={'row position-center mt-220 mb-50'}>
+        <BaseLayoutWidth className={''}>
+            <div className={'row position-center mt-220 mb-40'}>
+                <h2 className={'fs-40'}>Registration</h2>
+            </div>
+            <div className={'row position-center mb-50 background-color--light-2 p-40'}>
                 <RecruiterRegisterForm endpoint={`/users/recruiter/signup`}/>
             </div>
         </BaseLayoutWidth>;
