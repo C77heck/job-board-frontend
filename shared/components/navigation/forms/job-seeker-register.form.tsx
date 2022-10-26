@@ -75,7 +75,7 @@ export const JobSeekerRegisterForm = (props: any) => {
 
         const response: any = await client.client(props.endpoint, 'POST', { body: getPayload(inputs) });
 
-        if (!client.error && !!response?.userDat) {
+        if (!client.error && !!response?.userData) {
             signin({ ...(response?.userData || {}), expiry: moment() });
 
             redirect('/');
