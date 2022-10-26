@@ -112,6 +112,16 @@ export const RecruiterRegisterForm = (props: any) => {
                 onChange={inputHandler}
                 value={inputs.passwordConfirm.value}
             />
+            <Input
+                name={'companyType'}
+                label={'I represent a recruitment firm'}
+                validators={[]}
+                className={'col-100 mt-11'}
+                labelClass={'fs-15 fw--700 mb-2'}
+                onChange={inputHandler}
+                value={inputs.companyType.value}
+                element={'checkbox'}
+            />
         </div>
         <div className={'col-md-50 mx-md-20 col-100'}>
             <Input
@@ -125,16 +135,7 @@ export const RecruiterRegisterForm = (props: any) => {
                 value={inputs.relatedIndustry.value}
                 element={'searchable_dropdown'}
             />
-            <Input
-                name={'companyType'}
-                label={'I represent a recruitment firm'}
-                validators={[]}
-                className={'col-100 mt-11'}
-                labelClass={'fs-15 fw--700 mb-2'}
-                onChange={inputHandler}
-                value={inputs.companyType.value}
-                element={'checkbox'}
-            />
+
             <Input
                 name={'securityQuestion'}
                 label={'Security hint'}
