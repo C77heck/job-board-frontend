@@ -26,7 +26,7 @@ export interface FieldProps<TOptions = string[]> {
     validators: any[];
     errorMessage?: string;
     label?: string;
-    options?: any[];
+    options?: OptionProps[];
     element?: 'text' | 'dropdown' | 'searchable' | 'searchable_dropdown' | 'textarea' | 'checkbox' | 'datepicker' | string;
     isNumberOnly?: boolean;
     value: string | string[] | null | OptionProps;
@@ -67,7 +67,8 @@ export const Input = (props: FieldProps) => {
     };
 
     const onClickHandler = (isChosen: boolean, option: OptionProps) => {
-        props.onChange({ value: isChosen ? '' : option.value, valid: !state.hasError, inputName: props.name });
+        console.log({ isChosen, option });
+        props.onChange({ value: isChosen ? '' : option, valid: !state.hasError, inputName: props.name });
     };
 
     const manageInputType = (element: string) => {
@@ -90,7 +91,7 @@ export const Input = (props: FieldProps) => {
                 />; // will need the dropdown
             case INPUTS.SEARCHABLE_DROPDOWN:
                 return <SearchableDropdown
-                    currentValue={'something'}
+                    currentValue={''}
                     {...props}
                     handleChange={handleChange}
                     value={props.value as OptionProps}

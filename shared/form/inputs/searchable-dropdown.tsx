@@ -5,8 +5,8 @@ import { handleErrors } from '../../libs/handle-errors';
 import { FieldProps } from './input';
 
 export interface OptionProps {
-    value: string;
-    title: string;
+    value: string | number;
+    title: string | number;
 }
 
 export interface SearchableDropdownProps extends Omit<FieldProps<OptionProps>, 'value'> {
@@ -107,7 +107,6 @@ export class SearchableDropdown extends Component<SearchableDropdownProps, Searc
                 this.setState({ show: false });
                 break;
             case 'Tab':
-                // @ts-ignore
                 this.setState({ show: false });
                 break;
             default:
@@ -154,7 +153,7 @@ export class SearchableDropdown extends Component<SearchableDropdownProps, Searc
 
     public manageSearch() {
         const regex = new RegExp(this.state?.searchedValue || '', 'i');
-        const searchedOptions = (this.props?.options || []).filter(({ title }) => regex.test(title));
+        const searchedOptions = (this.props?.options || []).filter(({ title }) => regex.test(title.toString()));
 
         this.setState({ searchedOptions });
     }
@@ -177,7 +176,9 @@ export class SearchableDropdown extends Component<SearchableDropdownProps, Searc
                     placeholder={this.props.placeholder}
                     disabled={this.props.disabled}
                 />
+
                 <span className={'searchable-input w-100 fs-13 line-height-17 p-3'}>{this.props?.value?.title || '-'}</span>
+
                 {this.renderArrows()}
             </div>
             <div className={`${this.props.className} dropdown-general dropdown dropdown--searchable dropdown--${this.state.show ? 'show' : 'hide'} display-flex flex-column`}>
@@ -187,13 +188,15 @@ export class SearchableDropdown extends Component<SearchableDropdownProps, Searc
         </div>;
     }
 
+    public handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({ searchedValue: e.target.value });
+    };
+
     public renderSearchInput() {
-        const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-            this.setState({ searchedValue: e.target.value });
-        };
+
         return <input
             className={'input search-bar-input'}
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => this.handleChange(e)}
             value={this.state.searchedValue}
             type={'text'}
             placeholder={'Type here...'}

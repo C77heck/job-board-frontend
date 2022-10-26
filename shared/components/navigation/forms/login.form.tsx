@@ -47,42 +47,40 @@ export const LoginForm = (props: LoginFormProps) => {
         }
     };
 
-    return <div>
-        <Form
-            noSuccessModal={true}
-            isFormValid={isFormValid}
-            onSubmit={() => submit()}
-            submitButton={{ className: 'mt-20 margin-auto w-px-145', title: 'Login', type: 'submit' }}
-            buttonWrapper={'col-100'}
-            className={'row margin-auto w-60'}
-            onSuccess={() => window.location.reload()}
-            {...client}
-        >
-            <Input
-                name={'email'}
-                label={'Email'}
-                validators={[emailValidator]}
-                className={'col-100 mt-11'}
-                labelClass={'fs-15 fw--700 mb-2'}
-                value={inputs.email.value}
-                onChange={inputHandler}
-            />
-            <Input
-                name={'password'}
-                label={'Password'}
-                validators={[requiredValidator]}
-                className={'col-100 mt-11'}
-                labelClass={'fs-15 fw--700 mb-2'}
-                onChange={inputHandler}
-                value={inputs.password.value}
-            />
-        </Form>
-        <div className={'position-center py-15'}>
-            <NavLink noFullWidth href={props.link}>
-                <Button buttonStyle={'link'}>
-                    <span className={'hover-opacity color--secondary-1 fs-16'}>Register</span>
-                </Button>
-            </NavLink>
-        </div>
+    return <Form
+        noSuccessModal={true}
+        isFormValid={isFormValid}
+        onSubmit={() => submit()}
+        submitButton={{ className: 'mt-20 margin-auto w-px-145', title: 'Login', type: 'submit' }}
+        buttonWrapper={'col-100'}
+        className={'row margin-auto w-60'}
+        onSuccess={() => window.location.reload()}
+        {...client}
+    >
+        <Input
+            name={'email'}
+            label={'Email'}
+            validators={[emailValidator]}
+            className={'col-100 mt-11'}
+            labelClass={'fs-15 fw--700 mb-2'}
+            value={inputs.email.value}
+            onChange={inputHandler}
+        />
+        <Input
+            name={'password'}
+            label={'Password'}
+            validators={[requiredValidator]}
+            className={'col-100 mt-11'}
+            labelClass={'fs-15 fw--700 mb-2'}
+            onChange={inputHandler}
+            value={inputs.password.value}
+        />
+    </Form>;
+    <div className={'position-center py-15'}>
+        <NavLink noFullWidth href={props.link}>
+            <Button buttonStyle={'link'}>
+                <span className={'hover-opacity color--secondary-1 fs-16'}>Register</span>
+            </Button>
+        </NavLink>
     </div>;
 };
