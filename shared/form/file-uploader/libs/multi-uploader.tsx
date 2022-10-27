@@ -81,7 +81,7 @@ export const MultiUploader = (props: MultiUploaderProps) => {
         <label htmlFor={props.id}>{props.trigger}</label>
         <input
             onChange={(e) => addFiles(e)}
-            accept="image/*"
+            accept={props.fileType ?? 'image/*'}
             className={'display-none'}
             type={'file'}
             id={props.id}

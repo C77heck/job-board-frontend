@@ -156,6 +156,7 @@ export const JobForm = (props: JobFormProps) => {
                 validators={[]}
                 className={'col-100 mt-11'}
                 labelClass={'fs-15 fw--700 mb-2'}
+                multi={true}
                 element={SEARCHABLE_DROPDOWN}
             />
             <Input

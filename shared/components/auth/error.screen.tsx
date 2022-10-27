@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const ErrorScreen = (props: any) => {
-    return <div className={'full-screen'}>
+    return <div className={'mt-220 mb-90'}>
         <h2 className={'pt-40 text-align-center fw--700 fs-50 color--error-1'}>ERROR</h2>
         <h2 className={'pt-40 text-align-center fw--700 fs-50 color--error-2'}>
             You do not have the right permissions for this content!

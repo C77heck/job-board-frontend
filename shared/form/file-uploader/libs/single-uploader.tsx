@@ -13,7 +13,6 @@ export const SingleUploader = (props: SingleUploaderProps) => {
     useEffect(() => {
         props.getAttachment(attachment);
         props.getIsLoading(isLoading);
-
     }, [attachment, uploadQuantity, isLoading]);
 
     const addFiles = async (e: any) => {
@@ -59,13 +58,25 @@ export const SingleUploader = (props: SingleUploaderProps) => {
         };
     };
 
+    const getEndpoint = () => {
+        switch (props.fileType) {
+            case 'image/*':
+                return '/image-upload';
+            case 'file/*':
+                return '/file-upload';
+            default:
+                return '/image-upload';
+        }
+    };
+
     const createAttachment = async (file: string, fileData: FileData) => {
         try {
             setIsLoading(true);
             const body = { ...fileData, file, compressionQuality: 'high', alt: props.alt };
             setIsLoading(false);
-
-            return await client('/create', 'POST', { body: body as any, headers: { 'Content-Type': 'multipart/form-data' } });
+            // image and file uploader seperation /image-upload /file-upload
+            const endpoint = getEndpoint();
+            return await client(endpoint, 'POST', { body: body as any, headers: { 'Content-Type': 'multipart/form-data' } });
         } catch (e) {
             setIsLoading(false);
         }
@@ -75,7 +86,7 @@ export const SingleUploader = (props: SingleUploaderProps) => {
         <label htmlFor={props.id}>{props.trigger}</label>
         <input
             onChange={(e) => addFiles(e)}
-            accept="image/*"
+            accept={props.fileType ?? 'image/*'}
             className={'display-none'}
             type={'file'}
             id={props.id}

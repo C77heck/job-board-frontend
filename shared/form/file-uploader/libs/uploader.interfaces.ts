@@ -18,6 +18,7 @@ export interface Attachment {
 }
 
 export interface Uploader {
+    fileType?: 'file/*' | 'image/*';
     getIsLoading: (isLoading: boolean) => void;
     trigger: JSX.Element;
     alt?: string;

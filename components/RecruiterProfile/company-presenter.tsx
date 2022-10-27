@@ -29,12 +29,11 @@ export class CompanyPresenter extends React.Component<CompanyPresenterProps, any
                     <div className={'logo-presenter'}>
                         <img src={logo.data as string}/>
                     </div>
-                    <DataPresenter
-                        className={'my-15'}
-                        key={`${company_name.data}`}
-                        data={company_name.data}
-                        label={company_name.label}
-                    />
+                    <div className={`display-flex flex-column mb-4 my-15`}>
+                        <span className={'text--small-grey'}>{company_name.label}:</span>
+                        <span className={'text--small'}>{company_name.data}</span>
+                    </div>
+
                     <DataPresenter
                         className={'my-15'}
                         key={`${address.data}`}

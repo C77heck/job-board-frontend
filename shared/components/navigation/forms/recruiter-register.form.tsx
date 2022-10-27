@@ -1,6 +1,7 @@
 import moment from 'moment';
 import * as React from "react";
 import { CONSTANTS } from '../../../constants';
+import { IconUploader } from '../../../form/file-uploader/icon-uploader';
 import { Form } from "../../../form/form";
 import { Input } from '../../../form/inputs/input';
 import { emailValidator } from "../../../form/validators/email-validator";
@@ -35,6 +36,10 @@ export const RecruiterRegisterForm = (props: any) => {
                 value: [],
                 valid: false
             },
+            logo: {
+                value: false,
+                valid: false
+            },
             companyType: {
                 value: false,
                 valid: false
@@ -56,7 +61,12 @@ export const RecruiterRegisterForm = (props: any) => {
             return;
         }
 
-        const response: any = await client.client(props.endpoint, 'POST', { body: getPayload(inputs) });
+        const payload = getPayload(inputs);
+
+        payload.relatedIndustry = payload.relatedIndustry || '';
+        payload.companyType = payload.companyType ? 'Recruiter' : 'DirectEmployer';
+
+        const response: any = await client.client(props.endpoint, 'POST', { body: payload });
 
         if (!client.error && !!response?.userData) {
             signin({ ...(response?.userData || {}), expiry: moment() });
@@ -112,16 +122,19 @@ export const RecruiterRegisterForm = (props: any) => {
                 onChange={inputHandler}
                 value={inputs.passwordConfirm.value}
             />
-            <Input
-                name={'companyType'}
-                label={'I represent a recruitment firm'}
-                validators={[]}
-                className={'col-100 mt-11'}
-                labelClass={'fs-15 fw--700 mb-2'}
-                onChange={inputHandler}
-                value={inputs.companyType.value}
-                element={'checkbox'}
-            />
+            <div className={'row pt-30'}>
+                <div className={'col-70 display-flex align-items-center'}>
+                    <span className={'fs-15 fw--700 mb-2'}>Upload company logo:</span>
+                </div>
+                <div className={'col-30 position-center'}>
+                    <IconUploader
+                        name={'logo'}
+                        validators={[requiredValidator]}
+                        onChange={inputHandler}
+                        value={inputs.logo.value}
+                    />
+                </div>
+            </div>
         </div>
         <div className={'col-md-50 mx-md-20 col-100'}>
             <Input
@@ -134,17 +147,6 @@ export const RecruiterRegisterForm = (props: any) => {
                 onChange={inputHandler}
                 value={inputs.relatedIndustry.value}
                 element={'searchable_dropdown'}
-            />
-
-            <Input
-                name={'securityQuestion'}
-                label={'Security hint'}
-                validators={[requiredValidator]}
-                placeholder={'First pet name, first love...'}
-                className={'col-100 mt-11'}
-                labelClass={'fs-15 fw--700 mb-2'}
-                onChange={inputHandler}
-                value={inputs.securityQuestion.value}
             />
             <Input
                 name={'securityQuestion'}
@@ -164,6 +166,16 @@ export const RecruiterRegisterForm = (props: any) => {
                 labelClass={'fs-15 fw--700 mb-2'}
                 onChange={inputHandler}
                 value={inputs.securityAnswer.value}
+            />
+            <Input
+                name={'companyType'}
+                label={'I represent a recruitment firm'}
+                validators={[]}
+                className={'col-100 mt-11'}
+                labelClass={'fs-15 fw--700 mb-2'}
+                onChange={inputHandler}
+                value={inputs.companyType.value}
+                element={'checkbox'}
             />
         </div>
     </Form>;

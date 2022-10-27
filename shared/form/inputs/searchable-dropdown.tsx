@@ -14,6 +14,7 @@ export interface SearchableDropdownProps extends Omit<FieldProps<OptionProps>, '
     handleChange: (e: any) => void;
     onClickHandler: (onChange: any, value: OptionProps) => void;
     value: OptionProps;
+    multi?: boolean;
 }
 
 export interface SearchableDropdownState {
@@ -193,7 +194,6 @@ export class SearchableDropdown extends Component<SearchableDropdownProps, Searc
     };
 
     public renderSearchInput() {
-
         return <input
             className={'input search-bar-input'}
             onChange={(e) => this.handleChange(e)}
@@ -211,6 +211,7 @@ export class SearchableDropdown extends Component<SearchableDropdownProps, Searc
 
     public renderOption(option: OptionProps) {
         const { value, title } = option;
+        // todo need to look through an array if its multi and push back an array too
         const isChosen = this.props.value?.value === value;
 
         return <span

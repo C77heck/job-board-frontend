@@ -35,6 +35,7 @@ export interface FieldProps<TOptions = string[]> {
     wrapperClasses?: string;
     rows?: number;
     cols?: number;
+    multi?: boolean;
 }
 
 export const Input = (props: FieldProps) => {

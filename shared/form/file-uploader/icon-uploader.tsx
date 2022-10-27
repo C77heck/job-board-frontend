@@ -26,7 +26,12 @@ export const IconUploader = (props: IconUploaderProps) => {
         onClick={() => setIsLoading(true)}
         className={'logo-uploader background-color--light-2 position-center my-10'}
     >
-        <FileDisplay alt={uploadedAttachment?.alt} src={uploadedAttachment?.url} uploadText={'Upload your logo'} isLoading={isLoading}/>
+        <FileDisplay
+            alt={uploadedAttachment?.alt}
+            src={uploadedAttachment?.url}
+            uploadText={'Upload your logo'}
+            isLoading={isLoading}
+        />
     </div>;
 
     return <SingleUploader

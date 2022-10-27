@@ -35,6 +35,7 @@ export const CvUploader = (props: CvUploaderProps) => {
     </div>;
 
     return <SingleUploader
+        fileType={'file/*'}
         id={'logo-image-uploader'}
         getAttachment={(attachment) => setUploadedAttachment(attachment)}
         getIsLoading={(isLoading: boolean) => setIsLoading(isLoading)}

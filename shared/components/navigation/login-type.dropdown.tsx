@@ -5,7 +5,7 @@ import { LoginModal } from './libs/login.modal';
 import { ProfileDropdown } from './libs/profile-dropdown';
 
 export const LoginTypeDropdown = (props: any) => {
-    const trigger = (text: string) => <div className={'p-5 hover-primary'}><span className={'fw--700 fs-15'}>{text}</span></div>;
+    const trigger = (text: string) => <div className={'p-5 hover-opacity'}><span className={'fw--700 fs-15'}>{text}</span></div>;
 
     const content = <div className={'display-flex justify-content-end flex-column align-items-end'}>
         <div>
