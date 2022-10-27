@@ -1,25 +1,12 @@
 import React from 'react';
 import { ArrowDown, ArrowUp } from '../../components/icons/icons';
 import { handleErrors } from '../../libs/handle-errors';
-import { AbstractDropdown, DropdownProps, DropdownState } from './libs/abstract.dropdown';
+import { AbstractDropdown, DropdownProps, DropdownState, OptionProps } from './libs/abstract.dropdown';
 
-export interface OptionProps {
-    value: string | number;
-    title: string | number;
-}
+// todo -» we need to make the value to be an array and treat the data flow as such.
+// make sure that if something is picked we must have it in the options no matter what we searched for to be able to unpick it...
 
-export interface SearchableDropdownProps extends Omit<DropdownProps<OptionProps>, 'value' | 'onClickHandler' | 'handleChange'> {
-    currentValue: string;
-    handleChange: (e: any) => void;
-    onClickHandler: (onChange: any, value: OptionProps) => void;
-    value: OptionProps;
-}
-
-export interface SearchableDropdownState extends DropdownState {
-
-}
-
-export class SearchableDropdown extends AbstractDropdown<SearchableDropdownProps, SearchableDropdownState> {
+export class MultiSearchableDropdown extends AbstractDropdown<DropdownProps<OptionProps[]>, DropdownState> {
     public componentDidMount() {
         super.componentDidMount();
         this.setState({ searchedOptions: this.props?.options || [] });
@@ -98,7 +85,10 @@ export class SearchableDropdown extends AbstractDropdown<SearchableDropdownProps
     }
 
     public renderInputContent() {
-        return <>
+        return <div
+            className={'display-flex'}
+            onClick={() => this.setState({ show: !this.state.show })}
+        >
             <input
                 className={'input display-none'}
                 onChange={(e) => this.props.handleChange(e)}
@@ -115,7 +105,7 @@ export class SearchableDropdown extends AbstractDropdown<SearchableDropdownProps
             <span className={'searchable-input w-100 fs-13 line-height-17 p-3'}>{this.props?.value?.title || '-'}</span>
 
             {this.renderArrows()}
-        </>;
+        </div>;
     }
 
     public handleChange(e: React.ChangeEvent<HTMLInputElement>) {

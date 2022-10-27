@@ -7,6 +7,7 @@ import { ValidatorInterface } from '../validators/validator-interface';
 import { Checkbox } from './checkbox';
 import { Datepicker } from './datepicker';
 import { InputWrapper } from './libs/input-wrapper';
+import { MultiSearchableDropdown } from './multi-searchable-dropdown';
 import { RangeInput } from './range-input';
 import { OptionProps, SearchableDropdown } from './searchable-dropdown';
 import { TextInput } from './text-input';
@@ -26,16 +27,15 @@ export interface FieldProps<TOptions = string[]> {
     validators: any[];
     errorMessage?: string;
     label?: string;
-    options?: OptionProps[];
-    element?: 'text' | 'dropdown' | 'searchable' | 'searchable_dropdown' | 'textarea' | 'checkbox' | 'datepicker' | string;
+    options: OptionProps[];
+    element?: 'text' | 'dropdown' | 'searchable_dropdown' | 'textarea' | 'checkbox' | 'datepicker' | string;
     isNumberOnly?: boolean;
-    value: string | string[] | null | OptionProps;
+    value: string | string[] | null | OptionProps | OptionProps[];
     onChange: DispatchFunction<any>;
     labelClass?: string;
     wrapperClasses?: string;
     rows?: number;
     cols?: number;
-    multi?: boolean;
 }
 
 export const Input = (props: FieldProps) => {
@@ -82,20 +82,19 @@ export const Input = (props: FieldProps) => {
                     handleChange={handleChange}
                     value={props.value}
                 />; // will need the dropdown
-            case INPUTS.SEARCHABLE:
-                return <TextInput
-                    onFocus={() => focusChange(true)}
-                    onBlur={() => focusChange(false)}
-                    {...props}
-                    handleChange={handleChange}
-                    value={props.value}
-                />; // will need the dropdown
             case INPUTS.SEARCHABLE_DROPDOWN:
                 return <SearchableDropdown
                     currentValue={''}
                     {...props}
                     handleChange={handleChange}
                     value={props.value as OptionProps}
+                    onClickHandler={(isChosen: boolean, option: OptionProps) => onClickHandler(isChosen, option)}
+                />;
+            case INPUTS.MULTI_SEARCHABLE_DROPDOWN:
+                return <MultiSearchableDropdown
+                    {...props}
+                    handleChange={handleChange}
+                    value={props.value as OptionProps[]}
                     onClickHandler={(isChosen: boolean, option: OptionProps) => onClickHandler(isChosen, option)}
                 />;
             case INPUTS.TEXTAREA:

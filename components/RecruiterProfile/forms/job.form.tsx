@@ -17,7 +17,7 @@ export interface JobFormProps extends JobCardProps {
 }
 
 export const JobForm = (props: JobFormProps) => {
-    const { INPUTS: { CHECKBOX, TEXTAREA, DATEPICKER, SEARCHABLE_DROPDOWN } } = CONSTANTS;
+    const { INPUTS } = CONSTANTS;
     const client = useClient();
     const form = {
         title: {
@@ -125,7 +125,7 @@ export const JobForm = (props: JobFormProps) => {
                 validators={[requiredValidator]}
                 className={'col-100 mt-11'}
                 labelClass={'fs-15 fw--700 mb-2'}
-                element={DATEPICKER}
+                element={INPUTS.DATEPICKER}
             />
             <Input
                 onChange={inputHandler}
@@ -135,7 +135,7 @@ export const JobForm = (props: JobFormProps) => {
                 validators={[requiredValidator]}
                 className={'col-100 mt-11'}
                 labelClass={'fs-15 fw--700 mb-2'}
-                element={CHECKBOX}
+                element={INPUTS.CHECKBOX}
             />
             <Input
                 onChange={inputHandler}
@@ -145,7 +145,7 @@ export const JobForm = (props: JobFormProps) => {
                 validators={[]}
                 className={'col-100 mt-11'}
                 labelClass={'fs-15 fw--700 mb-2'}
-                element={TEXTAREA}
+                element={INPUTS.TEXTAREA}
             />
             <Input
                 onChange={inputHandler}
@@ -156,8 +156,7 @@ export const JobForm = (props: JobFormProps) => {
                 validators={[]}
                 className={'col-100 mt-11'}
                 labelClass={'fs-15 fw--700 mb-2'}
-                multi={true}
-                element={SEARCHABLE_DROPDOWN}
+                element={INPUTS.MULTI_SEARCHABLE_DROPDOWN}
             />
             <Input
                 onChange={inputHandler}
@@ -168,7 +167,7 @@ export const JobForm = (props: JobFormProps) => {
                 validators={[requiredValidator]}
                 className={'col-100 mt-11'}
                 labelClass={'fs-15 fw--700 mb-2'}
-                element={SEARCHABLE_DROPDOWN}
+                element={INPUTS.SEARCHABLE_DROPDOWN}
             />
         </div>
     </Form>;
