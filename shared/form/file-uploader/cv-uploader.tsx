@@ -22,11 +22,8 @@ export const CvUploader = (props: CvUploaderProps) => {
     useEffect(() => {
         setUploadedAttachment({ url: props.value } as any);
     }, [props.value]);
-    // todo need the upload label to be presented
-    const trigger = <div
-        onClick={() => setIsLoading(true)}
-        className={'cv-uploader background-color--light-1 position-center my-10'}
-    >
+
+    const trigger = <div className={'cv-uploader background-color--light-1 position-center my-10'}>
         {isLoading
             ? <SvgSpinner style={'dark'} className={'m-0'}/>
             : uploadedAttachment?.url

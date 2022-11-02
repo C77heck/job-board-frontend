@@ -27,7 +27,7 @@ export interface FieldProps<TOptions = string[]> {
     validators: any[];
     errorMessage?: string;
     label?: string;
-    options: OptionProps[];
+    options?: OptionProps[];
     element?: 'text' | 'dropdown' | 'searchable_dropdown' | 'textarea' | 'checkbox' | 'datepicker' | string;
     isNumberOnly?: boolean;
     value: string | string[] | null | OptionProps | OptionProps[];
@@ -63,13 +63,20 @@ export const Input = (props: FieldProps) => {
     const handleChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
         const { hasError, errorMessage } = validate(value);
         const val = props.isNumberOnly ? removeNonNumericValues(value) : value;
-        props.onChange({ value: val, valid: !hasError, inputName: props.name });
+        props.onChange({
+            value: val,
+            valid: !hasError,
+            inputName: props.name
+        });
         handleDataChange({ hasError, errorMessage });
     };
 
     const onClickHandler = (isChosen: boolean, option: OptionProps) => {
-        console.log({ isChosen, option });
-        props.onChange({ value: isChosen ? '' : option, valid: !state.hasError, inputName: props.name });
+        props.onChange({
+            value: isChosen ? '' : option,
+            valid: !state.hasError,
+            inputName: props.name
+        });
     };
 
     const manageInputType = (element: string) => {
@@ -85,6 +92,7 @@ export const Input = (props: FieldProps) => {
             case INPUTS.SEARCHABLE_DROPDOWN:
                 return <SearchableDropdown
                     currentValue={''}
+                    options={[]}
                     {...props}
                     handleChange={handleChange}
                     value={props.value as OptionProps}
@@ -92,6 +100,7 @@ export const Input = (props: FieldProps) => {
                 />;
             case INPUTS.MULTI_SEARCHABLE_DROPDOWN:
                 return <MultiSearchableDropdown
+                    options={props?.options || []}
                     {...props}
                     handleChange={handleChange}
                     value={props.value as OptionProps[]}

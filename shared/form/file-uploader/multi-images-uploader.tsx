@@ -18,19 +18,21 @@ export const MultiImagesUploader = (props: IconUploaderProps) => {
     const [uploadedAttachments, setUploadedAttachments] = useState<Attachment[] | { url: string }[]>([]);
 
     useEffect(() => {
+
         setOptions({
             numberOfImg: uploadedAttachments.length,
             display: uploadedAttachments[0]?.url || '',
             attachments: uploadedAttachments.map(att => att.url),
         });
+
         props.onChange({ value: uploadedAttachments.map(a => a.url), valid: true, inputName: props.name });
     }, [uploadedAttachments]);
-
-    useEffect(() => {
-        if (props.value) {
-            setUploadedAttachments((props.value || []).map(url => ({ url })));
-        }
-    }, [props.value]);
+    // todo  -> see how this will get soaked up later on.
+    // useEffect(() => {
+    //     if (props.value) {
+    //         setUploadedAttachments((props.value || []).map(url => ({ url })));
+    //     }
+    // }, [props.value]);
 
     const trigger = <FileDisplay
         onClick={() => setIsLoading(true)}

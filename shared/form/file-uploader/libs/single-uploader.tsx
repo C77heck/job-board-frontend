@@ -17,8 +17,10 @@ export const SingleUploader = (props: SingleUploaderProps) => {
 
     const addFiles = async (e: any) => {
         try {
-            const files = e.target.files || [];
             setIsLoading(true);
+
+            const files = e.target.files || [];
+
             setUploadsQuantity(files.length);
 
             for (const file of files) {
@@ -27,8 +29,8 @@ export const SingleUploader = (props: SingleUploaderProps) => {
 
             setIsLoading(false);
         } catch (e) {
-            handleErrors(e, error);
             setIsLoading(false);
+            handleErrors(e, error);
         }
 
     };
@@ -52,7 +54,9 @@ export const SingleUploader = (props: SingleUploaderProps) => {
                 const fileAsBuffer = Buffer.from((reader.result as Buffer)).toString('base64');
                 const upload = await createAttachment(fileAsBuffer, fileData);
                 setAttachment(upload.attachment);
+                console.log('onload');
             } catch (err) {
+                console.log('onload catch');
                 handleErrors(err);
             }
         };

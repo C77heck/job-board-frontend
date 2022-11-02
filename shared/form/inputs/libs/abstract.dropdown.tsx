@@ -63,6 +63,7 @@ export abstract class AbstractDropdown<TProps extends DropdownProps<any>, TState
 
     public componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
         if (prevState.show !== this.state.show) {
+            console.count('show');
             this.assignKeyDownListener(this.state.show);
         }
     }
@@ -86,19 +87,15 @@ export abstract class AbstractDropdown<TProps extends DropdownProps<any>, TState
     public listenForKeyPress(e: any) {
         switch (e.key) {
             case 'ArrowDown':
-                this.manageSteps('down');
-                break;
+                return this.manageSteps('down');
             case 'ArrowUp':
-                this.manageSteps('up');
-                break;
+                return this.manageSteps('up');
             case 'Enter':
-                this.manageEnterKeyPress();
-                break;
+                return this.manageEnterKeyPress();
             case 'Tab':
-                this.manageTabKeyPress();
-                break;
+                return this.manageTabKeyPress();
             default:
-                break;
+                return;
         }
     }
 
