@@ -1,5 +1,7 @@
 import moment from 'moment';
+import { useRouter } from 'next/router';
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { Form } from "../../../form/form";
 import { Input } from '../../../form/inputs/input';
 import { emailValidator } from "../../../form/validators/email-validator";
@@ -11,7 +13,7 @@ import { Button } from "../../buttons/button";
 import { NavLink } from '../libs/nav-link';
 
 export interface LoginFormProps {
-    link: string;
+    type: 'job-seeker' | 'recruiter';
     endpoint: string;
     email?: string;
     password?: string;
@@ -20,6 +22,14 @@ export interface LoginFormProps {
 export const LoginForm = (props: LoginFormProps) => {
     const client = useClient();
     const { signin } = useAuthContext();
+    const router = useRouter();
+    const [showLink, setShowLink] = useState(true);
+
+    useEffect(() => {
+        if (router.pathname.includes(props.type)) {
+            setShowLink(false);
+        }
+    }, [router.pathname, props.type]);
 
     const { inputState: { inputs }, inputHandler, isFormValid, getPayload } = useForm({
         inputs: {
@@ -36,7 +46,6 @@ export const LoginForm = (props: LoginFormProps) => {
     });
 
     const submit = async () => {
-        console.log('what the fuck');
         if (!isFormValid) {
             return;
         }
@@ -76,14 +85,15 @@ export const LoginForm = (props: LoginFormProps) => {
                 labelClass={'fs-15 fw--700 mb-2'}
                 onChange={inputHandler}
                 value={inputs.password.value}
+                type={'password'}
             />
         </Form>
         <div className={'position-center py-15'}>
-            <NavLink noFullWidth href={props.link}>
+            {showLink && <NavLink noFullWidth href={`/${props.type}/registration`}>
                 <Button buttonStyle={'link'}>
                     <span className={'hover-opacity color--secondary-1 fs-16'}>Register</span>
                 </Button>
-            </NavLink>
+            </NavLink>}
         </div>
     </div>;
 };
