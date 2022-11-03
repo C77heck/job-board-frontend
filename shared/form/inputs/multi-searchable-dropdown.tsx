@@ -3,10 +3,12 @@ import { ArrowDown, ArrowUp } from '../../components/icons/icons';
 import { handleErrors } from '../../libs/handle-errors';
 import { AbstractDropdown, DropdownProps, DropdownState, OptionProps } from './libs/abstract.dropdown';
 
-// todo -» we need to make the value to be an array and treat the data flow as such.
-// make sure that if something is picked we must have it in the options no matter what we searched for to be able to unpick it...
+export interface MultiSearchableDropdownProps extends Omit<DropdownProps<OptionProps[]>, 'onClickHandler' | 'value'> {
+    onClickHandler: (options: OptionProps[]) => void;
+    value: OptionProps[];
+}
 
-export class MultiSearchableDropdown extends AbstractDropdown<DropdownProps<OptionProps[]>, DropdownState> {
+export class MultiSearchableDropdown extends AbstractDropdown<MultiSearchableDropdownProps, DropdownState> {
     public componentDidMount() {
         super.componentDidMount();
         this.setState({ searchedOptions: this.props?.options || [] });
@@ -16,6 +18,9 @@ export class MultiSearchableDropdown extends AbstractDropdown<DropdownProps<Opti
         super.componentDidUpdate(prevProps, prevState);
         if (prevState.searchedValue !== this.state.searchedValue) {
             this.manageSearch();
+        }
+        if (prevState.searchedOptions !== this.state.searchedOptions) {
+            console.log(this.state.searchedOptions);
         }
     }
 
@@ -61,7 +66,9 @@ export class MultiSearchableDropdown extends AbstractDropdown<DropdownProps<Opti
         const options: OptionProps[] = this.state.searchedOptions;
 
         for (const option of options) {
-            if (option.value === this.props.value.value) {
+            const isChosen = !!(this.props.value || []).find(v => v.value === option.value);
+
+            if (isChosen) {
                 return direction === 'down' ? index + 1 : index - 1;
             }
             index++;
@@ -69,6 +76,10 @@ export class MultiSearchableDropdown extends AbstractDropdown<DropdownProps<Opti
 
         throw 'No options to search';
     }
+
+    public handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({ searchedValue: e.target.value });
+    };
 
     public manageSearch() {
         const regex = new RegExp(this.state?.searchedValue || '', 'i');
@@ -84,9 +95,13 @@ export class MultiSearchableDropdown extends AbstractDropdown<DropdownProps<Opti
         </>;
     }
 
+    public handleOnClick(option: OptionProps) {
+        this.props.onClickHandler([...(this.props?.value || []), option]);
+    }
+
     public renderInputContent() {
         return <div
-            className={'display-flex'}
+            className={'display-flex w-100'}
             onClick={() => this.setState({ show: !this.state.show })}
         >
             <input
@@ -101,16 +116,12 @@ export class MultiSearchableDropdown extends AbstractDropdown<DropdownProps<Opti
                 placeholder={this.props.placeholder}
                 disabled={this.props.disabled}
             />
-
-            <span className={'searchable-input w-100 fs-13 line-height-17 p-3'}>{this.props?.value?.title || '-'}</span>
-
+            {this.props?.value?.length
+                ? this.props.value.map(item => item?.title && <span key={item.title} className={'searchable-input w-100 fs-13 line-height-17 p-3'}>{item.title}</span>)
+                : <span className={'searchable-input w-100 fs-13 line-height-17 p-3'}>-</span>}
             {this.renderArrows()}
         </div>;
     }
-
-    public handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-        this.setState({ searchedValue: e.target.value });
-    };
 
     public renderSearchInput() {
         return <input
@@ -130,12 +141,12 @@ export class MultiSearchableDropdown extends AbstractDropdown<DropdownProps<Opti
 
     public renderOption(option: OptionProps) {
         const { value, title } = option;
-        const isChosen = this.props.value?.value === value;
+        const isChosen = !!(this.props.value || []).find(v => v.value === value);
 
         return <span
             onFocus={() => console.log('its on focus', value)}
             key={`${value}-${title}`}
-            onClick={() => this.props.onClickHandler(isChosen, option)}
+            onClick={() => this.handleOnClick(option)}
             className={`${isChosen && 'select-input-active-option'} fs-14 hover-primary pb-4`}
         >
             {title}

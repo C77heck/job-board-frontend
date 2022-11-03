@@ -71,9 +71,17 @@ export const Input = (props: FieldProps) => {
         handleDataChange({ hasError, errorMessage });
     };
 
-    const onClickHandler = (isChosen: boolean, option: OptionProps) => {
+    const singleOnClickHandler = (isChosen: boolean, option: OptionProps) => {
         props.onChange({
             value: isChosen ? '' : option,
+            valid: !state.hasError,
+            inputName: props.name
+        });
+    };
+
+    const multiOnClickHandler = (options: OptionProps[]) => {
+        props.onChange({
+            value: options,
             valid: !state.hasError,
             inputName: props.name
         });
@@ -92,11 +100,11 @@ export const Input = (props: FieldProps) => {
             case INPUTS.SEARCHABLE_DROPDOWN:
                 return <SearchableDropdown
                     currentValue={''}
-                    options={[]}
+                    options={props?.options || []}
                     {...props}
                     handleChange={handleChange}
                     value={props.value as OptionProps}
-                    onClickHandler={(isChosen: boolean, option: OptionProps) => onClickHandler(isChosen, option)}
+                    onClickHandler={(isChosen: boolean, option: OptionProps) => singleOnClickHandler(isChosen, option)}
                 />;
             case INPUTS.MULTI_SEARCHABLE_DROPDOWN:
                 return <MultiSearchableDropdown
@@ -104,7 +112,7 @@ export const Input = (props: FieldProps) => {
                     {...props}
                     handleChange={handleChange}
                     value={props.value as OptionProps[]}
-                    onClickHandler={(isChosen: boolean, option: OptionProps) => onClickHandler(isChosen, option)}
+                    onClickHandler={(options: OptionProps[]) => multiOnClickHandler(options)}
                 />;
             case INPUTS.TEXTAREA:
                 return <Textarea

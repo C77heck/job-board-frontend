@@ -21,7 +21,7 @@ export interface DropdownState {
     searchedValue: string;
 }
 
-export abstract class AbstractDropdown<TProps extends DropdownProps<any>, TState extends DropdownState> extends React.Component<TProps | DropdownProps<any>, TState | DropdownState> {
+export abstract class AbstractDropdown<TProps extends DropdownProps<any>, TState extends DropdownState> extends React.Component<TProps, TState | DropdownState> {
     public state = {
         show: false,
         hasError: false,
@@ -39,7 +39,6 @@ export abstract class AbstractDropdown<TProps extends DropdownProps<any>, TState
 
     public componentDidMount() {
         this.assignClickHandler();
-        this.setState({ searchedOptions: this.props?.options || [] });
     }
 
     public componentWillUnmount() {
@@ -63,7 +62,6 @@ export abstract class AbstractDropdown<TProps extends DropdownProps<any>, TState
 
     public componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
         if (prevState.show !== this.state.show) {
-            console.count('show');
             this.assignKeyDownListener(this.state.show);
         }
     }
