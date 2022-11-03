@@ -147,17 +147,7 @@ export const JobForm = (props: JobFormProps) => {
                 labelClass={'fs-15 fw--700 mb-2'}
                 element={INPUTS.TEXTAREA}
             />
-            <Input
-                onChange={inputHandler}
-                value={inputs.jobType.value}
-                name={'jobType'}
-                label={'Type of job'}
-                options={CONSTANTS.OPTIONS.JOB_TYPE}
-                validators={[]}
-                className={'col-100 mt-11'}
-                labelClass={'fs-15 fw--700 mb-2'}
-                element={INPUTS.MULTI_SEARCHABLE_DROPDOWN}
-            />
+
             <Input
                 onChange={inputHandler}
                 value={inputs.industryType.value}
@@ -168,6 +158,17 @@ export const JobForm = (props: JobFormProps) => {
                 className={'col-100 mt-11'}
                 labelClass={'fs-15 fw--700 mb-2'}
                 element={INPUTS.SEARCHABLE_DROPDOWN}
+            />
+            <Input
+                onChange={inputHandler}
+                value={inputs.jobType.value}
+                name={'jobType'}
+                label={'Type of job'}
+                options={CONSTANTS.OPTIONS.JOB_TYPE}
+                validators={[]}
+                className={'col-100 mt-11'}
+                labelClass={'fs-15 fw--700 mb-2'}
+                element={INPUTS.MULTI_SEARCHABLE_DROPDOWN}
             />
         </div>
     </Form>;

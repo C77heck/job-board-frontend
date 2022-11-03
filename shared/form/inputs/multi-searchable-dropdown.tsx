@@ -95,8 +95,12 @@ export class MultiSearchableDropdown extends AbstractDropdown<MultiSearchableDro
         </>;
     }
 
-    public handleOnClick(option: OptionProps) {
-        this.props.onClickHandler([...(this.props?.value || []), option]);
+    public handleOnClick(isChosen: boolean, option: OptionProps) {
+        if (!isChosen) {
+            return this.props.onClickHandler([...(this.props?.value || []), option]);
+        }
+
+        return this.props.onClickHandler((this.props?.value || []).filter(item => item.value !== option.value));
     }
 
     public renderInputContent() {
@@ -116,10 +120,27 @@ export class MultiSearchableDropdown extends AbstractDropdown<MultiSearchableDro
                 placeholder={this.props.placeholder}
                 disabled={this.props.disabled}
             />
-            {this.props?.value?.length
-                ? this.props.value.map(item => item?.title && <span key={item.title} className={'searchable-input w-100 fs-13 line-height-17 p-3'}>{item.title}</span>)
-                : <span className={'searchable-input w-100 fs-13 line-height-17 p-3'}>-</span>}
+            {this.renderContent()}
             {this.renderArrows()}
+        </div>;
+    }
+
+    public renderContent() {
+        const picked = this.props?.value?.length;
+
+        if (!picked) {
+            return <span className={'searchable-input w-100 fs-13 line-height-17 p-3'}>-</span>;
+        }
+
+        if (picked > 4) {
+            return <div className={'w-100 display-flex'}>
+                {this.props.value.slice(0, 4).map(item => item?.title && <span key={item.title} className={'searchable-input fs-13 line-height-17 p-3'}>{item.title}</span>)}
+                <span className={'searchable-input fs-13 line-height-17 p-3'}>...</span>
+            </div>;
+        }
+
+        return <div className={'w-100 display-flex'}>
+            {this.props.value.map(item => item?.title && <span key={item.title} className={'searchable-input fs-13 line-height-17 p-3'}>{item.title}</span>)}
         </div>;
     }
 
@@ -144,9 +165,8 @@ export class MultiSearchableDropdown extends AbstractDropdown<MultiSearchableDro
         const isChosen = !!(this.props.value || []).find(v => v.value === value);
 
         return <span
-            onFocus={() => console.log('its on focus', value)}
             key={`${value}-${title}`}
-            onClick={() => this.handleOnClick(option)}
+            onClick={() => this.handleOnClick(isChosen, option)}
             className={`${isChosen && 'select-input-active-option'} fs-14 hover-primary pb-4`}
         >
             {title}

@@ -143,7 +143,6 @@ export class SearchableDropdown extends AbstractDropdown<SearchableDropdownProps
         const isChosen = this.props.value?.value === value;
 
         return <span
-            onFocus={() => console.log('its on focus', value)}
             key={`${value}-${title}`}
             onClick={() => this.props.onClickHandler(isChosen, option)}
             className={`${isChosen && 'select-input-active-option'} fs-14 hover-primary pb-4`}
