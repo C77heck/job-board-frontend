@@ -24,15 +24,15 @@ export const CONSTANTS = {
             },
             {
                 title: "Administration, Business Support and Waste Management Services",
-                value: "Administration,-Business-Support-and-Waste-Management-Services"
+                value: "Administration-Business-Support-and-Waste-Management-Services"
             },
             {
                 title: "Agriculture, Forestry, Fishing and Hunting",
-                value: "Agriculture,-Forestry,-Fishing-and-Hunting"
+                value: "Agriculture-Forestry-Fishing-and-Hunting"
             },
             {
                 title: "Arts, Entertainment and Recreation",
-                value: "Arts,-Entertainment-and-Recreation"
+                value: "Arts-Entertainment-and-Recreation"
             },
             {
                 title: "Construction",
@@ -68,7 +68,7 @@ export const CONSTANTS = {
             },
             {
                 title: "Professional, Scientific and Technical Services",
-                value: "Professional,-Scientific-and-Technical-Services"
+                value: "Professional-Scientific-and-Technical-Services"
             },
             {
                 title: "Real Estate and Rental and Leasing",

@@ -8,6 +8,7 @@ export interface MultiSearchableDropdownProps extends Omit<DropdownProps<OptionP
     value: OptionProps[];
 }
 
+// todo we need a stepper and we only chose one if we press enter but with enter we do not close the dropdown but with escape
 export class MultiSearchableDropdown extends AbstractDropdown<MultiSearchableDropdownProps, DropdownState> {
     public componentDidMount() {
         super.componentDidMount();
@@ -19,46 +20,40 @@ export class MultiSearchableDropdown extends AbstractDropdown<MultiSearchableDro
         if (prevState.searchedValue !== this.state.searchedValue) {
             this.manageSearch();
         }
-        if (prevState.searchedOptions !== this.state.searchedOptions) {
-            console.log(this.state.searchedOptions);
-        }
     }
 
     public manageEnterKeyPress() {
-        if (!this.props.value) {
-            this.props.handleChange({ target: { value: this.state.searchedOptions[0] } });
+        if (!this.props.value?.length) {
+            this.handleKeypressChange(this.state.searchedOptions[0]);
         }
         this.setState({ show: false });
     }
 
     public manageTabKeyPress() {
-        if (!this.props.value) {
-            this.props.handleChange({ target: { value: this.state.searchedOptions[0] } });
-        }
+        this.setState({ show: false });
+    }
+
+    public manageEscapeKeyPress() {
         this.setState({ show: false });
     }
 
     public manageSteps(direction: 'up' | 'down') {
         try {
             const index = this.getIndex(direction);
-
-            switch (direction) {
-                case 'up':
-                    this.props.handleChange({ target: { value: this.state.searchedOptions[index] } });
-                    break;
-                case 'down':
-                    this.props.handleChange({ target: { value: this.state.searchedOptions[index] } });
-                    break;
-                default:
-                    break;
-            }
+            const value = this.state.searchedOptions[this.getIndex(direction)];
+            console.log({ index, value, options: this.props.options });
+            this.handleKeypressChange(value);
         } catch (e) {
             handleErrors(e);
         }
     }
 
+    public handleKeypressChange(newValue: OptionProps) {
+        this.props.handleChange({ target: { value: [...(this.props?.value || []), newValue] } });
+    }
+
     public getIndex(direction: 'up' | 'down'): number {
-        if (!this.props.value) {
+        if (!this.props.value?.length) {
             return direction === 'down' ? 0 : this.state.searchedOptions.length - 1;
         }
 
@@ -66,15 +61,15 @@ export class MultiSearchableDropdown extends AbstractDropdown<MultiSearchableDro
         const options: OptionProps[] = this.state.searchedOptions;
 
         for (const option of options) {
-            const isChosen = !!(this.props.value || []).find(v => v.value === option.value);
-
+            const isChosen = !(this.props.value || []).find(v => v.value === option.value);
+            console.log({ index, isChosen });
             if (isChosen) {
                 return direction === 'down' ? index + 1 : index - 1;
             }
             index++;
         }
 
-        throw 'No options to search';
+        return 0;
     }
 
     public handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -134,13 +129,13 @@ export class MultiSearchableDropdown extends AbstractDropdown<MultiSearchableDro
 
         if (picked > 4) {
             return <div className={'w-100 display-flex'}>
-                {this.props.value.slice(0, 4).map(item => item?.title && <span key={item.title} className={'searchable-input fs-13 line-height-17 p-3'}>{item.title}</span>)}
-                <span className={'searchable-input fs-13 line-height-17 p-3'}>...</span>
+                {this.props.value.slice(0, 4).map(item => item?.title && <span key={item.title} className={'searchable-input--multi fs-12'}>{item.title}</span>)}
+                <span className={'searchable-input--multi fs-12'}>...</span>
             </div>;
         }
 
         return <div className={'w-100 display-flex'}>
-            {this.props.value.map(item => item?.title && <span key={item.title} className={'searchable-input fs-13 line-height-17 p-3'}>{item.title}</span>)}
+            {this.props.value.map(item => item?.title && <span key={item.title} className={'searchable-input--multi fs-12'}>{item.title}</span>)}
         </div>;
     }
 
@@ -162,7 +157,8 @@ export class MultiSearchableDropdown extends AbstractDropdown<MultiSearchableDro
 
     public renderOption(option: OptionProps) {
         const { value, title } = option;
-        const isChosen = !!(this.props.value || []).find(v => v.value === value);
+
+        const isChosen = !!(this.props.value || [])?.find(v => v.value === value);
 
         return <span
             key={`${value}-${title}`}

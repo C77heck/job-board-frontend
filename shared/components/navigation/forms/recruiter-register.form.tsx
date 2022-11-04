@@ -10,6 +10,7 @@ import { requiredValidator } from "../../../form/validators/required-validator";
 import { useClient } from "../../../hooks/client.hook";
 import { useAuthContext } from '../../../hooks/context-hooks/auth-context.hook';
 import { useForm } from '../../../hooks/reducers/form-reducer.hook';
+import { redirect } from '../../../libs/helpers';
 
 export const RecruiterRegisterForm = (props: any) => {
     const client = useClient();
@@ -63,7 +64,7 @@ export const RecruiterRegisterForm = (props: any) => {
 
         const payload = getPayload(inputs);
 
-        payload.relatedIndustry = payload.relatedIndustry || '';
+        payload.relatedIndustry = payload.relatedIndustry?.value || '';
         payload.companyType = payload.companyType ? 'Recruiter' : 'DirectEmployer';
 
         const response: any = await client.client(props.endpoint, 'POST', { body: payload });
@@ -71,6 +72,8 @@ export const RecruiterRegisterForm = (props: any) => {
         if (!client.error && !!response?.userData) {
             signin({ ...(response?.userData || {}), expiry: moment() });
         }
+
+        redirect('/');
     };
 
     return <Form

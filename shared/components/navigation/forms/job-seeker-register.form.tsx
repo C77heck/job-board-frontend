@@ -78,9 +78,9 @@ export const JobSeekerRegisterForm = (props: any) => {
 
         if (!client.error && !!response?.userData) {
             signin({ ...(response?.userData || {}), expiry: moment() });
-
-            redirect('/');
         }
+
+        redirect('/');
     };
 
     return <Form

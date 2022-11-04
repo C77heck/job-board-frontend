@@ -163,6 +163,18 @@ textarea {
     font-family: 'Oswald', sans-serif;
 }
 
+.searchable-input--multi{
+    padding: 1px 6px 3px;
+    background: var(--color-secondary-1);
+    color: white;
+    border-radius: 7px;
+    margin-left: 4px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+    font-family: 'Oswald', sans-serif;
+}
 
 .search-bar-input {
     border: solid 1px var(--text-color-light) !important;

@@ -29,6 +29,8 @@ export abstract class AbstractDropdown<TProps extends DropdownProps<any>, TState
         searchedOptions: [],
         searchedValue: ''
     };
+    // todo catch the refs and find the scroll into view... check the note.
+    public refs: React.RefObject<HTMLSpanElement | null> = [];
 
     public divRef: React.RefObject<any> = React.createRef();
 
@@ -72,7 +74,7 @@ export abstract class AbstractDropdown<TProps extends DropdownProps<any>, TState
         if (!isVisible) {
             const keyListener: any = this.keyPressListener;
 
-            return document.removeEventListener('keydown', keyListener);
+            document.removeEventListener('keydown', keyListener);
         }
 
         const keyListener = this.listenForKeyPress.bind(this);
@@ -85,13 +87,17 @@ export abstract class AbstractDropdown<TProps extends DropdownProps<any>, TState
     public listenForKeyPress(e: any) {
         switch (e.key) {
             case 'ArrowDown':
+                e.preventDefault();
                 return this.manageSteps('down');
             case 'ArrowUp':
+                e.preventDefault();
                 return this.manageSteps('up');
             case 'Enter':
                 return this.manageEnterKeyPress();
             case 'Tab':
                 return this.manageTabKeyPress();
+            case 'Escape':
+                return this.manageEscapeKeyPress();
             default:
                 return;
         }
@@ -119,4 +125,6 @@ export abstract class AbstractDropdown<TProps extends DropdownProps<any>, TState
     public abstract manageEnterKeyPress(): void;
 
     public abstract manageTabKeyPress(): void;
+
+    public abstract manageEscapeKeyPress(): void;
 }

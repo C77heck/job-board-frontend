@@ -34,35 +34,30 @@ export class SearchableDropdown extends AbstractDropdown<SearchableDropdownProps
 
     public manageEnterKeyPress() {
         if (!this.props.value) {
-            this.props.handleChange({ target: { value: this.state.searchedOptions[0] } });
+            this.handleKeypressChange(this.state.searchedOptions[0]);
         }
         this.setState({ show: false });
     }
 
     public manageTabKeyPress() {
-        if (!this.props.value) {
-            this.props.handleChange({ target: { value: this.state.searchedOptions[0] } });
-        }
+        this.setState({ show: false });
+    }
+
+    public manageEscapeKeyPress() {
         this.setState({ show: false });
     }
 
     public manageSteps(direction: 'up' | 'down') {
         try {
             const index = this.getIndex(direction);
-
-            switch (direction) {
-                case 'up':
-                    this.props.handleChange({ target: { value: this.state.searchedOptions[index] } });
-                    break;
-                case 'down':
-                    this.props.handleChange({ target: { value: this.state.searchedOptions[index] } });
-                    break;
-                default:
-                    break;
-            }
+            this.handleKeypressChange(this.state.searchedOptions[index]);
         } catch (e) {
             handleErrors(e);
         }
+    }
+
+    public handleKeypressChange(value: OptionProps) {
+        this.props.handleChange({ target: { value } });
     }
 
     public getIndex(direction: 'up' | 'down'): number {
@@ -143,6 +138,7 @@ export class SearchableDropdown extends AbstractDropdown<SearchableDropdownProps
         const isChosen = this.props.value?.value === value;
 
         return <span
+            ref={ref => this.refs.push(ref)}
             key={`${value}-${title}`}
             onClick={() => this.props.onClickHandler(isChosen, option)}
             className={`${isChosen && 'select-input-active-option'} fs-14 hover-primary pb-4`}
